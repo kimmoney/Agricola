@@ -1,4 +1,4 @@
-from entity.farm.crop_type import CropType
+from entity.crop_type import CropType
 from entity.farm.field import Field
 
 '''
@@ -7,6 +7,8 @@ position : 위치
 type : 쌓인 작물의 종류
 stack : 쌓인 작물의 갯수
 '''
+
+
 class ArableLand(Field):
     def __init__(self, position):
         self._position = position
