@@ -1,0 +1,7 @@
+from repository.game_status_repository import GameStatusRepository
+from repository.player_status_repository import PlayerStatusRepository
+from repository.round_status_repository import RoundStatusRepository
+
+game_status_repository = GameStatusRepository()
+player_status_repository = PlayerStatusRepository()
+round_status_repository = RoundStatusRepository()
