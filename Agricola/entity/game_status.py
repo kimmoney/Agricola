@@ -2,6 +2,7 @@
 게임 전체의 진행 상태를 저장하는 클래스
 """
 
+
 class GameStatus:
     def __init__(self):
         self.now_round = 0
@@ -11,4 +12,5 @@ class GameStatus:
                                  [i for i in range(9, 11)],
                                  [i for i in range(11, 13)],
                                  [i for i in range(13, 14)]]
-
+        self.round_resource = [0 for i in range(14)]
+        self.basic_resource = [0 for i in range(15)]

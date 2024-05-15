@@ -7,3 +7,6 @@ from entity.round_status import RoundStatus
 class RoundStatusRepository:
     def __init__(self):
         self.round_status = RoundStatus()
+
+
+round_status_repository = RoundStatusRepository()
