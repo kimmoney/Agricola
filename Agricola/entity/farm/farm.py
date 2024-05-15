@@ -11,7 +11,8 @@ class Farm:
         self.observers = []
         self.house_status = HouseType.WOOD
         self.field = [[NoneField() for i in range(5)] for j in range(3)]
-        self.fence = [[NoneField() for i in range(6)] for j in range(4)]
+        self.horizon_fence = [[False for i in range(5)] for j in range(4)]
+        self.vertical_fence = [[False for i in range(6)] for j in range(3)]
         self.pet = AnimalType.NONE
 
     def attach(self, observer):
@@ -32,8 +33,12 @@ class Farm:
         self.field[row][col] = field
         self.notify()
 
-    def set_fence(self, row, col, fence):
-        self.fence[row][col] = fence
+    def set_horizon_fence(self, row, col, horizon_fence):
+        self.horizon_fence[row][col] = horizon_fence
+        self.notify()
+
+    def set_vertical_fence(self, row, col, vertical_fence):
+        self.vertical_fence[row][col] = vertical_fence
         self.notify()
 
     def set_pet(self, pet):
