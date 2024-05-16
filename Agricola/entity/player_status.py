@@ -36,11 +36,3 @@ class PlayerStatus:
     def set_card(self, card):
         self.card = card
         self.notify()
-
-    def set_farm(self, farm):
-        self.farm = farm
-        self.notify()
-
-    def set_resource(self, resource):
-        self.resource = resource
-        self.notify()
