@@ -1,5 +1,5 @@
 """
-나무 누적 1개 기본 행동 구현
+나무 누적 2개 기본 행동 구현
 """
 from behavior.behavior import Behavior
 from entity.basic_behavior_type import BasicBehaviorType
@@ -8,21 +8,21 @@ from repository.player_status_repository import player_status_repository
 from repository.round_status_repository import round_status_repository
 
 
-class Wood1(Behavior):
+class Wood2(Behavior):
     def __init__(self, player):
         self.log_text = None
         self.game_status = game_status_repository.game_status
         self.player_resource = player_status_repository.player_status_repository[player].resource
-        self.is_filled = round_status_repository.round_status.put_basic[BasicBehaviorType.WOOD1]
+        self.is_filled = round_status_repository.round_status.put_basic[BasicBehaviorType.WOOD2]
 
     def execute(self):
         if self.is_filled:
             self.log_text = "이번 라운드에 이미 수행된 행동입니다."
             return False
         self.player_resource.set_wood(
-            self.player_resource.wood + self.game_status.basic_resource[BasicBehaviorType.WOOD1])
-        self.log_text = f"나무 {self.game_status.basic_resource[BasicBehaviorType.WOOD1]}개를 획득하였습니다."
-        self.game_status.set_basic_resource(BasicBehaviorType.WOOD1, 0)
+            self.player_resource.wood + self.game_status.basic_resource[BasicBehaviorType.WOOD2])
+        self.log_text = f"나무 {self.game_status.basic_resource[BasicBehaviorType.WOOD2]}개를 획득하였습니다."
+        self.game_status.set_basic_resource(BasicBehaviorType.WOOD2, 0)
         return True
 
     def log(self):
