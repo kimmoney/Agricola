@@ -7,8 +7,8 @@ from behavior.behavior import Behavior
 
 
 class FenceValidation(Behavior):
-    def __init__(self, list):
-        self.list = list
+    def __init__(self, fence_status):
+        self.list = fence_status
         self.dx = [0, 0, -1, 1]
         self.dy = [-1, 1, 0, 0]
 
