@@ -1,4 +1,5 @@
 from abc import ABC, abstractmethod
+from entity.field_type import FieldType
 
 '''
 필드 한칸의 인터페이스
@@ -6,4 +7,4 @@ from abc import ABC, abstractmethod
 
 
 class Field(ABC):
-    pass
+    field_type = FieldType.NONE_FIELD

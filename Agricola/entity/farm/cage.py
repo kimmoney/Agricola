@@ -1,5 +1,6 @@
 from entity.animal_type import AnimalType
 from entity.farm.field import Field
+from entity.field_type import FieldType
 
 '''
 울타리 정보
@@ -11,6 +12,7 @@ from entity.farm.field import Field
 
 class Cage(Field):
     def __init__(self, position):
+        self.field_type = FieldType.CAGE
         self._kind = AnimalType.NONE
         self._count = 0
         self._maximum = 0
