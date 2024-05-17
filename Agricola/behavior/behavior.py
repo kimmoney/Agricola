@@ -8,7 +8,3 @@ class Behavior(ABC):
     @abstractmethod
     def log(self):
         pass
-
-    @abstractmethod
-    def stack(self):
-        pass
