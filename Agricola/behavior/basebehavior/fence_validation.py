@@ -30,3 +30,12 @@ class FenceValidation(Behavior):
 
     def log(self):
         pass
+
+
+"""
+1. 울타리 형태
+    - 울타리는 이어져있어야 한다
+    - 우리는 붙어있어야 한다
+2. 내부 요소 여부 (외양간 제외)
+3. 울타리 갯수
+"""
