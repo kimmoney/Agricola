@@ -12,7 +12,7 @@ class Wood3(Behavior):
     def __init__(self, player):
         self.log_text = None
         self.game_status = game_status_repository.game_status
-        self.player_resource = player_status_repository.player_status_repository[player].resource
+        self.player_resource = player_status_repository.player_status[player].resource
         self.is_filled = round_status_repository.round_status.put_basic[BasicBehaviorType.WOOD3]
 
     def execute(self):

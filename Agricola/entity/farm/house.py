@@ -7,6 +7,5 @@ from entity.field_type import FieldType
 
 
 class House(Field):
-    def __init__(self, position):
+    def __init__(self):
         self.field_type = FieldType.HOUSE
-        self._position = position

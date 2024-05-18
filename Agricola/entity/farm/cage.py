@@ -11,10 +11,9 @@ from entity.field_type import FieldType
 
 
 class Cage(Field):
-    def __init__(self, position):
+    def __init__(self):
         self.field_type = FieldType.CAGE
-        self._kind = AnimalType.NONE
-        self._count = 0
-        self._maximum = 0
-        self._barn = False
-        self._position = position
+        self.kind = AnimalType.NONE
+        self.count = 0
+        self.maximum = 0
+        self.barn = False

@@ -11,8 +11,7 @@ stack : 쌓인 작물의 갯수
 
 
 class ArableLand(Field):
-    def __init__(self, position):
+    def __init__(self):
         self.field_type = FieldType.ARABLE
-        self._position = position
-        self._stack = 0
-        self._type = CropType.NONE
+        self.stack = 0
+        self.type = CropType.NONE
