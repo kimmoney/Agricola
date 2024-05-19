@@ -4,6 +4,7 @@
 :return: 올바른 울타리 여부.
 """
 from collections import deque
+from copy import copy
 
 from behavior.behavior import Behavior
 from entity.field_type import FieldType
@@ -11,7 +12,7 @@ from entity.field_type import FieldType
 
 class FenceValidation(Behavior):
     def __init__(self, field_status):
-        self.field_status = field_status
+        self.field_status = copy(field_status)
         self.log_text = None
 
     def execute(self):

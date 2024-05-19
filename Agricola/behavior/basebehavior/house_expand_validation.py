@@ -2,6 +2,7 @@
 집 확장 검증 클래스
 """
 from collections import deque
+from copy import copy
 
 from behavior.behavior import Behavior
 from entity.field_type import FieldType
@@ -32,7 +33,7 @@ def check_connected_component(field_status, field_type):
 
 class HouseExpandValidation(Behavior):
     def __init__(self, field_status):
-        self.field_status = field_status
+        self.field_status = copy(field_status)
         self.log_text = None
 
     def execute(self):
