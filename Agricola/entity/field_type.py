@@ -9,3 +9,4 @@ class FieldType(Enum):
     ARABLE = 1
     CAGE = 2
     HOUSE = 3
+    FENCE = 4
