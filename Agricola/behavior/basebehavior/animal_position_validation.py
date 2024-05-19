@@ -1,9 +1,9 @@
 """
 동물들의 배치 상태가 올바른지 검증하는 로직을 수행하는 클래스.
-:param: 7*11 형태의 필드 배열
+:param: 3*5 형태의 필드 객체 배열
 :return: 배치 상태의 정상 여부를 의미하는 T/F 값.
 """
-from copy import copy
+from copy import copy, deepcopy
 
 from behavior.behavior import Behavior
 from entity.field_type import FieldType
@@ -11,7 +11,7 @@ from entity.field_type import FieldType
 
 class AnimalPositionValidation(Behavior):
     def __init__(self, field_status):
-        self.field_status = copy(field_status)
+        self.field_status = deepcopy(field_status)
         self.log_text = None
 
     def execute(self):
