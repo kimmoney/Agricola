@@ -1,33 +1,35 @@
 """
 동물의 이동을 검증하는 클래스
-:param: 필드(7*11), 포지션
+:param: 필드 객체 배열 (7*11), 포지션(3*5 기준)
 :return: 동물의 이동 가능 여부
 """
 from collections import deque
-from copy import copy
+from copy import deepcopy
 
 from behavior.behavior import Behavior
+from entity.animal_type import AnimalType
 from entity.field_type import FieldType
 
 
 class AnimalMoveValidation(Behavior):
     def __init__(self, field_status, animal_type, position):
-        self.field_status = copy(field_status)
+        self.field_status = deepcopy(field_status)
         self.animal_type = animal_type
         self.position = position
+        self.log_text = None
 
     def execute(self):
-        pass
+        return self.check_already_placed() and self.check_same_type()
 
     def check_already_placed(self):
-        pass
+        if self.field_status[self.position[0] * 2 + 1][self.position[1] * 2 + 1].field_type != FieldType.NONE_FIELD \
+                and self.field_status[self.position[0] * 2 + 1][self.position[1] * 2 + 1].field_type != FieldType.CAGE:
+            self.log_text = "다른 구조물 위에 동물을 놓을 수 없습니다."
+            return False
+        return True
 
     def check_same_type(self):
-        expanded_field_status = [[FieldType.NONE_FIELD for i in range(9)] for j in range(13)]
-        check = [[0 for i in range(9)] for j in range(13)]
-        for i, item in enumerate(self.field_status):
-            for j, value in enumerate(item):
-                expanded_field_status[i + 1][j + 1] = value
+        check = [[0 for i in range(11)] for j in range(7)]
         queue = deque()
         check[self.position[0]][self.position[1]] = 1
         queue.append((self.position[0], self.position[1]))
@@ -40,19 +42,19 @@ class AnimalMoveValidation(Behavior):
                 q = y + dy[i]
                 r = p + dx[i]
                 s = q + dy[i]
-                if 0 <= r < 9 and 0 <= s < 13 and check[r][s] == 0 and expanded_field_status[p][q] != FieldType.FENCE:
+                if 7 > r >= 0 == check[r][s] and 0 <= s < 11 \
+                        and self.field_status[p][q].field_type != FieldType.FENCE:
+                    if self.field_status[r][s].kind != AnimalType.NONE \
+                            and self.field_status[r][s].kind != self.animal_type:
+                        self.log_text = "한 울타리 안에는 서로 다른 종류의 동물이 존재할 수 없습니다."
+                        return False
                     check[r][s] = 1
                     queue.append((r, s))
-        for i in range(0, 9, 2):
-            for j in range(0, 13, 2):
-                if check[i][j] == 0 and expanded_field_status[i][j] != FieldType.NONE_FIELD and \
-                        expanded_field_status[i][j] != FieldType.CAGE:
-                    self.log_text = "울타리 안에는 외양간을 제외한 다른 구조물이 있을 수 없습니다."
-                    return False
         return True
 
     def log(self):
-        pass
+        return self.log_text
+
 
 """
 1. 집, 밭, 다른 동물이 존재하는 곳 여부
