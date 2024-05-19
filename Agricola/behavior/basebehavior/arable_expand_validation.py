@@ -1,5 +1,7 @@
 """
 경작지 확장 검증 클래스
+:Param: 3*5 필드 객체 배열을 입력으로 받는다.
+:return: 올바른 경작지의 형태를 띄고 있는지 여부를 T/F값으로 반환한다.
 """
 from collections import deque
 from copy import copy
@@ -53,6 +55,4 @@ class ArableExpandValidation(Behavior):
 경작지 확장의 검증
 1. 경작지가 하나의 연결 요소로 이루어져 있어야 한다.
 
-:Param: 3*5 필드 배열을 입력으로 받는다.
-:return: 올바른 경작지의 형태를 띄고 있는지 여부를 T/F값으로 반환한다.
 """
