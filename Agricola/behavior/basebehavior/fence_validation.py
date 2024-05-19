@@ -38,7 +38,7 @@ class FenceValidation(Behavior):
         return True
 
     def check_connected_component_fence(self):
-        expanded_field_status = [[FieldType.NONE_FIELD for i in range(9)]for j in range(13)]
+        expanded_field_status = [[FieldType.NONE_FIELD for i in range(13)]for j in range(9)]
         check = [[0 for i in range(13)]for j in range(9)]
         for i, item in enumerate(self.field_status):
             for j, value in enumerate(item):
