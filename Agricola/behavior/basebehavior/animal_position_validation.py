@@ -15,7 +15,7 @@ class AnimalPositionValidation(Behavior):
         self.log_text = None
 
     def execute(self):
-        pass
+        return self.animal_count_validation()
 
     def animal_count_validation(self):
         for i, items in enumerate(self.field_status):
@@ -27,7 +27,7 @@ class AnimalPositionValidation(Behavior):
         return True
 
     def log(self):
-        pass
+        return self.log_text
 
 
 """
