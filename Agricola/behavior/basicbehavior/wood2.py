@@ -13,15 +13,15 @@ class Wood2(Behavior):
         self.log_text = None
         self.game_status = game_status_repository.game_status
         self.player_resource = player_status_repository.player_status[player].resource
-        self.is_filled = round_status_repository.round_status.put_basic[BasicBehaviorType.WOOD2]
+        self.is_filled = round_status_repository.round_status.put_basic[BasicBehaviorType.WOOD2.value]
 
     def execute(self):
         if self.is_filled:
             self.log_text = "이번 라운드에 이미 수행된 행동입니다."
             return False
         self.player_resource.set_wood(
-            self.player_resource.wood + self.game_status.basic_resource[BasicBehaviorType.WOOD2])
-        self.log_text = f"나무 {self.game_status.basic_resource[BasicBehaviorType.WOOD2]}개를 획득하였습니다."
+            self.player_resource.wood + self.game_status.basic_resource[BasicBehaviorType.WOOD2.value])
+        self.log_text = f"나무 {self.game_status.basic_resource[BasicBehaviorType.WOOD2.value]}개를 획득하였습니다."
         self.game_status.set_basic_resource(BasicBehaviorType.WOOD2, 0)
         return True
 
