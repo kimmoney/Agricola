@@ -1,5 +1,6 @@
 """
 집 확장 검증 클래스
+Unit : 홍규
 """
 from collections import deque
 from copy import copy

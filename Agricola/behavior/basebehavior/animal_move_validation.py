@@ -2,6 +2,7 @@
 동물의 이동을 검증하는 클래스
 :param: 필드 객체 배열 (7*11), 포지션(3*5 기준)
 :return: 동물의 이동 가능 여부
+Unit : 선후
 """
 from collections import deque
 from copy import deepcopy

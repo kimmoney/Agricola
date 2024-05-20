@@ -2,6 +2,7 @@
 경작지 확장 검증 클래스
 :Param: 3*5 필드 객체 배열을 입력으로 받는다.
 :return: 올바른 경작지의 형태를 띄고 있는지 여부를 T/F값으로 반환한다.
+Unit : 준영
 """
 from collections import deque
 from copy import copy

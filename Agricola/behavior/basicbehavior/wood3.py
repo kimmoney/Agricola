@@ -1,5 +1,6 @@
 """
 나무 누적 3개 기본 행동 구현
+Unit : 지민
 """
 from behavior.behavior import Behavior
 from entity.basic_behavior_type import BasicBehaviorType
