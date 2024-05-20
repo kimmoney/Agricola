@@ -31,9 +31,9 @@ class GameStatus:
         self.notify()
 
     def set_round_resource(self, index, value):
-        self.round_resource[index] = value
+        self.round_resource[index.value] = value
         self.notify()
 
     def set_basic_resource(self, index, value):
-        self.basic_resource[index] = value
+        self.basic_resource[index.value] = value
         self.notify()
