@@ -1,6 +1,6 @@
 """
 동물의 이동을 검증하는 클래스
-:param: 필드 객체 배열 (7*11), 포지션(3*5 기준)
+:param: 필드 객체 배열 (7*11), 포지션(3*5 기준, 0-indexed)
 :return: 동물의 이동 가능 여부
 Unit : 선후
 """
@@ -32,8 +32,12 @@ class AnimalMoveValidation(Behavior):
     def check_same_type(self):
         check = [[0 for i in range(11)] for j in range(7)]
         queue = deque()
-        check[self.position[0]][self.position[1]] = 1
-        queue.append((self.position[0], self.position[1]))
+        if self.field_status[self.position[0]*2 + 1][self.position[1]*2 + 1].kind != AnimalType.NONE \
+                and self.field_status[self.position[0]*2 + 1][self.position[1]*2 + 1].kind != self.animal_type:
+            self.log_text = "한 울타리 안에는 서로 다른 종류의 동물이 존재할 수 없습니다."
+            return False
+        check[self.position[0]*2 + 1][self.position[1]*2 + 1] = 1
+        queue.append((self.position[0]*2 + 1, self.position[1]*2 + 1))
         while queue:
             x, y = queue.popleft()
             dx = [0, 0, -1, 1]
@@ -43,8 +47,8 @@ class AnimalMoveValidation(Behavior):
                 q = y + dy[i]
                 r = p + dx[i]
                 s = q + dy[i]
-                if 7 > r >= 0 == check[r][s] and 0 <= s < 11 \
-                        and self.field_status[p][q].field_type != FieldType.FENCE:
+                if 7 > r >= 0 and 0 <= s < 11 \
+                        and check[r][s] == 0 and self.field_status[p][q].field_type != FieldType.FENCE:
                     if self.field_status[r][s].kind != AnimalType.NONE \
                             and self.field_status[r][s].kind != self.animal_type:
                         self.log_text = "한 울타리 안에는 서로 다른 종류의 동물이 존재할 수 없습니다."
