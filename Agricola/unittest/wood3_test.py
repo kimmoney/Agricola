@@ -3,9 +3,6 @@ import pytest
 import sys
 import os
 
-
-
-
 from behavior.basicbehavior.wood3 import Wood3
 from entity.basic_behavior_type import BasicBehaviorType
 from repository.player_status_repository import player_status_repository
@@ -31,6 +28,7 @@ def test_execute_success(setup):
     assert player_status_repository.player_status[player].resource.wood == 3
     assert wood3_action.log() == "나무 3개를 획득하였습니다."
     assert game_status_repository.game_status.basic_resource[BasicBehaviorType.WOOD3.value] == 0
+
 
 def test_execute_already_filled(setup):
     player = setup
