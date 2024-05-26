@@ -17,7 +17,7 @@ class FenceValidation(Behavior):
         self.log_text = None
 
     def execute(self):
-        return self.check_fence_count() and self.check_connected_component_fence() and self.check_inside_object() and self.check_fence_count()
+        return self.check_fence_form() and self.check_connected_component_fence() and self.check_inside_object() and self.check_fence_count()
 
     def check_fence_form(self):
         dx = [0, 0, -1, 1]
@@ -31,9 +31,9 @@ class FenceValidation(Behavior):
                         q = j + dy[k]
                         if p < 0 or q < 0 or p >= 7 or q >= 11:
                             continue
-                        if list[p][q]:
+                        if self.field_status[p][q] == FieldType.FENCE:
                             adjacent += 1
-                    if adjacent == 1:
+                    if adjacent is 1:
                         self.log_text = "울타리의 형식이 올바르지 않습니다."
                         return False
         return True
