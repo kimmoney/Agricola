@@ -62,7 +62,8 @@ class FenceValidation(Behavior):
         ret = 0
         for i in range(0, 9, 2):
             for j in range(0, 13, 2):
-                if (expanded_field_status[i][j] == FieldType.CAGE or expanded_field_status[i][j] == FieldType.NONE_FIELD) and check[i][j] == 0:
+                if (expanded_field_status[i][j] == FieldType.CAGE or expanded_field_status[i][j] == FieldType.NONE_FIELD) \
+                        and check[i][j] == 0:
                     ret += 1
                     check[i][j] = 1
                     queue.append((i, j))
@@ -103,7 +104,8 @@ class FenceValidation(Behavior):
                     queue.append((r, s))
         for i in range(0, 9, 2):
             for j in range(0, 13, 2):
-                if check[i][j] == 0 and expanded_field_status[i][j] != FieldType.NONE_FIELD and expanded_field_status[i][j] != FieldType.CAGE:
+                if check[i][j] == 0 and expanded_field_status[i][j] != FieldType.NONE_FIELD \
+                        and expanded_field_status[i][j] != FieldType.CAGE:
                     self.log_text = "울타리 안에는 외양간을 제외한 다른 구조물이 있을 수 없습니다."
                     return False
         return True

@@ -69,10 +69,12 @@ class TestFenceValidation:
         list[6][9] = FieldType.FENCE
         list[6][7] = FieldType.FENCE
         list[0][7] = FieldType.FENCE
-        list[5][4] = FieldType.FENCE
         list[5][10] = FieldType.FENCE
         list[3][10] = FieldType.FENCE
-        list[4][7] = FieldType.FENCE
+        list[1][10] = FieldType.FENCE
+        list[5][6] = FieldType.FENCE
+        list[3][6] = FieldType.FENCE
+        list[1][6] = FieldType.FENCE
         fence_validation = FenceValidation(list)
         assert fence_validation.execute() is False
 
