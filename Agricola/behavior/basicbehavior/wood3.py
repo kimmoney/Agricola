@@ -23,7 +23,7 @@ class Wood3(Behavior):
         self.player_resource.set_wood(
             self.player_resource.wood + self.game_status.basic_resource[BasicBehaviorType.WOOD3.value])
         self.log_text = f"나무 {self.game_status.basic_resource[BasicBehaviorType.WOOD3.value]}개를 획득하였습니다."
-        self.game_status.set_basic_resource(BasicBehaviorType.WOOD3, 0)
+        self.game_status.set_basic_resource(BasicBehaviorType.WOOD3.value, 0)
         return True
 
     def log(self):
