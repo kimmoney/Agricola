@@ -18,6 +18,7 @@ class PlayerStatus:
         self.farm = Farm()
         self.resource = Resource()
         self.worker = 0
+        self.score = 0
 
     def attach(self, observer):
         self.observers.append(observer)
