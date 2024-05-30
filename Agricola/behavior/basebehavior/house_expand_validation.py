@@ -26,7 +26,7 @@ def check_connected_component(field_status, field_type):
                     for k in range(4):
                         nx = item[0] + dx[k]
                         ny = item[1] + dy[k]
-                        if 3 > nx >= 0 == check[nx][ny] and 0 <= ny < 5 and field.field_type == field_type:
+                        if 3 > nx >= 0 and 0 <= ny < 5 and check[nx][ny] == 0 and field.field_type == field_type:
                             check[nx][ny] = 1
                             queue.append((nx, ny))
     return ret
