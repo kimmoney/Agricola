@@ -6,7 +6,7 @@
 class RoundStatus:
     def __init__(self):
         self.observers = []
-        self.put_basic = [False for i in range(15)]
+        self.put_basic = [False for i in range(16)]
         self.put_round = [False for i in range(14)]
         self.remain_workers = [0, 0, 0, 0]
 

@@ -2,6 +2,9 @@
 동물의 이동을 검증하는 클래스
 :param: 필드 객체 배열 (7*11), 포지션(3*5 기준, 0-indexed)
 :return: 동물의 이동 가능 여부
+:rtype: bool
+
+동물 이동하기 상태에서 매 동물 이동마다 호출하는 동물 이동 검증 클래스
 Unit : 선후
 """
 from collections import deque

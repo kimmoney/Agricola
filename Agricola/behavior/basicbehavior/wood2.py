@@ -1,5 +1,8 @@
 """
 나무 누적 2개 기본 행동 구현
+:param: 플레이어 번호
+:return: 실행 결과.
+:rtype: bool
 """
 from behavior.behavior import Behavior
 from entity.basic_behavior_type import BasicBehaviorType

@@ -14,7 +14,7 @@ class GameStatus:
                                  [i for i in range(11, 13)],
                                  [i for i in range(13, 14)]]
         self.round_resource = [0 for i in range(14)]
-        self.basic_resource = [0 for i in range(15)]
+        self.basic_resource = [0 for i in range(16)]
 
     def attach(self, observer):
         self.observers.append(observer)

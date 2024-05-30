@@ -2,6 +2,7 @@
 동물들의 배치 상태가 올바른지 검증하는 로직을 수행하는 클래스.
 :param: 3*5 형태의 필드 객체 배열
 :return: 배치 상태의 정상 여부를 의미하는 T/F 값.
+:rtype: bool
 Unit : 종훈
 """
 from copy import copy, deepcopy
