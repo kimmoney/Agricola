@@ -1,7 +1,7 @@
 """
 돌가마
 """
-from command.main_facility.main_facility_interface import MainFacilityInterface
+from behavior.main_facility.main_facility_interface import MainFacilityInterface
 
 
 class StoneKiln(MainFacilityInterface):

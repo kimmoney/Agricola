@@ -13,3 +13,7 @@ class UndoRepository:
         self.game_status = copy.deepcopy(game_status)
         self.player_status = copy.deepcopy(player_status)
         self.round_status = copy.deepcopy(round_status)
+
+    def undo(self):
+        # Todo
+        pass

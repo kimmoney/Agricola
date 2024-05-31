@@ -5,3 +5,12 @@
 :rtype: bool
 농장 상태 업데이트도 수행되어야 함.
 """
+from command import Command
+
+
+class HouseExpansion(Command):
+    def execute(self):
+        pass
+
+    def log(self):
+        pass

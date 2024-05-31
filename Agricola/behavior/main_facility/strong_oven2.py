@@ -1,7 +1,7 @@
 """
 흙 5개 화덕
 """
-from command.main_facility.main_facility_interface import MainFacilityInterface
+from behavior.main_facility.main_facility_interface import MainFacilityInterface
 
 
 class StrongOven2(MainFacilityInterface):

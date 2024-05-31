@@ -4,5 +4,14 @@
 :return: 실행 결과.
 :rtype: bool
 """
+from command import Command
+
 
 # Todo
+
+class FarmExpansion(Command):
+    def execute(self):
+        pass
+
+    def log(self):
+        pass

@@ -5,3 +5,12 @@
 :rtype: bool
 실제 밭 정보를 업데이트한다.
 """
+from command import Command
+
+
+class ArableExpansion(Command):
+    def execute(self):
+        pass
+
+    def log(self):
+        pass

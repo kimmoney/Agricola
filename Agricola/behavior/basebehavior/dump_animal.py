@@ -4,3 +4,12 @@
 :return: 동물 버리기 성공 여부
 :rtype: bool
 """
+from command import Command
+
+
+class DumpAnimal(Command):
+    def execute(self):
+        pass
+
+    def log(self):
+        pass

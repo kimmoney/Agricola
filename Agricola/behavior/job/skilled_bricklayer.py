@@ -1,7 +1,7 @@
 """
 숙련 벽돌공 직업 카드
 """
-from command.job.job_interface import JobInterface
+from behavior.job.job_interface import JobInterface
 
 
 class SkilledBrickLayer(JobInterface):
