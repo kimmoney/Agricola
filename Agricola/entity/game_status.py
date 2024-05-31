@@ -6,7 +6,9 @@
 class GameStatus:
     def __init__(self):
         self.observers = []
-        self.now_round = 0
+        self.now_round = 0          # 현재 라운드
+        self.now_turn_player = 0    # 현재 턴 플레이어
+        self.next_turn_player = 0   # 다음 턴 플레이어
         self.round_card_order = [[i for i in range(0, 4)],
                                  [i for i in range(4, 7)],
                                  [i for i in range(7, 9)],
