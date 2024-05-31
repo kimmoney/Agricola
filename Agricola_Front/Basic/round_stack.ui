@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>178</width>
-    <height>108</height>
+    <width>702</width>
+    <height>469</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -33,25 +33,22 @@
     <number>0</number>
    </property>
    <item>
-    <layout class="QVBoxLayout" name="verticalLayout" stretch="3,5">
+    <layout class="QVBoxLayout" name="verticalLayout" stretch="1,2">
      <property name="spacing">
       <number>0</number>
      </property>
      <item>
-      <widget class="QPushButton" name="pushButton_5">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
+      <spacer name="verticalSpacer">
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
        </property>
-       <property name="styleSheet">
-        <string notr="true">border: none;</string>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>40</height>
+        </size>
        </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
+      </spacer>
      </item>
      <item>
       <widget class="QPushButton" name="pushButton_4">
@@ -127,7 +124,7 @@
           </sizepolicy>
          </property>
          <property name="styleSheet">
-          <string notr="true">border-image: url(:/newPrefix/KakaoTalk_Photo_2024-05-31-15-59-59_011-removebg-preview.png);</string>
+          <string notr="true">border-image: url(:/newPrefix/harvest.png);</string>
          </property>
          <property name="text">
           <string/>

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>849</width>
-    <height>563</height>
+    <width>456</width>
+    <height>178</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -48,12 +48,30 @@
      <property name="styleSheet">
       <string notr="true">#Frame{background-color:green;}</string>
      </property>
-     <layout class="QVBoxLayout" name="verticalLayout1" stretch="1,4,1,4,1,4,1">
+     <layout class="QVBoxLayout" name="verticalLayout1" stretch="1,5,1,5,1,5,1">
       <property name="spacing">
+       <number>0</number>
+      </property>
+      <property name="leftMargin">
+       <number>0</number>
+      </property>
+      <property name="topMargin">
+       <number>0</number>
+      </property>
+      <property name="rightMargin">
+       <number>0</number>
+      </property>
+      <property name="bottomMargin">
        <number>0</number>
       </property>
       <item>
        <widget class="QWidget" name="horizontalWidget_11" native="true">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
         <property name="styleSheet">
          <string notr="true">QPushButton:pressed {
        background-color: rgb(222, 255, 220);
@@ -89,7 +107,7 @@
            <property name="maximumSize">
             <size>
              <width>16777215</width>
-             <height>20</height>
+             <height>10</height>
             </size>
            </property>
            <property name="styleSheet">
@@ -115,7 +133,7 @@ background-color: rgba(0, 255, 0, 12);</string>
            <property name="maximumSize">
             <size>
              <width>16777215</width>
-             <height>20</height>
+             <height>10</height>
             </size>
            </property>
            <property name="toolTipDuration">
@@ -141,7 +159,7 @@ background-color: rgba(0, 255, 0, 12);</string>
            <property name="maximumSize">
             <size>
              <width>16777215</width>
-             <height>20</height>
+             <height>10</height>
             </size>
            </property>
            <property name="styleSheet">
@@ -164,7 +182,7 @@ background-color: rgba(0, 255, 0, 12);</string>
            <property name="maximumSize">
             <size>
              <width>16777215</width>
-             <height>20</height>
+             <height>10</height>
             </size>
            </property>
            <property name="styleSheet">
@@ -187,7 +205,7 @@ background-color: rgba(0, 255, 0, 12);</string>
            <property name="maximumSize">
             <size>
              <width>16777215</width>
-             <height>20</height>
+             <height>10</height>
             </size>
            </property>
            <property name="styleSheet">
@@ -473,7 +491,7 @@ background-color: rgba(0, 255, 0, 12);</string>
            <property name="maximumSize">
             <size>
              <width>16777215</width>
-             <height>20</height>
+             <height>10</height>
             </size>
            </property>
            <property name="styleSheet">
@@ -499,7 +517,7 @@ background-color: rgba(0, 255, 0, 12);</string>
            <property name="maximumSize">
             <size>
              <width>16777215</width>
-             <height>20</height>
+             <height>10</height>
             </size>
            </property>
            <property name="toolTipDuration">
@@ -525,7 +543,7 @@ background-color: rgba(0, 255, 0, 12);</string>
            <property name="maximumSize">
             <size>
              <width>16777215</width>
-             <height>20</height>
+             <height>10</height>
             </size>
            </property>
            <property name="styleSheet">
@@ -548,7 +566,7 @@ background-color: rgba(0, 255, 0, 12);</string>
            <property name="maximumSize">
             <size>
              <width>16777215</width>
-             <height>20</height>
+             <height>10</height>
             </size>
            </property>
            <property name="styleSheet">
@@ -571,7 +589,7 @@ background-color: rgba(0, 255, 0, 12);</string>
            <property name="maximumSize">
             <size>
              <width>16777215</width>
-             <height>20</height>
+             <height>10</height>
             </size>
            </property>
            <property name="styleSheet">
@@ -809,7 +827,7 @@ background-color: rgba(0, 255, 0, 12);</string>
            <property name="maximumSize">
             <size>
              <width>16777215</width>
-             <height>20</height>
+             <height>10</height>
             </size>
            </property>
            <property name="styleSheet">
@@ -835,7 +853,7 @@ background-color: rgba(0, 255, 0, 12);</string>
            <property name="maximumSize">
             <size>
              <width>16777215</width>
-             <height>20</height>
+             <height>10</height>
             </size>
            </property>
            <property name="toolTipDuration">
@@ -861,7 +879,7 @@ background-color: rgba(0, 255, 0, 12);</string>
            <property name="maximumSize">
             <size>
              <width>16777215</width>
-             <height>20</height>
+             <height>10</height>
             </size>
            </property>
            <property name="styleSheet">
@@ -884,7 +902,7 @@ background-color: rgba(0, 255, 0, 12);</string>
            <property name="maximumSize">
             <size>
              <width>16777215</width>
-             <height>20</height>
+             <height>10</height>
             </size>
            </property>
            <property name="styleSheet">
@@ -907,7 +925,7 @@ background-color: rgba(0, 255, 0, 12);</string>
            <property name="maximumSize">
             <size>
              <width>16777215</width>
-             <height>20</height>
+             <height>10</height>
             </size>
            </property>
            <property name="styleSheet">
@@ -1107,6 +1125,12 @@ background-color: rgba(0, 255, 0, 12);</string>
       </item>
       <item>
        <widget class="QWidget" name="horizontalWidget_20" native="true">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
         <property name="styleSheet">
          <string notr="true">QPushButton:pressed {
        background-color: rgb(222, 255, 220);
@@ -1142,7 +1166,7 @@ background-color: rgba(0, 255, 0, 12);</string>
            <property name="maximumSize">
             <size>
              <width>16777215</width>
-             <height>20</height>
+             <height>10</height>
             </size>
            </property>
            <property name="styleSheet">
@@ -1168,7 +1192,7 @@ background-color: rgba(0, 255, 0, 12);</string>
            <property name="maximumSize">
             <size>
              <width>16777215</width>
-             <height>20</height>
+             <height>10</height>
             </size>
            </property>
            <property name="toolTipDuration">
@@ -1194,7 +1218,7 @@ background-color: rgba(0, 255, 0, 12);</string>
            <property name="maximumSize">
             <size>
              <width>16777215</width>
-             <height>20</height>
+             <height>10</height>
             </size>
            </property>
            <property name="styleSheet">
@@ -1217,7 +1241,7 @@ background-color: rgba(0, 255, 0, 12);</string>
            <property name="maximumSize">
             <size>
              <width>16777215</width>
-             <height>20</height>
+             <height>10</height>
             </size>
            </property>
            <property name="styleSheet">
@@ -1240,7 +1264,7 @@ background-color: rgba(0, 255, 0, 12);</string>
            <property name="maximumSize">
             <size>
              <width>16777215</width>
-             <height>20</height>
+             <height>10</height>
             </size>
            </property>
            <property name="styleSheet">
