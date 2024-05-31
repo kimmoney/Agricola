@@ -1,7 +1,7 @@
 """
 가축 상인 직업 카드
 """
-from behavior.job.job_interface import JobInterface
+from command.job.job_interface import JobInterface
 
 
 class LivestockDealer(JobInterface):

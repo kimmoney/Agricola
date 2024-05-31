@@ -5,13 +5,13 @@
 :rtype: bool
 Unit : 종훈
 """
-from copy import copy, deepcopy
+from copy import deepcopy
 
-from behavior.behavior import Behavior
+from command import Command
 from entity.field_type import FieldType
 
 
-class AnimalPositionValidation(Behavior):
+class AnimalPositionValidation(Command):
     def __init__(self, field_status):
         self.field_status = deepcopy(field_status)
         self.log_text = None

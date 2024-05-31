@@ -2,10 +2,10 @@
 주요 설비 인터페이스
 """
 from abc import abstractmethod
-from behavior.behavior import Behavior
+from command import Command
 
 
-class MainFacilityInterface(Behavior):
+class MainFacilityInterface(Command):
     @abstractmethod
     def execute(self):
         pass

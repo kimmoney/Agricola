@@ -1,7 +1,7 @@
 """
 곡식용 삽
 """
-from behavior.sub_facility.sub_facility_interface import SubFacilityInterface
+from command.sub_facility.sub_facility_interface import SubFacilityInterface
 
 
 class GrainShovel(SubFacilityInterface):

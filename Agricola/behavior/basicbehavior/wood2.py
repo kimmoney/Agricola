@@ -4,14 +4,14 @@
 :return: 실행 결과.
 :rtype: bool
 """
-from behavior.behavior import Behavior
+from command import Command
 from entity.basic_behavior_type import BasicBehaviorType
 from repository.game_status_repository import game_status_repository
 from repository.player_status_repository import player_status_repository
 from repository.round_status_repository import round_status_repository
 
 
-class Wood2(Behavior):
+class Wood2(Command):
     def __init__(self, player):
         self.log_text = None
         self.game_status = game_status_repository.game_status

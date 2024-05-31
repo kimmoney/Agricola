@@ -1,7 +1,7 @@
 """
 폐품 창고
 """
-from behavior.sub_facility.sub_facility_interface import SubFacilityInterface
+from command.sub_facility.sub_facility_interface import SubFacilityInterface
 
 
 class JunkWarehouse(SubFacilityInterface):

@@ -1,7 +1,7 @@
 """
 흙가마
 """
-from behavior.main_facility.main_facility_interface import MainFacilityInterface
+from command.main_facility.main_facility_interface import MainFacilityInterface
 
 
 class DirtKiln(MainFacilityInterface):

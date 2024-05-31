@@ -3,10 +3,10 @@
 """
 from abc import abstractmethod
 
-from behavior.behavior import Behavior
+from command import Command
 
 
-class JobInterface(Behavior):
+class JobInterface(Command):
     @abstractmethod
     def execute(self):
         pass

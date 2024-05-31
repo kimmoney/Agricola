@@ -1,7 +1,7 @@
 """
 양모 담요
 """
-from behavior.sub_facility.sub_facility_interface import SubFacilityInterface
+from command.sub_facility.sub_facility_interface import SubFacilityInterface
 
 
 class WoolBlanket(SubFacilityInterface):

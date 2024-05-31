@@ -5,7 +5,7 @@ Unit : 홍규
 from collections import deque
 from copy import copy
 
-from behavior.behavior import Behavior
+from command import Command
 from entity.field_type import FieldType
 
 
@@ -32,7 +32,7 @@ def check_connected_component(field_status, field_type):
     return ret
 
 
-class HouseExpandValidation(Behavior):
+class HouseExpandValidation(Command):
     def __init__(self, field_status):
         self.field_status = copy(field_status)
         self.log_text = None

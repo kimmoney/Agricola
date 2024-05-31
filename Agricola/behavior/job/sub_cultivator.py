@@ -1,7 +1,7 @@
 """
 보조 경작자 직업 카드
 """
-from behavior.job.job_interface import JobInterface
+from command.job.job_interface import JobInterface
 
 
 class SubCultivator(JobInterface):

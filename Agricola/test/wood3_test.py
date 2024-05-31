@@ -1,6 +1,6 @@
 # test_wood3.py
 import pytest
-from behavior.basicbehavior.wood3 import Wood3
+from command.basicbehavior.wood3 import Wood3
 from entity.basic_behavior_type import BasicBehaviorType
 from repository.player_status_repository import player_status_repository
 from repository.round_status_repository import round_status_repository

@@ -1,7 +1,7 @@
 import sys, os
 from collections import deque
 sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
-from behavior.basebehavior.animal_move_validation import AnimalMoveValidation
+from command.basebehavior.animal_move_validation import AnimalMoveValidation
 from entity.animal_type import AnimalType
 from entity.farm.arable_land import ArableLand
 from entity.farm.cage import Cage

@@ -7,11 +7,11 @@ Unit : 준호
 from collections import deque
 from copy import copy
 
-from behavior.behavior import Behavior
+from command import Command
 from entity.field_type import FieldType
 
 
-class FenceValidation(Behavior):
+class FenceValidation(Command):
     def __init__(self, field_status):
         self.field_status = copy(field_status)
         self.log_text = None
