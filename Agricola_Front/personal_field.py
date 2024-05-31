@@ -8,7 +8,7 @@ def resource_path(relative_path):
     base_path = getattr(sys, '_MEIPASS', os.path.dirname(os.path.abspath(__file__)))
     return os.path.join(base_path, relative_path)
 
-personal_field_ui = uic.loadUiType(resource_path("PersonalField/help5.ui"))[0] # 농장 15개 빈칸 뚫린 ui
+personal_field_ui = uic.loadUiType(resource_path("PersonalField/field_frame.ui"))[0] # 농장 15개 빈칸 뚫린 ui
 main = uic.loadUiType(resource_path("PersonalField/main.ui"))[0] # main ui 불러오고
 field_base_ui = uic.loadUiType(resource_path("PersonalField/field_base.ui"))[0] # field 하나 ui
 #UI파일 연결
@@ -40,20 +40,28 @@ class MainWindowClass(QMainWindow, main) :
                 layout.addWidget(field)
                 tmp_field_num += 1
 
+        # fence 객체들에 대하여 버튼 클릭 이벤트 추가
+        for i in range(38):
+            btn = getattr(self.personal_field, f'btn_fence_{i}')
+            btn.clicked.connect(lambda _, id=i: self.personal_field.print_id(id))
+
 class widgetPersonalFieldClass(QWidget, personal_field_ui) :
     def __init__(self) :
         super().__init__()
         self.setupUi(self)
+
+    def print_id(self, id):
+        print(f"Fence ID: {id}")
 
 class widgetFieldBase(QWidget, field_base_ui) :
     def __init__(self, id):
         super().__init__()
         self.setupUi(self)
         self.id = id # field에게 고유 id (0~14) 부여
-        self.btn_personal_unit.clicked.connect(self.print_id)
+        self.btn_field_unit.clicked.connect(self.print_id)
 
     def print_id(self):
-        print(self.id)
+        print(f"Field ID: {self.id}")
 
 ###실행 코드### 밑에 건들 필요 굳이 없음###
 if __name__ == "__main__" :
