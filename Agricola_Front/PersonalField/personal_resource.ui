@@ -10,6 +10,12 @@
     <height>332</height>
    </rect>
   </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
@@ -38,7 +44,7 @@
       <number>1</number>
      </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>1</number>
      </property>
      <widget class="QWidget" name="page_0">
       <layout class="QHBoxLayout" name="horizontalLayout_3">
@@ -81,7 +87,7 @@
             </spacer>
            </item>
            <item>
-            <widget class="QPushButton" name="pushButton_7">
+            <widget class="QLabel" name="pushButton_7">
              <property name="maximumSize">
               <size>
                <width>30</width>
@@ -91,10 +97,13 @@
              <property name="text">
               <string>선턴</string>
              </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
             </widget>
            </item>
            <item>
-            <widget class="QPushButton" name="pushButton_17">
+            <widget class="QLabel" name="pushButton_17">
              <property name="maximumSize">
               <size>
                <width>40</width>
@@ -104,12 +113,15 @@
              <property name="text">
               <string>1</string>
              </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
             </widget>
            </item>
           </layout>
          </item>
          <item row="1" column="1">
-          <widget class="QPushButton" name="pushButton_10">
+          <widget class="QLabel" name="pushButton_10">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
              <horstretch>0</horstretch>
@@ -119,10 +131,13 @@
            <property name="text">
             <string>돌</string>
            </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
           </widget>
          </item>
          <item row="0" column="2">
-          <widget class="QPushButton" name="pushButton">
+          <widget class="QLabel" name="pushButton">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
              <horstretch>0</horstretch>
@@ -131,11 +146,14 @@
            </property>
            <property name="text">
             <string>0</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
            </property>
           </widget>
          </item>
          <item row="1" column="2">
-          <widget class="QPushButton" name="pushButton_3">
+          <widget class="QLabel" name="pushButton_3">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
              <horstretch>0</horstretch>
@@ -144,11 +162,14 @@
            </property>
            <property name="text">
             <string>0</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
            </property>
           </widget>
          </item>
          <item row="3" column="0">
-          <widget class="QPushButton" name="pushButton_16">
+          <widget class="QLabel" name="pushButton_16">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
              <horstretch>0</horstretch>
@@ -158,10 +179,13 @@
            <property name="text">
             <string>0</string>
            </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
           </widget>
          </item>
          <item row="1" column="3">
-          <widget class="QPushButton" name="pushButton_4">
+          <widget class="QLabel" name="pushButton_4">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
              <horstretch>0</horstretch>
@@ -171,10 +195,13 @@
            <property name="text">
             <string>갈대</string>
            </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
           </widget>
          </item>
          <item row="0" column="1">
-          <widget class="QPushButton" name="pushButton_9">
+          <widget class="QLabel" name="pushButton_9">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
              <horstretch>0</horstretch>
@@ -184,10 +211,13 @@
            <property name="text">
             <string>나무</string>
            </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
           </widget>
          </item>
          <item row="2" column="1">
-          <widget class="QPushButton" name="pushButton_11">
+          <widget class="QLabel" name="pushButton_11">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
              <horstretch>0</horstretch>
@@ -197,10 +227,13 @@
            <property name="text">
             <string>곡식</string>
            </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
           </widget>
          </item>
          <item row="3" column="3">
-          <widget class="QPushButton" name="pushButton_8">
+          <widget class="QLabel" name="pushButton_8">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
              <horstretch>0</horstretch>
@@ -210,10 +243,13 @@
            <property name="text">
             <string>턴순서</string>
            </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
           </widget>
          </item>
          <item row="0" column="0">
-          <widget class="QPushButton" name="pushButton_13">
+          <widget class="QLabel" name="pushButton_13">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
              <horstretch>0</horstretch>
@@ -223,10 +259,13 @@
            <property name="text">
             <string>0</string>
            </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
           </widget>
          </item>
          <item row="3" column="1">
-          <widget class="QPushButton" name="pushButton_12">
+          <widget class="QLabel" name="pushButton_12">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
              <horstretch>0</horstretch>
@@ -236,10 +275,13 @@
            <property name="text">
             <string>음식</string>
            </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
           </widget>
          </item>
          <item row="1" column="0">
-          <widget class="QPushButton" name="pushButton_14">
+          <widget class="QLabel" name="pushButton_14">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
              <horstretch>0</horstretch>
@@ -248,11 +290,14 @@
            </property>
            <property name="text">
             <string>0</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
            </property>
           </widget>
          </item>
          <item row="2" column="0">
-          <widget class="QPushButton" name="pushButton_15">
+          <widget class="QLabel" name="pushButton_15">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
              <horstretch>0</horstretch>
@@ -261,11 +306,14 @@
            </property>
            <property name="text">
             <string>0</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
            </property>
           </widget>
          </item>
          <item row="2" column="2">
-          <widget class="QPushButton" name="pushButton_5">
+          <widget class="QLabel" name="pushButton_5">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
              <horstretch>0</horstretch>
@@ -275,10 +323,13 @@
            <property name="text">
             <string>0</string>
            </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
           </widget>
          </item>
          <item row="2" column="3">
-          <widget class="QPushButton" name="pushButton_6">
+          <widget class="QLabel" name="pushButton_6">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
              <horstretch>0</horstretch>
@@ -288,10 +339,13 @@
            <property name="text">
             <string>야채</string>
            </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
           </widget>
          </item>
          <item row="0" column="3">
-          <widget class="QPushButton" name="pushButton_2">
+          <widget class="QLabel" name="pushButton_2">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
              <horstretch>0</horstretch>
@@ -300,6 +354,9 @@
            </property>
            <property name="text">
             <string>흙</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
            </property>
           </widget>
          </item>
@@ -330,7 +387,7 @@
           <number>0</number>
          </property>
          <item row="1" column="2">
-          <widget class="QPushButton" name="pushButton_22">
+          <widget class="QLabel" name="pushButton_22">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
              <horstretch>0</horstretch>
@@ -339,11 +396,14 @@
            </property>
            <property name="text">
             <string>0</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
            </property>
           </widget>
          </item>
          <item row="3" column="0">
-          <widget class="QPushButton" name="pushButton_23">
+          <widget class="QLabel" name="pushButton_23">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
              <horstretch>0</horstretch>
@@ -353,10 +413,13 @@
            <property name="text">
             <string>0</string>
            </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
           </widget>
          </item>
          <item row="1" column="3">
-          <widget class="QPushButton" name="pushButton_24">
+          <widget class="QLabel" name="pushButton_24">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
              <horstretch>0</horstretch>
@@ -366,10 +429,13 @@
            <property name="text">
             <string>사람</string>
            </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
           </widget>
          </item>
          <item row="2" column="1">
-          <widget class="QPushButton" name="pushButton_26">
+          <widget class="QLabel" name="pushButton_26">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
              <horstretch>0</horstretch>
@@ -379,10 +445,13 @@
            <property name="text">
             <string>울타리</string>
            </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
           </widget>
          </item>
          <item row="0" column="1">
-          <widget class="QPushButton" name="pushButton_25">
+          <widget class="QLabel" name="pushButton_25">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
              <horstretch>0</horstretch>
@@ -392,10 +461,13 @@
            <property name="text">
             <string>양</string>
            </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
           </widget>
          </item>
          <item row="3" column="1">
-          <widget class="QPushButton" name="pushButton_29">
+          <widget class="QLabel" name="pushButton_29">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
              <horstretch>0</horstretch>
@@ -405,10 +477,13 @@
            <property name="text">
             <string>구걸토큰</string>
            </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
           </widget>
          </item>
          <item row="1" column="0">
-          <widget class="QPushButton" name="pushButton_30">
+          <widget class="QLabel" name="pushButton_30">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
              <horstretch>0</horstretch>
@@ -417,11 +492,14 @@
            </property>
            <property name="text">
             <string>0</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
            </property>
           </widget>
          </item>
          <item row="2" column="0">
-          <widget class="QPushButton" name="pushButton_31">
+          <widget class="QLabel" name="pushButton_31">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
              <horstretch>0</horstretch>
@@ -430,11 +508,14 @@
            </property>
            <property name="text">
             <string>0</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
            </property>
           </widget>
          </item>
          <item row="0" column="0">
-          <widget class="QPushButton" name="pushButton_28">
+          <widget class="QLabel" name="pushButton_28">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
              <horstretch>0</horstretch>
@@ -444,10 +525,13 @@
            <property name="text">
             <string>0</string>
            </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
           </widget>
          </item>
          <item row="0" column="3">
-          <widget class="QPushButton" name="pushButton_34">
+          <widget class="QLabel" name="pushButton_34">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
              <horstretch>0</horstretch>
@@ -457,10 +541,13 @@
            <property name="text">
             <string>돼지</string>
            </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
           </widget>
          </item>
          <item row="2" column="2">
-          <widget class="QPushButton" name="pushButton_32">
+          <widget class="QLabel" name="pushButton_32">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
              <horstretch>0</horstretch>
@@ -470,10 +557,13 @@
            <property name="text">
             <string>0</string>
            </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
           </widget>
          </item>
          <item row="2" column="3">
-          <widget class="QPushButton" name="pushButton_33">
+          <widget class="QLabel" name="pushButton_33">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
              <horstretch>0</horstretch>
@@ -483,10 +573,13 @@
            <property name="text">
             <string>외양간</string>
            </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
           </widget>
          </item>
          <item row="3" column="3">
-          <widget class="QPushButton" name="pushButton_19">
+          <widget class="QLabel" name="pushButton_19">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
              <horstretch>0</horstretch>
@@ -496,10 +589,13 @@
            <property name="text">
             <string/>
            </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
           </widget>
          </item>
          <item row="1" column="1">
-          <widget class="QPushButton" name="pushButton_20">
+          <widget class="QLabel" name="pushButton_20">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
              <horstretch>0</horstretch>
@@ -509,10 +605,13 @@
            <property name="text">
             <string>소</string>
            </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
           </widget>
          </item>
          <item row="0" column="2">
-          <widget class="QPushButton" name="pushButton_21">
+          <widget class="QLabel" name="pushButton_21">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
              <horstretch>0</horstretch>
@@ -522,10 +621,13 @@
            <property name="text">
             <string>0</string>
            </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
           </widget>
          </item>
          <item row="3" column="2">
-          <widget class="QPushButton" name="pushButton_18">
+          <widget class="QLabel" name="pushButton_18">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
              <horstretch>0</horstretch>
@@ -534,6 +636,9 @@
            </property>
            <property name="text">
             <string/>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
            </property>
           </widget>
          </item>
