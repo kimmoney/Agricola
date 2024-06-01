@@ -2,7 +2,7 @@ import sys
 from PyQt5.QtWidgets import *
 from PyQt5 import uic
 from PyQt5.QtCore import QTimer
-
+from PyQt5.QtCore import Qt
 import os
 import images_rc
 import IMG_0404_rc
@@ -17,6 +17,7 @@ personal_field_ui = uic.loadUiType(resource_path("PersonalField/field_frame.ui")
 personal_resourcs_ui= uic.loadUiType(resource_path("PersonalField/personal_resource.ui"))[0] # 농장 15개 빈칸 뚫린 ui
 personal_card_ui= uic.loadUiType(resource_path("PersonalField/personal_card.ui"))[0] # 농장 15개 빈칸 뚫린 ui
 basic_roundcard_ui= uic.loadUiType(resource_path("Basic/round_stack.ui"))[0] # 농장 15개 빈칸 뚫린 ui
+log_viewer_ui= uic.loadUiType(resource_path("log_viewer_dialog.ui"))[0] # 농장 15개 빈칸 뚫린 ui
 #UI파일 연결
 #단, UI파일은 Python 코드 파일과 같은 디렉토리에 위치해야한다.
 # field_0_ui
@@ -44,16 +45,19 @@ class MainWindowClass(QMainWindow, main) :
         self.personal_resource = [WidgetPersonalResource(i,self) for i in range(4)]
         for i in range(4):getattr(self,f"frm_p{i}_2").addWidget(self.personal_resource[i])
         #베이직 라운드 위젯 설정
-        self.basic_round = [WidgetBasicRound(i,self) for i in range(15)]
-        for i in range(15):getattr(self,f"basic_{i}").addWidget(self.basic_round[i])
+        self.basic_round = [WidgetBasicRound(i,self) for i in range(30)]
+        for i in range(30):getattr(self,f"basic_{i}").addWidget(self.basic_round[i])
 
 
         ####################################init####################################
         self.timer_close,self.timer_open = QTimer(self),QTimer(self)
         self.log.clicked.connect(self.change_main)
+        self.log_2.clicked.connect(lambda:self.logging_dialog("한번 오류를 볼까요?"))
+        self.log = Log_viewer(self)
         ############################################################################
 
-
+    def logging_dialog(self,text):
+        self.log.logging(text)
 
     def change_main(self):
         currentWidget = self.stackedWidget.currentWidget().objectName()
@@ -175,6 +179,21 @@ class WidgetBasicRound(QWidget, basic_roundcard_ui) :
         self.setupUi(self)
     def mousePressEvent(self,event):
         print(f"Pressed basic round ID : {self.round}")
+
+
+
+
+class Log_viewer(QDialog,log_viewer_ui):
+    def __init__(self,main):
+        super().__init__()  # 부모 클래스의 __init__ 함수 호출
+        self.setupUi(self)
+        self.setWindowFlags(Qt.FramelessWindowHint | Qt.WindowStaysOnTopHint)
+        self.log.setText("이 곳은 로그를 표기하는 곳입니다.")
+        self.hide()
+    def logging(self,text):
+        self.log.setText(text)
+        self.show()
+        QTimer.singleShot(3000, self.hide)
 
 ###실행 코드### 밑에 건들 필요 굳이 없음###
 if __name__ == "__main__" :
