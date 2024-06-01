@@ -44,8 +44,8 @@ class MainWindowClass(QMainWindow, main) :
         self.personal_resource = [WidgetPersonalResource(i,self) for i in range(4)]
         for i in range(4):getattr(self,f"frm_p{i}_2").addWidget(self.personal_resource[i])
         #베이직 라운드 위젯 설정
-        self.basic_round = [WidgetBasicRound(i,self) for i in range(16)]
-        for i in range(16):getattr(self,f"roundCard_{i}").addWidget(self.basic_round[i])
+        self.basic_round = [WidgetBasicRound(i,self) for i in range(15)]
+        for i in range(15):getattr(self,f"basic_{i}").addWidget(self.basic_round[i])
 
 
         ####################################init####################################
