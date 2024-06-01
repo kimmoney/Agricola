@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>347</width>
-    <height>304</height>
+    <width>304</width>
+    <height>225</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -44,7 +44,7 @@
       <number>1</number>
      </property>
      <property name="currentIndex">
-      <number>1</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="page_0">
       <layout class="QHBoxLayout" name="horizontalLayout_3">
@@ -128,8 +128,11 @@
              <verstretch>0</verstretch>
             </sizepolicy>
            </property>
+           <property name="styleSheet">
+            <string notr="true">border-image: url(:/newPrefix/images/rock.png);</string>
+           </property>
            <property name="text">
-            <string>돌</string>
+            <string/>
            </property>
            <property name="alignment">
             <set>Qt::AlignCenter</set>
@@ -169,7 +172,7 @@
           </widget>
          </item>
          <item row="3" column="0">
-          <widget class="QLabel" name="count_meal">
+          <widget class="QLabel" name="count_food">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
              <horstretch>0</horstretch>
@@ -192,8 +195,11 @@
              <verstretch>0</verstretch>
             </sizepolicy>
            </property>
+           <property name="styleSheet">
+            <string notr="true">border-image: url(:/newPrefix/images/reed.png);</string>
+           </property>
            <property name="text">
-            <string>갈대</string>
+            <string/>
            </property>
            <property name="alignment">
             <set>Qt::AlignCenter</set>
@@ -208,8 +214,11 @@
              <verstretch>0</verstretch>
             </sizepolicy>
            </property>
+           <property name="styleSheet">
+            <string notr="true">border-image: url(:/newPrefix/images/wood.png);</string>
+           </property>
            <property name="text">
-            <string>나무</string>
+            <string/>
            </property>
            <property name="alignment">
             <set>Qt::AlignCenter</set>
@@ -224,8 +233,11 @@
              <verstretch>0</verstretch>
             </sizepolicy>
            </property>
+           <property name="styleSheet">
+            <string notr="true">border-image: url(:/newPrefix/images/grain.png);</string>
+           </property>
            <property name="text">
-            <string>곡식</string>
+            <string/>
            </property>
            <property name="alignment">
             <set>Qt::AlignCenter</set>
@@ -249,7 +261,7 @@
           </widget>
          </item>
          <item row="0" column="0">
-          <widget class="QLabel" name="wood_count">
+          <widget class="QLabel" name="count_wood">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
              <horstretch>0</horstretch>
@@ -258,22 +270,6 @@
            </property>
            <property name="text">
             <string>0</string>
-           </property>
-           <property name="alignment">
-            <set>Qt::AlignCenter</set>
-           </property>
-          </widget>
-         </item>
-         <item row="3" column="1">
-          <widget class="QLabel" name="pushButton_12">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="text">
-            <string>음식</string>
            </property>
            <property name="alignment">
             <set>Qt::AlignCenter</set>
@@ -336,8 +332,11 @@
              <verstretch>0</verstretch>
             </sizepolicy>
            </property>
+           <property name="styleSheet">
+            <string notr="true">border-image: url(:/newPrefix/images/vegetable.png);</string>
+           </property>
            <property name="text">
-            <string>야채</string>
+            <string/>
            </property>
            <property name="alignment">
             <set>Qt::AlignCenter</set>
@@ -352,8 +351,30 @@
              <verstretch>0</verstretch>
             </sizepolicy>
            </property>
+           <property name="styleSheet">
+            <string notr="true">border-image: url(:/newPrefix/images/dirt.png);</string>
+           </property>
            <property name="text">
-            <string>흙</string>
+            <string/>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="1">
+          <widget class="QLabel" name="pushButton_12">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">border-image: url(:/newPrefix/images/food.png);</string>
+           </property>
+           <property name="text">
+            <string/>
            </property>
            <property name="alignment">
             <set>Qt::AlignCenter</set>
@@ -650,6 +671,8 @@
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="../MyQRC.qrc"/>
+ </resources>
  <connections/>
 </ui>
