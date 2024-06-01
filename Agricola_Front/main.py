@@ -81,11 +81,16 @@ class MainWindowClass(QMainWindow, main) :
         self.round = round_status_repository.RoundStatusRepository()
         print(self.player.player_status[0].worker)
 
-
+        self.pushButton_3.clicked.connect(self.test)
+    
         ############################################################################
 
+    def test(self):
+        self.player.player_status[0].resource.stone+=1
+        self.update_state_of_all()
     def logging_dialog(self,text):
         self.log.logging(text)
+        self.update_state_of_all()
 
     def change_main_stacked(self):
         currentWidget = self.stackedWidget.currentWidget().objectName()
@@ -133,10 +138,11 @@ class MainWindowClass(QMainWindow, main) :
             if self.current_timer_count == 0:
                 self.timer_open.stop()
 
-    def update_state_of_all():
+    def update_state_of_all(self):
         for player in range(4):
-            pass
-
+            for t in ["dirt","grain","meal","reed","stone","vegetable","wood"]:
+                # self.personal_resource[player].count_dirt.setText(str(self.player.player_status[player].resource.dirt))
+                getattr(self.personal_resource[player],f"count_{t}").setText(str(getattr(self.player.player_status[player].resource,t)))
         print("상황판을 업데이트 합니다.")
 
 class WidgetPersonalField(QWidget, personal_field_ui) :
