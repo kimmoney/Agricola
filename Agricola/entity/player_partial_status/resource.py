@@ -9,7 +9,7 @@ class Resource:
         self.wood = 0
         self.dirt = 0
         self.reed = 0
-        self.rock = 0
+        self.stone = 0
         self.grain = 0
         self.vegetable = 0
         self.food = 0
@@ -38,8 +38,8 @@ class Resource:
         self.reed = reed
         self.notify()
 
-    def set_rock(self, rock):
-        self.rock = rock
+    def set_stone(self, stone):
+        self.stone = stone
         self.notify()
 
     def set_grain(self, grain):

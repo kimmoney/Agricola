@@ -2,6 +2,7 @@
 울타리 검증 클래스
 :param list:  7 * 11 의 enum으로 채워진 필드 상태 배열
 :return: 올바른 울타리 여부.
+:rtype: bool
 Unit : 준호
 """
 from collections import deque
