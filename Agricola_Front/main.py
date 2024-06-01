@@ -10,14 +10,20 @@ def resource_path(relative_path):
     """ Get absolute path to resource, works for dev and for PyInstaller """
     base_path = getattr(sys, '_MEIPASS', os.path.dirname(os.path.abspath(__file__)))
     return os.path.join(base_path, relative_path)
-
+#UI파일 연결
 main = uic.loadUiType(resource_path("mainwindow_v1.ui"))[0] # 진짜 메인
-field_base_ui = uic.loadUiType(resource_path("PersonalField/field_base.ui"))[0] # field 하나 ui
+###개인 영역 UI들###
 personal_field_ui = uic.loadUiType(resource_path("PersonalField/field_frame.ui"))[0] # 농장 15개 빈칸 뚫린 ui
-personal_resourcs_ui= uic.loadUiType(resource_path("PersonalField/personal_resource.ui"))[0] # 농장 15개 빈칸 뚫린 ui
-personal_card_ui= uic.loadUiType(resource_path("PersonalField/personal_card.ui"))[0] # 농장 15개 빈칸 뚫린 ui
-basic_roundcard_ui= uic.loadUiType(resource_path("Basic/round_stack.ui"))[0] # 농장 15개 빈칸 뚫린 ui
-log_viewer_ui= uic.loadUiType(resource_path("log_viewer_dialog.ui"))[0] # 농장 15개 빈칸 뚫린 ui
+field_base_ui = uic.loadUiType(resource_path("PersonalField/field_base.ui"))[0] # field 하나 ui
+personal_resources_ui= uic.loadUiType(resource_path("PersonalField/personal_resource.ui"))[0] # 화면 전환되는 개인 자원
+personal_card_ui= uic.loadUiType(resource_path("PersonalField/personal_card.ui"))[0] # 내가 낸 카드 ui
+#personal_card_ui= uic.loadUiType(resource_path("PersonalField/mycards.ui"))[0] # 개인 카드 ui
+
+###공동 영역 UI들###
+log_viewer_ui= uic.loadUiType(resource_path("log_viewer_dialog.ui"))[0] # 로그
+basic_roundcard_ui= uic.loadUiType(resource_path("Basic/roundcard.ui"))[0] # 라운드카드 ui
+worker_board_ui = uic.loadUiType(resource_path("Basic/worker_board.ui"))[0] # worker 보드
+
 #UI파일 연결
 #단, UI파일은 Python 코드 파일과 같은 디렉토리에 위치해야한다.
 # field_0_ui
@@ -48,7 +54,8 @@ class MainWindowClass(QMainWindow, main) :
         self.basic_round = [WidgetBasicRound(i,self) for i in range(30)]
         for i in range(30):getattr(self,f"basic_{i}").addWidget(self.basic_round[i])
 
-
+        self.worker_board = WorkerBoard(self)
+        self.verticalLayout_37.addWidget(self.worker_board)
         ####################################init####################################
         self.timer_close,self.timer_open = QTimer(self),QTimer(self)
         self.log.clicked.connect(self.change_main)
@@ -108,7 +115,7 @@ class MainWindowClass(QMainWindow, main) :
 
 
 class WidgetPersonalField(QWidget, personal_field_ui) :
-    def __init__(self, player,parent) :
+    def __init__(self, player, parent) :
         super().__init__()
         self.setupUi(self)
         self.player = player
@@ -159,7 +166,7 @@ class WidgetPersonalCard(QWidget, personal_card_ui) :
     def mousePressEvent(self,event):
         print(f"Pressed card Player ID : {self.player}")
 
-class WidgetPersonalResource(QWidget, personal_resourcs_ui) :
+class WidgetPersonalResource(QWidget, personal_resources_ui) :
     def __init__(self, player,parent) :
         super().__init__()  # 부모 클래스의 __init__ 함수 호출
         self.setupUi(self)
@@ -195,6 +202,17 @@ class Log_viewer(QDialog,log_viewer_ui):
         self.show()
         QTimer.singleShot(3000, self.hide)
 
+class WorkerBoard(QWidget, worker_board_ui):
+    def __init__(self, parent):
+        super().__init__()  # 부모 클래스의 __init__ 함수 호출
+        self.setupUi(self)
+        self.parent = parent
+    def mousePressEvent(self,event):
+        """
+        옵저버에게 status를 전달 받고 라운드카드 활성화 및 안내
+        """
+        pass
+    
 ###실행 코드### 밑에 건들 필요 굳이 없음###
 if __name__ == "__main__" :
     #QApplication : 프로그램을 실행시켜주는 클래스
