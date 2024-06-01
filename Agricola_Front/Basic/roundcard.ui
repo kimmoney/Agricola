@@ -14,7 +14,7 @@
    <string>Form</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">#Form{border-image: url(:/newPrefix/IMG_0403.PNG);}</string>
+   <string notr="true">#Form{border-image: url(:/newPrefix/images/IMG_0403.PNG);}</string>
   </property>
   <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="1,1">
    <property name="spacing">
@@ -127,7 +127,7 @@
           </sizepolicy>
          </property>
          <property name="styleSheet">
-          <string notr="true">border-image: url(:/newPrefix/harvest.png);</string>
+          <string notr="true">border-image: url(:/newPrefix/images/harvest.png);</string>
          </property>
          <property name="text">
           <string/>
@@ -141,7 +141,7 @@
   </layout>
  </widget>
  <resources>
-  <include location="../images/IMG_0404.qrc"/>
+  <include location="../MyQRC.qrc"/>
  </resources>
  <connections/>
 </ui>

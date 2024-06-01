@@ -62,7 +62,7 @@
          </sizepolicy>
         </property>
         <property name="styleSheet">
-         <string notr="true">border-image: url(:/newPrefix/worker_red.png);</string>
+         <string notr="true">border-image: url(:/newPrefix/images/worker_red.png);</string>
         </property>
         <property name="text">
          <string/>
@@ -126,7 +126,7 @@
          </sizepolicy>
         </property>
         <property name="styleSheet">
-         <string notr="true">border-image: url(:/newPrefix/worker_green.png);</string>
+         <string notr="true">border-image: url(:/newPrefix/images/worker_green.png);</string>
         </property>
         <property name="text">
          <string/>
@@ -190,7 +190,7 @@
          </sizepolicy>
         </property>
         <property name="styleSheet">
-         <string notr="true">border-image: url(:/newPrefix/worker_blue.png);</string>
+         <string notr="true">border-image: url(:/newPrefix/images/worker_blue.png);</string>
         </property>
         <property name="text">
          <string/>
@@ -254,7 +254,7 @@
          </sizepolicy>
         </property>
         <property name="styleSheet">
-         <string notr="true">border-image: url(:/newPrefix/worker_purple.png);</string>
+         <string notr="true">border-image: url(:/newPrefix/images/worker_purple.png);</string>
         </property>
         <property name="text">
          <string/>
@@ -288,7 +288,7 @@
   </layout>
  </widget>
  <resources>
-  <include location="../images/MyQRC.qrc"/>
+  <include location="../MyQRC.qrc"/>
  </resources>
  <connections/>
 </ui>

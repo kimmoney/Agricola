@@ -35,7 +35,7 @@
    <item>
     <widget class="QWidget" name="widget" native="true">
      <property name="styleSheet">
-      <string notr="true">#widget{border-image: url(:/newPrefix/IMG_0403.PNG);}</string>
+      <string notr="true">#widget{border-image: url(:/newPrefix/images/IMG_0403.PNG);}</string>
      </property>
      <layout class="QHBoxLayout" name="horizontalLayout_3" stretch="1,1">
       <item>
@@ -133,7 +133,7 @@
              </sizepolicy>
             </property>
             <property name="styleSheet">
-             <string notr="true">border-image: url(:/newPrefix/harvest.png);</string>
+             <string notr="true">border-image: url(:/newPrefix/images/harvest.png);</string>
             </property>
             <property name="text">
              <string/>
@@ -150,7 +150,7 @@
   </layout>
  </widget>
  <resources>
-  <include location="../images/IMG_0404.qrc"/>
+  <include location="../MyQRC.qrc"/>
  </resources>
  <connections/>
 </ui>

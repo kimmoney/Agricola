@@ -4,8 +4,7 @@ from PyQt5 import uic
 from PyQt5.QtCore import QTimer
 from PyQt5.QtCore import Qt
 import os
-import images_rc
-import IMG_0404_rc
+import MyQRC_rc
 
 import sys
 import os
@@ -36,6 +35,7 @@ personal_card_ui= uic.loadUiType(resource_path("PersonalField/personal_card.ui")
 log_viewer_ui= uic.loadUiType(resource_path("log_viewer_dialog.ui"))[0] # 로그
 basic_roundcard_ui= uic.loadUiType(resource_path("Basic/roundcard.ui"))[0] # 라운드카드 ui
 worker_board_ui = uic.loadUiType(resource_path("Basic/worker_board.ui"))[0] # worker 보드
+check_ui = uic.loadUiType(resource_path("check/check.ui"))[0] # worker 보드
 
 #UI파일 연결
 #단, UI파일은 Python 코드 파일과 같은 디렉토리에 위치해야한다.
@@ -69,6 +69,8 @@ class MainWindowClass(QMainWindow, main) :
 
         self.worker_board = WorkerBoard(self)
         self.verticalLayout_37.addWidget(self.worker_board)
+        self.Class_check = Check(self)
+        self.verticalLayout_37.addWidget(self.Class_check)
         ####################################init####################################
         self.timer_close,self.timer_open = QTimer(self),QTimer(self)
         self.log.clicked.connect(self.change_main_stacked)
@@ -84,20 +86,20 @@ class MainWindowClass(QMainWindow, main) :
         self.pushButton_3.clicked.connect(self.test)
     
         ############################################################################
-
     def test(self):
         self.player.player_status[0].resource.stone+=1
-        self.update_state_of_all()
+        update()
+
     def logging_dialog(self,text):
         self.log.logging(text)
-        self.update_state_of_all()
+        update()
 
     def change_main_stacked(self):
         currentWidget = self.stackedWidget.currentWidget().objectName()
         # if index == 0:self.stackedWidget.setCurrentIndex(1)
         # else:self.stackedWidget.setCurrentIndex(0)
-        if currentWidget == "round":self.change_stacked_page("personal")
-        else:self.change_stacked_page("round")
+        if currentWidget == "round_page":self.change_stacked_page("personal_page")
+        else:self.change_stacked_page("round_page")
 
 
 
@@ -139,11 +141,21 @@ class MainWindowClass(QMainWindow, main) :
                 self.timer_open.stop()
 
     def update_state_of_all(self):
+        print("상황판을 업데이트 합니다.")
+        #resource 업데이트
         for player in range(4):
             for t in ["dirt","grain","meal","reed","stone","vegetable","wood"]:
                 # self.personal_resource[player].count_dirt.setText(str(self.player.player_status[player].resource.dirt))
                 getattr(self.personal_resource[player],f"count_{t}").setText(str(getattr(self.player.player_status[player].resource,t)))
-        print("상황판을 업데이트 합니다.")
+        #현재턴만 활성화
+        print(f"현재 턴은 {self.gameStatus.game_status.now_turn_player}플레이어 입니다.")
+        player_list = [0,1,2,3]
+        player_list.remove(self.gameStatus.game_status.now_turn_player)
+        for i in player_list:
+            self.personal_resource[i].setEnabled(False)
+            self.personal_card[i].setEnabled(False)
+            self.personal_field[i].setEnabled(False)
+
 
 class WidgetPersonalField(QWidget, personal_field_ui) :
     def __init__(self, player,parent) :
@@ -191,9 +203,20 @@ class WidgetPersonalField(QWidget, personal_field_ui) :
 class WidgetPersonalCard(QWidget, personal_card_ui) :
     def __init__(self, player,parent) :
         super().__init__()  # 부모 클래스의 __init__ 함수 호출
+        # self.parent
         self.parent = parent
         self.player = player
         self.setupUi(self)
+        self.pushButton_1.clicked.connect(lambda : self.plus("dirt"))
+        self.pushButton_2.clicked.connect(lambda : self.plus("grain"))
+        self.pushButton_3.clicked.connect(lambda : self.plus("meal"))
+        self.pushButton_4.clicked.connect(lambda : self.plus("reed"))
+    def plus(self,object):
+        count = getattr(self.parent.player.player_status[self.player].resource,object)
+        setattr(self.parent.player.player_status[self.player].resource,object,count+1)
+
+
+
     def mousePressEvent(self,event):
         print(f"Pressed card Player ID : {self.player}")
 
@@ -243,13 +266,23 @@ class WorkerBoard(QWidget, worker_board_ui):
         옵저버에게 status를 전달 받고 라운드카드 활성화 및 안내
         """
         pass
-    
+class Check(QWidget, check_ui):
+    def __init__(self, parent):
+        super().__init__()  # 부모 클래스의 __init__ 함수 호출
+        self.setupUi(self)
+        self.parent = parent
+        self.
+    def mousePressEvent(self,event):
+        pass
+
+
 ###실행 코드### 밑에 건들 필요 굳이 없음###
 if __name__ == "__main__" :
     #QApplication : 프로그램을 실행시켜주는 클래스
     app = QApplication(sys.argv) 
     #WindowClass의 인스턴스 생성
     myWindow = MainWindowClass()
+    update = lambda: myWindow.update_state_of_all()
     #프로그램 화면을 보여주는 코드
     myWindow.show()
     #프로그램을 이벤트루프로 진입시키는(프로그램을 작동시키는) 코드

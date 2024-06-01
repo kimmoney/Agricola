@@ -1,5 +1,7 @@
 <RCC>
   <qresource prefix="newPrefix">
+    <file>check/check.png</file>
+    <file>check/undo.png</file>
     <file>images/vegetable.png</file>
     <file>images/곡식 활용.png</file>
     <file>images/급한 가족 늘리기.png</file>

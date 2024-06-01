@@ -1,3 +1,4 @@
 #!/bin/bash
  
-pyrcc5 images\IMG_0404.qrc -o IMG_0404_rc.py
+pyrcc5 
+MyQRC.qrc -o MyQRC_rc.py
