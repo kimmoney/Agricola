@@ -6,6 +6,19 @@ from PyQt5.QtCore import Qt
 import os
 import images_rc
 import IMG_0404_rc
+
+import sys
+import os
+
+# 모듈이 위치한 디렉토리를 지정합니다.
+module_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'Agricola_Back')
+# sys.path에 모듈 디렉토리를 추가합니다.
+if module_dir not in sys.path:
+    sys.path.append(module_dir)
+from Agricola_Back.repository import player_status_repository,game_status_repository,round_status_repository,undo_repository
+
+
+
 def resource_path(relative_path):
     """ Get absolute path to resource, works for dev and for PyInstaller """
     base_path = getattr(sys, '_MEIPASS', os.path.dirname(os.path.abspath(__file__)))
@@ -58,15 +71,23 @@ class MainWindowClass(QMainWindow, main) :
         self.verticalLayout_37.addWidget(self.worker_board)
         ####################################init####################################
         self.timer_close,self.timer_open = QTimer(self),QTimer(self)
-        self.log.clicked.connect(self.change_main)
+        self.log.clicked.connect(self.change_main_stacked)
         self.log_2.clicked.connect(lambda:self.logging_dialog("한번 오류를 볼까요?"))
         self.log = Log_viewer(self)
+
+
+        self.player = player_status_repository.PlayerStatusRepository()
+        self.gameStatus = game_status_repository.GameStatusRepository()
+        self.round = round_status_repository.RoundStatusRepository()
+        print(self.player.player_status[0].worker)
+
+
         ############################################################################
 
     def logging_dialog(self,text):
         self.log.logging(text)
 
-    def change_main(self):
+    def change_main_stacked(self):
         currentWidget = self.stackedWidget.currentWidget().objectName()
         # if index == 0:self.stackedWidget.setCurrentIndex(1)
         # else:self.stackedWidget.setCurrentIndex(0)
@@ -112,10 +133,14 @@ class MainWindowClass(QMainWindow, main) :
             if self.current_timer_count == 0:
                 self.timer_open.stop()
 
+    def update_state_of_all():
+        for player in range(4):
+            pass
 
+        print("상황판을 업데이트 합니다.")
 
 class WidgetPersonalField(QWidget, personal_field_ui) :
-    def __init__(self, player, parent) :
+    def __init__(self, player,parent) :
         super().__init__()
         self.setupUi(self)
         self.player = player
