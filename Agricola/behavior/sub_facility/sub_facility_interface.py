@@ -18,3 +18,7 @@ class SubFacilityInterface(Command):
     @abstractmethod
     def putDown(self):
         pass
+
+    @abstractmethod
+    def canUse(self):
+        pass

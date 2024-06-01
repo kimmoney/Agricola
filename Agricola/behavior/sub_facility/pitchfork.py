@@ -5,6 +5,9 @@ from behavior.sub_facility.sub_facility_interface import SubFacilityInterface
 
 
 class Pitchfork(SubFacilityInterface):
+    def canUse(self):
+        pass
+
     def execute(self):
         pass
 

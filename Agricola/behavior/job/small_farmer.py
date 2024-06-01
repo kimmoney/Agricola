@@ -5,6 +5,9 @@ from behavior.job.job_interface import JobInterface
 
 
 class SmallFarmer(JobInterface):
+    def canUse(self):
+        pass
+
     def execute(self):
         pass
 

@@ -5,6 +5,9 @@ from behavior.job.job_interface import JobInterface
 
 
 class KilnBaker(JobInterface):
+    def canUse(self):
+        pass
+
     def execute(self):
         pass
 

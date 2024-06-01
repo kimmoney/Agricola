@@ -17,3 +17,7 @@ class MainFacilityInterface(Command):
     @abstractmethod
     def purchase(self):
         pass
+
+    @abstractmethod
+    def canUse(self):
+        pass

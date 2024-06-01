@@ -13,3 +13,6 @@ class BowlWorkshop(MainFacilityInterface):
 
     def purchase(self):
         pass
+
+    def canUse(self):
+        pass
