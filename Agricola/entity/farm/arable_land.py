@@ -12,5 +12,5 @@ from entity.field_type import FieldType
 class ArableLand(Field):
     def __init__(self):
         self.field_type = FieldType.ARABLE
-        self.stack = 0
-        self.type = CropType.NONE
+        self.count = 0
+        self.kind = CropType.NONE

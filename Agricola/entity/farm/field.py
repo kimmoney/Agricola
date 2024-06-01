@@ -8,3 +8,7 @@ from entity.field_type import FieldType
 
 class Field(ABC):
     field_type = FieldType.NONE_FIELD
+    kind = None
+    count = None
+    barn = False
+    maximum = 0
