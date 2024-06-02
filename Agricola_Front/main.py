@@ -174,7 +174,7 @@ class MainWindowClass(QMainWindow, main) :
         for player in range(4):
             for t in ["dirt","grain","meal","reed","stone","vegetable","wood"]:
                 # self.personal_resource[player].count_dirt.setText(str(self.player.player_status[player].resource.dirt))
-                getattr(self.personal_resource[player],f"count_{t}").setText(str(getattr(self.player_status.player_status[player].resource,t)))
+                getattr(self.personal_resource[player],f"count_{t}").setText(str(getattr(self.player_status[player].resource,t)))
         #현재턴만 활성화
         player_list = [0,1,2,3]
         player_list.remove(self.game_Status.now_turn_player)
@@ -245,7 +245,7 @@ class WidgetPersonalCard(QWidget, personal_card_ui) :
         if not self.player == 5:
             player = self.player
         else:
-            player = self.parent.gameStatus.now_turn_player
+            player = self.parent.game_Status.now_turn_player
         count = getattr(self.parent.player_status[player].resource, object)
         pprint(f"{self.player}번 플레이어가 {object}를 추가하였습니다.")
         setattr(self.parent.player_status[player].resource, object,count+1)
@@ -313,9 +313,9 @@ class Check(QWidget, check_ui):
         self.btn_processing.clicked.connect(self.next_turn)
         self.btn_undo.clicked.connect(self.parent.undo)
     def next_turn(self):
-        self.parent.gameStatus.now_turn_player = (self.parent.gameStatus.now_turn_player+1)%4
+        self.parent.game_Status.now_turn_player = (self.parent.game_Status.now_turn_player+1)%4
         self.parent.update_state_of_all()
-        pprint(f"현재 턴은 {self.parent.gameStatus.now_turn_player}플레이어 입니다.")
+        pprint(f"현재 턴은 {self.parent.game_Status.now_turn_player}플레이어 입니다.")
         self.parent.set_undo()
 
     def mousePressEvent(self,event):
