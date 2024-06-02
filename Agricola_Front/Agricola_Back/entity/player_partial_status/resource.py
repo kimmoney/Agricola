@@ -13,7 +13,13 @@ class Resource:
         self.grain = 0
         self.vegetable = 0
         self.meal = 0
+        self.sheep = 0
+        self.cow = 0
+        self.fence = 0
         self.beg_token = 0
+        self.pig = 0
+        self.worker = 0
+        self.barn = 0
         self.first_turn = False
 
     def attach(self, observer):

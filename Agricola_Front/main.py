@@ -173,7 +173,7 @@ class MainWindowClass(QMainWindow, main) :
     def update_state_of_all(self):
         #resource 업데이트
         for player in range(4):
-            for t in ["dirt","grain","meal","reed","stone","vegetable","wood"]:
+            for t in ["dirt","grain","meal","reed","stone","vegetable","wood",'sheep','cow','fence','beg_token','pig','worker','barn']:
                 # self.personal_resource[player].count_dirt.setText(str(self.player.player_status[player].resource.dirt))
                 getattr(self.personal_resource[player],f"count_{t}").setText(str(getattr(self.player_status[player].resource,t)))
         #현재턴만 활성화
@@ -213,9 +213,17 @@ class WidgetPersonalField(QWidget, personal_field_ui) :
                 tmp_field_num += 1
 
         # fence 객체들에 대하여 버튼 클릭 이벤트 추가
-        for i in range(38):
-            btn = getattr(self, f'btn_fence_{i}')
-            btn.clicked.connect(lambda _, id=i: self.pprint_id(id))
+        for j in range(4):
+            for i in range(5):
+                getattr(self, f'btn_fence_h{j}{i}').clicked.connect(lambda _, i=i,j=j: self.pprint_id("h"+str(j)+str(i)))
+        for j in range(3):
+            for i in range(6):
+                getattr(self, f'btn_fence_v{j}{i}').clicked.connect(lambda _, i=i,j=j: self.pprint_id("v"+str(j)+str(i)))
+                
+        # for i in range(38):
+        #     btn = 
+        #     btn = getattr(self, f'btn_fence_{i}')
+        #     btn.clicked.connect(lambda _, id=i: self.pprint_id(id))
     
     def pprint_id(self, id):
         pprint(f"Player ID : {self.player} | Fence ID: {id}")
@@ -246,8 +254,8 @@ class WidgetPersonalCard(QWidget, personal_card_ui) :
         self.setupUi(self)
         self.pushButton_1.clicked.connect(lambda : self.plus("dirt"))
         self.pushButton_2.clicked.connect(lambda : self.plus("grain"))
-        self.pushButton_3.clicked.connect(lambda : self.plus("meal"))
-        self.pushButton_4.clicked.connect(lambda : self.plus("reed"))
+        self.pushButton_3.clicked.connect(lambda : self.plus("fence"))
+        self.pushButton_4.clicked.connect(lambda : self.plus("cow"))
     def plus(self, object):
         if not self.player == 5:
             player = self.player
@@ -286,6 +294,7 @@ class WidgetBasicRound(QWidget, basic_roundcard_ui) :
         self.btn_round_1.setText(str(round))
     def mousePressEvent(self,event):
         pprint(f"Pressed basic round ID : {self.round}")
+
 
 
 
