@@ -1,5 +1,11 @@
 <RCC>
   <qresource prefix="newPrefix">
+    <file>images/fence_h_0.png</file>
+    <file>images/fence_h_1.png</file>
+    <file>images/fence_h_2.png</file>
+    <file>images/fence_v_0.png</file>
+    <file>images/fence_v_1.png</file>
+    <file>images/fence_v_2.png</file>
     <file>images/number_1.png</file>
     <file>images/number_2.png</file>
     <file>images/number_3.png</file>
