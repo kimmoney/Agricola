@@ -85,7 +85,7 @@
           <property name="currentIndex">
            <number>0</number>
           </property>
-          <widget class="QWidget" name="round">
+          <widget class="QWidget" name="round_page">
            <layout class="QHBoxLayout" name="horizontalLayout_5" stretch="1,1">
             <property name="spacing">
              <number>0</number>
@@ -208,7 +208,7 @@
             </item>
            </layout>
           </widget>
-          <widget class="QWidget" name="personal">
+          <widget class="QWidget" name="personal_page">
            <layout class="QHBoxLayout" name="horizontalLayout_6" stretch="1,1">
             <item>
              <layout class="QVBoxLayout" name="frm_main_field"/>
@@ -251,14 +251,14 @@
             <item>
              <layout class="QVBoxLayout" name="vlo_etc_workerboard">
               <property name="spacing">
-               <number>-1</number>
+               <number>6</number>
               </property>
              </layout>
             </item>
             <item>
              <layout class="QVBoxLayout" name="vlo_etc_information">
               <property name="spacing">
-               <number>-1</number>
+               <number>6</number>
               </property>
              </layout>
             </item>

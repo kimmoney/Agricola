@@ -80,8 +80,8 @@ class MainWindowClass(QMainWindow, main) :
         self.Class_check = Check(self)
         self.verticalLayout_37.addWidget(self.Class_check)
         ####################################init####################################
-        # self.timer_close,self.timer_open = QTimer(self),QTimer(self)
-        # self.log.clicked.connect(self.change_main_stacked)
+        self.timer_close,self.timer_open = QTimer(self),QTimer(self)
+        self.log.clicked.connect(self.change_main_stacked)
         # self.log_2.clicked.connect(lambda:self.logging_dialog("한번 오류를 볼까요?"))
         # self.log = Log_viewer(self)
 
@@ -89,7 +89,6 @@ class MainWindowClass(QMainWindow, main) :
         self.gameStatus = game_status_repository.GameStatusRepository()
         self.round = round_status_repository.RoundStatusRepository()
         print(self.player.player_status[0].worker)
-
         self.pushButton_3.clicked.connect(self.test)
     
         ############################################################################
