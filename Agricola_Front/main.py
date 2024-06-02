@@ -100,6 +100,7 @@ class MainWindowClass(QMainWindow, main) :
         #     ppprint(text)
         # pprint(self.player.player_status[0].worker)
         self.pushButton_3.clicked.connect(self.undo)
+        self.update_state_of_all()
         self.set_undo()
         ############################################################################
 
@@ -186,6 +187,12 @@ class MainWindowClass(QMainWindow, main) :
         # self.personal_resource[i].setEnabled(True)
         self.personal_card[i].setEnabled(True)
         self.personal_field[i].setEnabled(True)
+
+        self.personal_resource[0].lb_turn_icon.hide()
+        self.personal_resource[1].lb_turn_icon.hide()
+        self.personal_resource[2].lb_turn_icon.hide()
+        self.personal_resource[3].lb_turn_icon.hide()
+        self.personal_resource[self.game_Status.now_turn_player].lb_turn_icon.show()
 
 class WidgetPersonalField(QWidget, personal_field_ui) :
     def __init__(self, player,parent) :
