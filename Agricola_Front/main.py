@@ -100,10 +100,21 @@ class MainWindowClass(QMainWindow, main) :
         #     ppprint(text)
         # pprint(self.player.player_status[0].worker)
         self.pushButton_3.clicked.connect(self.undo)
+        self.pushButton.clicked.connect(self.fence_test)
         self.update_state_of_all()
         self.set_undo()
         ############################################################################
-
+    def fence_test(self):
+        player = self.game_Status.now_turn_player
+        try:
+            if self.lineEdit_1.text() == "v":
+                self.player_status[player].farm.vertical_fence[int(self.lineEdit_3.text())][int(self.lineEdit_2.text())] = not self.player_status[player].farm.vertical_fence[int(self.lineEdit_3.text())][int(self.lineEdit_2.text())]
+            else:
+                self.player_status[player].farm.horizon_fence[int(self.lineEdit_3.text())][int(self.lineEdit_2.text())] = not self.player_status[player].farm.horizon_fence[int(self.lineEdit_3.text())][int(self.lineEdit_2.text())]
+            pprint("v"+self.lineEdit_2.text()+self.lineEdit_3.text()+"펜스 설치")
+            update()
+        except:
+            pprint("오류오류")
     def set_undo(self):
         self.undo_player = copy.deepcopy(self.player_status)
         self.undo_gameStatus = copy.deepcopy(self.game_Status)
@@ -193,6 +204,22 @@ class MainWindowClass(QMainWindow, main) :
         self.personal_resource[2].lb_turn_icon.hide()
         self.personal_resource[3].lb_turn_icon.hide()
         self.personal_resource[self.game_Status.now_turn_player].lb_turn_icon.show()
+        #fance 정보 업데이트
+        for player in range(4):
+            for j in range(4):
+                for i in range(5):
+                    if self.player_status[player].farm.horizon_fence[j][i]:
+                        getattr(self.personal_field[player], f'btn_fence_h{j}{i}').setStyleSheet(f"border:0.5px solid white;border-image : url(:/newPrefix/images/fence_h_{player}.png);")
+                    else:
+                        getattr(self.personal_field[player], f'btn_fence_h{j}{i}').setStyleSheet("border:0.5px solid white;border-image : none;")
+            for j in range(3):
+                for i in range(6):
+                    if self.player_status[player].farm.vertical_fence[j][i]:
+                        getattr(self.personal_field[player], f'btn_fence_v{j}{i}').setStyleSheet(f"border:0.5px solid white;border-image : url(:/newPrefix/images/fence_v_{player}.png);")
+                    else:
+                        getattr(self.personal_field[player], f'btn_fence_v{j}{i}').setStyleSheet("border:0.5px solid white;border-image : none;")
+
+
 
 class WidgetPersonalField(QWidget, personal_field_ui) :
     def __init__(self, player,parent) :
