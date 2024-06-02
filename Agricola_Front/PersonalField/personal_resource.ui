@@ -44,7 +44,7 @@
       <number>1</number>
      </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>1</number>
      </property>
      <widget class="QWidget" name="page_0">
       <layout class="QHBoxLayout" name="horizontalLayout_3">
@@ -87,15 +87,18 @@
             </spacer>
            </item>
            <item>
-            <widget class="QLabel" name="pushButton_7">
+            <widget class="QLabel" name="lb_turn_icon">
              <property name="maximumSize">
               <size>
                <width>30</width>
                <height>16777215</height>
               </size>
              </property>
+             <property name="styleSheet">
+              <string notr="true">border-image: url(:/newPrefix/images/turn_icon.png);</string>
+             </property>
              <property name="text">
-              <string>선턴</string>
+              <string/>
              </property>
              <property name="alignment">
               <set>Qt::AlignCenter</set>
@@ -129,7 +132,7 @@
             </sizepolicy>
            </property>
            <property name="styleSheet">
-            <string notr="true">border-image: url(:/newPrefix/images/rock.png);</string>
+            <string notr="true">border-image: url(:/newPrefix/images/stone.png);</string>
            </property>
            <property name="text">
             <string/>
@@ -172,7 +175,7 @@
           </widget>
          </item>
          <item row="3" column="0">
-          <widget class="QLabel" name="count_meal">
+          <widget class="QLabel" name="count_food">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
              <horstretch>0</horstretch>
@@ -447,8 +450,11 @@
              <verstretch>0</verstretch>
             </sizepolicy>
            </property>
+           <property name="styleSheet">
+            <string notr="true">border-image: url(:/newPrefix/images/worker_none.png);</string>
+           </property>
            <property name="text">
-            <string>사람</string>
+            <string/>
            </property>
            <property name="alignment">
             <set>Qt::AlignCenter</set>
@@ -463,8 +469,11 @@
              <verstretch>0</verstretch>
             </sizepolicy>
            </property>
+           <property name="styleSheet">
+            <string notr="true">border-image: url(:/newPrefix/images/fence_none.png);</string>
+           </property>
            <property name="text">
-            <string>울타리</string>
+            <string/>
            </property>
            <property name="alignment">
             <set>Qt::AlignCenter</set>
@@ -479,8 +488,11 @@
              <verstretch>0</verstretch>
             </sizepolicy>
            </property>
+           <property name="styleSheet">
+            <string notr="true">border-image: url(:/newPrefix/images/sheep.png);</string>
+           </property>
            <property name="text">
-            <string>양</string>
+            <string/>
            </property>
            <property name="alignment">
             <set>Qt::AlignCenter</set>
@@ -495,8 +507,11 @@
              <verstretch>0</verstretch>
             </sizepolicy>
            </property>
+           <property name="styleSheet">
+            <string notr="true">border-image: url(:/newPrefix/images/begging_token.png);</string>
+           </property>
            <property name="text">
-            <string>구걸토큰</string>
+            <string/>
            </property>
            <property name="alignment">
             <set>Qt::AlignCenter</set>
@@ -559,8 +574,11 @@
              <verstretch>0</verstretch>
             </sizepolicy>
            </property>
+           <property name="styleSheet">
+            <string notr="true">border-image: url(:/newPrefix/images/pig.png);</string>
+           </property>
            <property name="text">
-            <string>돼지</string>
+            <string/>
            </property>
            <property name="alignment">
             <set>Qt::AlignCenter</set>
@@ -591,8 +609,11 @@
              <verstretch>0</verstretch>
             </sizepolicy>
            </property>
+           <property name="styleSheet">
+            <string notr="true">border-image: url(:/newPrefix/images/barn_none.png);</string>
+           </property>
            <property name="text">
-            <string>외양간</string>
+            <string/>
            </property>
            <property name="alignment">
             <set>Qt::AlignCenter</set>
@@ -623,8 +644,11 @@
              <verstretch>0</verstretch>
             </sizepolicy>
            </property>
+           <property name="styleSheet">
+            <string notr="true">border-image: url(:/newPrefix/images/cow.png);</string>
+           </property>
            <property name="text">
-            <string>소</string>
+            <string/>
            </property>
            <property name="alignment">
             <set>Qt::AlignCenter</set>

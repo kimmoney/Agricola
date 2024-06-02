@@ -85,7 +85,7 @@
           <property name="currentIndex">
            <number>0</number>
           </property>
-          <widget class="QWidget" name="round_page">
+          <widget class="QWidget" name="round">
            <layout class="QHBoxLayout" name="horizontalLayout_5" stretch="1,1">
             <property name="spacing">
              <number>0</number>
@@ -208,7 +208,7 @@
             </item>
            </layout>
           </widget>
-          <widget class="QWidget" name="personal_page">
+          <widget class="QWidget" name="personal">
            <layout class="QHBoxLayout" name="horizontalLayout_6" stretch="1,1">
             <item>
              <layout class="QVBoxLayout" name="frm_main_field"/>
@@ -229,24 +229,43 @@
            <number>0</number>
           </property>
           <item>
-           <layout class="QVBoxLayout" name="verticalLayout_35">
+           <layout class="QVBoxLayout" name="vlo_etc_log"/>
+          </item>
+          <item>
+           <layout class="QVBoxLayout" name="verticalLayout_36">
+            <property name="spacing">
+             <number>0</number>
+            </property>
+            <property name="leftMargin">
+             <number>0</number>
+            </property>
+            <property name="topMargin">
+             <number>0</number>
+            </property>
+            <property name="rightMargin">
+             <number>0</number>
+            </property>
+            <property name="bottomMargin">
+             <number>0</number>
+            </property>
             <item>
-             <widget class="QPushButton" name="log_2">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
+             <layout class="QVBoxLayout" name="vlo_etc_workerboard">
+              <property name="spacing">
+               <number>-1</number>
               </property>
-              <property name="text">
-               <string>PushButton</string>
+             </layout>
+            </item>
+            <item>
+             <layout class="QVBoxLayout" name="vlo_etc_information">
+              <property name="spacing">
+               <number>-1</number>
               </property>
-             </widget>
+             </layout>
             </item>
            </layout>
           </item>
           <item>
-           <layout class="QVBoxLayout" name="verticalLayout_36">
+           <layout class="QVBoxLayout" name="verticalLayout_37">
             <item>
              <widget class="QPushButton" name="log">
               <property name="sizePolicy">
@@ -255,15 +274,17 @@
                 <verstretch>0</verstretch>
                </sizepolicy>
               </property>
+              <property name="maximumSize">
+               <size>
+                <width>16777215</width>
+                <height>25</height>
+               </size>
+              </property>
               <property name="text">
                <string>이거 누르면 메인 스텍트위젯 바뀜</string>
               </property>
              </widget>
             </item>
-           </layout>
-          </item>
-          <item>
-           <layout class="QVBoxLayout" name="verticalLayout_37">
             <item>
              <widget class="QPushButton" name="pushButton_3">
               <property name="sizePolicy">

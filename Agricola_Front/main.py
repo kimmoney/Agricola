@@ -36,7 +36,8 @@ log_viewer_ui= uic.loadUiType(resource_path("log_viewer_dialog.ui"))[0] # 로그
 basic_roundcard_ui= uic.loadUiType(resource_path("Basic/roundcard.ui"))[0] # 라운드카드 ui
 worker_board_ui = uic.loadUiType(resource_path("Basic/worker_board.ui"))[0] # worker 보드
 check_ui = uic.loadUiType(resource_path("check/check.ui"))[0] # worker 보드
-
+text_log_ui = uic.loadUiType(resource_path("Basic/log.ui"))[0] # text log 박스
+information_ui = uic.loadUiType(resource_path("Basic/information.ui"))[0] # information(설정, 점수표)
 #UI파일 연결
 #단, UI파일은 Python 코드 파일과 같은 디렉토리에 위치해야한다.
 # field_0_ui
@@ -66,17 +67,23 @@ class MainWindowClass(QMainWindow, main) :
         #베이직 라운드 위젯 설정
         self.basic_round = [WidgetBasicRound(i,self) for i in range(30)]
         for i in range(30):getattr(self,f"basic_{i}").addWidget(self.basic_round[i])
-
+        #말칸
         self.worker_board = WorkerBoard(self)
-        self.verticalLayout_37.addWidget(self.worker_board)
+        self.vlo_etc_workerboard.addWidget(self.worker_board)
+        #텍스트 로그 창 설정
+        self.text_log = WidgetTextLog(self)
+        self.vlo_etc_log.addWidget(self.text_log)
+        #인포메이션 칸(설정, 점수표)
+        self.information = WidgetInformation(self)
+        self.vlo_etc_information.addWidget(self.information)
+
         self.Class_check = Check(self)
         self.verticalLayout_37.addWidget(self.Class_check)
         ####################################init####################################
-        self.timer_close,self.timer_open = QTimer(self),QTimer(self)
-        self.log.clicked.connect(self.change_main_stacked)
-        self.log_2.clicked.connect(lambda:self.logging_dialog("한번 오류를 볼까요?"))
-        self.log = Log_viewer(self)
-
+        # self.timer_close,self.timer_open = QTimer(self),QTimer(self)
+        # self.log.clicked.connect(self.change_main_stacked)
+        # self.log_2.clicked.connect(lambda:self.logging_dialog("한번 오류를 볼까요?"))
+        # self.log = Log_viewer(self)
 
         self.player = player_status_repository.PlayerStatusRepository()
         self.gameStatus = game_status_repository.GameStatusRepository()
@@ -90,9 +97,9 @@ class MainWindowClass(QMainWindow, main) :
         self.player.player_status[0].resource.stone+=1
         update()
 
-    def logging_dialog(self,text):
-        self.log.logging(text)
-        update()
+    # def logging_dialog(self,text):
+    #     self.log.logging(text)
+    #     update()
 
     def change_main_stacked(self):
         currentWidget = self.stackedWidget.currentWidget().objectName()
@@ -103,8 +110,8 @@ class MainWindowClass(QMainWindow, main) :
 
 
 
-    def change_stacked_page(self,after_page):
-        after_page = getattr(self,after_page)
+    def change_stacked_page(self, after_page):
+        after_page = getattr(self, after_page)
         stacked_Widget = self.stackedWidget
         if not self.timer_close.isActive() and not self.timer_open.isActive():
             # 이걸로 속도 조절 낮을수록 빠름
@@ -164,7 +171,7 @@ class WidgetPersonalField(QWidget, personal_field_ui) :
         self.player = player
         self.main = parent
         for i in range(15):
-            setattr(self, f"field_{i}", self.widgetFieldBase(i,self)) # field_0 ~ field_14 까지
+            setattr(self, f"field_{i}", self.WidgetFieldBase(i,self)) # field_0 ~ field_14 까지
         
         tmp_field_num = 0
         for i in range(3):
@@ -184,7 +191,7 @@ class WidgetPersonalField(QWidget, personal_field_ui) :
         print(f"Player ID : {self.player} | Fence ID: {id}")
         print(self.objectName())
 
-    class widgetFieldBase(QWidget, field_base_ui) :
+    class WidgetFieldBase(QWidget, field_base_ui) :
         def __init__(self, id,parent):
             super().__init__()
             self.setupUi(self)
@@ -201,7 +208,7 @@ class WidgetPersonalField(QWidget, personal_field_ui) :
             self.pushButton_2.hide()
 
 class WidgetPersonalCard(QWidget, personal_card_ui) :
-    def __init__(self, player,parent) :
+    def __init__(self, player, parent) :
         super().__init__()  # 부모 클래스의 __init__ 함수 호출
         # self.parent
         self.parent = parent
@@ -211,9 +218,9 @@ class WidgetPersonalCard(QWidget, personal_card_ui) :
         self.pushButton_2.clicked.connect(lambda : self.plus("grain"))
         self.pushButton_3.clicked.connect(lambda : self.plus("meal"))
         self.pushButton_4.clicked.connect(lambda : self.plus("reed"))
-    def plus(self,object):
-        count = getattr(self.parent.player.player_status[self.player].resource,object)
-        setattr(self.parent.player.player_status[self.player].resource,object,count+1)
+    def plus(self, object):
+        count = getattr(self.parent.player.player_status[self.player].resource, object)
+        setattr(self.parent.player.player_status[self.player].resource, object,count+1)
 
 
 
@@ -271,10 +278,28 @@ class Check(QWidget, check_ui):
         super().__init__()  # 부모 클래스의 __init__ 함수 호출
         self.setupUi(self)
         self.parent = parent
-        self.
     def mousePressEvent(self,event):
         pass
 
+class WidgetTextLog(QWidget, text_log_ui):
+    def __init__(self, parent):
+        super().__init__()
+        self.setupUi(self)
+        self.parent = parent
+    def mousePressEvent(self,event):
+        # 팝업창으로 로그창 크게 보여주기 (중요도 하)
+        pass
+
+class WidgetInformation(QWidget, information_ui):
+    def __init__(self, parent):
+        super().__init__()
+        self.setupUi(self)
+        self.parent = parent
+
+    def setting(self):
+        pass
+    def show_scoreboard(self):
+        pass
 
 ###실행 코드### 밑에 건들 필요 굳이 없음###
 if __name__ == "__main__" :
