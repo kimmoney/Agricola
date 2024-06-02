@@ -5,9 +5,10 @@ from PyQt5.QtCore import QTimer
 from PyQt5.QtCore import Qt
 import os
 import MyQRC_rc
-
+import copy
 import sys
 import os
+import random
 
 # 모듈이 위치한 디렉토리를 지정합니다.
 module_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'Agricola_Back')
@@ -47,6 +48,7 @@ information_ui = uic.loadUiType(resource_path("Basic/information.ui"))[0] # info
 class MainWindowClass(QMainWindow, main) :
     def __init__(self) :
         super().__init__()
+        
         self.setupUi(self)
         #플레이어 필드 위젯 설정
         self.personal_field = [WidgetPersonalField(i,self) for i in range(4)]
@@ -65,14 +67,17 @@ class MainWindowClass(QMainWindow, main) :
         self.personal_resource = [WidgetPersonalResource(i,self) for i in range(4)]
         for i in range(4):getattr(self,f"frm_p{i}_2").addWidget(self.personal_resource[i])
         #베이직 라운드 위젯 설정
-        self.basic_round = [WidgetBasicRound(i,self) for i in range(30)]
+        numbers = list(range(30))
+        # 리스트를 무작위로 섞습니다.
+        random.shuffle(numbers)
+        self.basic_round = [WidgetBasicRound(i,self) for i in numbers]
         for i in range(30):getattr(self,f"basic_{i}").addWidget(self.basic_round[i])
         #말칸
         self.worker_board = WorkerBoard(self)
         self.vlo_etc_workerboard.addWidget(self.worker_board)
         #텍스트 로그 창 설정
-        self.text_log = WidgetTextLog(self)
-        self.vlo_etc_log.addWidget(self.text_log)
+        # self.text_log = WidgetTextLog(self)
+        # self.vlo_etc_log.addWidget(self.text_log)
         #인포메이션 칸(설정, 점수표)
         self.information = WidgetInformation(self)
         self.vlo_etc_information.addWidget(self.information)
@@ -82,24 +87,42 @@ class MainWindowClass(QMainWindow, main) :
         ####################################init####################################
         self.timer_close,self.timer_open = QTimer(self),QTimer(self)
         self.log.clicked.connect(self.change_main_stacked)
+        self.log.clicked.connect(self.update_state_of_all)
         # self.log_2.clicked.connect(lambda:self.logging_dialog("한번 오류를 볼까요?"))
         # self.log = Log_viewer(self)
 
-        self.player = player_status_repository.PlayerStatusRepository()
-        self.gameStatus = game_status_repository.GameStatusRepository()
-        self.round = round_status_repository.RoundStatusRepository()
-        print(self.player.player_status[0].worker)
-        self.pushButton_3.clicked.connect(self.test)
-    
+        self.round_status = player_status_repository.PlayerStatusRepository().player_status
+        self.gameStatus = game_status_repository.GameStatusRepository().game_status
+        self.round_status = round_status_repository.RoundStatusRepository().round_status
+        
+        # def pprint(text):
+        #     ppprint("log : ")
+        #     ppprint(text)
+        # pprint(self.player_status[0].worker)
+        self.pushButton_3.clicked.connect(self.undo)
+        self.set_undo()
         ############################################################################
-    def test(self):
-        self.player.player_status[0].resource.stone+=1
-        update()
 
+    def set_undo(self):
+        self.undo_player = copy.deepcopy(self.player)
+        self.undo_gameStatus = copy.deepcopy(self.gameStatus)
+        self.undo_round = copy.deepcopy(self.round)
+        
+    def undo(self):
+        self.player = self.undo_player
+        self.gameStatus = self.undo_gameStatus
+        self.round = self.undo_round
+        self.set_undo()
+        self.update_state_of_all()
+        pprint("턴 초기 화면으로 돌아갔습니다.")
     # def logging_dialog(self,text):
     #     self.log.logging(text)
     #     update()
-
+    def pprint(self,text):
+        print(text)
+        self.log_2.setText(self.log_2.toPlainText()+"\n"+str(text))
+        scroll_bar = self.log_2.verticalScrollBar()
+        scroll_bar.setValue(scroll_bar.maximum())
     def change_main_stacked(self):
         currentWidget = self.stackedWidget.currentWidget().objectName()
         # if index == 0:self.stackedWidget.setCurrentIndex(1)
@@ -147,21 +170,22 @@ class MainWindowClass(QMainWindow, main) :
                 self.timer_open.stop()
 
     def update_state_of_all(self):
-        print("상황판을 업데이트 합니다.")
         #resource 업데이트
         for player in range(4):
             for t in ["dirt","grain","meal","reed","stone","vegetable","wood"]:
-                # self.personal_resource[player].count_dirt.setText(str(self.player.player_status[player].resource.dirt))
-                getattr(self.personal_resource[player],f"count_{t}").setText(str(getattr(self.player.player_status[player].resource,t)))
+                # self.personal_resource[player].count_dirt.setText(str(self.player_status[player].resource.dirt))
+                getattr(self.personal_resource[player],f"count_{t}").setText(str(getattr(self.player_status[player].resource,t)))
         #현재턴만 활성화
-        print(f"현재 턴은 {self.gameStatus.game_status.now_turn_player}플레이어 입니다.")
         player_list = [0,1,2,3]
-        player_list.remove(self.gameStatus.game_status.now_turn_player)
+        player_list.remove(self.gameStatus.now_turn_player)
         for i in player_list:
-            self.personal_resource[i].setEnabled(False)
+            # self.personal_resource[i].setEnabled(False)
             self.personal_card[i].setEnabled(False)
             self.personal_field[i].setEnabled(False)
-
+        i = self.gameStatus.now_turn_player
+        # self.personal_resource[i].setEnabled(True)
+        self.personal_card[i].setEnabled(True)
+        self.personal_field[i].setEnabled(True)
 
 class WidgetPersonalField(QWidget, personal_field_ui) :
     def __init__(self, player,parent) :
@@ -184,11 +208,11 @@ class WidgetPersonalField(QWidget, personal_field_ui) :
         # fence 객체들에 대하여 버튼 클릭 이벤트 추가
         for i in range(38):
             btn = getattr(self, f'btn_fence_{i}')
-            btn.clicked.connect(lambda _, id=i: self.print_id(id))
+            btn.clicked.connect(lambda _, id=i: self.pprint_id(id))
     
-    def print_id(self, id):
-        print(f"Player ID : {self.player} | Fence ID: {id}")
-        print(self.objectName())
+    def pprint_id(self, id):
+        pprint(f"Player ID : {self.player} | Fence ID: {id}")
+        pprint(self.objectName())
 
     class WidgetFieldBase(QWidget, field_base_ui) :
         def __init__(self, id,parent):
@@ -196,12 +220,12 @@ class WidgetPersonalField(QWidget, personal_field_ui) :
             self.setupUi(self)
             self.id = id # field에게 고유 id (0~14) 부여
             self.parent = parent
-            self.btn_field_unit.clicked.connect(self.print_id)
+            self.btn_field_unit.clicked.connect(self.pprint_id)
         def mousePressEvent(self,event):
-            print(f"Pressed Fance Player ID : {self.parent.player} | Fence ID: {self.id}")
+            pprint(f"Pressed Fance Player ID : {self.parent.player} | Fence ID: {self.id}")
 
-        def print_id(self):
-            print(f"Player ID : {self.parent.player} | Fence ID: {self.id}")
+        def pprint_id(self):
+            pprint(f"Player ID : {self.parent.player} | Fence ID: {self.id}")
             if not self.pushButton_2.isVisible():
                 self.pushButton_3.hide()
             self.pushButton_2.hide()
@@ -218,13 +242,20 @@ class WidgetPersonalCard(QWidget, personal_card_ui) :
         self.pushButton_3.clicked.connect(lambda : self.plus("meal"))
         self.pushButton_4.clicked.connect(lambda : self.plus("reed"))
     def plus(self, object):
-        count = getattr(self.parent.player.player_status[self.player].resource, object)
-        setattr(self.parent.player.player_status[self.player].resource, object,count+1)
+        if not self.player == 5:
+            player = self.player
+        else:
+            player = self.parent.gameStatus.now_turn_player
+        count = getattr(self.parent.player_status[player].resource, object)
+        pprint(f"{self.player}번 플레이어가 {object}를 추가하였습니다.")
+        setattr(self.parent.player_status[player].resource, object,count+1)
+        self.parent.update_state_of_all()
+
 
 
 
     def mousePressEvent(self,event):
-        print(f"Pressed card Player ID : {self.player}")
+        pprint(f"Pressed card Player ID : {self.player}")
 
 class WidgetPersonalResource(QWidget, personal_resources_ui) :
     def __init__(self, player,parent) :
@@ -232,8 +263,9 @@ class WidgetPersonalResource(QWidget, personal_resources_ui) :
         self.setupUi(self)
         self.player = player
         self.parent = parent
+        # self.turn_num.setText()
     def mousePressEvent(self,event):
-        print(f"Pressed Resource Player ID : {self.player}")
+        pprint(f"Pressed Resource Player ID : {self.player}")
         index = self.stackedWidget.currentIndex()
         if index == 0:self.stackedWidget.setCurrentIndex(1)
         else:self.stackedWidget.setCurrentIndex(0)
@@ -244,8 +276,9 @@ class WidgetBasicRound(QWidget, basic_roundcard_ui) :
         self.parent = parent
         self.round = round
         self.setupUi(self)
+        self.btn_round_1.setText(str(round))
     def mousePressEvent(self,event):
-        print(f"Pressed basic round ID : {self.round}")
+        pprint(f"Pressed basic round ID : {self.round}")
 
 
 
@@ -277,6 +310,14 @@ class Check(QWidget, check_ui):
         super().__init__()  # 부모 클래스의 __init__ 함수 호출
         self.setupUi(self)
         self.parent = parent
+        self.btn_processing.clicked.connect(self.next_turn)
+        self.btn_undo.clicked.connect(self.parent.undo)
+    def next_turn(self):
+        self.parent.gameStatus.now_turn_player = (self.parent.gameStatus.now_turn_player+1)%4
+        self.parent.update_state_of_all()
+        pprint(f"현재 턴은 {self.parent.gameStatus.now_turn_player}플레이어 입니다.")
+        self.parent.set_undo()
+
     def mousePressEvent(self,event):
         pass
 
@@ -306,6 +347,8 @@ if __name__ == "__main__" :
     app = QApplication(sys.argv) 
     #WindowClass의 인스턴스 생성
     myWindow = MainWindowClass()
+    global pprint
+    pprint = myWindow.pprint
     update = lambda: myWindow.update_state_of_all()
     #프로그램 화면을 보여주는 코드
     myWindow.show()
