@@ -3,6 +3,7 @@ from PyQt5.QtWidgets import *
 from PyQt5 import uic
 from PyQt5.QtCore import QTimer
 from PyQt5.QtCore import Qt
+from PyQt5.QtWidgets import QGraphicsBlurEffect
 import os
 import MyQRC_rc
 import copy
@@ -39,6 +40,7 @@ worker_board_ui = uic.loadUiType(resource_path("Basic/worker_board.ui"))[0] # wo
 check_ui = uic.loadUiType(resource_path("check/check.ui"))[0] # worker 보드
 text_log_ui = uic.loadUiType(resource_path("Basic/log.ui"))[0] # text log 박스
 information_ui = uic.loadUiType(resource_path("Basic/information.ui"))[0] # information(설정, 점수표)
+scoreboard_ui = uic.loadUiType(resource_path("Basic/scoreboard.ui"))[0] # 점수표
 #UI파일 연결
 #단, UI파일은 Python 코드 파일과 같은 디렉토리에 위치해야한다.
 # field_0_ui
@@ -48,8 +50,8 @@ information_ui = uic.loadUiType(resource_path("Basic/information.ui"))[0] # info
 class MainWindowClass(QMainWindow, main) :
     def __init__(self) :
         super().__init__()
-        
         self.setupUi(self)
+        
         #플레이어 필드 위젯 설정
         self.personal_field = [WidgetPersonalField(i,self) for i in range(4)]
         for i in range(4):getattr(self,f"frm_p{i}_0").addWidget(self.personal_field[i])
@@ -61,7 +63,7 @@ class MainWindowClass(QMainWindow, main) :
         for i in range(4):getattr(self,f"frm_p{i}_1").addWidget(self.personal_card[i])
 
         #메인 카드 위젯 설정
-        self.main_card = WidgetPersonalCard(5,self)
+        self.main_card = WidgetPersonalCard(4,self)
         self.frm_main_card.addWidget(self.main_card)
         #플레이어 리소스 위젯 설정
         self.personal_resource = [WidgetPersonalResource(i,self) for i in range(4)]
@@ -92,7 +94,7 @@ class MainWindowClass(QMainWindow, main) :
         # self.log = Log_viewer(self)
 
         self.player_status = player_status_repository.PlayerStatusRepository().player_status
-        self.game_Status = game_status_repository.GameStatusRepository().game_status
+        self.game_status = game_status_repository.GameStatusRepository().game_status
         self.round_status = round_status_repository.RoundStatusRepository().round_status
         
         # def pprint(text):
@@ -103,15 +105,15 @@ class MainWindowClass(QMainWindow, main) :
         self.update_state_of_all()
         self.set_undo()
         ############################################################################
-    
+        
     def set_undo(self):
         self.undo_player = copy.deepcopy(self.player_status)
-        self.undo_gameStatus = copy.deepcopy(self.game_Status)
+        self.undo_gameStatus = copy.deepcopy(self.game_status)
         self.undo_round = copy.deepcopy(self.round_status)
         
     def undo(self):
         self.player_status = self.undo_player
-        self.game_Status = self.undo_gameStatus
+        self.game_status = self.undo_gameStatus
         self.round_status = self.undo_round
         self.set_undo()
         self.update_state_of_all()
@@ -176,23 +178,37 @@ class MainWindowClass(QMainWindow, main) :
             for t in ["dirt","grain","meal","reed","stone","vegetable","wood",'sheep','cow','fence','beg_token','pig','worker','barn']:
                 # self.personal_resource[player].count_dirt.setText(str(self.player.player_status[player].resource.dirt))
                 getattr(self.personal_resource[player],f"count_{t}").setText(str(getattr(self.player_status[player].resource,t)))
+            first_turn = 0
+            if self.player_status[player].resource.first_turn:
+                first_turn = player # 첫턴으로 시작하는 플레이어
+            self.personal_resource[player].turn_info_1.setText("")
+            self.personal_resource[player].turn_info_2.setText("")
+
         #현재턴만 활성화
         player_list = [0,1,2,3]
-        player_list.remove(self.game_Status.now_turn_player)
+        player_list.remove(self.game_status.now_turn_player)
         for i in player_list:
             # self.personal_resource[i].setEnabled(False)
             self.personal_card[i].setEnabled(False)
             self.personal_field[i].setEnabled(False)
-        i = self.game_Status.now_turn_player
+        now_turn = self.game_status.now_turn_player
+        #next_turn = self.game_status.next_turn_player ############원래는 이대로##########
+        next_turn = (now_turn+1)%4
+        self.personal_resource[now_turn].turn_info_1.setText("NOW")
+        self.personal_resource[now_turn].turn_info_2.setText("NOW")
+        self.personal_resource[next_turn].turn_info_1.setText("NEXT")
+        self.personal_resource[next_turn].turn_info_2.setText("NEXT")
         # self.personal_resource[i].setEnabled(True)
-        self.personal_card[i].setEnabled(True)
-        self.personal_field[i].setEnabled(True)
+        self.personal_card[now_turn].setEnabled(True)
+        self.personal_field[now_turn].setEnabled(True)
 
-        self.personal_resource[0].lb_turn_icon.hide()
-        self.personal_resource[1].lb_turn_icon.hide()
-        self.personal_resource[2].lb_turn_icon.hide()
-        self.personal_resource[3].lb_turn_icon.hide()
-        self.personal_resource[self.game_Status.now_turn_player].lb_turn_icon.show()
+        for resource in self.personal_resource:
+            resource.lb_turn_icon_1.hide()
+            resource.lb_turn_icon_2.hide()
+        self.personal_resource[first_turn].lb_turn_icon_1.show()
+        self.personal_resource[first_turn].lb_turn_icon_2.show()
+
+        
         #fance 정보 업데이트
         for player in range(4):
             for j in range(4):
@@ -207,7 +223,7 @@ class MainWindowClass(QMainWindow, main) :
                         getattr(self.personal_field[player], f'btn_fence_v{j}{i}').setStyleSheet(f"border:0.5px solid white;border-image : url(:/newPrefix/images/fence_v_{player}.png);")
                     else:
                         getattr(self.personal_field[player], f'btn_fence_v{j}{i}').setStyleSheet("border:0.5px solid white;border-image : none;")
-
+    
 
 
 class WidgetPersonalField(QWidget, personal_field_ui) :
@@ -284,13 +300,11 @@ class WidgetPersonalCard(QWidget, personal_card_ui) :
         if not self.player == 5:
             player = self.player
         else:
-            player = self.parent.game_Status.now_turn_player
+            player = self.parent.game_status.now_turn_player
         count = getattr(self.parent.player_status[player].resource, object)
         pprint(f"{self.player}번 플레이어가 {object}를 추가하였습니다.")
         setattr(self.parent.player_status[player].resource, object,count+1)
         self.parent.update_state_of_all()
-
-
 
 
     def mousePressEvent(self,event):
@@ -302,7 +316,8 @@ class WidgetPersonalResource(QWidget, personal_resources_ui) :
         self.setupUi(self)
         self.player = player
         self.parent = parent
-        # self.turn_num.setText()
+        self.turn_info_1.setText("")
+        self.turn_info_2.setText("")
     def mousePressEvent(self,event):
         pprint(f"Pressed Resource Player ID : {self.player}")
         index = self.stackedWidget.currentIndex()
@@ -318,9 +333,6 @@ class WidgetBasicRound(QWidget, basic_roundcard_ui) :
         self.btn_round_1.setText(str(round))
     def mousePressEvent(self,event):
         pprint(f"Pressed basic round ID : {self.round}")
-
-
-
 
 
 class Log_viewer(QDialog,log_viewer_ui):
@@ -353,9 +365,9 @@ class Check(QWidget, check_ui):
         self.btn_processing.clicked.connect(self.next_turn)
         self.btn_undo.clicked.connect(self.parent.undo)
     def next_turn(self):
-        self.parent.game_Status.now_turn_player = (self.parent.game_Status.now_turn_player+1)%4
+        self.parent.game_status.now_turn_player = (self.parent.game_status.now_turn_player+1)%4
         self.parent.update_state_of_all()
-        pprint(f"현재 턴은 {self.parent.game_Status.now_turn_player}플레이어 입니다.")
+        pprint(f"현재 턴은 {self.parent.game_status.now_turn_player}플레이어 입니다.")
         self.parent.set_undo()
 
     def mousePressEvent(self,event):
@@ -375,11 +387,22 @@ class WidgetInformation(QWidget, information_ui):
         super().__init__()
         self.setupUi(self)
         self.parent = parent
+        self.btn_scoreboard.clicked.connect(self.show_scoreboard)
 
     def setting(self):
         pass
     def show_scoreboard(self):
-        pass
+        self.scoreboard = Scoreboard(self.parent)
+        self.scoreboard.exec_()
+
+class Scoreboard(QDialog, scoreboard_ui):
+    def __init__(self, parent):
+        super().__init__()
+        self.setupUi(self)
+        self.parent = parent
+        self.setWindowFlags(Qt.FramelessWindowHint | Qt.WindowStaysOnTopHint)
+    def mousePressEvent(self,event):
+        self.close()
 
 ###실행 코드### 밑에 건들 필요 굳이 없음###
 if __name__ == "__main__" :

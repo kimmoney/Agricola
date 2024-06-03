@@ -64,12 +64,12 @@
         <number>0</number>
        </property>
        <item>
-        <layout class="QGridLayout" name="glo_0" rowstretch="1,1,1,1" columnstretch="1,1,1,1">
+        <layout class="QGridLayout" name="glo_0" rowstretch="1,1,1,1" columnstretch="1,1,1,1" rowminimumheight="1,1,1,1" columnminimumwidth="1,1,1,1">
          <property name="spacing">
           <number>0</number>
          </property>
          <item row="3" column="2">
-          <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="0,1,1">
+          <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="0,1">
            <property name="spacing">
             <number>0</number>
            </property>
@@ -87,7 +87,7 @@
             </spacer>
            </item>
            <item>
-            <widget class="QLabel" name="lb_turn_icon">
+            <widget class="QLabel" name="lb_turn_icon_1">
              <property name="maximumSize">
               <size>
                <width>30</width>
@@ -99,22 +99,6 @@
              </property>
              <property name="text">
               <string/>
-             </property>
-             <property name="alignment">
-              <set>Qt::AlignCenter</set>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLabel" name="turn_num">
-             <property name="maximumSize">
-              <size>
-               <width>40</width>
-               <height>16777215</height>
-              </size>
-             </property>
-             <property name="text">
-              <string>1</string>
              </property>
              <property name="alignment">
               <set>Qt::AlignCenter</set>
@@ -247,22 +231,6 @@
            </property>
           </widget>
          </item>
-         <item row="3" column="3">
-          <widget class="QLabel" name="pushButton_8">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="text">
-            <string>턴순서</string>
-           </property>
-           <property name="alignment">
-            <set>Qt::AlignCenter</set>
-           </property>
-          </widget>
-         </item>
          <item row="0" column="0">
           <widget class="QLabel" name="count_wood">
            <property name="sizePolicy">
@@ -378,6 +346,27 @@
            </property>
            <property name="text">
             <string/>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="3">
+          <widget class="QLabel" name="turn_info_1">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">font: 70 17pt &quot;American Typewriter&quot;;
+font-weight: 550;
+color: rgb(253, 102, 102);</string>
+           </property>
+           <property name="text">
+            <string>NEXT</string>
            </property>
            <property name="alignment">
             <set>Qt::AlignCenter</set>
@@ -620,22 +609,6 @@
            </property>
           </widget>
          </item>
-         <item row="3" column="3">
-          <widget class="QLabel" name="pushButton_19">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="text">
-            <string/>
-           </property>
-           <property name="alignment">
-            <set>Qt::AlignCenter</set>
-           </property>
-          </widget>
-         </item>
          <item row="1" column="1">
           <widget class="QLabel" name="pushButton_20">
            <property name="sizePolicy">
@@ -671,21 +644,65 @@
            </property>
           </widget>
          </item>
-         <item row="3" column="2">
-          <widget class="QLabel" name="pushButton_18">
+         <item row="3" column="3">
+          <widget class="QLabel" name="turn_info_2">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
              <horstretch>0</horstretch>
              <verstretch>0</verstretch>
             </sizepolicy>
            </property>
+           <property name="styleSheet">
+            <string notr="true">font: 70 17pt &quot;American Typewriter&quot;;
+font-weight: 550;
+color: rgb(253, 102, 102);</string>
+           </property>
            <property name="text">
-            <string/>
+            <string>NEXT</string>
            </property>
            <property name="alignment">
             <set>Qt::AlignCenter</set>
            </property>
           </widget>
+         </item>
+         <item row="3" column="2">
+          <layout class="QHBoxLayout" name="horizontalLayout_4" stretch="0,1">
+           <property name="spacing">
+            <number>0</number>
+           </property>
+           <item>
+            <spacer name="horizontalSpacer_2">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>1</width>
+               <height>1</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item>
+            <widget class="QLabel" name="lb_turn_icon_2">
+             <property name="maximumSize">
+              <size>
+               <width>30</width>
+               <height>16777215</height>
+              </size>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">border-image: url(:/newPrefix/images/turn_icon.png);</string>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+            </widget>
+           </item>
+          </layout>
          </item>
         </layout>
        </item>
