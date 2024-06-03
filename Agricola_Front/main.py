@@ -100,21 +100,10 @@ class MainWindowClass(QMainWindow, main) :
         #     ppprint(text)
         # pprint(self.player.player_status[0].worker)
         self.pushButton_3.clicked.connect(self.undo)
-        self.pushButton.clicked.connect(self.fence_test)
         self.update_state_of_all()
         self.set_undo()
         ############################################################################
-    def fence_test(self):
-        player = self.game_Status.now_turn_player
-        try:
-            if self.lineEdit_1.text() == "v":
-                self.player_status[player].farm.vertical_fence[int(self.lineEdit_3.text())][int(self.lineEdit_2.text())] = not self.player_status[player].farm.vertical_fence[int(self.lineEdit_3.text())][int(self.lineEdit_2.text())]
-            else:
-                self.player_status[player].farm.horizon_fence[int(self.lineEdit_3.text())][int(self.lineEdit_2.text())] = not self.player_status[player].farm.horizon_fence[int(self.lineEdit_3.text())][int(self.lineEdit_2.text())]
-            pprint("v"+self.lineEdit_2.text()+self.lineEdit_3.text()+"펜스 설치")
-            update()
-        except:
-            pprint("오류오류")
+    
     def set_undo(self):
         self.undo_player = copy.deepcopy(self.player_status)
         self.undo_gameStatus = copy.deepcopy(self.game_Status)
@@ -226,7 +215,7 @@ class WidgetPersonalField(QWidget, personal_field_ui) :
         super().__init__()
         self.setupUi(self)
         self.player = player
-        self.main = parent
+        self.parent = parent
         for i in range(15):
             setattr(self, f"field_{i}", self.WidgetFieldBase(i,self)) # field_0 ~ field_14 까지
         
@@ -242,19 +231,27 @@ class WidgetPersonalField(QWidget, personal_field_ui) :
         # fence 객체들에 대하여 버튼 클릭 이벤트 추가
         for j in range(4):
             for i in range(5):
-                getattr(self, f'btn_fence_h{j}{i}').clicked.connect(lambda _, i=i,j=j: self.pprint_id("h"+str(j)+str(i)))
+                getattr(self, f'btn_fence_h{j}{i}').clicked.connect(lambda _, v="h",i=i,j=j: self.pprint_id(v,j,i))
         for j in range(3):
             for i in range(6):
-                getattr(self, f'btn_fence_v{j}{i}').clicked.connect(lambda _, i=i,j=j: self.pprint_id("v"+str(j)+str(i)))
+                getattr(self, f'btn_fence_v{j}{i}').clicked.connect(lambda _,v="v", i=i,j=j: self.pprint_id(v,j,i))
                 
         # for i in range(38):
         #     btn = 
         #     btn = getattr(self, f'btn_fence_{i}')
         #     btn.clicked.connect(lambda _, id=i: self.pprint_id(id))
     
-    def pprint_id(self, id):
-        pprint(f"Player ID : {self.player} | Fence ID: {id}")
-        pprint(self.objectName())
+    def pprint_id(self, v,j,i):
+        # try:
+        if v == "v":
+            self.parent.player_status[self.player].farm.vertical_fence[j][i] = not self.parent.player_status[self.player].farm.vertical_fence[j][i]
+        else:
+            self.parent.player_status[self.player].farm.horizon_fence[j][i] = not self.parent.player_status[self.player].farm.horizon_fence[j][i]
+        pprint(f"{v}{j}{i}펜스 설치")
+        update()
+        # except:
+            # pprint("오류오류")
+        pprint(f"Player ID : {self.player} | Fence ID: {v}{j}{i}")
 
     class WidgetFieldBase(QWidget, field_base_ui) :
         def __init__(self, id,parent):

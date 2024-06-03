@@ -190,57 +190,19 @@
                <layout class="QVBoxLayout" name="basic_24"/>
               </item>
               <item row="0" column="2">
-               <layout class="QVBoxLayout" name="basic_25">
-                <item>
-                 <widget class="QLineEdit" name="lineEdit_3">
-                  <property name="sizePolicy">
-                   <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                   </sizepolicy>
-                  </property>
-                  <property name="text">
-                   <string>1</string>
-                  </property>
-                 </widget>
-                </item>
-               </layout>
+               <layout class="QVBoxLayout" name="basic_25"/>
               </item>
               <item row="1" column="2">
-               <layout class="QVBoxLayout" name="basic_26">
-                <item>
-                 <widget class="QLineEdit" name="lineEdit_2">
-                  <property name="text">
-                   <string>0</string>
-                  </property>
-                 </widget>
-                </item>
-               </layout>
+               <layout class="QVBoxLayout" name="basic_26"/>
               </item>
               <item row="2" column="2">
-               <layout class="QVBoxLayout" name="basic_27">
-                <item>
-                 <widget class="QLineEdit" name="lineEdit_1">
-                  <property name="text">
-                   <string>v</string>
-                  </property>
-                 </widget>
-                </item>
-               </layout>
+               <layout class="QVBoxLayout" name="basic_27"/>
               </item>
               <item row="3" column="2">
                <layout class="QVBoxLayout" name="basic_28"/>
               </item>
               <item row="4" column="2">
-               <layout class="QVBoxLayout" name="basic_29">
-                <item>
-                 <widget class="QPushButton" name="pushButton">
-                  <property name="text">
-                   <string>PushButton</string>
-                  </property>
-                 </widget>
-                </item>
-               </layout>
+               <layout class="QVBoxLayout" name="basic_29"/>
               </item>
              </layout>
             </item>
