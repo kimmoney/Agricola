@@ -1,5 +1,36 @@
 <RCC>
   <qresource prefix="newPrefix">
+    <file>images/랜덤/랜덤 (0).png</file>
+    <file>images/랜덤/랜덤 (1).png</file>
+    <file>images/랜덤/랜덤 (2).png</file>
+    <file>images/랜덤/랜덤 (3).png</file>
+    <file>images/랜덤/랜덤 (4).png</file>
+    <file>images/랜덤/랜덤 (5).png</file>
+    <file>images/랜덤/랜덤 (6).png</file>
+    <file>images/랜덤/랜덤 (7).png</file>
+    <file>images/랜덤/랜덤 (8).png</file>
+    <file>images/랜덤/랜덤 (9).png</file>
+    <file>images/랜덤/랜덤 (10).png</file>
+    <file>images/랜덤/랜덤 (11).png</file>
+    <file>images/랜덤/랜덤 (12).png</file>
+    <file>images/랜덤/랜덤 (13).png</file>
+    <file>images/랜덤/랜덤 (14).png</file>
+    <file>images/기본행동/기본행동 (0).png</file>
+    <file>images/기본행동/기본행동 (1).png</file>
+    <file>images/기본행동/기본행동 (2).png</file>
+    <file>images/기본행동/기본행동 (3).png</file>
+    <file>images/기본행동/기본행동 (4).png</file>
+    <file>images/기본행동/기본행동 (5).png</file>
+    <file>images/기본행동/기본행동 (6).png</file>
+    <file>images/기본행동/기본행동 (7).png</file>
+    <file>images/기본행동/기본행동 (8).png</file>
+    <file>images/기본행동/기본행동 (9).png</file>
+    <file>images/기본행동/기본행동 (10).png</file>
+    <file>images/기본행동/기본행동 (11).png</file>
+    <file>images/기본행동/기본행동 (12).png</file>
+    <file>images/기본행동/기본행동 (13).png</file>
+    <file>images/기본행동/기본행동 (14).png</file>
+    <file>images/기본행동/기본행동 (15).png</file>
     <file>check/undo.png</file>
     <file>check/check.png</file>
     <file>images/갈대밭.png</file>
@@ -37,7 +68,6 @@
     <file>images/barn_none.png</file>
     <file>images/barn_purple.png</file>
     <file>images/barn_red.png</file>
-    <file>images/beg_token.png</file>
     <file>images/begging_token.png</file>
     <file>images/cow.png</file>
     <file>images/dirt.png</file>
@@ -60,8 +90,8 @@
     <file>images/harvest.png</file>
     <file>images/house_dirt.png</file>
     <file>images/house_stone.png</file>
-    <file>images/house_wood.jpeg</file>
     <file>images/IMG_0402.PNG</file>
+    <file>images/house_wood.png</file>
     <file>images/IMG_0403.PNG</file>
     <file>images/IMG_0404.PNG</file>
     <file>images/number_1.png</file>

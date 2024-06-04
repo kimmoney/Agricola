@@ -45,6 +45,12 @@
    </property>
    <item>
     <widget class="QWidget" name="Frame" native="true">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
      <property name="styleSheet">
       <string notr="true">#Frame{background-color:green;}</string>
      </property>
@@ -67,7 +73,7 @@
       <item>
        <widget class="QWidget" name="horizontalWidget_11" native="true">
         <property name="sizePolicy">
-         <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+         <sizepolicy hsizetype="Minimum" vsizetype="Maximum">
           <horstretch>0</horstretch>
           <verstretch>0</verstretch>
          </sizepolicy>
@@ -504,6 +510,12 @@ background-color: rgba(0, 255, 0, 12);</string>
       </item>
       <item>
        <widget class="QWidget" name="horizontalWidget_14" native="true">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
         <property name="styleSheet">
          <string notr="true">QPushButton:pressed {
        background-color: rgb(222, 255, 220);
@@ -900,6 +912,12 @@ background-color: rgba(0, 255, 0, 12);</string>
       </item>
       <item>
        <widget class="QWidget" name="horizontalWidget_16" native="true">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
         <property name="styleSheet">
          <string notr="true">QPushButton:pressed {
        background-color: rgb(222, 255, 220);
@@ -1294,7 +1312,7 @@ background-color: rgba(0, 255, 0, 12);</string>
       <item>
        <widget class="QWidget" name="horizontalWidget_20" native="true">
         <property name="sizePolicy">
-         <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+         <sizepolicy hsizetype="Minimum" vsizetype="Maximum">
           <horstretch>0</horstretch>
           <verstretch>0</verstretch>
          </sizepolicy>
