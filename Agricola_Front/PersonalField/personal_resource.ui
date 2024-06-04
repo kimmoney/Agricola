@@ -44,7 +44,7 @@
       <number>1</number>
      </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>1</number>
      </property>
      <widget class="QWidget" name="page_0">
       <layout class="QHBoxLayout" name="horizontalLayout_3">
@@ -64,7 +64,7 @@
         <number>0</number>
        </property>
        <item>
-        <layout class="QGridLayout" name="glo_0" rowstretch="1,1,1,1" columnstretch="1,1,1,1" rowminimumheight="1,1,1,1" columnminimumwidth="1,1,1,1">
+        <layout class="QGridLayout" name="glo_0" rowstretch="1,1,1,1" columnstretch="4,5,4,5" rowminimumheight="1,1,1,1" columnminimumwidth="1,1,1,1">
          <property name="spacing">
           <number>0</number>
          </property>
@@ -360,8 +360,17 @@
              <verstretch>0</verstretch>
             </sizepolicy>
            </property>
+           <property name="font">
+            <font>
+             <family>American Typewriter</family>
+             <pointsize>12</pointsize>
+             <weight>68</weight>
+             <italic>false</italic>
+             <bold>true</bold>
+            </font>
+           </property>
            <property name="styleSheet">
-            <string notr="true">font: 70 17pt &quot;American Typewriter&quot;;
+            <string notr="true">font: 70 12pt &quot;American Typewriter&quot;;
 font-weight: 550;
 color: rgb(253, 102, 102);</string>
            </property>
@@ -395,7 +404,7 @@ color: rgb(253, 102, 102);</string>
         <number>0</number>
        </property>
        <item>
-        <layout class="QGridLayout" name="glo_1" rowstretch="1,1,1,1" columnstretch="1,1,1,1">
+        <layout class="QGridLayout" name="glo_1" rowstretch="1,1,1,1" columnstretch="4,5,4,5">
          <property name="spacing">
           <number>0</number>
          </property>
@@ -653,7 +662,7 @@ color: rgb(253, 102, 102);</string>
             </sizepolicy>
            </property>
            <property name="styleSheet">
-            <string notr="true">font: 70 17pt &quot;American Typewriter&quot;;
+            <string notr="true">font: 70 12pt &quot;American Typewriter&quot;;
 font-weight: 550;
 color: rgb(253, 102, 102);</string>
            </property>

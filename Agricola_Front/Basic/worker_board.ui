@@ -40,6 +40,11 @@
        <verstretch>0</verstretch>
       </sizepolicy>
      </property>
+     <property name="font">
+      <font>
+       <family>Pretendard Medium</family>
+      </font>
+     </property>
      <property name="styleSheet">
       <string notr="true">#widget_0{background-color : none;}
 #widget_0:disabled{background-color : rgba(255, 255, 127, 100);}
@@ -72,6 +77,11 @@
           <verstretch>0</verstretch>
          </sizepolicy>
         </property>
+        <property name="font">
+         <font>
+          <family>Pretendard Medium</family>
+         </font>
+        </property>
         <property name="styleSheet">
          <string notr="true">
 border-image: url(:/newPrefix/images/worker_red.png);</string>
@@ -94,6 +104,7 @@ border-image: url(:/newPrefix/images/worker_red.png);</string>
         </property>
         <property name="font">
          <font>
+          <family>Pretendard Medium</family>
           <pointsize>20</pointsize>
          </font>
         </property>
@@ -118,6 +129,11 @@ border-image: url(:/newPrefix/images/worker_red.png);</string>
        <horstretch>0</horstretch>
        <verstretch>0</verstretch>
       </sizepolicy>
+     </property>
+     <property name="font">
+      <font>
+       <family>Pretendard Medium</family>
+      </font>
      </property>
      <property name="styleSheet">
       <string notr="true">#widget_1{background-color : none;}
@@ -151,6 +167,11 @@ border-image: url(:/newPrefix/images/worker_red.png);</string>
           <verstretch>0</verstretch>
          </sizepolicy>
         </property>
+        <property name="font">
+         <font>
+          <family>Pretendard Medium</family>
+         </font>
+        </property>
         <property name="styleSheet">
          <string notr="true">border-image: url(:/newPrefix/images/worker_green.png);</string>
         </property>
@@ -172,6 +193,7 @@ border-image: url(:/newPrefix/images/worker_red.png);</string>
         </property>
         <property name="font">
          <font>
+          <family>Pretendard Medium</family>
           <pointsize>20</pointsize>
          </font>
         </property>
@@ -196,6 +218,11 @@ border-image: url(:/newPrefix/images/worker_red.png);</string>
        <horstretch>0</horstretch>
        <verstretch>0</verstretch>
       </sizepolicy>
+     </property>
+     <property name="font">
+      <font>
+       <family>Pretendard Medium</family>
+      </font>
      </property>
      <property name="styleSheet">
       <string notr="true">#widget_2{background-color : none;}
@@ -229,6 +256,11 @@ border-image: url(:/newPrefix/images/worker_red.png);</string>
           <verstretch>0</verstretch>
          </sizepolicy>
         </property>
+        <property name="font">
+         <font>
+          <family>Pretendard Medium</family>
+         </font>
+        </property>
         <property name="styleSheet">
          <string notr="true">border-image: url(:/newPrefix/images/worker_blue.png);</string>
         </property>
@@ -250,6 +282,7 @@ border-image: url(:/newPrefix/images/worker_red.png);</string>
         </property>
         <property name="font">
          <font>
+          <family>Pretendard Medium</family>
           <pointsize>20</pointsize>
          </font>
         </property>
@@ -274,6 +307,11 @@ border-image: url(:/newPrefix/images/worker_red.png);</string>
        <horstretch>0</horstretch>
        <verstretch>0</verstretch>
       </sizepolicy>
+     </property>
+     <property name="font">
+      <font>
+       <family>Pretendard Medium</family>
+      </font>
      </property>
      <property name="styleSheet">
       <string notr="true">#widget_3{background-color : none;}
@@ -307,6 +345,11 @@ border-image: url(:/newPrefix/images/worker_red.png);</string>
           <verstretch>0</verstretch>
          </sizepolicy>
         </property>
+        <property name="font">
+         <font>
+          <family>Pretendard Medium</family>
+         </font>
+        </property>
         <property name="styleSheet">
          <string notr="true">border-image: url(:/newPrefix/images/worker_purple.png);</string>
         </property>
@@ -328,6 +371,7 @@ border-image: url(:/newPrefix/images/worker_red.png);</string>
         </property>
         <property name="font">
          <font>
+          <family>Pretendard Medium</family>
           <pointsize>20</pointsize>
          </font>
         </property>

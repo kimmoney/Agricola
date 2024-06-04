@@ -5,12 +5,12 @@ from PyQt5.QtCore import QTimer
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QGraphicsBlurEffect
 import os
-import data.MyQRC_rc as MyQRC_rc
+import MyQRC_rc
 import copy
 import sys
 import os
 import random
-
+from PyQt5.QtGui import QFont, QFontDatabase
 # 모듈이 위치한 디렉토리를 지정합니다.
 module_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'Agricola_Back')
 # sys.path에 모듈 디렉토리를 추가합니다.
@@ -52,6 +52,16 @@ class MainWindowClass(QMainWindow, main) :
         super().__init__()
         self.setupUi(self)
         
+        font_path = os.path.join(os.path.join(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'data'),'font'),'Pretendard-Medium.otf')
+        
+        # 폰트 파일 로드
+        font_id = QFontDatabase.addApplicationFont(font_path)
+        if font_id == -1:
+            print("Failed to load font")
+        else:
+            font_family = QFontDatabase.applicationFontFamilies(font_id)[0]
+            font = QFont(font_family, 9)  # 로드된 폰트를 기본 폰트로 설정
+            app.setFont(font)
         #플레이어 필드 위젯 설정
         self.personal_field = [WidgetPersonalField(i,self) for i in range(4)]
         for i in range(4):getattr(self,f"frm_p{i}_0").addWidget(self.personal_field[i])
@@ -344,6 +354,7 @@ class WidgetPersonalField(QWidget, personal_field_ui) :
                 player = myWindow.game_status.now_turn_player
             print("player : "+str(player))
             rand = [HouseType.DIRT,HouseType.STONE,HouseType.WOOD]
+            rand.remove(getattr(HouseType,myWindow.player_status[player].farm.house_status.name))
             random.shuffle(rand)
             print(rand)
             myWindow.player_status[player].farm.house_status = rand[0]
@@ -492,6 +503,7 @@ class Scoreboard(QDialog, scoreboard_ui):
 if __name__ == "__main__" :
     #QApplication : 프로그램을 실행시켜주는 클래스
     app = QApplication(sys.argv) 
+    
     #WindowClass의 인스턴스 생성
     myWindow = MainWindowClass()
     global pprint
