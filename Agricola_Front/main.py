@@ -243,7 +243,6 @@ class MainWindowClass(QMainWindow, main) :
                         getattr(self.personal_field[player], f'field_{field_convert[({j}, {i})]}'.setStyleSheet(f"border-image : url(:/newPrefix/images/empty_field.png);"))
 
 
-
 class WidgetPersonalField(QWidget, personal_field_ui) :
     def __init__(self, player,parent) :
         super().__init__()
