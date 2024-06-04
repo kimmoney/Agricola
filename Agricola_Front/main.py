@@ -224,6 +224,14 @@ class MainWindowClass(QMainWindow, main) :
                     else:
                         getattr(self.personal_field[player], f'btn_fence_v{j}{i}').setStyleSheet("border:0.5px solid white;border-image : none;")
     
+        #field 정보 업데이트
+        field_convert = {(i, j): i * 5 + j for i in range(3) for j in range(5)}
+        for player in range(4):
+            house_status = self.player_status[player].farm.house_status # 집 종류 파악
+            for j in range(3):
+                for i in range(5):
+                    if self.player_status[player].farm.field[j][i].field_type.value in [0,1]:
+                        getattr(self.personal_field[player], f'field_{field_convert[({j}, {i})]}'.setStyleSheet(f"border-image : url(:/newPrefix/images/empty_field.png);"))
 
 
 class WidgetPersonalField(QWidget, personal_field_ui) :
