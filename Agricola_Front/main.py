@@ -17,7 +17,7 @@ module_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'Agricola_
 if module_dir not in sys.path:
     sys.path.append(module_dir)
 from Agricola_Back.repository import player_status_repository,game_status_repository,round_status_repository,undo_repository
-
+from Agricola_Back.entity.field_type import FieldType
 
 
 def resource_path(relative_path):
@@ -69,12 +69,14 @@ class MainWindowClass(QMainWindow, main) :
         self.personal_resource = [WidgetPersonalResource(i,self) for i in range(4)]
         for i in range(4):getattr(self,f"frm_p{i}_2").addWidget(self.personal_resource[i])
         #베이직 라운드 위젯 설정
-        numbers = list(range(30))
         # 리스트를 무작위로 섞습니다.
-        random.shuffle(numbers)
-        self.basic_round = [WidgetBasicRound(i,self) for i in numbers]
-        for i in range(30):getattr(self,f"basic_{i}").addWidget(self.basic_round[i])
-        #말칸
+        self.basic_round = [WidgetBasicRound(i,self) for i in range(16)]
+        [getattr(self,f"basic_{i}").addWidget(self.basic_round[i]) for i in range(16)]
+        self.random_round = [WidgetBasicRound(i,self) for i in range(14)]
+        [getattr(self,f"basic_{i+16}").addWidget(self.random_round[i]) for i in range(14)]
+
+        #말칸        numbers = list(range(30))
+
         self.worker_board = WorkerBoard(self)
         self.vlo_etc_workerboard.addWidget(self.worker_board)
         #텍스트 로그 창 설정
@@ -105,7 +107,14 @@ class MainWindowClass(QMainWindow, main) :
         self.update_state_of_all()
         self.set_undo()
         ############################################################################
+
+    def random_round_suffle(self):
+        numbers = list(range(14))
+        random.shuffle(numbers)
+        [self.random_round[i].suffle(numbers[i]) for i in range(14)]
         
+
+        [getattr(self,f"basic_{i+16}").addWidget(self.random_round[i]) for i in range(13)]
     def set_undo(self):
         self.undo_player = copy.deepcopy(self.player_status)
         self.undo_gameStatus = copy.deepcopy(self.game_status)
@@ -185,13 +194,13 @@ class MainWindowClass(QMainWindow, main) :
             self.personal_resource[player].turn_info_2.setText("")
 
         #현재턴만 활성화
+        now_turn = self.game_status.now_turn_player
         player_list = [0,1,2,3]
         player_list.remove(self.game_status.now_turn_player)
         for i in player_list:
             # self.personal_resource[i].setEnabled(False)
             self.personal_card[i].setEnabled(False)
             self.personal_field[i].setEnabled(False)
-        now_turn = self.game_status.now_turn_player
         #next_turn = self.game_status.next_turn_player ############원래는 이대로##########
         next_turn = (now_turn+1)%4
         self.personal_resource[now_turn].turn_info_1.setText("NOW")
@@ -213,17 +222,26 @@ class MainWindowClass(QMainWindow, main) :
         for player in range(4):
             for j in range(4):
                 for i in range(5):
-                    if self.player_status[player].farm.horizon_fence[j][i]:
+                    if self.player_status[player].farm.horizon_fence[j][i] == FieldType.FENCE:
                         getattr(self.personal_field[player], f'btn_fence_h{j}{i}').setStyleSheet(f"border:0.5px solid white;border-image : url(:/newPrefix/images/fence_h_{player}.png);")
                     else:
                         getattr(self.personal_field[player], f'btn_fence_h{j}{i}').setStyleSheet("border:0.5px solid white;border-image : none;")
             for j in range(3):
                 for i in range(6):
-                    if self.player_status[player].farm.vertical_fence[j][i]:
+                    if self.player_status[player].farm.vertical_fence[j][i] == FieldType.FENCE:
                         getattr(self.personal_field[player], f'btn_fence_v{j}{i}').setStyleSheet(f"border:0.5px solid white;border-image : url(:/newPrefix/images/fence_v_{player}.png);")
                     else:
                         getattr(self.personal_field[player], f'btn_fence_v{j}{i}').setStyleSheet("border:0.5px solid white;border-image : none;")
-    
+            #field 정보 업데이트
+        
+        field_convert = {(i, j): i * 5 + j for i in range(3) for j in range(5)}
+        for player in range(4):
+            house_status = self.player_status[player].farm.house_status # 집 종류 파악
+            for j in range(3):
+                for i in range(5):
+                    if self.player_status[player].farm.field[j][i].field_type.value in [0,1]:
+                        getattr(self.personal_field[player], f'field_{field_convert[({j}, {i})]}'.setStyleSheet(f"border-image : url(:/newPrefix/images/empty_field.png);"))
+
 
 
 class WidgetPersonalField(QWidget, personal_field_ui) :
@@ -260,9 +278,16 @@ class WidgetPersonalField(QWidget, personal_field_ui) :
     def pprint_id(self, v,j,i):
         # try:
         if v == "v":
-            self.parent.player_status[self.player].farm.vertical_fence[j][i] = not self.parent.player_status[self.player].farm.vertical_fence[j][i]
+            if self.parent.player_status[self.player].farm.vertical_fence[j][i] == FieldType.FENCE:
+                self.parent.player_status[self.player].farm.vertical_fence[j][i] = FieldType.NONE_FIELD
+            else:
+                self.parent.player_status[self.player].farm.vertical_fence[j][i] = FieldType.FENCE
         else:
-            self.parent.player_status[self.player].farm.horizon_fence[j][i] = not self.parent.player_status[self.player].farm.horizon_fence[j][i]
+            if self.parent.player_status[self.player].farm.horizon_fence[j][i] == FieldType.FENCE:
+                self.parent.player_status[self.player].farm.horizon_fence[j][i] = FieldType.NONE_FIELD
+            else:
+                self.parent.player_status[self.player].farm.horizon_fence[j][i] = FieldType.FENCE
+            # self.parent.player_status[self.player].farm.horizon_fence[j][i] = not self.parent.player_status[self.player].farm.horizon_fence[j][i]
         pprint(f"{v}{j}{i}펜스 설치")
         update()
         # except:
@@ -333,6 +358,9 @@ class WidgetBasicRound(QWidget, basic_roundcard_ui) :
         self.btn_round_1.setText(str(round))
     def mousePressEvent(self,event):
         pprint(f"Pressed basic round ID : {self.round}")
+    def suffle(self,i):
+        self.btn_round_1.setText(str(i))
+
 
 
 class Log_viewer(QDialog,log_viewer_ui):
@@ -353,6 +381,9 @@ class WorkerBoard(QWidget, worker_board_ui):
         self.setupUi(self)
         self.parent = parent
     def mousePressEvent(self,event):
+        pprint(f"player{myWindow.game_status.now_turn_player} 번 말 선택")
+        state = getattr(self,f"widget_{myWindow.game_status.now_turn_player}").isEnabled()
+        getattr(self,f"widget_{myWindow.game_status.now_turn_player}").setEnabled(not state)
         """
         옵저버에게 status를 전달 받고 라운드카드 활성화 및 안내
         """
@@ -365,9 +396,13 @@ class Check(QWidget, check_ui):
         self.btn_processing.clicked.connect(self.next_turn)
         self.btn_undo.clicked.connect(self.parent.undo)
     def next_turn(self):
+        for i in [0,1,2,3]:
+            getattr(self.parent.worker_board,f"widget_{i}").setEnabled(True)
+        
         self.parent.game_status.now_turn_player = (self.parent.game_status.now_turn_player+1)%4
         self.parent.update_state_of_all()
         pprint(f"현재 턴은 {self.parent.game_status.now_turn_player}플레이어 입니다.")
+        self.parent.random_round_suffle()
         self.parent.set_undo()
 
     def mousePressEvent(self,event):
