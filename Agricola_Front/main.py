@@ -277,10 +277,10 @@ class WidgetPersonalField(QWidget, personal_field_ui) :
             self.parent = parent
             self.btn_field_unit.clicked.connect(self.pprint_id)
         def mousePressEvent(self,event):
-            pprint(f"Pressed Fance Player ID : {self.parent.player_status} | Fence ID: {self.id}")
+            pprint(f"Pressed Fance Player ID : {self.parent.player} | Fence ID: {self.id}")
 
         def pprint_id(self):
-            pprint(f"Player ID : {self.parent.player_status} | Fence ID: {self.id}")
+            pprint(f"Player ID : {self.parent.player} | Fence ID: {self.id}")
             if not self.pushButton_2.isVisible():
                 self.pushButton_3.hide()
             self.pushButton_2.hide()
