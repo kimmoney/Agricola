@@ -66,7 +66,7 @@ class MainWindowClass(QMainWindow, main) :
         self.personal_field = [WidgetPersonalField(i,self) for i in range(4)]
         for i in range(4):getattr(self,f"frm_p{i}_0").addWidget(self.personal_field[i])
         #메인 필드 위젯 설정
-        self.main_field = WidgetPersonalField(5,self)
+        self.main_field = WidgetPersonalField(4,self)
         self.frm_main_field.addWidget(self.main_field)
         #플레이어 카드 위젯 설정
         self.personal_card = [WidgetPersonalCard(i,self) for i in range(4)]
@@ -318,7 +318,7 @@ class WidgetPersonalField(QWidget, personal_field_ui) :
     
     def pprint_id(self, v,j,i):
         # try:
-        if self.player == 5:
+        if self.player == 4:
             player = myWindow.game_status.now_turn_player
         else :
             player = self.player
@@ -359,7 +359,7 @@ class WidgetPersonalField(QWidget, personal_field_ui) :
             pprint(f"Pressed Fance Player ID : {self.parent.player} | Fence ID: {self.id}")
 
         def pprint_id(self,t):
-            if self.player == 5:
+            if self.player == 4:
                 player = myWindow.game_status.now_turn_player
             else :
                 player = self.parent.player
@@ -398,7 +398,7 @@ class WidgetPersonalCard(QWidget, personal_card_ui) :
         self.pushButton_3.clicked.connect(lambda : self.plus("fence"))
         self.pushButton_4.clicked.connect(lambda : self.plus("cow"))
     def plus(self, object):
-        if not self.player == 5:
+        if not self.player == 4:
             player = self.player
         else:
             player = self.parent.game_status.now_turn_player
@@ -528,8 +528,6 @@ class Scoreboard(QDialog, scoreboard_ui):
 
 
 
-def reverse(a):
-    return not reverse
 ###실행 코드### 밑에 건들 필요 굳이 없음###
 if __name__ == "__main__" :
     #QApplication : 프로그램을 실행시켜주는 클래스
