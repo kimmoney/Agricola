@@ -32,7 +32,7 @@
    <item>
     <widget class="QWidget" name="widget_0" native="true">
      <property name="enabled">
-      <bool>false</bool>
+      <bool>true</bool>
      </property>
      <property name="sizePolicy">
       <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
@@ -122,7 +122,7 @@ border-image: url(:/newPrefix/images/worker_red.png);</string>
    <item>
     <widget class="QWidget" name="widget_1" native="true">
      <property name="enabled">
-      <bool>false</bool>
+      <bool>true</bool>
      </property>
      <property name="sizePolicy">
       <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
@@ -211,7 +211,7 @@ border-image: url(:/newPrefix/images/worker_red.png);</string>
    <item>
     <widget class="QWidget" name="widget_2" native="true">
      <property name="enabled">
-      <bool>false</bool>
+      <bool>true</bool>
      </property>
      <property name="sizePolicy">
       <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
@@ -300,7 +300,7 @@ border-image: url(:/newPrefix/images/worker_red.png);</string>
    <item>
     <widget class="QWidget" name="widget_3" native="true">
      <property name="enabled">
-      <bool>false</bool>
+      <bool>true</bool>
      </property>
      <property name="sizePolicy">
       <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
