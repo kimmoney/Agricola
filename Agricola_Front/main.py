@@ -281,7 +281,10 @@ class MainWindowClass(QMainWindow, main) :
                 getattr(self.main_field, f'field_{field_convert[(j, i)]}').widget.setStyleSheet("#widget{"+f"border-image : url(:/newPrefix/images/{CONVERTER_image[field_status,house_status]}.png);"+"}")
         
                 # 외양간 처리
-                getattr(self.main_field, f'field_{field_convert[(j, i)]}').btn_barn.setStyleSheet("#btn_barn{"+f"border-image : url(:/newPrefix/images/barn_{player}.png);"+"}" if self.player_status[player].farm.field[j][i].barn else "#btn_barn{"+f"border-image : none;"+"}")
+                getattr(self.main_field, f'field_{field_convert[(j, i)]}').btn_barn.setStyleSheet(getattr(self.personal_field[player], f'field_{field_convert[(j, i)]}').btn_barn.styleSheet())
+                getattr(self.main_field, f'field_{field_convert[(j, i)]}').btn_barn.setChecked(self.player_status[player].farm.field[j][i].barn)
+                
+                # getattr(self.main_field, f'field_{field_convert[(j, i)]}').btn_barn.setStyleSheet("#btn_barn{"+f"border-image : url(:/newPrefix/images/barn_{player}.png);"+"}" if self.player_status[player].farm.field[j][i].barn else "#btn_barn{"+f"border-image : none;"+"}")
 class WidgetPersonalField(QWidget, personal_field_ui) :
     def __init__(self, player,parent) :
         super().__init__()
@@ -344,25 +347,31 @@ class WidgetPersonalField(QWidget, personal_field_ui) :
             self.i = self.id//5
             self.j = self.id%5
             self.parent = parent
-            player = self.parent.player
+            self.player = self.parent.player
             self.btn_animal.clicked.connect(lambda:self.pprint_id("animal"))
             self.pushButton_2.clicked.connect(self.change_house)
             self.btn_barn.clicked.connect(lambda:self.pprint_id("barn"))
-            self.btn_barn.setStyleSheet(f"QPushButton#btn_barn {{border: none;}}QPushButton#btn_barn:checked {{border :url(:/newPrefix/images/barn_{player}.png);}}")
+            self.btn_barn.setStyleSheet(f"QPushButton#btn_barn {{border: none;}}QPushButton#btn_barn:checked {{border-image: url(:/newPrefix/images/barn_{self.player}.png);}}")
+            print(f"QPushButton#btn_barn {{border: none;}}QPushButton#btn_barn:checked {{border-image :url(:/newPrefix/images/barn_{self.player}.png);}}")
             # print(f"#btn_barn:checked{{border : none;}}#btn_barn:checked{{border :url(:/newPrefix/images/barn_{player}.png);}}")
             # getattr(self.main_field, f'field_{field_convert[(j, i)]}').btn_barn.setStyleSheet("#btn_barn{"+f"border-image : url(:/newPrefix/images/barn_{player}.png);"+"}" if self.player_status[player].farm.field[j][i].barn else "#btn_barn{"+f"border-image : none;"+"}")
         def mousePressEvent(self,event):
             pprint(f"Pressed Fance Player ID : {self.parent.player} | Fence ID: {self.id}")
 
         def pprint_id(self,t):
-            pprint(f"Player ID : {self.parent.player} | Fence ID: {self.id} | Type: {t}")
+            if self.player == 5:
+                player = myWindow.game_status.now_turn_player
+            else :
+                player = self.parent.player
+            pprint(f"Player ID : {player} | Fence ID: {self.id} | Type: {t}")
             if t == "barn" : 
                 i = self.id//5
                 j = self.id%5
-                print(myWindow.player_status[self.parent.player].farm.field[i][j].barn)
+                print(myWindow.player_status[player].farm.field[i][j].barn)
                 print(self.btn_barn.isChecked())
                 print(i,j)
-                myWindow.player_status[self.parent.player].farm.field[i][j].barn = not myWindow.player_status[self.parent.player].farm.field[i][j].barn
+                myWindow.player_status[player].farm.field[i][j].barn = not myWindow.player_status[player].farm.field[i][j].barn
+                print(self.btn_barn.isChecked())
                 myWindow.update_state_of_all()
 
         def change_house(self):

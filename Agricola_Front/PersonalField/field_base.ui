@@ -187,6 +187,9 @@
            <property name="text">
             <string>사람</string>
            </property>
+           <property name="checkable">
+            <bool>true</bool>
+           </property>
           </widget>
          </item>
          <item>
@@ -210,6 +213,9 @@
            </property>
            <property name="text">
             <string>사람</string>
+           </property>
+           <property name="checkable">
+            <bool>true</bool>
            </property>
           </widget>
          </item>
@@ -343,6 +349,9 @@
            <property name="text">
             <string>동물</string>
            </property>
+           <property name="checkable">
+            <bool>true</bool>
+           </property>
           </widget>
          </item>
          <item>
@@ -356,6 +365,7 @@
            <property name="font">
             <font>
              <family>Pretendard Medium</family>
+             <pointsize>8</pointsize>
             </font>
            </property>
            <property name="styleSheet">
@@ -504,8 +514,18 @@
                <pointsize>5</pointsize>
               </font>
              </property>
+             <property name="styleSheet">
+              <string notr="true">
+QPushButton#btn_barn {border: none;}QPushButton#btn_barn:checked {border-image :url(:/newPrefix/images/barn_2.png);}</string>
+             </property>
              <property name="text">
               <string>외양간</string>
+             </property>
+             <property name="checkable">
+              <bool>true</bool>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
              </property>
             </widget>
            </item>
