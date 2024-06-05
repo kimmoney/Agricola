@@ -12,4 +12,4 @@ class NoneField(Field):
         self.kind = AnimalType.NONE
         self.count = 0
         self.maximum = 0
-        self.barn = False
+        self.barn = True

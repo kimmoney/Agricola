@@ -234,28 +234,28 @@ class MainWindowClass(QMainWindow, main) :
             for j in range(4):
                 for i in range(5):
                     if self.player_status[player].farm.horizon_fence[j][i] == True:
-                        getattr(self.personal_field[player], f'btn_fence_h{j}{i}').setStyleSheet(f"border:0.5px solid white;border-image : url(:/newPrefix/images/fence_h_{player}.png);")
+                        getattr(self.personal_field[player], f'btn_fence_h{j}{i}').setStyleSheet(f"border:0.5px solid rgba(255, 255, 255, 128);border-image : url(:/newPrefix/images/fence_h_{player}.png);")
                     else:
-                        getattr(self.personal_field[player], f'btn_fence_h{j}{i}').setStyleSheet("border:0.5px solid white;border-image : none;")
+                        getattr(self.personal_field[player], f'btn_fence_h{j}{i}').setStyleSheet("border:0.5px solid rgba(255, 255, 255, 128);border-image : none;")
             for j in range(3):
                 for i in range(6):
                     if self.player_status[player].farm.vertical_fence[j][i] == True:
-                        getattr(self.personal_field[player], f'btn_fence_v{j}{i}').setStyleSheet(f"border:0.5px solid white;border-image : url(:/newPrefix/images/fence_v_{player}.png);")
+                        getattr(self.personal_field[player], f'btn_fence_v{j}{i}').setStyleSheet(f"border:0.5px solid rgba(255, 255, 255, 128);border-image : url(:/newPrefix/images/fence_v_{player}.png);")
                     else:
-                        getattr(self.personal_field[player], f'btn_fence_v{j}{i}').setStyleSheet("border:0.5px solid white;border-image : none;")
+                        getattr(self.personal_field[player], f'btn_fence_v{j}{i}').setStyleSheet("border:0.5px solid rgba(255, 255, 255, 128);border-image : none;")
         #메인 Fence
         for j in range(4):
             for i in range(5):
                 if self.player_status[self.game_status.now_turn_player].farm.horizon_fence[j][i] == True:
-                    getattr(self.main_field, f'btn_fence_h{j}{i}').setStyleSheet(f"border:0.5px solid white;border-image : url(:/newPrefix/images/fence_h_{self.game_status.now_turn_player}.png);")
+                    getattr(self.main_field, f'btn_fence_h{j}{i}').setStyleSheet(f"border:0.5px solid rgba(255, 255, 255, 128);border-image : url(:/newPrefix/images/fence_h_{self.game_status.now_turn_player}.png);")
                 else:
-                    getattr(self.main_field, f'btn_fence_h{j}{i}').setStyleSheet("border:0.5px solid white;border-image : none;")
+                    getattr(self.main_field, f'btn_fence_h{j}{i}').setStyleSheet("border:0.5px solid rgba(255, 255, 255, 128);border-image : none;")
         for j in range(3):
             for i in range(6):
                 if self.player_status[self.game_status.now_turn_player].farm.vertical_fence[j][i] == True:
-                    getattr(self.main_field, f'btn_fence_v{j}{i}').setStyleSheet(f"border:0.5px solid white;border-image : url(:/newPrefix/images/fence_v_{self.game_status.now_turn_player}.png);")
+                    getattr(self.main_field, f'btn_fence_v{j}{i}').setStyleSheet(f"border:0.5px solid rgba(255, 255, 255, 128);border-image : url(:/newPrefix/images/fence_v_{self.game_status.now_turn_player}.png);")
                 else:
-                    getattr(self.main_field, f'btn_fence_v{j}{i}').setStyleSheet("border:0.5px solid white;border-image : none;")
+                    getattr(self.main_field, f'btn_fence_v{j}{i}').setStyleSheet("border:0.5px solid rgba(255, 255, 255, 128);border-image : none;")
         
         #field 정보 업데이트
         field_convert = {(i, j): i * 5 + j for i in range(3) for j in range(5)}
@@ -265,18 +265,23 @@ class MainWindowClass(QMainWindow, main) :
             house_status = self.player_status[player].farm.house_status.value # 집 종류 파악
             for j in range(3):
                 for i in range(5):
+                    # 배경화면 바꾸기
                     field_status = self.player_status[player].farm.field[j][i].field_type.value
                     getattr(self.personal_field[player], f'field_{field_convert[(j, i)]}').widget.setStyleSheet("#widget{"+f"border-image : url(:/newPrefix/images/{CONVERTER_image[field_status,house_status]}.png);"+"}")
-
+                    # 동물 처리
+                    # 외양간 처리
+                    getattr(self.personal_field[player], f'field_{field_convert[(j, i)]}').btn_barn.setChecked(self.player_status[player].farm.field[j][i].barn)
+                    # 사람 처리
         #메인 field
-        
-        house_status = self.player_status[self.game_status.now_turn_player].farm.house_status.value # 집 종류 파악
+        player = self.game_status.now_turn_player
+        house_status = self.player_status[player].farm.house_status.value # 집 종류 파악
         for j in range(3):
             for i in range(5):
-                field_status = self.player_status[self.game_status.now_turn_player].farm.field[j][i].field_type.value
+                field_status = self.player_status[player].farm.field[j][i].field_type.value
                 getattr(self.main_field, f'field_{field_convert[(j, i)]}').widget.setStyleSheet("#widget{"+f"border-image : url(:/newPrefix/images/{CONVERTER_image[field_status,house_status]}.png);"+"}")
         
-
+                # 외양간 처리
+                getattr(self.main_field, f'field_{field_convert[(j, i)]}').btn_barn.setStyleSheet("#btn_barn{"+f"border-image : url(:/newPrefix/images/barn_{player}.png);"+"}" if self.player_status[player].farm.field[j][i].barn else "#btn_barn{"+f"border-image : none;"+"}")
 class WidgetPersonalField(QWidget, personal_field_ui) :
     def __init__(self, player,parent) :
         super().__init__()
@@ -336,17 +341,30 @@ class WidgetPersonalField(QWidget, personal_field_ui) :
             super().__init__()
             self.setupUi(self)
             self.id = id # field에게 고유 id (0~14) 부여
+            self.i = self.id//5
+            self.j = self.id%5
             self.parent = parent
-            self.btn_field_unit.clicked.connect(self.pprint_id)
+            player = self.parent.player
+            self.btn_animal.clicked.connect(lambda:self.pprint_id("animal"))
             self.pushButton_2.clicked.connect(self.change_house)
+            self.btn_barn.clicked.connect(lambda:self.pprint_id("barn"))
+            self.btn_barn.setStyleSheet(f"QPushButton#btn_barn {{border: none;}}QPushButton#btn_barn:checked {{border :url(:/newPrefix/images/barn_{player}.png);}}")
+            # print(f"#btn_barn:checked{{border : none;}}#btn_barn:checked{{border :url(:/newPrefix/images/barn_{player}.png);}}")
+            # getattr(self.main_field, f'field_{field_convert[(j, i)]}').btn_barn.setStyleSheet("#btn_barn{"+f"border-image : url(:/newPrefix/images/barn_{player}.png);"+"}" if self.player_status[player].farm.field[j][i].barn else "#btn_barn{"+f"border-image : none;"+"}")
         def mousePressEvent(self,event):
             pprint(f"Pressed Fance Player ID : {self.parent.player} | Fence ID: {self.id}")
 
-        def pprint_id(self):
-            pprint(f"Player ID : {self.parent.player} | Fence ID: {self.id}")
-            if not self.pushButton_2.isVisible():
-                self.pushButton_3.hide()
-            self.pushButton_2.hide()
+        def pprint_id(self,t):
+            pprint(f"Player ID : {self.parent.player} | Fence ID: {self.id} | Type: {t}")
+            if t == "barn" : 
+                i = self.id//5
+                j = self.id%5
+                print(myWindow.player_status[self.parent.player].farm.field[i][j].barn)
+                print(self.btn_barn.isChecked())
+                print(i,j)
+                myWindow.player_status[self.parent.player].farm.field[i][j].barn = not myWindow.player_status[self.parent.player].farm.field[i][j].barn
+                myWindow.update_state_of_all()
+
         def change_house(self):
             if not self.parent.player ==5:
                 player = self.parent.player
@@ -499,6 +517,10 @@ class Scoreboard(QDialog, scoreboard_ui):
     def mousePressEvent(self,event):
         self.close()
 
+
+
+def reverse(a):
+    return not reverse
 ###실행 코드### 밑에 건들 필요 굳이 없음###
 if __name__ == "__main__" :
     #QApplication : 프로그램을 실행시켜주는 클래스

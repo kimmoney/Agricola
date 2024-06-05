@@ -117,7 +117,7 @@
             </size>
            </property>
            <property name="styleSheet">
-            <string notr="true">border:0.5px solid white;
+            <string notr="true">border:0.5px solid rgba(255, 255, 255, 28);
 background-color: rgba(0, 255, 0, 12);</string>
            </property>
            <property name="text">
@@ -146,7 +146,7 @@ background-color: rgba(0, 255, 0, 12);</string>
             <number>-1</number>
            </property>
            <property name="styleSheet">
-            <string notr="true">border:0.5px solid white;
+            <string notr="true">border:0.5px solid rgba(255, 255, 255, 28);
 background-color: rgba(0, 255, 0, 12);</string>
            </property>
            <property name="text">
@@ -169,7 +169,7 @@ background-color: rgba(0, 255, 0, 12);</string>
             </size>
            </property>
            <property name="styleSheet">
-            <string notr="true">border:0.5px solid white;
+            <string notr="true">border:0.5px solid rgba(255, 255, 255, 28);
 background-color: rgba(0, 255, 0, 12);</string>
            </property>
            <property name="text">
@@ -192,7 +192,7 @@ background-color: rgba(0, 255, 0, 12);</string>
             </size>
            </property>
            <property name="styleSheet">
-            <string notr="true">border:0.5px solid white;
+            <string notr="true">border:0.5px solid rgba(255, 255, 255, 28);
 background-color: rgba(0, 255, 0, 12);</string>
            </property>
            <property name="text">
@@ -215,7 +215,7 @@ background-color: rgba(0, 255, 0, 12);</string>
             </size>
            </property>
            <property name="styleSheet">
-            <string notr="true">border:0.5px solid white;
+            <string notr="true">border:0.5px solid rgba(255, 255, 255, 28);
 background-color: rgba(0, 255, 0, 12);</string>
            </property>
            <property name="text">
@@ -247,7 +247,7 @@ background-color: rgba(0, 255, 0, 12);</string>
           </property>
           <property name="minimumSize">
            <size>
-            <width>15</width>
+            <width>10</width>
             <height>0</height>
            </size>
           </property>
@@ -258,7 +258,7 @@ background-color: rgba(0, 255, 0, 12);</string>
            </size>
           </property>
           <property name="styleSheet">
-           <string notr="true">border:0.5px solid white;
+           <string notr="true">border:0.5px solid rgba(255, 255, 255, 28);
 background-color: rgba(0, 255, 0, 12);</string>
           </property>
           <property name="text">
@@ -295,7 +295,7 @@ background-color: rgba(0, 255, 0, 12);</string>
           </property>
           <property name="minimumSize">
            <size>
-            <width>15</width>
+            <width>10</width>
             <height>0</height>
            </size>
           </property>
@@ -306,7 +306,7 @@ background-color: rgba(0, 255, 0, 12);</string>
            </size>
           </property>
           <property name="styleSheet">
-           <string notr="true">border:0.5px solid white;
+           <string notr="true">border:0.5px solid rgba(255, 255, 255, 28);
 background-color: rgba(0, 255, 0, 12);</string>
           </property>
           <property name="text">
@@ -343,7 +343,7 @@ background-color: rgba(0, 255, 0, 12);</string>
           </property>
           <property name="minimumSize">
            <size>
-            <width>15</width>
+            <width>10</width>
             <height>0</height>
            </size>
           </property>
@@ -354,7 +354,7 @@ background-color: rgba(0, 255, 0, 12);</string>
            </size>
           </property>
           <property name="styleSheet">
-           <string notr="true">border:0.5px solid white;
+           <string notr="true">border:0.5px solid rgba(255, 255, 255, 28);
 background-color: rgba(0, 255, 0, 12);</string>
           </property>
           <property name="text">
@@ -391,7 +391,7 @@ background-color: rgba(0, 255, 0, 12);</string>
           </property>
           <property name="minimumSize">
            <size>
-            <width>15</width>
+            <width>10</width>
             <height>0</height>
            </size>
           </property>
@@ -402,7 +402,7 @@ background-color: rgba(0, 255, 0, 12);</string>
            </size>
           </property>
           <property name="styleSheet">
-           <string notr="true">border:0.5px solid white;
+           <string notr="true">border:0.5px solid rgba(255, 255, 255, 28);
 background-color: rgba(0, 255, 0, 12);</string>
           </property>
           <property name="text">
@@ -439,7 +439,7 @@ background-color: rgba(0, 255, 0, 12);</string>
           </property>
           <property name="minimumSize">
            <size>
-            <width>15</width>
+            <width>10</width>
             <height>0</height>
            </size>
           </property>
@@ -450,7 +450,7 @@ background-color: rgba(0, 255, 0, 12);</string>
            </size>
           </property>
           <property name="styleSheet">
-           <string notr="true">border:0.5px solid white;
+           <string notr="true">border:0.5px solid rgba(255, 255, 255, 28);
 background-color: rgba(0, 255, 0, 12);</string>
           </property>
           <property name="text">
@@ -487,7 +487,7 @@ background-color: rgba(0, 255, 0, 12);</string>
           </property>
           <property name="minimumSize">
            <size>
-            <width>15</width>
+            <width>10</width>
             <height>0</height>
            </size>
           </property>
@@ -498,7 +498,7 @@ background-color: rgba(0, 255, 0, 12);</string>
            </size>
           </property>
           <property name="styleSheet">
-           <string notr="true">border:0.5px solid white;
+           <string notr="true">border:0.5px solid rgba(255, 255, 255, 28);
 background-color: rgba(0, 255, 0, 12);</string>
           </property>
           <property name="text">
@@ -555,7 +555,7 @@ background-color: rgba(0, 255, 0, 12);</string>
             </size>
            </property>
            <property name="styleSheet">
-            <string notr="true">border:0.5px solid white;
+            <string notr="true">border:0.5px solid rgba(255, 255, 255, 28);
 background-color: rgba(0, 255, 0, 12);</string>
            </property>
            <property name="text">
@@ -584,7 +584,7 @@ background-color: rgba(0, 255, 0, 12);</string>
             <number>-1</number>
            </property>
            <property name="styleSheet">
-            <string notr="true">border:0.5px solid white;
+            <string notr="true">border:0.5px solid rgba(255, 255, 255, 28);
 background-color: rgba(0, 255, 0, 12);</string>
            </property>
            <property name="text">
@@ -607,7 +607,7 @@ background-color: rgba(0, 255, 0, 12);</string>
             </size>
            </property>
            <property name="styleSheet">
-            <string notr="true">border:0.5px solid white;
+            <string notr="true">border:0.5px solid rgba(255, 255, 255, 28);
 background-color: rgba(0, 255, 0, 12);</string>
            </property>
            <property name="text">
@@ -630,7 +630,7 @@ background-color: rgba(0, 255, 0, 12);</string>
             </size>
            </property>
            <property name="styleSheet">
-            <string notr="true">border:0.5px solid white;
+            <string notr="true">border:0.5px solid rgba(255, 255, 255, 28);
 background-color: rgba(0, 255, 0, 12);</string>
            </property>
            <property name="text">
@@ -653,7 +653,7 @@ background-color: rgba(0, 255, 0, 12);</string>
             </size>
            </property>
            <property name="styleSheet">
-            <string notr="true">border:0.5px solid white;
+            <string notr="true">border:0.5px solid rgba(255, 255, 255, 28);
 background-color: rgba(0, 255, 0, 12);</string>
            </property>
            <property name="text">
@@ -685,12 +685,12 @@ background-color: rgba(0, 255, 0, 12);</string>
           </property>
           <property name="minimumSize">
            <size>
-            <width>15</width>
+            <width>10</width>
             <height>0</height>
            </size>
           </property>
           <property name="styleSheet">
-           <string notr="true">border:0.5px solid white;
+           <string notr="true">border:0.5px solid rgba(255, 255, 255, 28);
 background-color: rgba(0, 255, 0, 12);</string>
           </property>
           <property name="text">
@@ -727,12 +727,12 @@ background-color: rgba(0, 255, 0, 12);</string>
           </property>
           <property name="minimumSize">
            <size>
-            <width>15</width>
+            <width>10</width>
             <height>0</height>
            </size>
           </property>
           <property name="styleSheet">
-           <string notr="true">border:0.5px solid white;
+           <string notr="true">border:0.5px solid rgba(255, 255, 255, 28);
 background-color: rgba(0, 255, 0, 12);</string>
           </property>
           <property name="text">
@@ -769,12 +769,12 @@ background-color: rgba(0, 255, 0, 12);</string>
           </property>
           <property name="minimumSize">
            <size>
-            <width>15</width>
+            <width>10</width>
             <height>0</height>
            </size>
           </property>
           <property name="styleSheet">
-           <string notr="true">border:0.5px solid white;
+           <string notr="true">border:0.5px solid rgba(255, 255, 255, 28);
 background-color: rgba(0, 255, 0, 12);</string>
           </property>
           <property name="text">
@@ -811,12 +811,12 @@ background-color: rgba(0, 255, 0, 12);</string>
           </property>
           <property name="minimumSize">
            <size>
-            <width>15</width>
+            <width>10</width>
             <height>0</height>
            </size>
           </property>
           <property name="styleSheet">
-           <string notr="true">border:0.5px solid white;
+           <string notr="true">border:0.5px solid rgba(255, 255, 255, 28);
 background-color: rgba(0, 255, 0, 12);</string>
           </property>
           <property name="text">
@@ -853,12 +853,12 @@ background-color: rgba(0, 255, 0, 12);</string>
           </property>
           <property name="minimumSize">
            <size>
-            <width>15</width>
+            <width>10</width>
             <height>0</height>
            </size>
           </property>
           <property name="styleSheet">
-           <string notr="true">border:0.5px solid white;
+           <string notr="true">border:0.5px solid rgba(255, 255, 255, 28);
 background-color: rgba(0, 255, 0, 12);</string>
           </property>
           <property name="text">
@@ -895,12 +895,12 @@ background-color: rgba(0, 255, 0, 12);</string>
           </property>
           <property name="minimumSize">
            <size>
-            <width>15</width>
+            <width>10</width>
             <height>0</height>
            </size>
           </property>
           <property name="styleSheet">
-           <string notr="true">border:0.5px solid white;
+           <string notr="true">border:0.5px solid rgba(255, 255, 255, 28);
 background-color: rgba(0, 255, 0, 12);</string>
           </property>
           <property name="text">
@@ -957,7 +957,7 @@ background-color: rgba(0, 255, 0, 12);</string>
             </size>
            </property>
            <property name="styleSheet">
-            <string notr="true">border:0.5px solid white;
+            <string notr="true">border:0.5px solid rgba(255, 255, 255, 28);
 background-color: rgba(0, 255, 0, 12);</string>
            </property>
            <property name="text">
@@ -986,7 +986,7 @@ background-color: rgba(0, 255, 0, 12);</string>
             <number>-1</number>
            </property>
            <property name="styleSheet">
-            <string notr="true">border:0.5px solid white;
+            <string notr="true">border:0.5px solid rgba(255, 255, 255, 28);
 background-color: rgba(0, 255, 0, 12);</string>
            </property>
            <property name="text">
@@ -1009,7 +1009,7 @@ background-color: rgba(0, 255, 0, 12);</string>
             </size>
            </property>
            <property name="styleSheet">
-            <string notr="true">border:0.5px solid white;
+            <string notr="true">border:0.5px solid rgba(255, 255, 255, 28);
 background-color: rgba(0, 255, 0, 12);</string>
            </property>
            <property name="text">
@@ -1032,7 +1032,7 @@ background-color: rgba(0, 255, 0, 12);</string>
             </size>
            </property>
            <property name="styleSheet">
-            <string notr="true">border:0.5px solid white;
+            <string notr="true">border:0.5px solid rgba(255, 255, 255, 28);
 background-color: rgba(0, 255, 0, 12);</string>
            </property>
            <property name="text">
@@ -1055,7 +1055,7 @@ background-color: rgba(0, 255, 0, 12);</string>
             </size>
            </property>
            <property name="styleSheet">
-            <string notr="true">border:0.5px solid white;
+            <string notr="true">border:0.5px solid rgba(255, 255, 255, 28);
 background-color: rgba(0, 255, 0, 12);</string>
            </property>
            <property name="text">
@@ -1084,12 +1084,12 @@ background-color: rgba(0, 255, 0, 12);</string>
           </property>
           <property name="minimumSize">
            <size>
-            <width>15</width>
+            <width>10</width>
             <height>0</height>
            </size>
           </property>
           <property name="styleSheet">
-           <string notr="true">border:0.5px solid white;
+           <string notr="true">border:0.5px solid rgba(255, 255, 255, 28);
 background-color: rgba(0, 255, 0, 12);</string>
           </property>
           <property name="text">
@@ -1126,12 +1126,12 @@ background-color: rgba(0, 255, 0, 12);</string>
           </property>
           <property name="minimumSize">
            <size>
-            <width>15</width>
+            <width>10</width>
             <height>0</height>
            </size>
           </property>
           <property name="styleSheet">
-           <string notr="true">border:0.5px solid white;
+           <string notr="true">border:0.5px solid rgba(255, 255, 255, 28);
 background-color: rgba(0, 255, 0, 12);</string>
           </property>
           <property name="text">
@@ -1168,12 +1168,12 @@ background-color: rgba(0, 255, 0, 12);</string>
           </property>
           <property name="minimumSize">
            <size>
-            <width>15</width>
+            <width>10</width>
             <height>0</height>
            </size>
           </property>
           <property name="styleSheet">
-           <string notr="true">border:0.5px solid white;
+           <string notr="true">border:0.5px solid rgba(255, 255, 255, 28);
 background-color: rgba(0, 255, 0, 12);</string>
           </property>
           <property name="text">
@@ -1210,12 +1210,12 @@ background-color: rgba(0, 255, 0, 12);</string>
           </property>
           <property name="minimumSize">
            <size>
-            <width>15</width>
+            <width>10</width>
             <height>0</height>
            </size>
           </property>
           <property name="styleSheet">
-           <string notr="true">border:0.5px solid white;
+           <string notr="true">border:0.5px solid rgba(255, 255, 255, 28);
 background-color: rgba(0, 255, 0, 12);</string>
           </property>
           <property name="text">
@@ -1252,12 +1252,12 @@ background-color: rgba(0, 255, 0, 12);</string>
           </property>
           <property name="minimumSize">
            <size>
-            <width>15</width>
+            <width>10</width>
             <height>0</height>
            </size>
           </property>
           <property name="styleSheet">
-           <string notr="true">border:0.5px solid white;
+           <string notr="true">border:0.5px solid rgba(255, 255, 255, 28);
 background-color: rgba(0, 255, 0, 12);</string>
           </property>
           <property name="text">
@@ -1294,12 +1294,12 @@ background-color: rgba(0, 255, 0, 12);</string>
           </property>
           <property name="minimumSize">
            <size>
-            <width>15</width>
+            <width>10</width>
             <height>0</height>
            </size>
           </property>
           <property name="styleSheet">
-           <string notr="true">border:0.5px solid white;
+           <string notr="true">border:0.5px solid rgba(255, 255, 255, 28);
 background-color: rgba(0, 255, 0, 12);</string>
           </property>
           <property name="text">
@@ -1356,7 +1356,7 @@ background-color: rgba(0, 255, 0, 12);</string>
             </size>
            </property>
            <property name="styleSheet">
-            <string notr="true">border:0.5px solid white;
+            <string notr="true">border:0.5px solid rgba(255, 255, 255, 28);
 background-color: rgba(0, 255, 0, 12);</string>
            </property>
            <property name="text">
@@ -1385,7 +1385,7 @@ background-color: rgba(0, 255, 0, 12);</string>
             <number>-1</number>
            </property>
            <property name="styleSheet">
-            <string notr="true">border:0.5px solid white;
+            <string notr="true">border:0.5px solid rgba(255, 255, 255, 28);
 background-color: rgba(0, 255, 0, 12);</string>
            </property>
            <property name="text">
@@ -1408,7 +1408,7 @@ background-color: rgba(0, 255, 0, 12);</string>
             </size>
            </property>
            <property name="styleSheet">
-            <string notr="true">border:0.5px solid white;
+            <string notr="true">border:0.5px solid rgba(255, 255, 255, 28);
 background-color: rgba(0, 255, 0, 12);</string>
            </property>
            <property name="text">
@@ -1431,7 +1431,7 @@ background-color: rgba(0, 255, 0, 12);</string>
             </size>
            </property>
            <property name="styleSheet">
-            <string notr="true">border:0.5px solid white;
+            <string notr="true">border:0.5px solid rgba(255, 255, 255, 28);
 background-color: rgba(0, 255, 0, 12);</string>
            </property>
            <property name="text">
@@ -1454,7 +1454,7 @@ background-color: rgba(0, 255, 0, 12);</string>
             </size>
            </property>
            <property name="styleSheet">
-            <string notr="true">border:0.5px solid white;
+            <string notr="true">border:0.5px solid rgba(255, 255, 255, 28);
 background-color: rgba(0, 255, 0, 12);</string>
            </property>
            <property name="text">

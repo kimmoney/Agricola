@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>94</width>
-    <height>52</height>
+    <width>879</width>
+    <height>673</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -321,7 +321,7 @@
           </spacer>
          </item>
          <item>
-          <widget class="QPushButton" name="btn_field_unit">
+          <widget class="QPushButton" name="btn_animal">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Ignored" vsizetype="Preferred">
              <horstretch>0</horstretch>
@@ -443,60 +443,73 @@
           <number>0</number>
          </property>
          <item>
-          <spacer name="verticalSpacer_5">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="minimumSize">
-            <size>
-             <width>0</width>
-             <height>0</height>
-            </size>
-           </property>
-           <property name="font">
-            <font>
-             <family>Pretendard Medium</family>
-             <pointsize>5</pointsize>
-            </font>
-           </property>
-           <property name="orientation">
-            <enum>Qt::Vertical</enum>
-           </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>0</width>
-             <height>10</height>
-            </size>
-           </property>
-          </spacer>
-         </item>
-         <item>
-          <widget class="QPushButton" name="btn_barn">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Ignored" vsizetype="Preferred">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="minimumSize">
-            <size>
-             <width>1</width>
-             <height>1</height>
-            </size>
-           </property>
-           <property name="font">
-            <font>
-             <family>Pretendard Medium</family>
-             <pointsize>5</pointsize>
-            </font>
-           </property>
-           <property name="text">
-            <string>외양간</string>
-           </property>
-          </widget>
+          <layout class="QVBoxLayout" name="verticalLayout_4" stretch="1,1">
+           <item>
+            <spacer name="verticalSpacer_5">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="font">
+              <font>
+               <family>Pretendard Medium</family>
+               <pointsize>5</pointsize>
+              </font>
+             </property>
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+             <property name="sizeType">
+              <enum>QSizePolicy::Preferred</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>0</width>
+               <height>10</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item>
+            <widget class="QPushButton" name="btn_barn">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="minimumSize">
+              <size>
+               <width>1</width>
+               <height>1</height>
+              </size>
+             </property>
+             <property name="sizeIncrement">
+              <size>
+               <width>2</width>
+               <height>1</height>
+              </size>
+             </property>
+             <property name="font">
+              <font>
+               <family>Pretendard Medium</family>
+               <pointsize>5</pointsize>
+              </font>
+             </property>
+             <property name="text">
+              <string>외양간</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
          </item>
         </layout>
        </widget>
