@@ -103,7 +103,7 @@ class MainWindowClass(QMainWindow, main) :
         self.log.clicked.connect(self.change_main_stacked)
         self.log.clicked.connect(self.update_state_of_all)
         # self.log_2.clicked.connect(lambda:self.logging_dialog("한번 오류를 볼까요?"))
-        # self.log = Log_viewer(self)
+        self.log_popup = Log_viewer(self)
 
         self.player_status = player_status_repository.PlayerStatusRepository().player_status
         self.game_status = game_status_repository.GameStatusRepository().game_status
@@ -146,6 +146,8 @@ class MainWindowClass(QMainWindow, main) :
         self.log_2.setText(self.log_2.toPlainText()+"\n"+str(text))
         scroll_bar = self.log_2.verticalScrollBar()
         scroll_bar.setValue(scroll_bar.maximum())
+        self.log_popup.logging(text)
+
     def change_main_stacked(self):
         currentWidget = self.stackedWidget.currentWidget().objectName()
         # if index == 0:self.stackedWidget.setCurrentIndex(1)
@@ -456,11 +458,14 @@ class Log_viewer(QDialog,log_viewer_ui):
         self.setupUi(self)
         self.setWindowFlags(Qt.FramelessWindowHint | Qt.WindowStaysOnTopHint)
         self.log.setText("이 곳은 로그를 표기하는 곳입니다.")
+        self.timer = QTimer()
         self.hide()
     def logging(self,text):
+        self.timer.stop()
         self.log.setText(text)
         self.show()
-        QTimer.singleShot(3000, self.hide)
+        self.timer.timeout.connect(self.hide)
+        self.timer.start(3000) 
 
 class WorkerBoard(QWidget, worker_board_ui):
     def __init__(self, parent):
