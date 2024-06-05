@@ -1,7 +1,11 @@
 """
 농장의 상태
 """
+from typing import List
+
 from entity.animal_type import AnimalType
+from entity.farm.field import Field
+from entity.farm.house import House
 from entity.farm.none_field import NoneField
 from entity.house_type import HouseType
 
@@ -10,13 +14,15 @@ class Farm:
     def __init__(self):
         self.observers = []
         self.house_status = HouseType.WOOD
-        self.field = [[NoneField() for i in range(5)] for j in range(3)]
-        
-        from entity.field_type import FieldType
-        self.field[0][0].field_type = FieldType.HOUSE
+        self.field: List[List[Field]] = [[NoneField() for i in range(5)] for j in range(3)]
+        self.field[2][0] = House()
+        self.field[1][0] = House()
         self.horizon_fence = [[False for i in range(5)] for j in range(4)]
         self.vertical_fence = [[False for i in range(6)] for j in range(3)]
         self.pet = AnimalType.NONE
+        self.cow = 0
+        self.sheep = 0
+        self.pig = 0
 
     def attach(self, observer):
         self.observers.append(observer)
@@ -47,3 +53,33 @@ class Farm:
     def set_pet(self, pet):
         self.pet = pet
         self.notify()
+
+    def get_cow_count(self):
+        ret = 0
+        if self.pet == AnimalType.COW:
+            ret += 1
+        for fields in self.field:
+            for field in fields:
+                if field.kind == AnimalType.COW:
+                    ret += field.count
+        return ret
+
+    def get_pig_count(self):
+        ret = 0
+        if self.pet == AnimalType.PIG:
+            ret += 1
+        for fields in self.field:
+            for field in fields:
+                if field.kind == AnimalType.PIG:
+                    ret += field.count
+        return ret
+
+    def get_sheep_count(self):
+        ret = 0
+        if self.pet == AnimalType.SHEEP:
+            ret += 1
+        for fields in self.field:
+            for field in fields:
+                if field.kind == AnimalType.SHEEP:
+                    ret += field.count
+        return ret

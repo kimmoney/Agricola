@@ -1,5 +1,8 @@
 """
 집 확장 검증 클래스
+:param:
+:return: 집 확장 검증 결과값을 반환한다
+:rtype: bool
 Unit : 홍규
 """
 from collections import deque
