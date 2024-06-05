@@ -190,6 +190,12 @@
            <property name="checkable">
             <bool>true</bool>
            </property>
+           <property name="autoRepeatDelay">
+            <number>0</number>
+           </property>
+           <property name="autoRepeatInterval">
+            <number>0</number>
+           </property>
           </widget>
          </item>
          <item>
@@ -216,6 +222,12 @@
            </property>
            <property name="checkable">
             <bool>true</bool>
+           </property>
+           <property name="autoRepeatDelay">
+            <number>0</number>
+           </property>
+           <property name="autoRepeatInterval">
+            <number>0</number>
            </property>
           </widget>
          </item>
@@ -327,7 +339,7 @@
           </spacer>
          </item>
          <item>
-          <widget class="QPushButton" name="btn_animal">
+          <widget class="QPushButton" name="btn_unit">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Ignored" vsizetype="Preferred">
              <horstretch>0</horstretch>
@@ -351,6 +363,12 @@
            </property>
            <property name="checkable">
             <bool>true</bool>
+           </property>
+           <property name="autoRepeatDelay">
+            <number>0</number>
+           </property>
+           <property name="autoRepeatInterval">
+            <number>0</number>
            </property>
           </widget>
          </item>
@@ -526,6 +544,12 @@ QPushButton#btn_barn {border: none;}QPushButton#btn_barn:checked {border-image :
              </property>
              <property name="checked">
               <bool>true</bool>
+             </property>
+             <property name="autoRepeatDelay">
+              <number>0</number>
+             </property>
+             <property name="autoRepeatInterval">
+              <number>0</number>
              </property>
             </widget>
            </item>
