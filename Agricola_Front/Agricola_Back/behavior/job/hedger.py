@@ -1,10 +1,10 @@
 """
-거대 농장
+산울타리지기 직업 카드
 """
-from behavior.sub_facility.sub_facility_interface import SubFacilityInterface
+from behavior.job.job_interface import JobInterface
 
 
-class GiantFarm(SubFacilityInterface):
+class hedger(JobInterface):
     """
     사용 가능 여부를 반환하는 메소드
     :param:
@@ -13,6 +13,7 @@ class GiantFarm(SubFacilityInterface):
     """
     def canUse(self):
         pass
+
     """
     카드 사용 메소드
     :param: 
@@ -21,6 +22,7 @@ class GiantFarm(SubFacilityInterface):
     """
     def execute(self):
         pass
+
     """
     로그 반환
     :param:

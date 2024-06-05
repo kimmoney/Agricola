@@ -7,5 +7,6 @@ from entity.game_status import GameStatus
 class GameStatusRepository:
     def __init__(self):
         self.game_status = GameStatus()
-    
+
+
 game_status_repository = GameStatusRepository()

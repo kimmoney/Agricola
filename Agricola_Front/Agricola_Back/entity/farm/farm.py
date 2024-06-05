@@ -11,9 +11,6 @@ class Farm:
         self.observers = []
         self.house_status = HouseType.WOOD
         self.field = [[NoneField() for i in range(5)] for j in range(3)]
-        
-        from entity.field_type import FieldType
-        self.field[0][0].field_type = FieldType.HOUSE
         self.horizon_fence = [[False for i in range(5)] for j in range(4)]
         self.vertical_fence = [[False for i in range(6)] for j in range(3)]
         self.pet = AnimalType.NONE

@@ -24,6 +24,8 @@ if module_dir not in sys.path:
 from Agricola_Back.repository import player_status_repository,game_status_repository,round_status_repository,undo_repository
 from Agricola_Back.entity.field_type import FieldType
 from Agricola_Back.entity.house_type import HouseType
+from Agricola_Back.entity.crop_type import CropType
+from Agricola_Back.entity.animal_type import AnimalType
 
 def resource_path(relative_path):
     """ Get absolute path to resource, works for dev and for PyInstaller """
@@ -413,6 +415,17 @@ class WidgetPersonalField(QWidget, personal_field_ui) :
             # print(rand)
             myWindow.player_status[player].farm.house_status = rand[0]
             myWindow.update_state_of_all()
+
+        def change_unit(self):
+            player = myWindow.game_status.now_turn_player
+            print("player : "+str(player))
+            rand = [CropType.GRAIN,CropType.VEGETABLE,AnimalType.COW,AnimalType.PIG,AnimalType.SHEEP]
+            #rand.remove(getattr(HouseType,myWindow.player_status[player].farm.house_status.name))
+            random.shuffle(rand)
+            print(rand)
+            myWindow.player_status[player].farm.field = rand[0]
+            myWindow.update_state_of_all()
+
 class WidgetPersonalCard(QWidget, personal_card_ui) :
     def __init__(self, player, parent) :
         super().__init__()  # 부모 클래스의 __init__ 함수 호출
