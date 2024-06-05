@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>178</width>
+    <width>177</width>
     <height>108</height>
    </rect>
   </property>
@@ -34,7 +34,7 @@
    </property>
    <item>
     <widget class="QWidget" name="widget" native="true">
-     <layout class="QHBoxLayout" name="horizontalLayout" stretch="9,10">
+     <layout class="QHBoxLayout" name="horizontalLayout" stretch="4,5">
       <property name="spacing">
        <number>0</number>
       </property>
@@ -116,7 +116,7 @@
          </widget>
         </item>
         <item>
-         <layout class="QHBoxLayout" name="hlo" stretch="3,2">
+         <layout class="QHBoxLayout" name="hlo" stretch="0,0">
           <property name="spacing">
            <number>0</number>
           </property>
@@ -143,6 +143,12 @@
               <horstretch>0</horstretch>
               <verstretch>0</verstretch>
              </sizepolicy>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>16777215</height>
+             </size>
             </property>
             <property name="styleSheet">
              <string notr="true">border-image: url(:/newPrefix/images/harvest.png);</string>
