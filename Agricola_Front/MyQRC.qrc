@@ -1,5 +1,11 @@
 <RCC>
   <qresource prefix="newPrefix">
+    <file>images/라운드카드/number_1.png</file>
+    <file>images/라운드카드/number_2.png</file>
+    <file>images/라운드카드/number_3.png</file>
+    <file>images/라운드카드/number_4.png</file>
+    <file>images/라운드카드/number_5.png</file>
+    <file>images/라운드카드/number_6.png</file>
     <file>images/랜덤/랜덤 (0).png</file>
     <file>images/랜덤/랜덤 (1).png</file>
     <file>images/랜덤/랜덤 (2).png</file>
@@ -98,12 +104,6 @@
     <file>images/house_wood.png</file>
     <file>images/IMG_0403.PNG</file>
     <file>images/IMG_0404.PNG</file>
-    <file>images/number_1.png</file>
-    <file>images/number_2.png</file>
-    <file>images/number_3.png</file>
-    <file>images/number_4.png</file>
-    <file>images/number_5.png</file>
-    <file>images/number_6.png</file>
     <file>images/pig.png</file>
     <file>images/reed.png</file>
     <file>images/round_circle.svg</file>

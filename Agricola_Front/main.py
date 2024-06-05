@@ -1,7 +1,9 @@
 import sys
 # pyc 생성 방지
 sys.dont_write_bytecode = True
-
+#QRC 업데이트
+from qcr_converter import run_pyrcc5
+# run_pyrcc5()
 from PyQt5.QtWidgets import *
 from PyQt5 import uic
 from PyQt5.QtCore import QTimer
@@ -65,6 +67,9 @@ class MainWindowClass(QMainWindow, main) :
             font_family = QFontDatabase.applicationFontFamilies(font_id)[0]
             font = QFont(font_family, 9)  # 로드된 폰트를 기본 폰트로 설정
             app.setFont(font)
+        self.player_status = player_status_repository.PlayerStatusRepository().player_status
+        self.game_status = game_status_repository.GameStatusRepository().game_status
+        self.round_status = round_status_repository.RoundStatusRepository().round_status
         #플레이어 필드 위젯 설정
         self.personal_field = [WidgetPersonalField(i,self) for i in range(4)]
         for i in range(4):getattr(self,f"frm_p{i}_0").addWidget(self.personal_field[i])
@@ -82,10 +87,12 @@ class MainWindowClass(QMainWindow, main) :
         self.personal_resource = [WidgetPersonalResource(i,self) for i in range(4)]
         for i in range(4):getattr(self,f"frm_p{i}_2").addWidget(self.personal_resource[i])
         #베이직 라운드 위젯 설정
-        # 리스트를 무작위로 섞습니다.
-        self.basic_round = [WidgetBasicRound("basic",i,self) for i in range(16)]
+        # 리스트를 무작위로 섞습니다.WidgetrandomRound
+        self.basic_round = [WidgetBasicRound(i,self) for i in range(16)]
         [getattr(self,f"basic_{i}").addWidget(self.basic_round[i]) for i in range(16)]
-        self.random_round = [WidgetBasicRound("random",i,self) for i in range(14)]
+        numbers = list(range(14))
+        random.shuffle(numbers)
+        self.random_round = [WidgetrandomRound(i,numbers[i],self) for i in range(14)]
         [getattr(self,f"basic_{i+16}").addWidget(self.random_round[i]) for i in range(14)]
 
         #말칸        numbers = list(range(30))
@@ -105,27 +112,22 @@ class MainWindowClass(QMainWindow, main) :
         self.timer_close,self.timer_open = QTimer(self),QTimer(self)
         self.log.clicked.connect(self.change_main_stacked)
         self.log.clicked.connect(self.update_state_of_all)
-        # self.log_2.clicked.connect(lambda:self.logging_dialog("한번 오류를 볼까요?"))
+        self.pushButton_3.clicked.connect(self.round_test)
         self.log_popup = Log_viewer(self)
-
-        self.player_status = player_status_repository.PlayerStatusRepository().player_status
-        self.game_status = game_status_repository.GameStatusRepository().game_status
-        self.round_status = round_status_repository.RoundStatusRepository().round_status
         
         # def pprint(text):
         #     ppprint("log : ")
         #     ppprint(text)
         # pprint(self.player.player_status[0].worker)
-        self.pushButton_3.clicked.connect(self.undo)
-        self.random_round_suffle()
+        # self.random_round_suffle()
         self.update_state_of_all()
         self.set_undo()
         ############################################################################
 
-    def random_round_suffle(self):
-        numbers = list(range(14))
-        random.shuffle(numbers)
-        [self.random_round[i].suffle(numbers[i]) for i in range(14)]
+    def round_test(self):
+        self.game_status.now_round = (self.game_status.now_round+1)%15
+        pprint(f"현재 라운드는 {self.game_status.now_round}라운드입니다.")
+        self.update_state_of_all()
         
 
         [getattr(self,f"basic_{i+16}").addWidget(self.random_round[i]) for i in range(13)]
@@ -273,10 +275,10 @@ class MainWindowClass(QMainWindow, main) :
                 for i in range(5):
                     # 배경화면 바꾸기
                     field_status = self.player_status[player].farm.field[j][i].field_type.value
-                    getattr(self.personal_field[player], f'field_{field_convert[(j, i)]}').widget.setStyleSheet("#widget{"+f"border-image : url(:/newPrefix/images/{CONVERTER_image[field_status,house_status]}.png);"+"}")
+                    getattr(self.personal_field[player], f'field_{field_convert[(j, i)]}').widget.setStyleSheet("#widget{"+f"border-image : url(:/newPrefix/images/{CONVERTER_image[field_status,house_status]}.png);}}")
                     # 동물 처리
                     # 외양간 처리
-                    print(f"barn{self.player_status[player].farm.field[j][i].barn}")
+                    # print(f"barn{self.player_status[player].farm.field[j][i].barn}")
                     if self.player_status[player].farm.field[j][i].barn:
                         styleSheet = f"QPushButton#btn_barn {{border-image: url(:/newPrefix/images/barn_{player}.png);}}"
                     else:
@@ -289,13 +291,18 @@ class MainWindowClass(QMainWindow, main) :
         for j in range(3):
             for i in range(5):
                 field_status = self.player_status[player].farm.field[j][i].field_type.value
-                getattr(self.main_field, f'field_{field_convert[(j, i)]}').widget.setStyleSheet("#widget{"+f"border-image : url(:/newPrefix/images/{CONVERTER_image[field_status,house_status]}.png);"+"}")
+                getattr(self.main_field, f'field_{field_convert[(j, i)]}').widget.setStyleSheet("#widget{"+f"border-image : url(:/newPrefix/images/{CONVERTER_image[field_status,house_status]}.png);}}")
         
                 # 외양간 처리
                 getattr(self.main_field, f'field_{field_convert[(j, i)]}').btn_barn.setStyleSheet(getattr(self.personal_field[player], f'field_{field_convert[(j, i)]}').btn_barn.styleSheet())
                 # getattr(self.main_field, f'field_{field_convert[(j, i)]}').btn_barn.setChecked(self.player_status[player].farm.field[j][i].barn)
                 
-                # getattr(self.main_field, f'field_{field_convert[(j, i)]}').btn_barn.setStyleSheet("#btn_barn{"+f"border-image : url(:/newPrefix/images/barn_{player}.png);"+"}" if self.player_status[player].farm.field[j][i].barn else "#btn_barn{"+f"border-image : none;"+"}")
+                # getattr(self.main_field, f'field_{field_convert[(j, i)]}').btn_barn.setStyleSheet("#btn_barn{"+f"border-image : url(:/newPrefix/images/barn_{player}.png);}}" if self.player_status[player].farm.field[j][i].barn else "#btn_barn{"+f"border-image : none;}}")
+        # 라운드카드 업데이트
+        for widget in self.random_round:
+            widget.setup()
+
+
 class WidgetPersonalField(QWidget, personal_field_ui) :
     def __init__(self, player,parent) :
         super().__init__()
@@ -382,7 +389,7 @@ class WidgetPersonalField(QWidget, personal_field_ui) :
             self.btn_barn.setStyleSheet(f"QPushButton#btn_barn {{border: none;}}QPushButton#btn_barn:checked {{border-image: url(:/newPrefix/images/barn_{self.player}.png);}}")
             # print(f"QPushButton#btn_barn {{border: none;}}QPushButton#btn_barn:checked {{border-image :url(:/newPrefix/images/barn_{self.player}.png);}}")
             # print(f"#btn_barn:checked{{border : none;}}#btn_barn:checked{{border :url(:/newPrefix/images/barn_{player}.png);}}")
-            # getattr(self.main_field, f'field_{field_convert[(j, i)]}').btn_barn.setStyleSheet("#btn_barn{"+f"border-image : url(:/newPrefix/images/barn_{player}.png);"+"}" if self.player_status[player].farm.field[j][i].barn else "#btn_barn{"+f"border-image : none;"+"}")
+            # getattr(self.main_field, f'field_{field_convert[(j, i)]}').btn_barn.setStyleSheet("#btn_barn{"+f"border-image : url(:/newPrefix/images/barn_{player}.png);}}" if self.player_status[player].farm.field[j][i].barn else "#btn_barn{"+f"border-image : none;}}")
         def mousePressEvent(self,event):
             pprint(f"Pressed Fance Player ID : {self.parent.player} | Fence ID: {self.id}")
             if self.player != 4:
@@ -399,11 +406,11 @@ class WidgetPersonalField(QWidget, personal_field_ui) :
                 pprint("외양간")
         def change_house(self):
             player = myWindow.game_status.now_turn_player
-            print("player : "+str(player))
+            # print("player : "+str(player))
             rand = [HouseType.DIRT,HouseType.STONE,HouseType.WOOD]
             rand.remove(getattr(HouseType,myWindow.player_status[player].farm.house_status.name))
             random.shuffle(rand)
-            print(rand)
+            # print(rand)
             myWindow.player_status[player].farm.house_status = rand[0]
             myWindow.update_state_of_all()
 class WidgetPersonalCard(QWidget, personal_card_ui) :
@@ -446,29 +453,59 @@ class WidgetPersonalResource(QWidget, personal_resources_ui) :
         else:self.stackedWidget.setCurrentIndex(0)
 
 class WidgetBasicRound(QWidget, basic_roundcard_ui) :
-    def __init__(self, t, round,parent) :
+    def __init__(self,num,parent) :
         super().__init__()  # 부모 클래스의 __init__ 함수 호출
         self.parent = parent
-        self.round = round
+        self.num = num
         self.setupUi(self)
         self.btn_round_1.setText('')
+        self.setStyleSheet(f"#widget{{border-image: url(:/newPrefix/images/기본행동/기본행동 ({self.num}).png);}}")
+        self.btn_round_4.hide()
 
-        if t == "basic":
-            #Form{border-image: url(:/newPrefix/images/기본행동/기본행동 (0).png);}
-            # self.setStyleSheet("#Form{"+f"border-image : url(:/newPrefix/images/기본행동/기본행동 ({round}).png);"+"}")
-            self.setStyleSheet("#widget{"+f"border-image: url(:/newPrefix/images/기본행동/기본행동 ({round}).png);"+"}")
     def mousePressEvent(self,event):
-        pprint(f"Pressed basic round ID : {self.round}")
-    def suffle(self,i):
-        if i<5:
-            self.btn_round_1.setText(str(i))
+        pprint(f"Pressed basic round num : {self.num}")
+        
+class WidgetrandomRound(QWidget, basic_roundcard_ui) :
+    def __init__(self, cardnumber,imagenumber,parent) :
+        super().__init__()  # 부모 클래스의 __init__ 함수 호출
+        self.parent = parent
+        self.cardnum = cardnumber
+        self.imagenum = imagenumber
+        self.setupUi(self)
+        self.btn_round_1.setText('')
+        self.btn_round_4.hide()
+        self.setup()
+    def mousePressEvent(self,event):
+        pprint(f"Pressed basic round ID : {self.imagenum}")
+        # print(i)
+        
+    def setup(self):
+        round = self.parent.game_status.now_round
+        print(self.imagenum)
+        # print(i)
+        
+        if self.cardnum<=round-1:
+            self.setStyleSheet(f"#widget{{border-image: url(:/newPrefix/images/랜덤/랜덤 ({self.imagenum}).png);}}")
+        elif self.cardnum<=3:
+            self.setStyleSheet(f"#widget{{border-image: url(:/newPrefix/images/라운드카드/number_1.png);}}")
+        elif self.cardnum<=6:
+            self.setStyleSheet(f"#widget{{border-image: url(:/newPrefix/images/라운드카드/number_2.png);}}")
+        elif self.cardnum<=8:
+            self.setStyleSheet(f"#widget{{border-image: url(:/newPrefix/images/라운드카드/number_3.png);}}")
+        elif self.cardnum<=10:
+            self.setStyleSheet(f"#widget{{border-image: url(:/newPrefix/images/라운드카드/number_4.png);}}")
+        elif self.cardnum<=12:
+            self.setStyleSheet(f"#widget{{border-image: url(:/newPrefix/images/라운드카드/number_5.png);}}")
+        elif self.cardnum<=13:
+            self.setStyleSheet(f"#widget{{border-image: url(:/newPrefix/images/라운드카드/number_6.png);}}")
+
+        if self.imagenum<5 and "랜덤/랜덤" in self.styleSheet():
+            self.btn_round_1.setText(str(1))
         else:
             self.btn_round_1.setText("")
-        print(i)
-        self.setStyleSheet("#widget{"+f"border-image: url(:/newPrefix/images/랜덤/랜덤 ({i}).png);"+"}")
-
-
-
+        if  self.cardnum in [3,6,8,10,12,13]:
+            self.btn_round_4.show()
+            
 
 class Log_viewer(QDialog,log_viewer_ui):
     def __init__(self,main):
@@ -512,7 +549,7 @@ class Check(QWidget, check_ui):
         self.parent.game_status.now_turn_player = (self.parent.game_status.now_turn_player+1)%4
         self.parent.update_state_of_all()
         pprint(f"현재 턴은 {self.parent.game_status.now_turn_player}플레이어 입니다.")
-        self.parent.random_round_suffle()
+
         self.parent.set_undo()
 
     def mousePressEvent(self,event):
