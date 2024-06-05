@@ -11,13 +11,13 @@ from house_expand_validation import HouseExpandValidation
 
 class HouseExpansion(Command):
 
-    def __init__(self, filed_status):
-        self.filed_status = filed_status
+    def __init__(self, field_status):
+        self.field_status = field_status
         self.log_text = None
 
     def execute(self):
-        checkValidation=HouseExpandValidation(self.field_status)
-        if (checkValidation.execute()):
+        checkValidation = HouseExpandValidation(self.field_status)
+        if checkValidation.execute():
             self.log_text = "농장 확장 검증에 성공했습니다"
             return True
         else:
