@@ -4,9 +4,11 @@
 from typing import List
 
 from entity.animal_type import AnimalType
+from entity.farm.cage import Cage
 from entity.farm.field import Field
 from entity.farm.house import House
 from entity.farm.none_field import NoneField
+from entity.field_type import FieldType
 from entity.house_type import HouseType
 
 
@@ -98,5 +100,37 @@ class Farm:
         for fields in self.field:
             for field in fields:
                 if field.barn is True:
+                    ret += 1
+        return ret
+
+    def get_house_count(self):
+        ret = 0
+        for fields in self.field:
+            for field in fields:
+                if field.field_type == FieldType.HOUSE:
+                    ret += 1
+        return ret
+
+    def get_arable_count(self):
+        ret = 0
+        for fields in self.field:
+            for field in fields:
+                if field.field_type == FieldType.ARABLE:
+                    ret += 1
+        return ret
+
+    def get_none_field_count(self):
+        ret = 0
+        for fields in self.field:
+            for field in fields:
+                if isinstance(field,NoneField):
+                    ret += 1
+        return ret
+
+    def get_cage_count(self):
+        ret = 0
+        for fields in self.field:
+            for field in fields:
+                if isinstance(field, Cage):
                     ret += 1
         return ret
