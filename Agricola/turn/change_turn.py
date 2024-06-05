@@ -1,10 +1,10 @@
 """
-신생아 처리 커맨드
+턴을 바꾸는 커맨드
 """
 from command import Command
 
 
-class BabyHandling(Command):
+class ChangeTurn(Command):
     def execute(self):
         pass
 

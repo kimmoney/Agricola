@@ -36,6 +36,10 @@ class GameStatus:
         self.round_resource[index] = value
         self.notify()
 
+    def set_round_card_order(self, index, value):
+        self.round_card_order[index] = value
+        self.notify()
+
     def set_basic_resource(self, index, value):
         self.basic_resource[index] = value
         self.notify()
