@@ -1,4 +1,7 @@
 import sys
+# pyc 생성 방지
+sys.dont_write_bytecode = True
+
 from PyQt5.QtWidgets import *
 from PyQt5 import uic
 from PyQt5.QtCore import QTimer
