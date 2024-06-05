@@ -483,7 +483,7 @@ class Log_viewer(QDialog,log_viewer_ui):
         self.log.setText(text)
         self.show()
         self.timer.timeout.connect(self.hide)
-        self.timer.start(3000) 
+        self.timer.start(500) 
 
 class WorkerBoard(QWidget, worker_board_ui):
     def __init__(self, parent):
