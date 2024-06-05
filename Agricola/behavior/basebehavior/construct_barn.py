@@ -5,10 +5,13 @@
 :rtype: bool
 농장 상태 업데이트도 수행되어야 함.
 """
-from command import Command
 
+from behavior.basebehavior.house_expansion import *
 
 class ConstructBarn(Command):
+
+    def __init__(self, player):
+        self.log_text = None
     def execute(self):
         pass
 
