@@ -79,9 +79,7 @@
          </sizepolicy>
         </property>
         <property name="styleSheet">
-         <string notr="true">QPushButton:pressed {
-       background-color: rgb(222, 255, 220);
-    }</string>
+         <string notr="true"/>
         </property>
         <layout class="QHBoxLayout" name="horizontalLayout_43">
          <property name="spacing">
@@ -115,6 +113,9 @@
              <width>16777215</width>
              <height>10</height>
             </size>
+           </property>
+           <property name="focusPolicy">
+            <enum>Qt::StrongFocus</enum>
            </property>
            <property name="styleSheet">
             <string notr="true">border:0.5px solid rgba(255, 255, 255, 28);
@@ -517,9 +518,7 @@ background-color: rgba(0, 255, 0, 12);</string>
          </sizepolicy>
         </property>
         <property name="styleSheet">
-         <string notr="true">QPushButton:pressed {
-       background-color: rgb(222, 255, 220);
-    }</string>
+         <string notr="true"/>
         </property>
         <layout class="QHBoxLayout" name="horizontalLayout_44">
          <property name="spacing">
@@ -919,9 +918,7 @@ background-color: rgba(0, 255, 0, 12);</string>
          </sizepolicy>
         </property>
         <property name="styleSheet">
-         <string notr="true">QPushButton:pressed {
-       background-color: rgb(222, 255, 220);
-    }</string>
+         <string notr="true"/>
         </property>
         <layout class="QHBoxLayout" name="horizontalLayout_45">
          <property name="spacing">
@@ -1318,9 +1315,7 @@ background-color: rgba(0, 255, 0, 12);</string>
          </sizepolicy>
         </property>
         <property name="styleSheet">
-         <string notr="true">QPushButton:pressed {
-       background-color: rgb(222, 255, 220);
-    }</string>
+         <string notr="true"/>
         </property>
         <layout class="QHBoxLayout" name="horizontalLayout_49">
          <property name="spacing">

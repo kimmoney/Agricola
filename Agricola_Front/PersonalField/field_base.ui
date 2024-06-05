@@ -191,7 +191,13 @@
             <string/>
            </property>
            <property name="checkable">
-            <bool>true</bool>
+            <bool>false</bool>
+           </property>
+           <property name="autoRepeatDelay">
+            <number>0</number>
+           </property>
+           <property name="autoRepeatInterval">
+            <number>0</number>
            </property>
           </widget>
          </item>
@@ -221,7 +227,13 @@
             <string/>
            </property>
            <property name="checkable">
-            <bool>true</bool>
+            <bool>false</bool>
+           </property>
+           <property name="autoRepeatDelay">
+            <number>0</number>
+           </property>
+           <property name="autoRepeatInterval">
+            <number>0</number>
            </property>
           </widget>
          </item>
@@ -333,7 +345,7 @@
           </spacer>
          </item>
          <item>
-          <widget class="QPushButton" name="btn_animal">
+          <widget class="QPushButton" name="btn_unit">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
              <horstretch>0</horstretch>
@@ -359,7 +371,13 @@
             <string/>
            </property>
            <property name="checkable">
-            <bool>true</bool>
+            <bool>false</bool>
+           </property>
+           <property name="autoRepeatDelay">
+            <number>0</number>
+           </property>
+           <property name="autoRepeatInterval">
+            <number>0</number>
            </property>
           </widget>
          </item>
@@ -537,10 +555,16 @@ QPushButton#btn_barn {border: none;}QPushButton#btn_barn:checked {border-image :
               <string>외양간</string>
              </property>
              <property name="checkable">
-              <bool>true</bool>
+              <bool>false</bool>
              </property>
              <property name="checked">
-              <bool>true</bool>
+              <bool>false</bool>
+             </property>
+             <property name="autoRepeatDelay">
+              <number>0</number>
+             </property>
+             <property name="autoRepeatInterval">
+              <number>0</number>
              </property>
             </widget>
            </item>
@@ -616,6 +640,9 @@ QPushButton#btn_barn {border: none;}QPushButton#btn_barn:checked {border-image :
            </property>
            <property name="text">
             <string>평상시</string>
+           </property>
+           <property name="checkable">
+            <bool>false</bool>
            </property>
           </widget>
          </item>
