@@ -188,7 +188,7 @@
             <string>사람</string>
            </property>
            <property name="checkable">
-            <bool>true</bool>
+            <bool>false</bool>
            </property>
            <property name="autoRepeatDelay">
             <number>0</number>
@@ -221,7 +221,7 @@
             <string>사람</string>
            </property>
            <property name="checkable">
-            <bool>true</bool>
+            <bool>false</bool>
            </property>
            <property name="autoRepeatDelay">
             <number>0</number>
@@ -362,7 +362,7 @@
             <string>동물</string>
            </property>
            <property name="checkable">
-            <bool>true</bool>
+            <bool>false</bool>
            </property>
            <property name="autoRepeatDelay">
             <number>0</number>
@@ -540,10 +540,10 @@ QPushButton#btn_barn {border: none;}QPushButton#btn_barn:checked {border-image :
               <string>외양간</string>
              </property>
              <property name="checkable">
-              <bool>true</bool>
+              <bool>false</bool>
              </property>
              <property name="checked">
-              <bool>true</bool>
+              <bool>false</bool>
              </property>
              <property name="autoRepeatDelay">
               <number>0</number>
@@ -625,6 +625,9 @@ QPushButton#btn_barn {border: none;}QPushButton#btn_barn:checked {border-image :
            </property>
            <property name="text">
             <string>평상시</string>
+           </property>
+           <property name="checkable">
+            <bool>false</bool>
            </property>
           </widget>
          </item>
