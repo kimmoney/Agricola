@@ -36,6 +36,15 @@ class MainFacilityInterface(Command):
         pass
 
     """
+    카드 구매 가능 여부를 반환하는 메소드
+    :return: 카드 구매 가능 여부 반환
+    :rtype: bool
+    """
+    @abstractmethod
+    def canPurchase(self):
+        pass
+
+    """
     사용 가능 여부를 반환하는 메소드
     :param:
     :return: 현재 해당 카드 사용 가능 여부
