@@ -4,7 +4,7 @@
 from behavior.job.job_interface import JobInterface
 
 
-class hedger(JobInterface):
+class Hedger(JobInterface):
     """
     사용 가능 여부를 반환하는 메소드
     :param:

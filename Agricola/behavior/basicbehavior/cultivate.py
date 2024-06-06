@@ -20,7 +20,6 @@ class Cultivate(Command):
         self.log_text = None
         self.game_status = game_status_repository.game_status
         self.player_farm = player_status_repository.player_status[player].farm
-        self.is_filled = round_status_repository.round_status.put_basic[BasicBehaviorType.CULTIVATE.value]
 
     def can_play(self):
 
