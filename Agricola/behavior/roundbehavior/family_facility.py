@@ -33,7 +33,7 @@ class FamilyFacility(Command):
             return True
 
     def execute(self):
-        self.player_status.baby += 1
+        self.player_status.set_baby(1)
         self.log_text = "급하지않은 가족 늘리기를 성공했습니다"
         return True
 
