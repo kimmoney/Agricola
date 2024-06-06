@@ -13,7 +13,7 @@ class SubFacilityType(Enum):
     GRAIN_SHOVEL = 4
     JUNK_WAREHOUSE = 5
     LOAM_MINING_SITE = 6
-    MANAGER = 7
+    MANGER = 7
     PINCER = 8
     PITCHFORK = 9
     SILPAN = 10
