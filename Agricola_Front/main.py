@@ -41,7 +41,7 @@ check_ui = uic.loadUiType(resource_path("data/check/check.ui"))[0] # worker 보�
 text_log_ui = uic.loadUiType(resource_path("data/Basic/log.ui"))[0] # text log 박스
 information_ui = uic.loadUiType(resource_path("data/Basic/information.ui"))[0] # information(설정, 점수표)
 scoreboard_ui = uic.loadUiType(resource_path("data/Basic/scoreboard.ui"))[0] # 점수표
-side_bar_ui = uic.loadUiType(resource_path("data/Basic/sidebar.ui"))[0] # 농장확대창 옆 사이드바
+sidebar_ui = uic.loadUiType(resource_path("data/Basic/sidebar.ui"))[0] # 농장확대창 옆 사이드바
 setting_ui = uic.loadUiType(resource_path("data/Basic/setting.ui"))[0] # 세팅창
 allcard_ui = uic.loadUiType(resource_path("data/Basic/allcard.ui"))[0] # 모든 카드
 
@@ -588,11 +588,13 @@ class AllCard(QDialog, allcard_ui):
         super().__init__()
         self.setupUi(self)
         self.parent = parent
-# class Setting(Q, allcard_ui):
-#     def __init__(self, parent):
-#         super().__init__()
-#         self.setupUi(self)
-#         self.parent = parent
+class Setting(QDialog, setting_ui):
+     def __init__(self, parent):
+         super().__init__()
+         self.setupUi(self)
+         self.parent = parent
+class SideBar(QWidget, sidebar_ui):
+    pass
 
 ###실행 코드### 밑에 건들 필요 굳이 없음###
 if __name__ == "__main__" :
