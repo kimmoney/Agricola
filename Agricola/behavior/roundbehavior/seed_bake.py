@@ -6,6 +6,7 @@
 :return: 실행 결과.
 :rtype: bool
 """
+from behavior.basebehavior.can_bake import DoBake
 from command import Command
 from copy import copy
 from entity.crop_type import CropType
@@ -18,17 +19,14 @@ from behavior.basebehavior.seed_plant import SeedPlant
 
 class SeedBake(Command):
 
-    def __init__(self, ifBread, plantDict, field_status):
+    def __init__(self, player, ifBread, plantDict, field_status):
         self.log_text = None
-        self.is_filled = round_status_repository.round_status.put_basic[RoundBehaviorType.SEED_BAKE.value]
+        self.player = player
         self.ifBread = ifBread
         self.plantDict = plantDict  # ex) {CropType.Grain : [[0,1],[1,2]}
         self.field_status = copy(field_status)
 
     def execute(self):
-        if self.is_filled:
-            self.log_text = "이번 라운드에 이미 수행된 행동입니다."
-            return False
         doSeedPlant = SeedPlant(self.plantDict, self.field_status)
         if doSeedPlant.execute():
             self.log_text = "밭 심기를 성공했습니다"
@@ -37,7 +35,11 @@ class SeedBake(Command):
             return False
         if (not self.ifBread):  # 빵굽기x
             return True
-        # 빵굽기 코드
+        canBake = DoBake(self.player)
+        if (canBake.execute()):
+            self.log_Text = "빵 굽기를 완료했습니다"
+        else:
+            self.log_text = "빵 굽기를 실패했습니다"
         return True
 
     def log(self):

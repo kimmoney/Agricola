@@ -5,7 +5,12 @@ from command import Command
 
 
 class CanUseValidation(Command):
+    def __init__(self, command):
+        self.command = command
     def execute(self):
+        #if isfilled[self.command] and self.command.canUse():
+
+
         for card in ownCard:
             if card.canUse():
                 list.append(card)
