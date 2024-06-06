@@ -18,3 +18,6 @@ class JobType(Enum):
     SMALL_FARMER = 9
     SUB_CULTIVATOR = 10
     WAREHOUSE_MANAGER = 11
+
+
+job_type_reverse_map = {member.value: member.name for member in JobType}
