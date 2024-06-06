@@ -28,7 +28,7 @@ class Cultivate(Command):
 
     def execute(self):
         doArable = ArableExpansion(self.player_farm)
-        if (doArable.execute()):
+        if doArable.execute():
             self.log_text = f"밭 {self.game_status.basic_resource[BasicBehaviorType.CULTIVATE.value]}개를 일구었습니다."
             return True
         else:
