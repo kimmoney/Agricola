@@ -44,7 +44,7 @@ text_log_ui = uic.loadUiType(resource_path("data/Basic/log.ui"))[0] # text log �
 information_ui = uic.loadUiType(resource_path("data/Basic/information.ui"))[0] # information(설정, 점수표)
 scoreboard_ui = uic.loadUiType(resource_path("data/Basic/scoreboard.ui"))[0] # 점수표
 sidebar_ui = uic.loadUiType(resource_path("data/Basic/sidebar.ui"))[0] # 농장확대창 옆 사이드바
-setting_ui = uic.loadUiType(resource_path("data/Basic/setting.ui"))[0] # 세팅창
+setting_ui = uic.loadUiType(resource_path("data/Basic/setting_pop.ui"))[0] # 세팅창
 allcard_ui = uic.loadUiType(resource_path("data/Basic/allcard.ui"))[0] # 모든 카드
 
 # MAIN
@@ -225,7 +225,6 @@ class MainWindowClass(QMainWindow, main) :
         getattr(self,f"player_{i}_border").setStyleSheet(f"#player_{i}_border{{border:3px solid blue;}}")
 
     def update_state_of_all(self):
-        
         #resource 업데이트
         for c in self.personal_field:
             c.update_state()
@@ -237,6 +236,7 @@ class MainWindowClass(QMainWindow, main) :
         for widget in self.random_round:
             widget.update_state()
         self.update_state()
+
 class WidgetPersonalField(QWidget, personal_field_ui) :
     def __init__(self, player,parent) :
         super().__init__()
@@ -271,7 +271,6 @@ class WidgetPersonalField(QWidget, personal_field_ui) :
                     getattr(self, f'btn_fence_v{j}{i}').clicked.connect(self.parent.change_main_stacked)
                     getattr(self, f'btn_fence_v{j}{i}').setCheckable(False)
 
-        
     def mousePressEvent(self,event):
         pprint(f"Pressed personalField Player ID : {self.player}")
         if self.player != 4:
@@ -613,10 +612,16 @@ class WidgetInformation(QWidget, information_ui):
         super().__init__()
         self.setupUi(self)
         self.parent = parent
-        self.btn_scoreboard.clicked.connect(self.show_scoreboard)
+        self.btn_setting.clicked.connect(self.show_setting) #세팅
+        self.btn_card_all.clicked.connect(self.show_card_all) #전체카드
+        self.btn_scoreboard.clicked.connect(self.show_scoreboard) #점수표
 
-    def setting(self):
-        pass
+    def show_setting(self):
+        self.setting = Setting(self.parent)
+        self.setting.exec_()
+    def show_card_all(self):
+        self.allcard = AllCard(self.parent)
+        self.allcard.exec_()
     def show_scoreboard(self):
         self.scoreboard = Scoreboard(self.parent)
         self.scoreboard.exec_()
@@ -635,18 +640,27 @@ class FirstCardDistribution(QWidget, card_distribution_ui):
         self.setupUi(self)
         self.parent = parent
         self.player = player
+
 class AllCard(QDialog, allcard_ui):
     def __init__(self, parent):
         super().__init__()
         self.setupUi(self)
         self.parent = parent
+        self.setWindowFlags(Qt.FramelessWindowHint | Qt.WindowStaysOnTopHint)
+    def mousePressEvent(self,event):
+        self.close()
+
 class Setting(QDialog, setting_ui):
-     def __init__(self, parent):
-         super().__init__()
-         self.setupUi(self)
-         self.parent = parent
+    def __init__(self, parent):
+        super().__init__()
+        self.setupUi(self)
+        self.parent = parent
+        self.setWindowFlags(Qt.FramelessWindowHint | Qt.WindowStaysOnTopHint)
 class SideBar(QWidget, sidebar_ui):
-    pass
+    def __init__(self, parent):
+        super().__init__()
+        self.setupUi(self)
+        self.parent = parent
 
 ###실행 코드### 밑에 건들 필요 굳이 없음###
 if __name__ == "__main__" :
