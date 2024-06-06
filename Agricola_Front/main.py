@@ -4,7 +4,7 @@ sys.path.append(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'Agrico
 sys.path.append(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'data'))
 sys.dont_write_bytecode = True # pyc 생성 방지
 from qcr_converter import run_pyrcc5
-run_pyrcc5()#QRC 업데이트
+# run_pyrcc5()#QRC 업데이트
 
 from PyQt5 import uic
 from PyQt5.QtWidgets import *
@@ -116,15 +116,26 @@ class MainWindowClass(QMainWindow, main) :
             getattr(self, f"card_check_p{i}").clicked.connect(lambda _, x=i: self.stackedWidget.setCurrentIndex( (x+4)%7 ))
         self.play_sound()
 
+
+
     def play_sound(self):
-        url = QUrl.fromLocalFile(f'data/media/strongcowsound.mp3')  # 파일 경로는 실제 오디오 파일의 경로로 바꾸세요
+        file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),f'data/media/strongcowsound.mp3')  # 절대 경로로 변경
+        print(f"Trying to play: {file_path}")
+
+        if not os.path.exists(file_path):
+            print(f"File not found: {file_path}")
+            return
+
+        url = QUrl.fromLocalFile(file_path)
         self.media_player.setMedia(QMediaContent(url))
 
-        # 오디오 재생
+        if self.media_player.mediaStatus() == QMediaPlayer.NoMedia:
+            print("Failed to load media.")
+        else:
+            print("Media loaded successfully.")
+        
         self.media_player.play()
-        print("play")
-
-
+        print("Playing sound...")
 
 
 
@@ -567,23 +578,23 @@ class Check(QWidget, check_ui):
     def next_turn(self):
         
         # pf = myWindow.player_status[myWindow.game_status.now_turn_player].farm
-        print(construct_fence.ConstructFence(myWindow.player_status[myWindow.game_status.now_turn_player].farm.field,myWindow.player_status[myWindow.game_status.now_turn_player].farm.vertical_fence,myWindow.player_status[myWindow.game_status.now_turn_player].farm.horizon_fence).execute())
-        fence = construct_fence.ConstructFence(myWindow.player_status[myWindow.game_status.now_turn_player].farm.field,myWindow.player_status[myWindow.game_status.now_turn_player].farm.vertical_fence,myWindow.player_status[myWindow.game_status.now_turn_player].farm.horizon_fence)
-        fence_ex = fence.execute()# if log:
-        # barn = construct_barn.ConstructBarn(myWindow.player_status[myWindow.game_status.now_turn_player].farm.field,myWindow.player_status[myWindow.game_status.now_turn_player].farm.vertical_fence,myWindow.player_status[myWindow.game_status.now_turn_player].farm.horizon_fence)
-        # barn_ex = barn.execute()# if log:
-        if fence_ex :
-            for i in [0,1,2,3]:
-                getattr(self.parent.worker_board,f"widget_{i}").setEnabled(True)
-            nowturn = self.parent.game_status.now_turn_player
-            self.parent.game_status.now_turn_player = (nowturn+1)%4
-            self.parent.game_status.next_turn_player = (nowturn+2)%4
-            self.parent.update_state_of_all()
-            pprint(f"현재 턴은 {self.parent.game_status.now_turn_player}플레이어 입니다.")
+        # print(construct_fence.ConstructFence(myWindow.player_status[myWindow.game_status.now_turn_player].farm.field,myWindow.player_status[myWindow.game_status.now_turn_player].farm.vertical_fence,myWindow.player_status[myWindow.game_status.now_turn_player].farm.horizon_fence).execute())
+        # fence = construct_fence.ConstructFence(myWindow.player_status[myWindow.game_status.now_turn_player].farm.field,myWindow.player_status[myWindow.game_status.now_turn_player].farm.vertical_fence,myWindow.player_status[myWindow.game_status.now_turn_player].farm.horizon_fence)
+        # fence_ex = fence.execute()# if log:
+        # # barn = construct_barn.ConstructBarn(myWindow.player_status[myWindow.game_status.now_turn_player].farm.field,myWindow.player_status[myWindow.game_status.now_turn_player].farm.vertical_fence,myWindow.player_status[myWindow.game_status.now_turn_player].farm.horizon_fence)
+        # # barn_ex = barn.execute()# if log:
+        # if fence_ex :
+        for i in [0,1,2,3]:
+            getattr(self.parent.worker_board,f"widget_{i}").setEnabled(True)
+        nowturn = self.parent.game_status.now_turn_player
+        self.parent.game_status.now_turn_player = (nowturn+1)%4
+        self.parent.game_status.next_turn_player = (nowturn+2)%4
+        self.parent.update_state_of_all()
+        pprint(f"현재 턴은 {self.parent.game_status.now_turn_player}플레이어 입니다.")
 
-            self.parent.set_undo()
-        else:
-            pprint(fence.log_text)
+        self.parent.set_undo()
+        # else:
+        #     pprint(fence.log_text)
 
     def mousePressEvent(self,event):
         pass
