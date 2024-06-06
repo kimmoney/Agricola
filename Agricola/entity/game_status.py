@@ -9,9 +9,9 @@ class GameStatus:
         self.now_round = 0          # 현재 라운드
         self.now_turn_player = 0    # 현재 턴 플레이어
         self.next_turn_player = 0   # 다음 턴 플레이어
-        self.round_card_order = [0 for i in range(14)]
-        self.opened_round_card = [False for i in range(14)]
-        self.round_resource = [0 for i in range(14)]
+        self.round_card_order = [0 for i in range(14)]  # 라운드 카드의 순서. reverse map으로 탐색
+        self.opened_round = [False for i in range(14)]  # 카드가 공개된 라운드 여부
+        self.round_resource = [0 for i in range(14)] # 라운드 기준 해당 라운드 칸 내부
         self.basic_resource = [0 for i in range(16)]
 
     def attach(self, observer):
