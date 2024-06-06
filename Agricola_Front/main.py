@@ -182,8 +182,14 @@ class MainWindowClass(QMainWindow, main) :
             self.current_timer_count -= 1
             if self.current_timer_count == 0:
                 self.timer_open.stop()
+    def update_state(self):
+        for i in range(4):
+            getattr(self,f"player_{i}_border").setStyleSheet("")
+        i = self.game_status.now_turn_player
+        getattr(self,f"player_{i}_border").setStyleSheet(f"#player_{i}_border{{border:3px solid blue;}}")
 
     def update_state_of_all(self):
+        
         #resource 업데이트
         for c in self.personal_field:
             c.update_state()
@@ -194,7 +200,7 @@ class MainWindowClass(QMainWindow, main) :
             c.update_state()
         for widget in self.random_round:
             widget.update_state()
-
+        self.update_state()
 class WidgetPersonalField(QWidget, personal_field_ui) :
     def __init__(self, player,parent) :
         super().__init__()
@@ -244,10 +250,10 @@ class WidgetPersonalField(QWidget, personal_field_ui) :
             self.parent.player_status[player].farm.horizon_fence[j][i] = not self.parent.player_status[player].farm.horizon_fence[j][i]
 
             # self.parent.player_status[self.player].farm.horizon_fence[j][i] = not self.parent.player_status[self.player].farm.horizon_fence[j][i]
-        pprint(f"{v}{j}{i}펜스 설치")
+        # pprint(f"{v}{j}{i}펜스 설치")
         # except:
             # pprint("오류오류")
-        pprint(f"Player ID : {self.player} | Fence ID: {v}{j}{i}")
+        # pprint(f"Player ID : {self.player} | Fence ID: {v}{j}{i}")
         update()
 
     def update_state(self):
@@ -257,6 +263,7 @@ class WidgetPersonalField(QWidget, personal_field_ui) :
         else:
             player = self.player
         self.setEnabled(player == self.parent.game_status.now_turn_player)
+        
         # 펜스 state
         for j in range(4):
             for i in range(5):
@@ -407,9 +414,9 @@ class WidgetPersonalResource(QWidget, personal_resources_ui) :
         player = self.player 
 
         for t in ["dirt","grain","reed","stone","vegetable","wood",'beg_token',"food"]:
-            # self.personal_resource[player].count_dirt.setText(str(self.player.player_status[player].resource.dirt))
             getattr(self,f"count_{t}").setText(str(getattr(self.parent.player_status[player].resource,t)))
-        # for t in ['sheep','cow','pig']:
+        for t in ['sheep','cow','pig','barn','fence']:
+            getattr(self,f"count_{t}").setText(str(getattr(self.parent.player_status[player].farm,f"get_{t}_count")()))
 
         #     # self.personal_resource[player].count_dirt.setText(str(self.player.player_status[player].resource.dirt))
         #     getattr(self,f"count_{t}").setText(str(getattr(self.parent.player_status[player].farm,t)))
@@ -423,19 +430,19 @@ class WidgetPersonalResource(QWidget, personal_resources_ui) :
         if self.parent.game_status.now_turn_player == player:
             self.turn_info_1.setText("NOW")
             self.turn_info_2.setText("NOW")
-            self.lb_turn_icon_1.show()
-            self.lb_turn_icon_2.show()
         elif self.parent.game_status.next_turn_player ==player:
             self.turn_info_1.setText("NEXT")
             self.turn_info_2.setText("NEXT")
-            self.lb_turn_icon_1.hide()
-            self.lb_turn_icon_2.hide()
         else :
             self.turn_info_1.setText("")
             self.turn_info_2.setText("")
+        if self.parent.player_status[self.player].resource.first_turn:
+            self.lb_turn_icon_1.show()
+            self.lb_turn_icon_2.show()
+        else:
             self.lb_turn_icon_1.hide()
             self.lb_turn_icon_2.hide()
-
+            
 class WidgetBasicRound(QWidget, basic_roundcard_ui) :
     def __init__(self,num,parent) :
         super().__init__()  # 부모 클래스의 __init__ 함수 호출
@@ -527,15 +534,26 @@ class Check(QWidget, check_ui):
         self.btn_processing.clicked.connect(self.next_turn)
         self.btn_undo.clicked.connect(self.parent.undo)
     def next_turn(self):
-        for i in [0,1,2,3]:
-            getattr(self.parent.worker_board,f"widget_{i}").setEnabled(True)
-        
-        self.parent.game_status.now_turn_player = (self.parent.game_status.now_turn_player+1)%4
-        self.parent.game_status.next_turn_player = (self.parent.game_status.now_turn_player+1)%4
-        self.parent.update_state_of_all()
-        pprint(f"현재 턴은 {self.parent.game_status.now_turn_player}플레이어 입니다.")
+        from Agricola.Agricola.behavior.basebehavior import construct_barn, construct_fence
+        # pf = myWindow.player_status[myWindow.game_status.now_turn_player].farm
+        print(construct_fence.ConstructFence(myWindow.player_status[myWindow.game_status.now_turn_player].farm.field,myWindow.player_status[myWindow.game_status.now_turn_player].farm.vertical_fence,myWindow.player_status[myWindow.game_status.now_turn_player].farm.horizon_fence).execute())
+        fence = construct_fence.ConstructFence(myWindow.player_status[myWindow.game_status.now_turn_player].farm.field,myWindow.player_status[myWindow.game_status.now_turn_player].farm.vertical_fence,myWindow.player_status[myWindow.game_status.now_turn_player].farm.horizon_fence)
+        fence_ex = fence.execute()# if log:
+        barn = construct_barn.ConstructBarn(myWindow.player_status[myWindow.game_status.now_turn_player].farm.field,myWindow.player_status[myWindow.game_status.now_turn_player].farm.vertical_fence,myWindow.player_status[myWindow.game_status.now_turn_player].farm.horizon_fence)
+        barn_ex = barn.execute()# if log:
 
-        self.parent.set_undo()
+        if fence_ex and barn_ex:
+            for i in [0,1,2,3]:
+                getattr(self.parent.worker_board,f"widget_{i}").setEnabled(True)
+            nowturn = self.parent.game_status.now_turn_player
+            self.parent.game_status.now_turn_player = (nowturn+1)%4
+            self.parent.game_status.next_turn_player = (nowturn+2)%4
+            self.parent.update_state_of_all()
+            pprint(f"현재 턴은 {self.parent.game_status.now_turn_player}플레이어 입니다.")
+
+            self.parent.set_undo()
+        else:
+            pprint(fence.log_text+barn.log_text)
 
     def mousePressEvent(self,event):
         pass
