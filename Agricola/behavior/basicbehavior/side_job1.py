@@ -31,11 +31,11 @@ class SideJob1(Command):
             return False
 
     def execute(self):
-        if (self.playCard not in self.player_ownCard.handJobCard):
+        if self.playCard not in self.player_ownCard.handJobCard:
             self.log_text = "직업을 낼 수 없습니다."
             return False
-        if (self.playCard.purchase(self.player)):
-            if (self.player_ownCard.handJobCard):
+        if self.playCard.purchase(self.player):
+            if self.player_ownCard.handJobCard:
                 self.player_resource.food -= 1
         self.log_text = "직업을 냈습니다."
         return True
