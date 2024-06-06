@@ -70,7 +70,8 @@ class MainWindowClass(QMainWindow, main) :
         self.personal_card = [PersonalCard_small(i,self) for i in range(4)]
         for i in range(4):getattr(self,f"frm_p{i}_1").addWidget(self.personal_card[i])
 #메인 카드 위젯 설정
-        self.frm_main_card.addWidget(PersonalCard_big(self))
+        self.main_card = PersonalCard_big(self)
+        self.frm_main_card.addWidget(self.main_card)
         
         #플레이어 리소스 위젯 설정
         self.personal_resource = [WidgetPersonalResource(i,self) for i in range(4)]
@@ -102,7 +103,6 @@ class MainWindowClass(QMainWindow, main) :
         self.update_state_of_all()
         self.set_undo()
         ############################################################################
-
         self.stackedWidget.setCurrentIndex(2)
         self.GAMESTART_BUTTON.clicked.connect(self.game_start)
 
