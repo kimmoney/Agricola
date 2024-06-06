@@ -2,9 +2,13 @@
 흙 5개 화덕
 """
 from behavior.main_facility.main_facility_interface import MainFacilityInterface
+from entity import card_type
 
 
 class StrongOven2(MainFacilityInterface):
+    def __init__(self, input_behavior):
+        self.input_behavior = input_behavior
+        self.card_type = card_type.CardType.main_facility
     """
     사용 가능 여부를 반환하는 메소드
     :param:
