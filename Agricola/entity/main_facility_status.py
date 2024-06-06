@@ -10,4 +10,4 @@
 
 class MainFacilityStatus:
     def __init__(self):
-        self.card_list = [-1 for i in range(9)]
+        self.card_list = [-1 for i in range(5)]

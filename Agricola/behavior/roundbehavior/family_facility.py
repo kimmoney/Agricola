@@ -6,6 +6,7 @@
 """
 from command import Command
 from entity.round_behavior_type import RoundBehaviorType
+from repository.game_status_repository import game_status_repository
 from repository.player_status_repository import player_status_repository
 from repository.round_status_repository import round_status_repository
 
@@ -35,6 +36,7 @@ class FamilyFacility(Command):
     def execute(self):
         self.player_status.set_baby(1)
         self.log_text = "급하지않은 가족 늘리기를 성공했습니다"
+        round_status_repository.round_status.remain_workers[game_status_repository.game_status.now_turn_player] -= 1
         return True
 
     def log(self):

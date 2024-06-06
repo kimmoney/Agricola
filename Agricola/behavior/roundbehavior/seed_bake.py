@@ -11,6 +11,7 @@ from command import Command
 from copy import copy
 from entity.crop_type import CropType
 from entity.round_behavior_type import RoundBehaviorType
+from repository.game_status_repository import game_status_repository
 from repository.player_status_repository import player_status_repository
 from repository.round_status_repository import round_status_repository
 from behavior.basebehavior.seed_plant import SeedPlant
@@ -43,6 +44,7 @@ class SeedBake(Command):
             self.log_text = "밭 심기를 실패했습니다"
             return False
         if (not self.ifBread):  # 빵굽기x
+            round_status_repository.round_status.remain_workers[game_status_repository.game_status.now_turn_player] -= 1
             return True
         else :
             doBake = DoBake(self.player)
@@ -50,6 +52,7 @@ class SeedBake(Command):
                 self.log_Text = "빵 굽기를 완료했습니다"
             else:
                 self.log_text = "빵 굽기를 실패했습니다"
+            round_status_repository.round_status.remain_workers[game_status_repository.game_status.now_turn_player] -= 1
             return True
 
     def log(self):

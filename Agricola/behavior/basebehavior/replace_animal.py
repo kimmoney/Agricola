@@ -6,12 +6,17 @@
 
 프론트에서 동물 재배치하기 버튼을 클릭하고, 동물을 완전히 이동시킨 뒤 수행하는 동물 배치 확정 로직
 """
+from behavior.basebehavior.place_animal import PlaceAnimal
 from command import Command
 
 
 class ReplaceAnimal(Command):
+    def __init__(self, field_status):
+        self.log_text = ""
+        self.field_status = field_status
+
     def execute(self):
-        pass
+        return PlaceAnimal(self.field_status)
 
     def log(self):
-        pass
+        return self.log_text
