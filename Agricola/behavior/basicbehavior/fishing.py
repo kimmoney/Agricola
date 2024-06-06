@@ -15,8 +15,9 @@ from repository.round_status_repository import round_status_repository
 
 
 class Fishing(Command):
-    def __init__(self, player):
+    def __init__(self):
         self.log_text = ""
+        player = player_status_repository.player_status[game_status_repository.game_status.now_turn_player]
         self.game_status = game_status_repository.game_status
         self.player_resource = player_status_repository.player_status[player].resource
         self.is_filled = round_status_repository.round_status.put_basic[BasicBehaviorType.FISHING.value]

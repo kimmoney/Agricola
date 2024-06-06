@@ -25,7 +25,7 @@ class MeetingPlace(Command):
 
     def execute(self):
         for player in player_status_repository.player_status:  # 기존 1등 선마커 뺏기
-            if (player.resource.first_turn):
+            if player.resource.first_turn:
                 player.resource.set_first_turn(False)
                 break
         self.player_resource.set_first_turn(True)
