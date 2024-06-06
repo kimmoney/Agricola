@@ -126,6 +126,13 @@ class MainWindowClass(QMainWindow, main) :
         self.set_undo()
         ############################################################################
 
+        self.stackedWidget.setCurrentIndex(2)
+        self.GAMESTART_BUTTON.clicked.connect(self.game_start)
+
+    def game_start(self):
+        pprint("게임이 시작되었습니다.")
+        self.stackedWidget.setCurrentIndex(0)
+        
     def round_test(self):
         self.game_status.now_round = (self.game_status.now_round+1)%15
         pprint(f"현재 라운드는 {self.game_status.now_round}라운드입니다.")
