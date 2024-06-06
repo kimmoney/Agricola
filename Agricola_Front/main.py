@@ -4,7 +4,7 @@ sys.path.append(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'Agrico
 sys.path.append(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'data'))
 sys.dont_write_bytecode = True # pyc 생성 방지
 from qcr_converter import run_pyrcc5
-# run_pyrcc5()#QRC 업데이트
+run_pyrcc5()#QRC 업데이트
 
 from PyQt5 import uic
 from PyQt5.QtWidgets import *
@@ -18,7 +18,7 @@ from Agricola.Agricola.entity.crop_type import CropType
 from Agricola.Agricola.entity.animal_type import AnimalType
 from PyQt5.QtMultimedia import QMediaPlayer, QMediaContent
 from PyQt5.QtCore import QUrl
-from Agricola.Agricola.behavior.basebehavior import construct_barn, construct_fence,animal_move_validation,animal_position_validation
+# from Agricola.Agricola.behavior.basebehavior import construct_barn, construct_fence,animal_move_validation,animal_position_validation
 def resource_path(relative_path):
     """ Get absolute path to resource, works for dev and for PyInstaller """
     base_path = getattr(sys, '_MEIPASS', os.path.dirname(os.path.abspath(__file__)))
@@ -114,15 +114,10 @@ class MainWindowClass(QMainWindow, main) :
             getattr(self, f"p{i}_show").clicked.connect(lambda _, x=i: getattr(myWindow, f"sw_p{x}").setCurrentIndex(1))
             getattr(self, f"p{i}_show").clicked.connect(lambda _, x=i: getattr(myWindow, f"card_check_p{x}").setEnabled(True))
             getattr(self, f"card_check_p{i}").clicked.connect(lambda _, x=i: self.stackedWidget.setCurrentIndex( (x+4)%7 ))
-        
+        self.play_sound()
 
-    def play_sound(self,name):
-        # 재생할 오디오 파일의 경로 설정
-        # try:
-        #     self.media_player.stop()
-        # except:
-        #     pass
-        url = QUrl.fromLocalFile(f'data\media\{name}')  # 파일 경로는 실제 오디오 파일의 경로로 바꾸세요
+    def play_sound(self):
+        url = QUrl.fromLocalFile(f'data/media/strongcowsound.mp3')  # 파일 경로는 실제 오디오 파일의 경로로 바꾸세요
         self.media_player.setMedia(QMediaContent(url))
 
         # 오디오 재생
@@ -371,33 +366,10 @@ class WidgetFieldBase(QWidget, field_base_ui) :
         print(animal, (self.i,self.j))
         self.vertical_fence=myWindow.player_status[player].farm.vertical_fence
         self.horizontal_fence=myWindow.player_status[player].farm.horizon_fence
-        expanded_field = self.execute222(myWindow.player_status[myWindow.game_status.now_turn_player].farm.field,self.vertical_fence,self.horizontal_fence)
-        
-        animal_move_text = animal_move_validation.AnimalMoveValidation(expanded_field, animal, [self.i,self.j])
+        myWindow.player_status[player].farm.field[self.i][self.j].kind = rand[0]
 
-        if animal_move_text.execute():
-            myWindow.player_status[player].farm.field[self.i][self.j].kind = rand[0]
-        else:
-            pprint(animal_move_text.log_text)
         myWindow.update_state_of_all()
 
-    def execute222(self, field_status, vertical_fence, horizontal_fence):
-        from Agricola.Agricola.entity.farm.none_field import NoneField
-        expanded_field = [[NoneField for i in range(11)] for i in range(7)]
-        for i in range(3):
-            for j in range(6):
-                # if self.vertical_fence is True:
-                if vertical_fence[i][j] is True:
-                    expanded_field[i * 2 + 1][2 * j] = FieldType.FENCE
-        for i in range(4):
-            for j in range(5):
-                # if self.horizontal_fence is True:
-                if horizontal_fence[i][j] is True:
-                    expanded_field[i * 2][j * 2 + 1] = FieldType.FENCE
-        for i in range(3):
-            for j in range(5):
-                expanded_field[i * 2 + 1][j * 2 + 1] = field_status[i][j]
-        return expanded_field
     def update_state(self):
         if self.player == 4:
             player = self.parent.parent.game_status.now_turn_player
