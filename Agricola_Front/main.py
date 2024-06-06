@@ -1,33 +1,21 @@
-import sys
-# pyc 생성 방지
-sys.dont_write_bytecode = True
-#QRC 업데이트
-from qcr_converter import run_pyrcc5
-# run_pyrcc5()
-from PyQt5.QtWidgets import *
-from PyQt5 import uic
-from PyQt5.QtCore import QTimer
-from PyQt5.QtCore import Qt
-from PyQt5.QtWidgets import QGraphicsBlurEffect
-import os 
-import MyQRC_rc
-import copy
-import sys
-import os
-import random
-from PyQt5.QtGui import QFont, QFontDatabase
+import sys,os,copy,random
 # 모듈이 위치한 디렉토리를 지정합니다.
-module_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'Agricola/Agricola')
-# sys.path에 모듈 디렉토리를 추가합니다.
+sys.path.append(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'Agricola/Agricola'))
+sys.path.append(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'data'))
+sys.dont_write_bytecode = True # pyc 생성 방지
+from qcr_converter import run_pyrcc5
+# run_pyrcc5()#QRC 업데이트
 
-if module_dir not in sys.path:
-    sys.path.append(module_dir)
+from PyQt5 import uic
+from PyQt5.QtWidgets import *
+from PyQt5.QtCore import QTimer,Qt
+import data.MyQRC_rc as MyQRC_rc
+from PyQt5.QtGui import QFont, QFontDatabase
 from Agricola.Agricola.repository import player_status_repository,game_status_repository,round_status_repository,undo_repository
 from Agricola.Agricola.entity.field_type import FieldType
 from Agricola.Agricola.entity.house_type import HouseType
 from Agricola.Agricola.entity.crop_type import CropType
 from Agricola.Agricola.entity.animal_type import AnimalType
-
 
 def resource_path(relative_path):
     """ Get absolute path to resource, works for dev and for PyInstaller """
@@ -65,47 +53,40 @@ class MainWindowClass(QMainWindow, main) :
         
         font_path = os.path.join(os.path.join(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'data'),'font'),'Pretendard-Medium.otf')
         
-        # 폰트 파일 로드
+# 폰트 파일 로드
         font_id = QFontDatabase.addApplicationFont(font_path)
-        if font_id == -1:
-            pass
-            # print("Failed to load font")
-        else:
-            font_family = QFontDatabase.applicationFontFamilies(font_id)[0]
-            font = QFont(font_family, 9)  # 로드된 폰트를 기본 폰트로 설정
-            app.setFont(font)
+        font_family = QFontDatabase.applicationFontFamilies(font_id)[0]
+        font = QFont(font_family, 9)  # 로드된 폰트를 기본 폰트로 설정
+        app.setFont(font)
         self.player_status = player_status_repository.PlayerStatusRepository().player_status
         self.game_status = game_status_repository.GameStatusRepository().game_status
         self.round_status = round_status_repository.RoundStatusRepository().round_status
-        #플레이어 필드 위젯 설정
+#플레이어 필드 위젯 설정
         self.personal_field = [WidgetPersonalField(i,self) for i in range(5)]
         for i in range(4):getattr(self,f"frm_p{i}_0").addWidget(self.personal_field[i])
-        #메인 필드 위젯 설정
+#메인 필드 위젯 설정
         self.frm_main_field.addWidget(self.personal_field[4])
         #플레이어 카드 위젯 설정
         self.personal_card = [PersonalCard_small(i,self) for i in range(4)]
         for i in range(4):getattr(self,f"frm_p{i}_1").addWidget(self.personal_card[i])
-        #메인 카드 위젯 설정
+#메인 카드 위젯 설정
         self.frm_main_card.addWidget(PersonalCard_big(self))
         
         #플레이어 리소스 위젯 설정
         self.personal_resource = [WidgetPersonalResource(i,self) for i in range(4)]
         for i in range(4):getattr(self,f"frm_p{i}_2").addWidget(self.personal_resource[i])
-        #베이직 라운드 위젯 설정
+#베이직 라운드 위젯 설정
         self.basic_round = [WidgetBasicRound(i,self) for i in range(16)]
         [getattr(self,f"basic_{i}").addWidget(self.basic_round[i]) for i in range(16)]
+# 랜덤위젯 설정
         numbers = list(range(14))
         random.shuffle(numbers)
         self.random_round = [WidgetrandomRound(i,numbers[i],self) for i in range(14)]
         [getattr(self,f"basic_{i+16}").addWidget(self.random_round[i]) for i in range(14)]
-
-
+#워커보드 설정
         self.worker_board = WorkerBoard(self)
         self.vlo_etc_workerboard.addWidget(self.worker_board)
-        #텍스트 로그 창 설정
-        # self.text_log = WidgetTextLog(self)
-        # self.vlo_etc_log.addWidget(self.text_log)
-        #인포메이션 칸(설정, 점수표)
+#인포메이션 칸(설정, 점수표)
         self.information = WidgetInformation(self)
         self.vlo_etc_information.addWidget(self.information)
 
@@ -117,11 +98,7 @@ class MainWindowClass(QMainWindow, main) :
         self.log.clicked.connect(self.update_state_of_all)
         self.pushButton_3.clicked.connect(self.round_test)
         self.log_popup = Log_viewer(self)
-        # def pprint(text):
-        #     ppprint("log : ")
-        #     ppprint(text)
-        # pprint(self.player.player_status[0].worker)
-        # self.random_round_suffle()
+        
         self.update_state_of_all()
         self.set_undo()
         ############################################################################
