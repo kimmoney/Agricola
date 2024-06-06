@@ -1,5 +1,6 @@
 from gamestate.state import State
 from repository.game_status_repository import game_status_repository
+from turn.check_turn_remain import CheckTurnRemain
 
 
 class TurnEndState(State):
@@ -14,6 +15,7 @@ class TurnEndState(State):
         return self.game_context.state.execute()
 
     def execute(self):
+        CheckTurnRemain().execute()
         return "남은 플레이어가 있는지 검사중입니다. 계속하려면 확인 버튼을 클릭해주세요."
 
     def log(self):
