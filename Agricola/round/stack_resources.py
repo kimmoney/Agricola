@@ -10,15 +10,15 @@ class StackResources(Command):
     def execute(self):
         game_status = game_status_repository.game_status
         for i in range(14):
-            if round_behavior_reverse_map[game_status.opened_round_card[i]] == RoundBehaviorType.SHEEP1.name:
+            if game_status.round_card_order[i] == RoundBehaviorType.SHEEP1.value:
                 game_status.set_round_resource(i, game_status.round_resource[i] + 1)
-            if round_behavior_reverse_map[game_status.opened_round_card[i]] == RoundBehaviorType.COW.name:
+            if game_status.round_card_order[i] == RoundBehaviorType.COW.value:
                 game_status.set_round_resource(i, game_status.round_resource[i] + 1)
-            if round_behavior_reverse_map[game_status.opened_round_card[i]] == RoundBehaviorType.PIG.name:
+            if game_status.round_card_order[i] == RoundBehaviorType.PIG.value:
                 game_status.set_round_resource(i, game_status.round_resource[i] + 1)
-            if round_behavior_reverse_map[game_status.opened_round_card[i]] == RoundBehaviorType.STONE_2.name:
+            if game_status.round_card_order[i] == RoundBehaviorType.STONE_2.value:
                 game_status.set_round_resource(i, game_status.round_resource[i] + 1)
-            if round_behavior_reverse_map[game_status.opened_round_card[i]] == RoundBehaviorType.STONE_4.name:
+            if game_status.round_card_order[i] == RoundBehaviorType.STONE_4.value:
                 game_status.set_round_resource(i, game_status.round_resource[i] + 1)
         game_status.set_basic_resource(0, game_status.basic_resource[0] + 1)
         game_status.set_basic_resource(1, game_status.basic_resource[1] + 2)
