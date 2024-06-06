@@ -117,7 +117,6 @@ class MainWindowClass(QMainWindow, main) :
         self.log.clicked.connect(self.update_state_of_all)
         self.pushButton_3.clicked.connect(self.round_test)
         self.log_popup = Log_viewer(self)
-        
         # def pprint(text):
         #     ppprint("log : ")
         #     ppprint(text)
@@ -524,7 +523,7 @@ class Log_viewer(QDialog,log_viewer_ui):
         self.log.setText("이 곳은 로그를 표기하는 곳입니다.")
         self.timer = QTimer()
         self.hide()
-    def logging(self,text):
+    def logging(self,text,time=500):
         self.timer.stop()
         self.log.setText(text)
         self.show()
