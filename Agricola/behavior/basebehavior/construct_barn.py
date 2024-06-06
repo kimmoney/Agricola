@@ -12,9 +12,10 @@ from behavior.basebehavior.house_expansion import *
 from entity.field_type import FieldType
 
 
-class ConstructBarn(Command):
+class ConstructBarn(BaseBehaviorInterface):
 
     def __init__(self, field_status, vertical_fence, horizontal_fence):
+        self.log_text = ""
         self.field_status = copy.deepcopy(field_status)
         self.vertical_fence = copy.deepcopy(vertical_fence)
         self.horizontal_fence = copy.deepcopy(horizontal_fence)
@@ -29,8 +30,12 @@ class ConstructBarn(Command):
         if barn_cnt >= 4 or selected_field_type != FieldType.CAGE:
             self.log_text = "외양간 건설이 불가능한 장소입니다."
             return False
+        elif player_status_repository.player_status[game_status_repository.game_status.now_turn_player].resource.wood < 2:
+            self.log_text = "나무가 모자랍니다."
+            return False
         else:
             self.log_text = "외양간 건설 완료"
+            player_status_repository.player_status[game_status_repository.game_status.now_turn_player].resource.wood -= 2
             CreateCage(self.field_status, self.vertical_fence, self.horizontal_fence)
             return True
 

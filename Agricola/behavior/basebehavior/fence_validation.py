@@ -15,7 +15,7 @@ from entity.field_type import FieldType
 class FenceValidation(Command):
     def __init__(self, field_status):
         self.field_status = copy(field_status)
-        self.log_text = None
+        self.log_text = ""
 
     def execute(self):
         return self.check_fence_form() and self.check_connected_component_fence() and self.check_inside_object() and self.check_fence_count()

@@ -10,6 +10,7 @@ import copy
 from collections import deque
 from typing import List
 
+from behavior.basebehavior.base_behavior_interface import BaseBehaviorInterface
 from behavior.basebehavior.create_cage import CreateCage
 from command import Command
 from entity.farm.cage import Cage
@@ -23,13 +24,13 @@ from repository.player_status_repository import player_status_repository
 
 # Todo
 
-class ConstructFence(Command):
+class ConstructFence(BaseBehaviorInterface):
 
     def __init__(self, field_status, vertical_fence, horizontal_fence):
         self.field_status = copy.deepcopy(field_status)
         self.vertical_fence = copy.deepcopy(vertical_fence)
         self.horizontal_fence = copy.deepcopy(horizontal_fence)
-        self.log_text = None
+        self.log_text = ""
 
     def execute(self):
         expanded_field = [[FieldType.NONE_FIELD for i in range(11)] for i in range(7)]
@@ -46,6 +47,19 @@ class ConstructFence(Command):
                 expanded_field[i * 2 + 1][j * 2 + 1] = self.field_status[i][j].field_type
         fence_validation = FenceValidation(expanded_field)
         if fence_validation.execute():
+            cost = 0
+            for i in range(4):
+                for j in range(5):
+                    if self.horizontal_fence == True and player_status_repository.player_status[game_status_repository.game_status.now_turn_player].farm.house_status[i][j] == False:
+                        cost += 1
+            for i in range(3):
+                for j in range(6):
+                    if self.vertical_fence == True and player_status_repository.player_status[game_status_repository.game_status.now_turn_player].farm.vertical_fence[i][j] == False:
+                        cost += 1
+            if cost > player_status_repository.player_status[game_status_repository.game_status.now_turn_player].resource.wood:
+                self.log_text = "나무가 모자랍니다."
+                return False
+            player_status_repository.player_status[game_status_repository.game_status.now_turn_player].resource.wood -= cost
             self.log_text = "울타리 건설 성공"
             CreateCage(self.field_status, self.vertical_fence, self.horizontal_fence).execute()
             return True

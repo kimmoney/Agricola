@@ -38,7 +38,7 @@ def check_connected_component(field_status, field_type):
 class HouseExpandValidation(Command):
     def __init__(self, field_status):
         self.field_status = copy(field_status)
-        self.log_text = None
+        self.log_text = ""
 
     def execute(self):
         val = check_connected_component(field_status=self.field_status, field_type=FieldType.HOUSE)

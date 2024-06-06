@@ -21,7 +21,7 @@ from behavior.basebehavior.seed_plant import SeedPlant
 class SeedBake(Command):
 
     def __init__(self, player, ifBread, plantDict, field_status):
-        self.log_text = None
+        self.log_text = ""
         self.player = player
         self.ifBread = ifBread
         self.player_MainCard = player_status_repository.player_status[player].card.putMainCard

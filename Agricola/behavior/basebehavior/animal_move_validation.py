@@ -10,17 +10,18 @@ Unit : 선후
 from collections import deque
 from copy import deepcopy
 
+from behavior.basebehavior.base_behavior_interface import BaseBehaviorInterface
 from command import Command
 from entity.animal_type import AnimalType
 from entity.field_type import FieldType
 
 
-class AnimalMoveValidation(Command):
+class AnimalMoveValidation(BaseBehaviorInterface):
     def __init__(self, field_status, animal_type, position):
         self.field_status = deepcopy(field_status)
         self.animal_type = animal_type
         self.position = position
-        self.log_text = None
+        self.log_text = ""
 
     def execute(self):
         return self.check_already_placed() and self.check_same_type()

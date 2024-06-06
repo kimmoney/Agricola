@@ -8,6 +8,7 @@ Unit : 준영
 from collections import deque
 from copy import copy
 
+from behavior.basebehavior.base_behavior_interface import BaseBehaviorInterface
 from command import Command
 from entity.field_type import FieldType
 
@@ -35,10 +36,10 @@ def check_connected_component(field_status, field_type):
     return ret
 
 
-class ArableExpandValidation(Command):
+class ArableExpandValidation(BaseBehaviorInterface):
     def __init__(self, field_status):
         self.field_status = copy(field_status)
-        self.log_text = None
+        self.log_text = ""
 
     def execute(self):
         val = check_connected_component(field_status=self.field_status, field_type=FieldType.ARABLE)

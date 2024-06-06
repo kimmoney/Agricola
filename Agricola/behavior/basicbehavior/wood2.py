@@ -13,7 +13,7 @@ from repository.round_status_repository import round_status_repository
 
 class Wood2(Command):
     def __init__(self, player):
-        self.log_text = None
+        self.log_text = ""
         self.game_status = game_status_repository.game_status
         self.player_resource = player_status_repository.player_status[player].resource
         self.is_filled = round_status_repository.round_status.put_basic[BasicBehaviorType.WOOD2.value]
