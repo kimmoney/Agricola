@@ -143,7 +143,7 @@ class MainWindowClass(QMainWindow, main) :
     def game_start(self):
         pprint("게임이 시작되었습니다.")
         self.stackedWidget.setCurrentIndex(3) #player1의 카드 공개
-        self.play_sound("strongcowsound.mp3")
+        self.play_sound()
         
     def round_test(self):
         self.game_status.now_round = (self.game_status.now_round+1)%15
