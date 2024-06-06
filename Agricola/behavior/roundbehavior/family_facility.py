@@ -21,14 +21,18 @@ class FamilyFacility(Command):
         self.subFacility = subFacility
         self.field_status = field_status
 
-    def execute(self):
-        if self.is_filled:
-            self.log_text = "이번 라운드에 이미 수행된 행동입니다."
-            return False
+    def can_play(self):
         '''
         familyHouse=FamilyHouse()
         if familyHouse.execute() # field_status 순회 집갯수 조건문
         '''
+        if self.player_status.baby + self.player_status.worker == 5:
+            self.log_text = "더 이상 가족을 늘릴 수 없습니다"
+            return False
+        else:
+            return True
+
+    def execute(self):
         self.player_status.baby += 1
         self.log_text = "급하지않은 가족 늘리기를 성공했습니다"
         return True

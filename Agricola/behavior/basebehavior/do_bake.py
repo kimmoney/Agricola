@@ -15,14 +15,10 @@ class DoBake(Command):
         self.player_MainCard = player_status_repository.player_status[player].card.putMainCard
 
     def execute(self):
-        if (not self.player_MainCard):
-            self.log_text("빵 굽기를 할 주요 설비가 존재하지 않습니다")
-            return False
-        else:
-            for mainFacility in self.player_MainCard:
-                if mainFacility.canUse():
-                    mainFacility.execute(self.player_resource)
-            return True
+        for mainFacility in self.player_MainCard:
+            if mainFacility.canUse():
+                mainFacility.execute(self.player_resource)
+        return True
 
     def log(self):
         return self.log_text

@@ -22,10 +22,11 @@ class FarmExpansion(Command):
         self.player_farm = player_status_repository.player_status[player].farm
         self.is_filled = round_status_repository.round_status.put_basic[BasicBehaviorType.EXPAND.value]
 
+    def can_play(self):
+        # 농장 확장이 가능한 위치가 있는지 확인
+        return True
+
     def execute(self):
-        if self.is_filled:
-            self.log_text = "이번 라운드에 이미 수행된 행동입니다."
-            return False
         doExpansion = HouseExpansion(self.player_farm)
         if (doExpansion.execute()):
             self.log_text = f"농장 확장에 성공했습니다."

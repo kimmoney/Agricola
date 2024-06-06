@@ -21,10 +21,10 @@ class PigMarket(Command):
         self.player_resource = player_status_repository.player_status[player].resource
         self.is_filled = round_status_repository.round_status.put_basic[RoundBehaviorType.PIG.value]
 
+    def can_play(self):
+        return True
+
     def execute(self):
-        if self.is_filled:
-            self.log_text = "이번 라운드에 이미 수행된 행동입니다."
-            return False
         animal_dict = {AnimalType.PIG: self.game_status.basic_resource[RoundBehaviorType.PIG.value]}
         self.log_text = f"돼지 {self.game_status.basic_resource[RoundBehaviorType.PIG.value]}마리를 획득하였습니다."
         self.game_status.set_basic_resource(RoundBehaviorType.PIG.value, 0)
