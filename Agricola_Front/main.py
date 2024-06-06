@@ -83,11 +83,11 @@ class MainWindowClass(QMainWindow, main) :
         #메인 필드 위젯 설정
         self.frm_main_field.addWidget(self.personal_field[4])
         #플레이어 카드 위젯 설정
-        self.personal_card = [WidgetPersonalCard(i,self) for i in range(5)]
+        self.personal_card = [PersonalCard_small(i,self) for i in range(4)]
         for i in range(4):getattr(self,f"frm_p{i}_1").addWidget(self.personal_card[i])
         #메인 카드 위젯 설정
-        self.frm_main_card.addWidget(self.personal_card[4])
-
+        self.frm_main_card.addWidget(PersonalCard_big(self))
+        
         #플레이어 리소스 위젯 설정
         self.personal_resource = [WidgetPersonalResource(i,self) for i in range(4)]
         for i in range(4):getattr(self,f"frm_p{i}_2").addWidget(self.personal_resource[i])
@@ -208,13 +208,12 @@ class MainWindowClass(QMainWindow, main) :
         for c in self.personal_field:
             c.update_state()
             for cc in c.field:cc.update_state()
-        for c in self.personal_card:
-            c.update_state()
+        # for c in self.personal_card:
+        #     c.update_state()
         for c in self.personal_resource:
             c.update_state()
         for widget in self.random_round:
             widget.update_state()
-
 
 class WidgetPersonalField(QWidget, personal_field_ui) :
     def __init__(self, player,parent) :
@@ -390,37 +389,28 @@ class WidgetFieldBase(QWidget, field_base_ui) :
         pass
         
     
-class WidgetPersonalCard(QWidget, personal_card_ui) :
-    def __init__(self, player, parent) :
-        super().__init__()  # 부모 클래스의 __init__ 함수 호출
-        # self.parent
-        self.parent = parent
-        self.player = player
+# 개인 농장 오른 쪽 아이콘으로 보이는 작은 카드창
+class PersonalCard_small(QWidget, personal_card_small_ui):
+    def __init__(self, player, parent):
+        super().__init__()
         self.setupUi(self)
-        self.pushButton_1.clicked.connect(lambda : self.plus("dirt"))
-        self.pushButton_2.clicked.connect(lambda : self.plus("grain"))
-        self.pushButton_3.clicked.connect(lambda : self.plus("reed"))
-        self.pushButton_4.clicked.connect(lambda : self.plus("wood"))
-    def plus(self, object):
-        if not self.player == 4:
-            player = self.player
-        else:
-            player = self.parent.game_status.now_turn_player
-        count = getattr(self.parent.player_status[player].resource, object)
-        pprint(f"{self.player}번 플레이어가 {object}를 추가하였습니다.")
-        setattr(self.parent.player_status[player].resource, object,count+1)
-        self.parent.update_state_of_all()
+        self.player = player
+        self.parent = parent
+    def mousePressEvent(self, event):
+        self.setEnabled(self.player == self.parent.game_status.now_turn_player)
+        pprint(f"Pressed personalField Player ID : {self.player}")
+        self.parent.change_main_stacked()  
+# 메인 창에 뜰 개인별 카드 창
+class PersonalCard_big(QWidget, personal_card_big_ui):
+    def __init__(self, parent):
+        super().__init__()
+        self.setupUi(self)
+        self.parent = parent
+    def mousePressEvent(self, event):
+        player = self.parent.game_status.now_turn_player
+        pprint(f"Pressed personalField Player ID : {player}")
 
 
-    def mousePressEvent(self,event):
-        pprint(f"Pressed card Player ID : {self.player}")
-        
-    def update_state(self):
-        if self.player == 4:
-            player = self.parent.game_status.now_turn_player
-        else:
-            player = self.player
-        self.setEnabled(player == self.parent.game_status.now_turn_player)
 
 
 class WidgetPersonalResource(QWidget, personal_resources_ui) :
@@ -605,25 +595,6 @@ class Scoreboard(QDialog, scoreboard_ui):
         self.setWindowFlags(Qt.FramelessWindowHint | Qt.WindowStaysOnTopHint)
     def mousePressEvent(self,event):
         self.close()
-
-# 개인 농장 오른 쪽 아이콘으로 보이는 작은 카드창
-class PersonalCard_small(QWidget, personal_card_small_ui):
-    def __init__(self, player, parent):
-        super().__init__()
-        self.setupUi(self)
-        self.player = player
-        self.parent = parent
-    def mousePressEvent(self, event):
-        pass
-# 메인 창에 뜰 개인별 카드 창
-class PersonalCard_big(QWidget, personal_card_big_ui):
-    def __init__(self, parent):
-        super().__init__()
-        self.setupUi(self)
-        self.parent = parent
-    def mousePressEvent(self, event):
-        pass
-
 
 ###실행 코드### 밑에 건들 필요 굳이 없음###
 if __name__ == "__main__" :
