@@ -17,15 +17,16 @@ import os
 import random
 from PyQt5.QtGui import QFont, QFontDatabase
 # 모듈이 위치한 디렉토리를 지정합니다.
-module_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'Agricola_Back')
+module_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'Agricola/Agricola')
 # sys.path에 모듈 디렉토리를 추가합니다.
+
 if module_dir not in sys.path:
     sys.path.append(module_dir)
-from Agricola_Back.repository import player_status_repository,game_status_repository,round_status_repository,undo_repository
-from Agricola_Back.entity.field_type import FieldType
-from Agricola_Back.entity.house_type import HouseType
-from Agricola_Back.entity.crop_type import CropType
-from Agricola_Back.entity.animal_type import AnimalType
+from Agricola.Agricola.repository import player_status_repository,game_status_repository,round_status_repository,undo_repository
+from Agricola.Agricola.entity.field_type import FieldType
+from Agricola.Agricola.entity.house_type import HouseType
+from Agricola.Agricola.entity.crop_type import CropType
+from Agricola.Agricola.entity.animal_type import AnimalType
 
 
 def resource_path(relative_path):
@@ -210,6 +211,7 @@ class MainWindowClass(QMainWindow, main) :
                 # self.personal_resource[player].count_dirt.setText(str(self.player.player_status[player].resource.dirt))
                 getattr(self.personal_resource[player],f"count_{t}").setText(str(getattr(self.player_status[player].resource,t)))
             for t in ['sheep','cow','pig']:
+
                 # self.personal_resource[player].count_dirt.setText(str(self.player.player_status[player].resource.dirt))
                 getattr(self.personal_resource[player],f"count_{t}").setText(str(getattr(self.player_status[player].farm,t)))
             getattr(self.personal_resource[player],f"count_worker").setText(str(self.player_status[player].worker+self.player_status[player].baby))
