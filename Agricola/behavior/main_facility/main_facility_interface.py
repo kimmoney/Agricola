@@ -13,6 +13,7 @@ class MainFacilityInterface(Command):
     :rtype: bool
     """
     @abstractmethod
+
     def execute(self):
         pass
 
