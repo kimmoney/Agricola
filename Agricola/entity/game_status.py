@@ -28,6 +28,14 @@ class GameStatus:
         self.now_round = now_round
         self.notify()
 
+    def set_now_turn_player(self, now_turn_player):
+        self.now_turn_player = now_turn_player
+        self.notify()
+
+    def set_next_turn_player(self, next_turn_player):
+        self.next_turn_player = next_turn_player
+        self.notify()
+
     def set_round_resource(self, index, value):
         self.round_resource[index] = value
         self.notify()
