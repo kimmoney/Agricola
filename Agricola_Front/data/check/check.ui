@@ -68,7 +68,7 @@
           </property>
           <property name="icon">
            <iconset resource="../MyQRC.qrc">
-            <normaloff>:/newPrefix/check/check.png</normaloff>:/newPrefix/check/check.png</iconset>
+            <normaloff>:/newPrefix/images/check.png</normaloff>:/newPrefix/images/check.png</iconset>
           </property>
           <property name="iconSize">
            <size>
@@ -110,7 +110,7 @@
           </property>
           <property name="icon">
            <iconset resource="../MyQRC.qrc">
-            <normaloff>:/newPrefix/check/undo.png</normaloff>:/newPrefix/check/undo.png</iconset>
+            <normaloff>:/newPrefix/images/undo.png</normaloff>:/newPrefix/images/undo.png</iconset>
           </property>
           <property name="iconSize">
            <size>
