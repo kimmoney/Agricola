@@ -18,4 +18,6 @@ class SubFacilityType(Enum):
     PITCHFORK = 9
     SILPAN = 10
     WOOL = 11
-    
+
+
+sub_facility_type_reverse_map = {member.value: member.name for member in SubFacilityType}
