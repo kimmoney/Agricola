@@ -1,4 +1,5 @@
 from gamestate.state import State
+from round.SetRoundWorkerResource import SetRoundWorkerResource
 from round.clean_game_board import CleanGameBoard
 from round.open_new_round_card import OpenNewRoundCard
 from round.predict_turn_roundstart import PredictTurnRoundStart
@@ -14,6 +15,7 @@ class RoundStartState(State):
         card = OpenNewRoundCard().execute()
         StackResources().execute()
         PredictTurnRoundStart().execute()
+        SetRoundWorkerResource().execute()
         return f"새 카드가 공개되었습니다. 공개된 카드 : ${card}"
 
 
