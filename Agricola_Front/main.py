@@ -3,7 +3,7 @@ import sys
 sys.dont_write_bytecode = True
 #QRC 업데이트
 from qcr_converter import run_pyrcc5
-# run_pyrcc5()
+run_pyrcc5()
 from PyQt5.QtWidgets import *
 from PyQt5 import uic
 from PyQt5.QtCore import QTimer
@@ -129,9 +129,14 @@ class MainWindowClass(QMainWindow, main) :
         self.stackedWidget.setCurrentIndex(2)
         self.GAMESTART_BUTTON.clicked.connect(self.game_start)
 
+        #카드 확인하면 다음사람에게 넘기기
+        for i in range(4):
+            getattr(self, f"card_check_p{i}").clicked.connect(lambda _, x=i: myWindow.stackedWidget.setCurrentIndex(((x+4)%7)))
+            getattr(self, f"p{i}_show").clicked.connect(lambda _, x=i: getattr(myWindow, f"sw_p{x}").setCurrentIndex(1))
+        
     def game_start(self):
         pprint("게임이 시작되었습니다.")
-        self.stackedWidget.setCurrentIndex(0)
+        self.stackedWidget.setCurrentIndex(3) #player1의 카드 공개
         
     def round_test(self):
         self.game_status.now_round = (self.game_status.now_round+1)%15

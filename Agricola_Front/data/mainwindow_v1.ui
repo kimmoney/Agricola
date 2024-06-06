@@ -95,7 +95,7 @@
            </font>
           </property>
           <property name="currentIndex">
-           <number>2</number>
+           <number>6</number>
           </property>
           <widget class="QWidget" name="round_page">
            <layout class="QHBoxLayout" name="horizontalLayout_5" stretch="1,1">
@@ -265,7 +265,274 @@
             </item>
            </layout>
           </widget>
-          <widget class="QWidget" name="page"/>
+          <widget class="QWidget" name="page">
+           <layout class="QHBoxLayout" name="horizontalLayout_10">
+            <item>
+             <widget class="QStackedWidget" name="sw_p0">
+              <property name="currentIndex">
+               <number>0</number>
+              </property>
+              <widget class="QWidget" name="page_2">
+               <widget class="QPushButton" name="p0_show">
+                <property name="geometry">
+                 <rect>
+                  <x>350</x>
+                  <y>180</y>
+                  <width>351</width>
+                  <height>151</height>
+                 </rect>
+                </property>
+                <property name="text">
+                 <string>카드 확인하기</string>
+                </property>
+               </widget>
+              </widget>
+              <widget class="QWidget" name="p0_card_show"/>
+             </widget>
+            </item>
+            <item>
+             <layout class="QVBoxLayout" name="verticalLayout_4">
+              <item>
+               <widget class="QLabel" name="label">
+                <property name="text">
+                 <string>player 1
+당신의 말은</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLabel" name="label_5">
+                <property name="styleSheet">
+                 <string notr="true">border-image: url(:/newPrefix/images/worker_red.png);</string>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLabel" name="label_6">
+                <property name="text">
+                 <string>입니다.
+모든 카드를 확인하셨다면
+아래 버튼을 눌러 다음 플레이어에게
+넘겨주세요.
+!!이 정보는 다시 공개되지 않습니다!!</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPushButton" name="card_check_p0">
+                <property name="text">
+                 <string>확인하였습니다.</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+           </layout>
+          </widget>
+          <widget class="QWidget" name="page_4">
+           <layout class="QHBoxLayout" name="horizontalLayout_9">
+            <item>
+             <widget class="QStackedWidget" name="sw_p1">
+              <property name="currentIndex">
+               <number>0</number>
+              </property>
+              <widget class="QWidget" name="page_5">
+               <widget class="QPushButton" name="p1_show">
+                <property name="geometry">
+                 <rect>
+                  <x>390</x>
+                  <y>170</y>
+                  <width>351</width>
+                  <height>151</height>
+                 </rect>
+                </property>
+                <property name="text">
+                 <string>카드 확인하기</string>
+                </property>
+               </widget>
+              </widget>
+              <widget class="QWidget" name="p1_card_show"/>
+             </widget>
+            </item>
+            <item>
+             <layout class="QVBoxLayout" name="verticalLayout_9">
+              <item>
+               <widget class="QLabel" name="label_2">
+                <property name="text">
+                 <string>player 2
+당신의 말은</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLabel" name="label_7">
+                <property name="styleSheet">
+                 <string notr="true">border-image: url(:/newPrefix/images/worker_green.png);</string>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLabel" name="label_8">
+                <property name="text">
+                 <string>입니다.
+모든 카드를 확인하셨다면
+아래 버튼을 눌러 다음 플레이어에게
+넘겨주세요.
+!!이 정보는 다시 공개되지 않습니다!!</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPushButton" name="card_check_p1">
+                <property name="text">
+                 <string>확인하였습니다.</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+           </layout>
+          </widget>
+          <widget class="QWidget" name="page_7">
+           <layout class="QHBoxLayout" name="horizontalLayout_8">
+            <item>
+             <widget class="QStackedWidget" name="sw_p2">
+              <property name="currentIndex">
+               <number>0</number>
+              </property>
+              <widget class="QWidget" name="page_8">
+               <widget class="QPushButton" name="p2_show">
+                <property name="geometry">
+                 <rect>
+                  <x>410</x>
+                  <y>170</y>
+                  <width>351</width>
+                  <height>151</height>
+                 </rect>
+                </property>
+                <property name="text">
+                 <string>카드 확인하기</string>
+                </property>
+               </widget>
+              </widget>
+              <widget class="QWidget" name="p2_card_show"/>
+             </widget>
+            </item>
+            <item>
+             <layout class="QVBoxLayout" name="verticalLayout_6">
+              <item>
+               <widget class="QLabel" name="label_3">
+                <property name="text">
+                 <string>player 3
+당신의 말은</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLabel" name="label_9">
+                <property name="styleSheet">
+                 <string notr="true">border-image: url(:/newPrefix/images/worker_blue.png);</string>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLabel" name="label_10">
+                <property name="text">
+                 <string>입니다.
+모든 카드를 확인하셨다면
+아래 버튼을 눌러 다음 플레이어에게
+넘겨주세요.
+!!이 정보는 다시 공개되지 않습니다!!</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPushButton" name="card_check_p2">
+                <property name="text">
+                 <string>확인하였습니다.</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+           </layout>
+          </widget>
+          <widget class="QWidget" name="page_10">
+           <layout class="QHBoxLayout" name="horizontalLayout_7">
+            <item>
+             <widget class="QStackedWidget" name="sw_p3">
+              <property name="currentIndex">
+               <number>0</number>
+              </property>
+              <widget class="QWidget" name="page_11">
+               <widget class="QPushButton" name="p3_show">
+                <property name="geometry">
+                 <rect>
+                  <x>390</x>
+                  <y>170</y>
+                  <width>351</width>
+                  <height>151</height>
+                 </rect>
+                </property>
+                <property name="text">
+                 <string>카드 확인하기</string>
+                </property>
+               </widget>
+              </widget>
+              <widget class="QWidget" name="p3_card_show"/>
+             </widget>
+            </item>
+            <item>
+             <layout class="QVBoxLayout" name="verticalLayout_7">
+              <item>
+               <widget class="QLabel" name="label_4">
+                <property name="text">
+                 <string>player 4
+당신의 말은</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLabel" name="label_11">
+                <property name="styleSheet">
+                 <string notr="true">border-image: url(:/newPrefix/images/worker_purple.png);</string>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLabel" name="label_12">
+                <property name="text">
+                 <string>입니다.
+모든 카드를 확인하셨다면
+아래 버튼을 눌러 다음 플레이어에게
+넘겨주세요.
+!!이 정보는 다시 공개되지 않습니다!!</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPushButton" name="card_check_p3">
+                <property name="text">
+                 <string>확인하였습니다.</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+           </layout>
+          </widget>
          </widget>
         </item>
         <item>
@@ -865,6 +1132,8 @@ p, li { white-space: pre-wrap; }
    </layout>
   </widget>
  </widget>
- <resources/>
+ <resources>
+  <include location="../MyQRC.qrc"/>
+ </resources>
  <connections/>
 </ui>
