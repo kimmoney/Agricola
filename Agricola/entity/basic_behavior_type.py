@@ -24,4 +24,4 @@ class BasicBehaviorType(Enum):
     SIDE_JOB2 = 15
 
 
-basic_behavior_reverse_map = {member.value : member.name for member in BasicBehaviorType}
+basic_behavior_reverse_map = {member.value: member.name for member in BasicBehaviorType}
