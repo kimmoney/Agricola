@@ -4,14 +4,33 @@
 :return: 획득한 동물이 담긴 큐
 :rtype: deque
 """
+
 from command import Command
+from entity.round_behavior_type import RoundBehaviorType
+from repository.game_status_repository import game_status_repository
+from repository.player_status_repository import player_status_repository
+from repository.round_status_repository import round_status_repository
+from entity.animal_type import AnimalType
 
 
 # Todo
 
 class SheepMarket(Command):
+
+    def __init__(self, player):
+        self.log_text = None
+        self.game_status = game_status_repository.game_status
+        self.player_resource = player_status_repository.player_status[player].resource
+        self.is_filled = round_status_repository.round_status.put_basic[RoundBehaviorType.SHEEP1.value]
+
+    def can_play(self):
+        return True
+
     def execute(self):
-        pass
+        animal_dict = {AnimalType.SHEEP: self.game_status.basic_resource[RoundBehaviorType.SHEEP1.value]}
+        self.log_text = f"양 {self.game_status.basic_resource[RoundBehaviorType.SHEEP1.value]}마리를 획득하였습니다."
+        self.game_status.set_basic_resource(RoundBehaviorType.SHEEP1.value, 0)
+        return animal_dict
 
     def log(self):
-        pass
+        return self.log_text

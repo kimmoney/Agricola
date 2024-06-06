@@ -13,6 +13,7 @@ class MainFacilityInterface(Command):
     :rtype: bool
     """
     @abstractmethod
+
     def execute(self):
         pass
 
@@ -33,6 +34,15 @@ class MainFacilityInterface(Command):
     """
     @abstractmethod
     def purchase(self):
+        pass
+
+    """
+    카드 구매 가능 여부를 반환하는 메소드
+    :return: 카드 구매 가능 여부 반환
+    :rtype: bool
+    """
+    @abstractmethod
+    def canPurchase(self):
         pass
 
     """

@@ -6,11 +6,23 @@
 농장 상태 업데이트도 수행되어야 함.
 """
 from command import Command
+from house_expand_validation import HouseExpandValidation
 
 
 class HouseExpansion(Command):
+
+    def __init__(self, field_status):
+        self.field_status = field_status
+        self.log_text = None
+
     def execute(self):
-        pass
+        checkValidation = HouseExpandValidation(self.field_status)
+        if checkValidation.execute():
+            self.log_text = "농장 확장 검증에 성공했습니다"
+            return True
+        else:
+            self.log_text = "농장 확장 검증에 실패했습니다"
+            return False
 
     def log(self):
-        pass
+        return self.log_text

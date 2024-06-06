@@ -41,3 +41,12 @@ class Oven1(MainFacilityInterface):
     """
     def purchase(self):
         pass
+
+    """
+    카드 구매 가능 여부를 반환하는 메소드
+    :return: 카드 구매 가능 여부 반환
+    :rtype: bool
+    """
+
+    def canPurchase(self):
+        pass

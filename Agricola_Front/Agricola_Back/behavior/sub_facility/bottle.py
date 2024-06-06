@@ -38,3 +38,12 @@ class Bottle(SubFacilityInterface):
     """
     def putDown(self):
         pass
+
+    """
+    카드 내려놓기 가능 여부 반환 메소드
+    :return: 카드 내려놓기 가능 여부 반환
+    :rtype: bool
+    """
+
+    def canPutDown(self):
+        pass

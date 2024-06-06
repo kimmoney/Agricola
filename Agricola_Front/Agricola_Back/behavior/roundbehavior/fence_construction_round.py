@@ -10,6 +10,7 @@ from command import Command
 # Todo
 
 class FenceConstructionRound(Command):
+
     def execute(self):
         pass
 

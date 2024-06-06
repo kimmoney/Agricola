@@ -9,7 +9,7 @@ from PyQt5 import uic
 from PyQt5.QtCore import QTimer
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QGraphicsBlurEffect
-import os
+import os 
 import MyQRC_rc
 import copy
 import sys
@@ -39,6 +39,8 @@ personal_field_ui = uic.loadUiType(resource_path("PersonalField/field_frame.ui")
 field_base_ui = uic.loadUiType(resource_path("PersonalField/field_base.ui"))[0] # field 하나 ui
 personal_resources_ui= uic.loadUiType(resource_path("PersonalField/personal_resource.ui"))[0] # 화면 전환되는 개인 자원
 personal_card_ui= uic.loadUiType(resource_path("PersonalField/personal_card.ui"))[0] # 내가 낸 카드 ui
+personal_card_small_ui = uic.loadUiType(resource_path("PersonalField/mycard_small.ui"))[0] # 내가 낸 카드 ui
+personal_card_big_ui = uic.loadUiType(resource_path("PersonalField/mycard_big.ui"))[0] # 내가 낸 카드 ui
 #personal_card_ui= uic.loadUiType(resource_path("PersonalField/mycards.ui"))[0] # 개인 카드 ui
 
 ###공동 영역 UI들###
@@ -80,12 +82,18 @@ class MainWindowClass(QMainWindow, main) :
         self.main_field = WidgetPersonalField(4,self)
         self.frm_main_field.addWidget(self.main_field)
         #플레이어 카드 위젯 설정
-        self.personal_card = [WidgetPersonalCard(i,self) for i in range(4)]
-        for i in range(4):getattr(self,f"frm_p{i}_1").addWidget(self.personal_card[i])
+        #self.personal_card = [WidgetPersonalCard(i,self) for i in range(4)]
+        #for i in range(4):getattr(self,f"frm_p{i}_1").addWidget(self.personal_card[i])
+        
+        # 개인 카드 위젯 설정
+        self.personal_card_small = [PersonalCard_small(i,self) for i in range(4)]
+        for i in range(4): getattr(self, f"frm_p{i}_1").addWidget(self.personal_card_small[i])
 
         #메인 카드 위젯 설정
-        self.main_card = WidgetPersonalCard(4,self)
+        #self.main_card = WidgetPersonalCard(4,self)
+        self.main_card = PersonalCard_big(self)
         self.frm_main_card.addWidget(self.main_card)
+
         #플레이어 리소스 위젯 설정
         self.personal_resource = [WidgetPersonalResource(i,self) for i in range(4)]
         for i in range(4):getattr(self,f"frm_p{i}_2").addWidget(self.personal_resource[i])
@@ -98,7 +106,6 @@ class MainWindowClass(QMainWindow, main) :
         self.random_round = [WidgetrandomRound(i,numbers[i],self) for i in range(14)]
         [getattr(self,f"basic_{i+16}").addWidget(self.random_round[i]) for i in range(14)]
 
-        #말칸        numbers = list(range(30))
 
         self.worker_board = WorkerBoard(self)
         self.vlo_etc_workerboard.addWidget(self.worker_board)
@@ -209,9 +216,9 @@ class MainWindowClass(QMainWindow, main) :
             for t in ["dirt","grain","reed","stone","vegetable","wood",'beg_token',"food"]:
                 # self.personal_resource[player].count_dirt.setText(str(self.player.player_status[player].resource.dirt))
                 getattr(self.personal_resource[player],f"count_{t}").setText(str(getattr(self.player_status[player].resource,t)))
-            for t in ['sheep','cow','pig']:
+            #for t in ['sheep','cow','pig']:
                 # self.personal_resource[player].count_dirt.setText(str(self.player.player_status[player].resource.dirt))
-                getattr(self.personal_resource[player],f"count_{t}").setText(str(getattr(self.player_status[player].farm,t)))
+            #    getattr(self.personal_resource[player],f"count_{t}").setText(str(getattr(self.player_status[player].farm,t)))
             getattr(self.personal_resource[player],f"count_worker").setText(str(self.player_status[player].worker+self.player_status[player].baby))
             "Fence 는 아직 진행중"
             # for t in ["fence",]:
@@ -230,7 +237,7 @@ class MainWindowClass(QMainWindow, main) :
         player_list.remove(self.game_status.now_turn_player)
         for i in player_list:
             # self.personal_resource[i].setEnabled(False)
-            self.personal_card[i].setEnabled(False)
+            self.personal_card_small[i].setEnabled(False)
             self.personal_field[i].setEnabled(False)
         #next_turn = self.game_status.next_turn_player ############원래는 이대로##########
         next_turn = (now_turn+1)%4
@@ -239,7 +246,7 @@ class MainWindowClass(QMainWindow, main) :
         self.personal_resource[next_turn].turn_info_1.setText("NEXT")
         self.personal_resource[next_turn].turn_info_2.setText("NEXT")
         # self.personal_resource[i].setEnabled(True)
-        self.personal_card[now_turn].setEnabled(True)
+        self.personal_card_small[now_turn].setEnabled(True)
         self.personal_field[now_turn].setEnabled(True)
 
         for resource in self.personal_resource:
@@ -639,6 +646,23 @@ class Scoreboard(QDialog, scoreboard_ui):
     def mousePressEvent(self,event):
         self.close()
 
+# 개인 농장 오른 쪽 아이콘으로 보이는 작은 카드창
+class PersonalCard_small(QWidget, personal_card_small_ui):
+    def __init__(self, player, parent):
+        super().__init__()
+        self.setupUi(self)
+        self.player = player
+        self.parent = parent
+    def mousePressEvent(self, event):
+        pass
+# 메인 창에 뜰 개인별 카드 창
+class PersonalCard_big(QWidget, personal_card_big_ui):
+    def __init__(self, parent):
+        super().__init__()
+        self.setupUi(self)
+        self.parent = parent
+    def mousePressEvent(self, event):
+        pass
 
 
 ###실행 코드### 밑에 건들 필요 굳이 없음###
