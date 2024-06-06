@@ -40,20 +40,14 @@ check_ui = uic.loadUiType(resource_path("data/check/check.ui"))[0] # worker 보�
 text_log_ui = uic.loadUiType(resource_path("data/Basic/log.ui"))[0] # text log 박스
 information_ui = uic.loadUiType(resource_path("data/Basic/information.ui"))[0] # information(설정, 점수표)
 scoreboard_ui = uic.loadUiType(resource_path("data/Basic/scoreboard.ui"))[0] # 점수표
-#UI파일 연결
-#단, UI파일은 Python 코드 파일과 같은 디렉토리에 위치해야한다.
-# field_0_ui
-#  = uic.loadUiType("main.ui")[0]
 
 # MAIN
 class MainWindowClass(QMainWindow, main) :
     def __init__(self) :
         super().__init__()
         self.setupUi(self)
-        
-        font_path = os.path.join(os.path.join(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'data'),'font'),'Pretendard-Medium.otf')
-        
 # 폰트 파일 로드
+        font_path = os.path.join(os.path.join(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'data'),'font'),'Pretendard-Medium.otf')
         font_id = QFontDatabase.addApplicationFont(font_path)
         font_family = QFontDatabase.applicationFontFamilies(font_id)[0]
         font = QFont(font_family, 9)  # 로드된 폰트를 기본 폰트로 설정
@@ -129,9 +123,8 @@ class MainWindowClass(QMainWindow, main) :
         self.set_undo()
         self.update_state_of_all()
         pprint("턴 초기 화면으로 돌아갔습니다.")
-    # def logging_dialog(self,text):
-    #     self.log.logging(text)
-    #     update()
+
+
     def pprint(self,text):
         print(text)
         self.log_2.setText(self.log_2.toPlainText()+"\n"+str(text))
@@ -146,7 +139,6 @@ class MainWindowClass(QMainWindow, main) :
         # else:self.stackedWidget.setCurrentIndex(0)
         if currentWidget == "round_page":self.change_stacked_page("personal_page")
         else:self.change_stacked_page("round_page")
-
 
 
     def change_stacked_page(self, after_page):
@@ -371,7 +363,6 @@ class WidgetFieldBase(QWidget, field_base_ui) :
 
         pass
         
-    
 # 개인 농장 오른 쪽 아이콘으로 보이는 작은 카드창
 class PersonalCard_small(QWidget, personal_card_small_ui):
     def __init__(self, player, parent):
@@ -392,9 +383,6 @@ class PersonalCard_big(QWidget, personal_card_big_ui):
     def mousePressEvent(self, event):
         player = self.parent.game_status.now_turn_player
         pprint(f"Pressed personalField Player ID : {player}")
-
-
-
 
 class WidgetPersonalResource(QWidget, personal_resources_ui) :
     def __init__(self, player,parent) :
@@ -442,7 +430,6 @@ class WidgetPersonalResource(QWidget, personal_resources_ui) :
             self.turn_info_2.setText("")
             self.lb_turn_icon_1.hide()
             self.lb_turn_icon_2.hide()
-
 
 class WidgetBasicRound(QWidget, basic_roundcard_ui) :
     def __init__(self,num,parent) :
@@ -498,7 +485,6 @@ class WidgetrandomRound(QWidget, basic_roundcard_ui) :
         if  self.cardnum in [3,6,8,10,12,13]:
             self.btn_round_4.show()
             
-
 class Log_viewer(QDialog,log_viewer_ui):
     def __init__(self,main):
         super().__init__()  # 부모 클래스의 __init__ 함수 호출
@@ -527,6 +513,7 @@ class WorkerBoard(QWidget, worker_board_ui):
         옵저버에게 status를 전달 받고 라운드카드 활성화 및 안내
         """
         pass
+
 class Check(QWidget, check_ui):
     def __init__(self, parent):
         super().__init__()  # 부모 클래스의 __init__ 함수 호출
