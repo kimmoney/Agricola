@@ -83,24 +83,10 @@ class MainWindowClass(QMainWindow, main) :
         #메인 필드 위젯 설정
         self.frm_main_field.addWidget(self.personal_field[4])
         #플레이어 카드 위젯 설정
-<<<<<<< HEAD
         self.personal_card = [WidgetPersonalCard(i,self) for i in range(5)]
         for i in range(4):getattr(self,f"frm_p{i}_1").addWidget(self.personal_card[i])
         #메인 카드 위젯 설정
         self.frm_main_card.addWidget(self.personal_card[4])
-=======
-        #self.personal_card = [WidgetPersonalCard(i,self) for i in range(4)]
-        #for i in range(4):getattr(self,f"frm_p{i}_1").addWidget(self.personal_card[i])
-        
-        # 개인 카드 위젯 설정
-        self.personal_card_small = [PersonalCard_small(i,self) for i in range(4)]
-        for i in range(4): getattr(self, f"frm_p{i}_1").addWidget(self.personal_card_small[i])
-
-        #메인 카드 위젯 설정
-        #self.main_card = WidgetPersonalCard(4,self)
-        self.main_card = PersonalCard_big(self)
-        self.frm_main_card.addWidget(self.main_card)
->>>>>>> f896df227f34f3887c64769c9ff0ffb84c2e0e01
 
         #플레이어 리소스 위젯 설정
         self.personal_resource = [WidgetPersonalResource(i,self) for i in range(4)]
@@ -219,7 +205,6 @@ class MainWindowClass(QMainWindow, main) :
 
     def update_state_of_all(self):
         #resource 업데이트
-<<<<<<< HEAD
         for c in self.personal_field:
             c.update_state()
             for cc in c.field:cc.update_state()
@@ -227,136 +212,6 @@ class MainWindowClass(QMainWindow, main) :
             c.update_state()
         for c in self.personal_resource:
             c.update_state()
-=======
-        for player in range(4):
-            for t in ["dirt","grain","reed","stone","vegetable","wood",'beg_token',"food"]:
-                # self.personal_resource[player].count_dirt.setText(str(self.player.player_status[player].resource.dirt))
-                getattr(self.personal_resource[player],f"count_{t}").setText(str(getattr(self.player_status[player].resource,t)))
-            #for t in ['sheep','cow','pig']:
-                # self.personal_resource[player].count_dirt.setText(str(self.player.player_status[player].resource.dirt))
-            #    getattr(self.personal_resource[player],f"count_{t}").setText(str(getattr(self.player_status[player].farm,t)))
-            getattr(self.personal_resource[player],f"count_worker").setText(str(self.player_status[player].worker+self.player_status[player].baby))
-            "Fence 는 아직 진행중"
-            # for t in ["fence",]:
-            #     # getattr(self.personal_resource[player],f"count_{t}").setText(str(getattr(self.player_status[player].resource,t)))
-            #     getattr(self.personal_resource[player],f"count_{t}")
-                
-            first_turn = 0
-            if self.player_status[player].resource.first_turn:
-                first_turn = player # 첫턴으로 시작하는 플레이어
-            self.personal_resource[player].turn_info_1.setText("")
-            self.personal_resource[player].turn_info_2.setText("")
-
-        #현재턴만 활성화
-        now_turn = self.game_status.now_turn_player
-        player_list = [0,1,2,3]
-        player_list.remove(self.game_status.now_turn_player)
-        for i in player_list:
-            # self.personal_resource[i].setEnabled(False)
-            self.personal_card_small[i].setEnabled(False)
-            self.personal_field[i].setEnabled(False)
-        #next_turn = self.game_status.next_turn_player ############원래는 이대로##########
-        next_turn = (now_turn+1)%4
-        self.personal_resource[now_turn].turn_info_1.setText("NOW")
-        self.personal_resource[now_turn].turn_info_2.setText("NOW")
-        self.personal_resource[next_turn].turn_info_1.setText("NEXT")
-        self.personal_resource[next_turn].turn_info_2.setText("NEXT")
-        # self.personal_resource[i].setEnabled(True)
-        self.personal_card_small[now_turn].setEnabled(True)
-        self.personal_field[now_turn].setEnabled(True)
-
-        for resource in self.personal_resource:
-            resource.lb_turn_icon_1.hide()
-            resource.lb_turn_icon_2.hide()
-        self.personal_resource[first_turn].lb_turn_icon_1.show()
-        self.personal_resource[first_turn].lb_turn_icon_2.show()
-
-        
-        #fance 정보 업데이트
-        for player in range(4):
-            for j in range(4):
-                for i in range(5):
-                    if self.player_status[player].farm.horizon_fence[j][i] == True:
-                        getattr(self.personal_field[player], f'btn_fence_h{j}{i}').setStyleSheet(f"border:0.5px solid rgba(255, 255, 255, 128);border-image : url(:/newPrefix/images/fence_h_{player}.png);")
-                    else:
-                        getattr(self.personal_field[player], f'btn_fence_h{j}{i}').setStyleSheet("border:0.5px solid rgba(255, 255, 255, 128);border-image : none;")
-            for j in range(3):
-                for i in range(6):
-                    if self.player_status[player].farm.vertical_fence[j][i] == True:
-                        getattr(self.personal_field[player], f'btn_fence_v{j}{i}').setStyleSheet(f"border:0.5px solid rgba(255, 255, 255, 128);border-image : url(:/newPrefix/images/fence_v_{player}.png);")
-                    else:
-                        getattr(self.personal_field[player], f'btn_fence_v{j}{i}').setStyleSheet("border:0.5px solid rgba(255, 255, 255, 128);border-image : none;")
-        #메인 Fence
-        for j in range(4):
-            for i in range(5):
-                if self.player_status[self.game_status.now_turn_player].farm.horizon_fence[j][i] == True:
-                    getattr(self.main_field, f'btn_fence_h{j}{i}').setStyleSheet(f"border:0.5px solid rgba(255, 255, 255, 128);border-image : url(:/newPrefix/images/fence_h_{self.game_status.now_turn_player}.png);")
-                else:
-                    getattr(self.main_field, f'btn_fence_h{j}{i}').setStyleSheet("border:0.5px solid rgba(255, 255, 255, 128);border-image : none;")
-        for j in range(3):
-            for i in range(6):
-                if self.player_status[self.game_status.now_turn_player].farm.vertical_fence[j][i] == True:
-                    getattr(self.main_field, f'btn_fence_v{j}{i}').setStyleSheet(f"border:0.5px solid rgba(255, 255, 255, 128);border-image : url(:/newPrefix/images/fence_v_{self.game_status.now_turn_player}.png);")
-                else:
-                    getattr(self.main_field, f'btn_fence_v{j}{i}').setStyleSheet("border:0.5px solid rgba(255, 255, 255, 128);border-image : none;")
-        
-        #field 정보 업데이트
-        field_convert = {(i, j): i * 5 + j for i in range(3) for j in range(5)}
-        CONVERTER_image={(0,0):"empty_field",(0,1):"empty_field",(0,2):"empty_field",(0,3):"empty_field",(1,0):"arable_land",(1,1):"arable_land",(1,2):"arable_land",(1,3):"arable_land",(2,0):"empty_field",(2,1):"empty_field",(2,2):"empty_field",(2,3):"empty_field",(3,1):"house_dirt",(3,2):"house_wood",(3,3):"house_stone"}
-        
-        for player in range(4):
-            house_status = self.player_status[player].farm.house_status.value # 집 종류 파악
-            for j in range(3):
-                for i in range(5):
-                    # 배경화면 바꾸기
-                    field_status = self.player_status[player].farm.field[j][i].field_type.value
-                    getattr(self.personal_field[player], f'field_{field_convert[(j, i)]}').widget.setStyleSheet("#widget{"+f"border-image : url(:/newPrefix/images/{CONVERTER_image[field_status,house_status]}.png);}}")
-                    # 유닛 처리
-                    unit = self.player_status[player].farm.field[j][i].kind
-                    if not unit==None:
-                        kind = self.player_status[player].farm.field[j][i].kind.name.lower()
-                        if not kind == "none":
-                            getattr(self.personal_field[player], f'field_{field_convert[(j, i)]}').btn_unit.setStyleSheet(f"#btn_unit{{border-image : url(:/newPrefix/images/{self.player_status[player].farm.field[j][i].kind.name.lower()}.png);}}")
-                        else:
-                            getattr(self.personal_field[player], f'field_{field_convert[(j, i)]}').btn_unit.setStyleSheet(f"#btn_unit{{border:none;}}")
-                    else:
-                        getattr(self.personal_field[player], f'field_{field_convert[(j, i)]}').btn_unit.setStyleSheet(f"#btn_unit{{border:none;}}")
-                    count = self.player_status[player].farm.field[j][i].count if self.player_status[player].farm.field[j][i].count not in [0,None] else ""
-                    getattr(self.personal_field[player], f'field_{field_convert[(j, i)]}').count.setText(str(count))
-                    # 외양간 처리
-                    if self.player_status[player].farm.field[j][i].barn:
-                        styleSheet = f"QPushButton#btn_barn {{border-image: url(:/newPrefix/images/barn_{player}.png);}}"
-                    else:
-                        styleSheet = f"QPushButton#btn_barn {{border: none;}}"
-                    getattr(self.personal_field[player], f'field_{field_convert[(j, i)]}').btn_barn.setStyleSheet(styleSheet)
-
-
-        #메인 field
-        player = self.game_status.now_turn_player
-        house_status = self.player_status[player].farm.house_status.value # 집 종류 파악
-        for j in range(3):
-            for i in range(5):
-                field_status = self.player_status[player].farm.field[j][i].field_type.value
-                getattr(self.main_field, f'field_{field_convert[(j, i)]}').widget.setStyleSheet(f"#widget{{border-image : url(:/newPrefix/images/{CONVERTER_image[field_status,house_status]}.png);}}")
-                # 유닛 처리
-                animal = self.player_status[player].farm.field[j][i].kind
-                if not animal==None:
-                    kind = self.player_status[player].farm.field[j][i].kind.name.lower()
-                    if not kind == "none":
-                        getattr(self.main_field, f'field_{field_convert[(j, i)]}').btn_unit.setStyleSheet(f"#btn_unit{{border-image : url(:/newPrefix/images/{self.player_status[player].farm.field[j][i].kind.name.lower()}.png);}}")
-                    else:
-                        getattr(self.main_field, f'field_{field_convert[(j, i)]}').btn_unit.setStyleSheet(f"#btn_unit{{border:none;}}")
-                else:
-                    getattr(self.main_field, f'field_{field_convert[(j, i)]}').btn_unit.setStyleSheet(f"#btn_unit{{border:none;}}")
-                count = self.player_status[player].farm.field[j][i].count if self.player_status[player].farm.field[j][i].count not in [0,None] else ""
-                getattr(self.main_field, f'field_{field_convert[(j, i)]}').count.setText(str(count))
-                # 외양간 처리
-                getattr(self.main_field, f'field_{field_convert[(j, i)]}').btn_barn.setStyleSheet(getattr(self.personal_field[player], f'field_{field_convert[(j, i)]}').btn_barn.styleSheet())
-                # getattr(self.main_field, f'field_{field_convert[(j, i)]}').btn_barn.setChecked(self.player_status[player].farm.field[j][i].barn)
-                
-                # getattr(self.main_field, f'field_{field_convert[(j, i)]}').btn_barn.setStyleSheet("#btn_barn{"+f"border-image : url(:/newPrefix/images/barn_{player}.png);}}" if self.player_status[player].farm.field[j][i].barn else "#btn_barn{"+f"border-image : none;}}")
-        # 라운드카드 업데이트
->>>>>>> f896df227f34f3887c64769c9ff0ffb84c2e0e01
         for widget in self.random_round:
             widget.update_state()
 
