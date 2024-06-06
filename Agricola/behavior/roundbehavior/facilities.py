@@ -18,10 +18,18 @@ class Facilities(Command):
         self.selectedCard = selectedCard
         self.isMain = isMain
 
-    def execute(self):
-        if (self.selectedCard.canPurchase(self.playerResource)):
+    def can_play(self):
+        if (self.selectedCard.canPurchase(self.player)):
             self.log_text = "카드 구매가 가능합니다"
-            return True # 프런트에서 진짜 살지 물어보고 true false 로 base/behavior/purchaseCard 실행
+            return True  # 프런트에서 진짜 살지 물어보고 true false 로 base/behavior/purchaseCard 실행
+        else:
+            self.log_text = "카드 구매에 실패했습니다"
+            return False
+
+    def execute(self):
+        if (self.selectedCard.purchase(self.player)):
+            self.log_text = "카드 구매에 성공했습니다"
+            return True
         else:
             self.log_text = "카드 구매에 실패했습니다"
             return False

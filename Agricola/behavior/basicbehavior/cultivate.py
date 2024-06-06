@@ -22,10 +22,12 @@ class Cultivate(Command):
         self.player_farm = player_status_repository.player_status[player].farm
         self.is_filled = round_status_repository.round_status.put_basic[BasicBehaviorType.CULTIVATE.value]
 
+    def can_play(self):
+
+        # 밭을 건설할수있는 위치가 있는지 확인필요
+        return True
+
     def execute(self):
-        if self.is_filled:
-            self.log_text = "이번 라운드에 이미 수행된 행동입니다."
-            return False
         doArable = ArableExpansion(self.player_farm)
         if (doArable.execute()):
             self.log_text = f"밭 {self.game_status.basic_resource[BasicBehaviorType.CULTIVATE.value]}개를 일구었습니다."

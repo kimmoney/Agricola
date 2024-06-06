@@ -15,21 +15,32 @@ from repository.round_status_repository import round_status_repository
 class SideJob2(Command):
     def __init__(self, player, playCard):
         self.log_text = None
+        self.player = player
         self.playCard = playCard
         self.player_resource = player_status_repository.player_status[player].resource
         self.player_ownCard = player_status_repository.player_status[player].own_card
-        self.is_filled = round_status_repository.round_status.put_basic[BasicBehaviorType.SIDE_JOB2.value]
+        self.is_filled = round_status_repository.round_status.put_basic[BasicBehaviorType.SIDE_JOB1.value]
 
-    def execute(self):
-        if self.is_filled:
-            self.log_text = "이번 라운드에 이미 수행된 행동입니다."
-            return False
-        if (self.playCard in self.player_ownCard.handJobCard) and self.playCard.putDown():
-            self.log_text = "카드 내기에 성공했습니다."
+    def can_play(self):
+        if (((len(self.player_ownCard.handJobCard)) <= 1 and self.player_resource.food >= 1) or
+                self.player_resource.food >= 2):
+            self.log_text = "직업을 낼 수 있습니다."
             return True
         else:
-            self.log_text = "해당 카드를 낼 수 없습니다."
+            self.log_text = "비용이 없어 행동이 불가능합니다"
             return False
+
+    def execute(self):
+        if (self.playCard not in self.player_ownCard.handJobCard):
+            self.log_text = "직업을 낼 수 없습니다."
+            return False
+        if (self.playCard.purchase(self.player)):
+            if ((len(self.player_ownCard.handJobCard)) <= 2):
+                self.player_resource.food -= 1
+            else:
+                self.player_resource.food -= 2
+        self.log_text = "직업을 냈습니다."
+        return True
 
     def log(self):
         return self.log_text

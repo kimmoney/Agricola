@@ -21,10 +21,10 @@ class Seed(Command):
         self.player_resource = player_status_repository.player_status[player].resource
         self.is_filled = round_status_repository.round_status.put_basic[BasicBehaviorType.SEED.value]
 
+    def can_play(self):
+        return True
+
     def execute(self):
-        if self.is_filled:
-            self.log_text = "이번 라운드에 이미 수행된 행동입니다."
-            return False
         self.player_resource.set_grain(
             self.player_resource.grain + self.game_status.basic_resource[BasicBehaviorType.SEED.value])
         self.log_text = f"곡식 {self.game_status.basic_resource[BasicBehaviorType.SEED.value]}개를 획득하였습니다."
