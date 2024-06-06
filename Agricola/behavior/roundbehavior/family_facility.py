@@ -15,7 +15,7 @@ from repository.round_status_repository import round_status_repository
 class FamilyFacility(Command):
 
     def __init__(self, player, subFacility, field_status):
-        self.log_text = None
+        self.log_text = ""
         self.player_status = player_status_repository.player_status[player]
         self.is_filled = round_status_repository.round_status.put_basic[RoundBehaviorType.FAMILY_FACILITY.value]
         self.subFacility = subFacility

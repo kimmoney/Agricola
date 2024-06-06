@@ -15,7 +15,7 @@ from repository.round_status_repository import round_status_repository
 class HurryFamily(Command):
 
     def __init__(self, player):
-        self.log_text = None
+        self.log_text = ""
         self.player_status = player_status_repository.player_status[player]
         self.is_filled = round_status_repository.round_status.put_basic[RoundBehaviorType.HURRY_FAMILY.value]
 

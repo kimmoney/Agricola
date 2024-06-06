@@ -1,6 +1,5 @@
 from gamestate.state import State
 from round.SetRoundWorkerResource import SetRoundWorkerResource
-from round.clean_game_board import CleanGameBoard
 from round.open_new_round_card import OpenNewRoundCard
 from round.predict_turn_roundstart import PredictTurnRoundStart
 from round.stack_resources import StackResources

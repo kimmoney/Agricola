@@ -15,7 +15,7 @@ from repository.round_status_repository import round_status_repository
 class SideJob1(Command):
 
     def __init__(self, player, playCard):
-        self.log_text = None
+        self.log_text = ""
         self.player = player
         self.playCard = playCard
         self.player_resource = player_status_repository.player_status[player].resource

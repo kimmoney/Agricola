@@ -7,7 +7,7 @@ class SeedPlant(Command):
     def __init__(self, plantDict, field_status):
         self.plantDict = plantDict
         self.field_status = field_status
-        self.log_text = None
+        self.log_text = ""
 
     def execute(self):
         checkValidation = SeedPlantValidation(self.plantDict, self.field_status)

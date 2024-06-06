@@ -19,7 +19,7 @@ from behavior.basebehavior.arable_expansion import ArableExpansion
 class CultivateSeed(Command):
 
     def __init__(self, player, plantDict, field_status, ifPlant):
-        self.log_text = None
+        self.log_text = ""
         self.game_status = game_status_repository.game_status
         self.player_farm = player_status_repository.player_status[player].farm
         self.plantDict = plantDict  # ex) {CropType.Grain : [[0,1],[1,2]}

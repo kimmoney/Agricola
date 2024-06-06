@@ -9,3 +9,26 @@
 
     이 커맨드는 동물을 배치하는 커맨드
 """
+from copy import deepcopy
+
+from behavior.basebehavior.animal_position_validation import AnimalPositionValidation
+from command import Command
+from repository.game_status_repository import game_status_repository
+from repository.player_status_repository import player_status_repository
+
+
+class PlaceAnimal(Command):
+    def __init__(self, field_status):
+        self.log_text = ""
+        self.field_status = deepcopy(field_status)
+
+    def execute(self):
+        if AnimalPositionValidation(field_status=self.field_status).execute():
+            self.log_text = "동물 배치에 성공했습니다."
+            player_status_repository.player_status[
+                game_status_repository.game_status.now_turn_player].farm.field = self.field_status
+            return True
+        self.log_text = "올바르지 않은 동물 배치 : 동물을 올바르게 배치해주세요."
+
+    def log(self):
+        return self.log_text

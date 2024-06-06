@@ -7,14 +7,15 @@ Unit : 종훈
 """
 from copy import deepcopy
 
+from behavior.basebehavior.base_behavior_interface import BaseBehaviorInterface
 from command import Command
 from entity.field_type import FieldType
 
 
-class AnimalPositionValidation(Command):
+class AnimalPositionValidation(BaseBehaviorInterface):
     def __init__(self, field_status):
         self.field_status = deepcopy(field_status)
-        self.log_text = None
+        self.log_text = ""
 
     def execute(self):
         return self.animal_count_validation()

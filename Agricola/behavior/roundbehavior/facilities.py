@@ -12,7 +12,7 @@ from repository.player_status_repository import player_status_repository
 
 class Facilities(Command):
     def __init__(self, player, selectedCard, isMain):
-        self.log_text = None
+        self.log_text = ""
         self.playerResource = player_status_repository.player_status[player].resource
         self.playerCard = player_status_repository.player_status[player].card
         self.selectedCard = selectedCard

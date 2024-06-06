@@ -17,7 +17,7 @@ from behavior.basebehavior.arable_expansion import ArableExpansion
 
 class Cultivate(Command):
     def __init__(self, player):
-        self.log_text = None
+        self.log_text = ""
         self.game_status = game_status_repository.game_status
         self.player_farm = player_status_repository.player_status[player].farm
 
