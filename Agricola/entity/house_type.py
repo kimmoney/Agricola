@@ -6,3 +6,6 @@ class HouseType(Enum):
     DIRT = 1
     WOOD = 2
     STONE = 3
+
+
+house_type_reverse_map = {member.value: member.name for member in HouseType}

@@ -1,7 +1,7 @@
 """
 라운드 행동 Enum
 """
-from enum import Enum
+from enum import Enum, member
 
 
 class RoundBehaviorType(Enum):
@@ -19,3 +19,6 @@ class RoundBehaviorType(Enum):
     CULTIVATE_SEED = 11
     HURRY_FAMILY = 12
     UPGRADE_FENCE = 13
+
+
+round_behavior_reverse_map = {member.value: member.name for member in RoundBehaviorType}
