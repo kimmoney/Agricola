@@ -22,3 +22,6 @@ class BasicBehaviorType(Enum):
     REED = 13
     FISHING = 14
     SIDE_JOB2 = 15
+
+
+basic_behavior_reverse_map = {member.value : member.name for member in BasicBehaviorType}
