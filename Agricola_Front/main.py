@@ -28,8 +28,9 @@ personal_field_ui = uic.loadUiType(resource_path("data/PersonalField/field_frame
 field_base_ui = uic.loadUiType(resource_path("data/PersonalField/field_base.ui"))[0] # field 하나 ui
 personal_resources_ui= uic.loadUiType(resource_path("data/PersonalField/personal_resource.ui"))[0] # 화면 전환되는 개인 자원
 personal_card_ui= uic.loadUiType(resource_path("data/PersonalField/personal_card.ui"))[0] # 내가 낸 카드 ui
-personal_card_small_ui = uic.loadUiType(resource_path("data/PersonalField/mycard_small.ui"))[0] # 내가 낸 카드 ui
-personal_card_big_ui = uic.loadUiType(resource_path("data/PersonalField/mycard_big.ui"))[0] # 내가 낸 카드 ui
+personal_card_small_ui = uic.loadUiType(resource_path("data/PersonalField/mycard_small.ui"))[0]
+personal_card_big_ui = uic.loadUiType(resource_path("data/PersonalField/mycard_big.ui"))[0]
+card_distribution_ui = uic.loadUiType(resource_path("data/Basic/mycard_firstcheck.ui"))[0] # 내가 낸 카드 ui
 #personal_card_ui= uic.loadUiType(resource_path("PersonalField/mycards.ui"))[0] # 개인 카드 ui
 
 ###공동 영역 UI들###
@@ -40,6 +41,9 @@ check_ui = uic.loadUiType(resource_path("data/check/check.ui"))[0] # worker 보�
 text_log_ui = uic.loadUiType(resource_path("data/Basic/log.ui"))[0] # text log 박스
 information_ui = uic.loadUiType(resource_path("data/Basic/information.ui"))[0] # information(설정, 점수표)
 scoreboard_ui = uic.loadUiType(resource_path("data/Basic/scoreboard.ui"))[0] # 점수표
+side_bar_ui = uic.loadUiType(resource_path("data/Basic/sidebar.ui"))[0] # 농장확대창 옆 사이드바
+setting_ui = uic.loadUiType(resource_path("data/Basic/setting.ui"))[0] # 세팅창
+allcard_ui = uic.loadUiType(resource_path("data/Basic/allcard.ui"))[0] # 모든 카드
 
 # MAIN
 class MainWindowClass(QMainWindow, main) :
@@ -101,10 +105,13 @@ class MainWindowClass(QMainWindow, main) :
         self.GAMESTART_BUTTON.clicked.connect(self.game_start)
 
         #카드 확인하면 다음사람에게 넘기기
+        card_distribution = [FirstCardDistribution(i,self) for i in range(4)]
         for i in range(4):
-            getattr(self, f"card_check_p{i}").clicked.connect(lambda _, x=i: myWindow.stackedWidget.setCurrentIndex(((x+4)%7)))
+            getattr(self,f"sw_p{i}").setCurrentIndex(0) #확인 전 화면으로 설정해두고
+            getattr(self,f"hlo_p{i}_card").addWidget(card_distribution[i]) #카드 분배 위젯 설정
             getattr(self, f"p{i}_show").clicked.connect(lambda _, x=i: getattr(myWindow, f"sw_p{x}").setCurrentIndex(1))
-        
+            getattr(self, f"p{i}_show").clicked.connect(lambda _, x=i: getattr(myWindow, f"card_check_p{x}").setEnabled(True))
+            getattr(self, f"card_check_p{i}").clicked.connect(lambda _, x=i: self.stackedWidget.setCurrentIndex( (x+4)%7 ))
     def game_start(self):
         pprint("게임이 시작되었습니다.")
         self.stackedWidget.setCurrentIndex(3) #player1의 카드 공개
@@ -588,6 +595,22 @@ class Scoreboard(QDialog, scoreboard_ui):
         self.setWindowFlags(Qt.FramelessWindowHint | Qt.WindowStaysOnTopHint)
     def mousePressEvent(self,event):
         self.close()
+class FirstCardDistribution(QWidget, card_distribution_ui):
+    def __init__(self, player, parent):
+        super().__init__()
+        self.setupUi(self)
+        self.parent = parent
+        self.player = player
+class AllCard(QDialog, allcard_ui):
+    def __init__(self, parent):
+        super().__init__()
+        self.setupUi(self)
+        self.parent = parent
+# class Setting(Q, allcard_ui):
+#     def __init__(self, parent):
+#         super().__init__()
+#         self.setupUi(self)
+#         self.parent = parent
 
 ###실행 코드### 밑에 건들 필요 굳이 없음###
 if __name__ == "__main__" :
