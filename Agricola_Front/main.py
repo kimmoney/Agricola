@@ -16,7 +16,9 @@ from Agricola.Agricola.entity.field_type import FieldType
 from Agricola.Agricola.entity.house_type import HouseType
 from Agricola.Agricola.entity.crop_type import CropType
 from Agricola.Agricola.entity.animal_type import AnimalType
-
+from PyQt5.QtMultimedia import QMediaPlayer, QMediaContent
+from PyQt5.QtCore import QUrl
+from Agricola.Agricola.behavior.basebehavior import construct_barn, construct_fence,animal_move_validation,animal_position_validation
 def resource_path(relative_path):
     """ Get absolute path to resource, works for dev and for PyInstaller """
     base_path = getattr(sys, '_MEIPASS', os.path.dirname(os.path.abspath(__file__)))
@@ -28,8 +30,9 @@ personal_field_ui = uic.loadUiType(resource_path("data/PersonalField/field_frame
 field_base_ui = uic.loadUiType(resource_path("data/PersonalField/field_base.ui"))[0] # field 하나 ui
 personal_resources_ui= uic.loadUiType(resource_path("data/PersonalField/personal_resource.ui"))[0] # 화면 전환되는 개인 자원
 personal_card_ui= uic.loadUiType(resource_path("data/PersonalField/personal_card.ui"))[0] # 내가 낸 카드 ui
-personal_card_small_ui = uic.loadUiType(resource_path("data/PersonalField/mycard_small.ui"))[0] # 내가 낸 카드 ui
-personal_card_big_ui = uic.loadUiType(resource_path("data/PersonalField/mycard_big.ui"))[0] # 내가 낸 카드 ui
+personal_card_small_ui = uic.loadUiType(resource_path("data/PersonalField/mycard_small.ui"))[0]
+personal_card_big_ui = uic.loadUiType(resource_path("data/PersonalField/mycard_big.ui"))[0]
+card_distribution_ui = uic.loadUiType(resource_path("data/Basic/mycard_firstcheck.ui"))[0] # 내가 낸 카드 ui
 #personal_card_ui= uic.loadUiType(resource_path("PersonalField/mycards.ui"))[0] # 개인 카드 ui
 
 ###공동 영역 UI들###
@@ -40,6 +43,9 @@ check_ui = uic.loadUiType(resource_path("data/check/check.ui"))[0] # worker 보�
 text_log_ui = uic.loadUiType(resource_path("data/Basic/log.ui"))[0] # text log 박스
 information_ui = uic.loadUiType(resource_path("data/Basic/information.ui"))[0] # information(설정, 점수표)
 scoreboard_ui = uic.loadUiType(resource_path("data/Basic/scoreboard.ui"))[0] # 점수표
+side_bar_ui = uic.loadUiType(resource_path("data/Basic/sidebar.ui"))[0] # 농장확대창 옆 사이드바
+setting_ui = uic.loadUiType(resource_path("data/Basic/setting.ui"))[0] # 세팅창
+allcard_ui = uic.loadUiType(resource_path("data/Basic/allcard.ui"))[0] # 모든 카드
 
 # MAIN
 class MainWindowClass(QMainWindow, main) :
@@ -93,7 +99,7 @@ class MainWindowClass(QMainWindow, main) :
         self.log.clicked.connect(self.update_state_of_all)
         self.pushButton_3.clicked.connect(self.round_test)
         self.log_popup = Log_viewer(self)
-        
+        self.media_player = QMediaPlayer()
         self.update_state_of_all()
         self.set_undo()
         ############################################################################
@@ -101,13 +107,37 @@ class MainWindowClass(QMainWindow, main) :
         self.GAMESTART_BUTTON.clicked.connect(self.game_start)
 
         #카드 확인하면 다음사람에게 넘기기
+        card_distribution = [FirstCardDistribution(i,self) for i in range(4)]
         for i in range(4):
-            getattr(self, f"card_check_p{i}").clicked.connect(lambda _, x=i: myWindow.stackedWidget.setCurrentIndex(((x+4)%7)))
+            getattr(self,f"sw_p{i}").setCurrentIndex(0) #확인 전 화면으로 설정해두고
+            getattr(self,f"hlo_p{i}_card").addWidget(card_distribution[i]) #카드 분배 위젯 설정
             getattr(self, f"p{i}_show").clicked.connect(lambda _, x=i: getattr(myWindow, f"sw_p{x}").setCurrentIndex(1))
+            getattr(self, f"p{i}_show").clicked.connect(lambda _, x=i: getattr(myWindow, f"card_check_p{x}").setEnabled(True))
+            getattr(self, f"card_check_p{i}").clicked.connect(lambda _, x=i: self.stackedWidget.setCurrentIndex( (x+4)%7 ))
         
+
+    def play_sound(self,name):
+        # 재생할 오디오 파일의 경로 설정
+        # try:
+        #     self.media_player.stop()
+        # except:
+        #     pass
+        url = QUrl.fromLocalFile(f'data\media\{name}')  # 파일 경로는 실제 오디오 파일의 경로로 바꾸세요
+        self.media_player.setMedia(QMediaContent(url))
+
+        # 오디오 재생
+        self.media_player.play()
+        print("play")
+
+
+
+
+
+
     def game_start(self):
         pprint("게임이 시작되었습니다.")
         self.stackedWidget.setCurrentIndex(3) #player1의 카드 공개
+        self.play_sound("strongcowsound.mp3")
         
     def round_test(self):
         self.game_status.now_round = (self.game_status.now_round+1)%15
@@ -324,7 +354,7 @@ class WidgetFieldBase(QWidget, field_base_ui) :
         player = myWindow.game_status.now_turn_player
         # print("player : "+str(player))
 
-        rand = [AnimalType.NONE,AnimalType.COW,AnimalType.PIG,AnimalType.SHEEP,CropType.GRAIN,CropType.NONE,CropType.VEGETABLE]
+        rand = [AnimalType.NONE,AnimalType.COW,AnimalType.PIG,AnimalType.SHEEP]#,CropType.GRAIN,CropType.NONE,CropType.VEGETABLE]
         # print(myWindow.player_status[player].farm.field[self.i][self.j].kind)
         try:
             rand.remove(getattr(AnimalType,myWindow.player_status[player].farm.field[self.i][self.j].kind.name))
@@ -335,10 +365,39 @@ class WidgetFieldBase(QWidget, field_base_ui) :
                 rand = [CropType.GRAIN,CropType.NONE,CropType.VEGETABLE]
 
         random.shuffle(rand)
+        animal = rand[0]
         # print(rand)
-        # print(rand[0])
-        myWindow.player_status[player].farm.field[self.i][self.j].kind = rand[0]
+        print(animal)
+        print(animal, (self.i,self.j))
+        self.vertical_fence=myWindow.player_status[player].farm.vertical_fence
+        self.horizontal_fence=myWindow.player_status[player].farm.horizon_fence
+        expanded_field = self.execute222(myWindow.player_status[myWindow.game_status.now_turn_player].farm.field,self.vertical_fence,self.horizontal_fence)
+        
+        animal_move_text = animal_move_validation.AnimalMoveValidation(expanded_field, animal, [self.i,self.j])
+
+        if animal_move_text.execute():
+            myWindow.player_status[player].farm.field[self.i][self.j].kind = rand[0]
+        else:
+            pprint(animal_move_text.log_text)
         myWindow.update_state_of_all()
+
+    def execute222(self, field_status, vertical_fence, horizontal_fence):
+        from Agricola.Agricola.entity.farm.none_field import NoneField
+        expanded_field = [[NoneField for i in range(11)] for i in range(7)]
+        for i in range(3):
+            for j in range(6):
+                # if self.vertical_fence is True:
+                if vertical_fence[i][j] is True:
+                    expanded_field[i * 2 + 1][2 * j] = FieldType.FENCE
+        for i in range(4):
+            for j in range(5):
+                # if self.horizontal_fence is True:
+                if horizontal_fence[i][j] is True:
+                    expanded_field[i * 2][j * 2 + 1] = FieldType.FENCE
+        for i in range(3):
+            for j in range(5):
+                expanded_field[i * 2 + 1][j * 2 + 1] = field_status[i][j]
+        return expanded_field
     def update_state(self):
         if self.player == 4:
             player = self.parent.parent.game_status.now_turn_player
@@ -534,15 +593,14 @@ class Check(QWidget, check_ui):
         self.btn_processing.clicked.connect(self.next_turn)
         self.btn_undo.clicked.connect(self.parent.undo)
     def next_turn(self):
-        from Agricola.Agricola.behavior.basebehavior import construct_barn, construct_fence
+        
         # pf = myWindow.player_status[myWindow.game_status.now_turn_player].farm
         print(construct_fence.ConstructFence(myWindow.player_status[myWindow.game_status.now_turn_player].farm.field,myWindow.player_status[myWindow.game_status.now_turn_player].farm.vertical_fence,myWindow.player_status[myWindow.game_status.now_turn_player].farm.horizon_fence).execute())
         fence = construct_fence.ConstructFence(myWindow.player_status[myWindow.game_status.now_turn_player].farm.field,myWindow.player_status[myWindow.game_status.now_turn_player].farm.vertical_fence,myWindow.player_status[myWindow.game_status.now_turn_player].farm.horizon_fence)
         fence_ex = fence.execute()# if log:
-        barn = construct_barn.ConstructBarn(myWindow.player_status[myWindow.game_status.now_turn_player].farm.field,myWindow.player_status[myWindow.game_status.now_turn_player].farm.vertical_fence,myWindow.player_status[myWindow.game_status.now_turn_player].farm.horizon_fence)
-        barn_ex = barn.execute()# if log:
-
-        if fence_ex and barn_ex:
+        # barn = construct_barn.ConstructBarn(myWindow.player_status[myWindow.game_status.now_turn_player].farm.field,myWindow.player_status[myWindow.game_status.now_turn_player].farm.vertical_fence,myWindow.player_status[myWindow.game_status.now_turn_player].farm.horizon_fence)
+        # barn_ex = barn.execute()# if log:
+        if fence_ex :
             for i in [0,1,2,3]:
                 getattr(self.parent.worker_board,f"widget_{i}").setEnabled(True)
             nowturn = self.parent.game_status.now_turn_player
@@ -553,7 +611,7 @@ class Check(QWidget, check_ui):
 
             self.parent.set_undo()
         else:
-            pprint(fence.log_text+barn.log_text)
+            pprint(fence.log_text)
 
     def mousePressEvent(self,event):
         pass
@@ -588,6 +646,22 @@ class Scoreboard(QDialog, scoreboard_ui):
         self.setWindowFlags(Qt.FramelessWindowHint | Qt.WindowStaysOnTopHint)
     def mousePressEvent(self,event):
         self.close()
+class FirstCardDistribution(QWidget, card_distribution_ui):
+    def __init__(self, player, parent):
+        super().__init__()
+        self.setupUi(self)
+        self.parent = parent
+        self.player = player
+class AllCard(QDialog, allcard_ui):
+    def __init__(self, parent):
+        super().__init__()
+        self.setupUi(self)
+        self.parent = parent
+# class Setting(Q, allcard_ui):
+#     def __init__(self, parent):
+#         super().__init__()
+#         self.setupUi(self)
+#         self.parent = parent
 
 ###실행 코드### 밑에 건들 필요 굳이 없음###
 if __name__ == "__main__" :
