@@ -95,7 +95,7 @@
            </font>
           </property>
           <property name="currentIndex">
-           <number>6</number>
+           <number>2</number>
           </property>
           <widget class="QWidget" name="round_page">
            <layout class="QHBoxLayout" name="horizontalLayout_5" stretch="1,1">
@@ -234,7 +234,16 @@
            </layout>
           </widget>
           <widget class="QWidget" name="start_page">
-           <layout class="QVBoxLayout" name="verticalLayout_5" stretch="1,1">
+           <property name="styleSheet">
+            <string notr="true">#start_page {
+    background-image: url(':/newPrefix/images/agricola.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain; /* or use 'cover' depending on your needs */
+}
+</string>
+           </property>
+           <layout class="QVBoxLayout" name="verticalLayout_5" stretch="4,1">
             <item>
              <widget class="QLabel" name="lb_start">
               <property name="font">
@@ -242,8 +251,11 @@
                 <pointsize>30</pointsize>
                </font>
               </property>
+              <property name="styleSheet">
+               <string notr="true">color:white;</string>
+              </property>
               <property name="text">
-               <string>아그리콜라</string>
+               <string>AGRICOLA</string>
               </property>
               <property name="alignment">
                <set>Qt::AlignCenter</set>
@@ -270,7 +282,7 @@
             <item>
              <widget class="QStackedWidget" name="sw_p0">
               <property name="currentIndex">
-               <number>0</number>
+               <number>1</number>
               </property>
               <widget class="QWidget" name="page_2">
                <widget class="QPushButton" name="p0_show">
@@ -287,7 +299,17 @@
                 </property>
                </widget>
               </widget>
-              <widget class="QWidget" name="p0_card_show"/>
+              <widget class="QWidget" name="p0_card_show">
+               <layout class="QHBoxLayout" name="horizontalLayout_12">
+                <item>
+                 <layout class="QHBoxLayout" name="hlo_p0_card">
+                  <property name="spacing">
+                   <number>0</number>
+                  </property>
+                 </layout>
+                </item>
+               </layout>
+              </widget>
              </widget>
             </item>
             <item>
@@ -323,6 +345,9 @@
               </item>
               <item>
                <widget class="QPushButton" name="card_check_p0">
+                <property name="enabled">
+                 <bool>false</bool>
+                </property>
                 <property name="text">
                  <string>확인하였습니다.</string>
                 </property>
@@ -337,7 +362,7 @@
             <item>
              <widget class="QStackedWidget" name="sw_p1">
               <property name="currentIndex">
-               <number>0</number>
+               <number>1</number>
               </property>
               <widget class="QWidget" name="page_5">
                <widget class="QPushButton" name="p1_show">
@@ -354,7 +379,17 @@
                 </property>
                </widget>
               </widget>
-              <widget class="QWidget" name="p1_card_show"/>
+              <widget class="QWidget" name="p1_card_show">
+               <layout class="QHBoxLayout" name="horizontalLayout_13">
+                <item>
+                 <layout class="QHBoxLayout" name="hlo_p1_card">
+                  <property name="spacing">
+                   <number>0</number>
+                  </property>
+                 </layout>
+                </item>
+               </layout>
+              </widget>
              </widget>
             </item>
             <item>
@@ -390,6 +425,9 @@
               </item>
               <item>
                <widget class="QPushButton" name="card_check_p1">
+                <property name="enabled">
+                 <bool>false</bool>
+                </property>
                 <property name="text">
                  <string>확인하였습니다.</string>
                 </property>
@@ -404,7 +442,7 @@
             <item>
              <widget class="QStackedWidget" name="sw_p2">
               <property name="currentIndex">
-               <number>0</number>
+               <number>1</number>
               </property>
               <widget class="QWidget" name="page_8">
                <widget class="QPushButton" name="p2_show">
@@ -421,7 +459,17 @@
                 </property>
                </widget>
               </widget>
-              <widget class="QWidget" name="p2_card_show"/>
+              <widget class="QWidget" name="p2_card_show">
+               <layout class="QHBoxLayout" name="horizontalLayout_14">
+                <item>
+                 <layout class="QHBoxLayout" name="hlo_p2_card">
+                  <property name="spacing">
+                   <number>0</number>
+                  </property>
+                 </layout>
+                </item>
+               </layout>
+              </widget>
              </widget>
             </item>
             <item>
@@ -457,6 +505,9 @@
               </item>
               <item>
                <widget class="QPushButton" name="card_check_p2">
+                <property name="enabled">
+                 <bool>false</bool>
+                </property>
                 <property name="text">
                  <string>확인하였습니다.</string>
                 </property>
@@ -471,7 +522,7 @@
             <item>
              <widget class="QStackedWidget" name="sw_p3">
               <property name="currentIndex">
-               <number>0</number>
+               <number>1</number>
               </property>
               <widget class="QWidget" name="page_11">
                <widget class="QPushButton" name="p3_show">
@@ -488,7 +539,17 @@
                 </property>
                </widget>
               </widget>
-              <widget class="QWidget" name="p3_card_show"/>
+              <widget class="QWidget" name="p3_card_show">
+               <layout class="QHBoxLayout" name="horizontalLayout_15">
+                <item>
+                 <layout class="QHBoxLayout" name="hlo_p3_card">
+                  <property name="spacing">
+                   <number>0</number>
+                  </property>
+                 </layout>
+                </item>
+               </layout>
+              </widget>
              </widget>
             </item>
             <item>
@@ -524,6 +585,9 @@
               </item>
               <item>
                <widget class="QPushButton" name="card_check_p3">
+                <property name="enabled">
+                 <bool>false</bool>
+                </property>
                 <property name="text">
                  <string>확인하였습니다.</string>
                 </property>
