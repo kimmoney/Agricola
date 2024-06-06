@@ -12,6 +12,7 @@ from entity.basic_behavior_type import BasicBehaviorType
 from repository.game_status_repository import game_status_repository
 from repository.player_status_repository import player_status_repository
 from behavior.basebehavior.arable_expansion import ArableExpansion
+from repository.round_status_repository import round_status_repository
 
 
 # Todo
@@ -41,6 +42,7 @@ class CultivateSeed(Command):
         doSeedPlant = SeedPlant(self.plantDict, self.field_status)
         if doSeedPlant.execute():
             self.log_text = "밭 심기를 성공했습니다"
+            round_status_repository.round_status.remain_workers[game_status_repository.game_status.now_turn_player] -= 1
             return True
         else:
             self.log_text = "밭 심기를 실패했습니다"

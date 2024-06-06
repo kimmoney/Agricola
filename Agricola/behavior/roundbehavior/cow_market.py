@@ -28,6 +28,7 @@ class CowMarket(Command):
         animal_dict = {AnimalType.COW: self.game_status.basic_resource[RoundBehaviorType.COW.value]}
         self.log_text = f"소 {self.game_status.basic_resource[RoundBehaviorType.COW.value]}마리를 획득하였습니다."
         self.game_status.set_basic_resource(RoundBehaviorType.COW.value, 0)
+        round_status_repository.round_status.remain_workers[game_status_repository.game_status.now_turn_player] -= 1
         return animal_dict
 
     def log(self):

@@ -5,6 +5,8 @@
 :rtype: bool
 """
 from command import Command
+from repository.game_status_repository import game_status_repository
+from repository.round_status_repository import round_status_repository
 
 
 # Todo
@@ -12,6 +14,7 @@ from command import Command
 class FenceConstructionRound(Command):
 
     def execute(self):
+        round_status_repository.round_status.remain_workers[game_status_repository.game_status.now_turn_player] -= 1
         pass
 
     def log(self):

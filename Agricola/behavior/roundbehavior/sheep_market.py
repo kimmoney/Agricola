@@ -30,6 +30,7 @@ class SheepMarket(Command):
         animal_dict = {AnimalType.SHEEP: self.game_status.basic_resource[RoundBehaviorType.SHEEP1.value]}
         self.log_text = f"양 {self.game_status.basic_resource[RoundBehaviorType.SHEEP1.value]}마리를 획득하였습니다."
         self.game_status.set_basic_resource(RoundBehaviorType.SHEEP1.value, 0)
+        round_status_repository.round_status.remain_workers[game_status_repository.game_status.now_turn_player] -= 1
         return animal_dict
 
     def log(self):

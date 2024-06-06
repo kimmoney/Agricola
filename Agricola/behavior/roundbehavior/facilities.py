@@ -5,7 +5,9 @@
 :rtype: bool
 """
 from command import Command
+from repository.game_status_repository import game_status_repository
 from repository.player_status_repository import player_status_repository
+from repository.round_status_repository import round_status_repository
 
 
 # Todo
@@ -29,6 +31,7 @@ class Facilities(Command):
     def execute(self):
         if (self.selectedCard.purchase(self.player)):
             self.log_text = "카드 구매에 성공했습니다"
+            round_status_repository.round_status.remain_workers[game_status_repository.game_status.now_turn_player] -= 1
             return True
         else:
             self.log_text = "카드 구매에 실패했습니다"

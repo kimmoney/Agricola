@@ -15,7 +15,7 @@ class PlayableSubJobListup(Command):
 
     def execute(self):
         self.log_text = "구매 가능한 직업을 확인했습니다"
-        return  self.jobList
+        return self.jobList
 
     def log(self):
         return self.log_text

@@ -28,6 +28,7 @@ class Stone2(Command):
             self.player_resource.stone + self.game_status.basic_resource[RoundBehaviorType.STONE_2.value])
         self.log_text = f"돌 {self.game_status.basic_resource[RoundBehaviorType.STONE_2.value]}개를 획득하였습니다."
         self.game_status.set_basic_resource(RoundBehaviorType.STONE_2.value, 0)
+        round_status_repository.round_status.remain_workers[game_status_repository.game_status.now_turn_player] -= 1
         return True
 
     def log(self):
