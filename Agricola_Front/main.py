@@ -34,24 +34,24 @@ def resource_path(relative_path):
     base_path = getattr(sys, '_MEIPASS', os.path.dirname(os.path.abspath(__file__)))
     return os.path.join(base_path, relative_path)
 #UI파일 연결
-main = uic.loadUiType(resource_path("mainwindow_v1.ui"))[0] # 진짜 메인
+main = uic.loadUiType(resource_path("data/mainwindow_v1.ui"))[0] # 진짜 메인
 ###개인 영역 UI들###
-personal_field_ui = uic.loadUiType(resource_path("PersonalField/field_frame.ui"))[0] # 농장 15개 빈칸 뚫린 ui
-field_base_ui = uic.loadUiType(resource_path("PersonalField/field_base.ui"))[0] # field 하나 ui
-personal_resources_ui= uic.loadUiType(resource_path("PersonalField/personal_resource.ui"))[0] # 화면 전환되는 개인 자원
-personal_card_ui= uic.loadUiType(resource_path("PersonalField/personal_card.ui"))[0] # 내가 낸 카드 ui
-personal_card_small_ui = uic.loadUiType(resource_path("PersonalField/mycard_small.ui"))[0] # 내가 낸 카드 ui
-personal_card_big_ui = uic.loadUiType(resource_path("PersonalField/mycard_big.ui"))[0] # 내가 낸 카드 ui
+personal_field_ui = uic.loadUiType(resource_path("data/PersonalField/field_frame.ui"))[0] # 농장 15개 빈칸 뚫린 ui
+field_base_ui = uic.loadUiType(resource_path("data/PersonalField/field_base.ui"))[0] # field 하나 ui
+personal_resources_ui= uic.loadUiType(resource_path("data/PersonalField/personal_resource.ui"))[0] # 화면 전환되는 개인 자원
+personal_card_ui= uic.loadUiType(resource_path("data/PersonalField/personal_card.ui"))[0] # 내가 낸 카드 ui
+personal_card_small_ui = uic.loadUiType(resource_path("data/PersonalField/mycard_small.ui"))[0] # 내가 낸 카드 ui
+personal_card_big_ui = uic.loadUiType(resource_path("data/PersonalField/mycard_big.ui"))[0] # 내가 낸 카드 ui
 #personal_card_ui= uic.loadUiType(resource_path("PersonalField/mycards.ui"))[0] # 개인 카드 ui
 
 ###공동 영역 UI들###
 log_viewer_ui= uic.loadUiType(resource_path("data/log_viewer_dialog.ui"))[0] # 로그
-basic_roundcard_ui= uic.loadUiType(resource_path("Basic/roundcard.ui"))[0] # 라운드카드 ui
-worker_board_ui = uic.loadUiType(resource_path("Basic/worker_board.ui"))[0] # worker 보드
-check_ui = uic.loadUiType(resource_path("check/check.ui"))[0] # worker 보드
-text_log_ui = uic.loadUiType(resource_path("Basic/log.ui"))[0] # text log 박스
-information_ui = uic.loadUiType(resource_path("Basic/information.ui"))[0] # information(설정, 점수표)
-scoreboard_ui = uic.loadUiType(resource_path("Basic/scoreboard.ui"))[0] # 점수표
+basic_roundcard_ui= uic.loadUiType(resource_path("data/Basic/roundcard.ui"))[0] # 라운드카드 ui
+worker_board_ui = uic.loadUiType(resource_path("data/Basic/worker_board.ui"))[0] # worker 보드
+check_ui = uic.loadUiType(resource_path("data/check/check.ui"))[0] # worker 보드
+text_log_ui = uic.loadUiType(resource_path("data/Basic/log.ui"))[0] # text log 박스
+information_ui = uic.loadUiType(resource_path("data/Basic/information.ui"))[0] # information(설정, 점수표)
+scoreboard_ui = uic.loadUiType(resource_path("data/Basic/scoreboard.ui"))[0] # 점수표
 #UI파일 연결
 #단, UI파일은 Python 코드 파일과 같은 디렉토리에 위치해야한다.
 # field_0_ui
@@ -150,7 +150,7 @@ class MainWindowClass(QMainWindow, main) :
     #     self.log.logging(text)
     #     update()
     def pprint(self,text):
-        # print(text)
+        print(text)
         self.log_2.setText(self.log_2.toPlainText()+"\n"+str(text))
         scroll_bar = self.log_2.verticalScrollBar()
         scroll_bar.setValue(scroll_bar.maximum())

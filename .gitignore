@@ -6,3 +6,5 @@
 *.pyc
 *.pyc
 *.pyc
+/Agricola_Front/dist
+/Agricola_Front/build
