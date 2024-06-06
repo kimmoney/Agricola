@@ -7,7 +7,7 @@ Unit : 지민
 """
 from command import Command
 from entity.basic_behavior_type import BasicBehaviorType
-from repository.game_status_repository import game_status_repository
+from repository.game_status_repository import  game_status_repository
 from repository.player_status_repository import player_status_repository
 from repository.round_status_repository import round_status_repository
 
