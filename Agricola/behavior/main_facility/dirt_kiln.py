@@ -79,4 +79,4 @@ class DirtKiln(MainFacilityInterface):
     """
 
     def canPurchase(self):
-        return self.player_data.resource.dirt >= 3 and self.player_data.resource.stone >= 1
+        return self.player_data.resource.dirt >= 3 and self.player_data.resource.stone >= 1 and  self.game_status.main_facility_status[0] == -1

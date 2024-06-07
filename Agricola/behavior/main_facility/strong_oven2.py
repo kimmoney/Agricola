@@ -103,9 +103,9 @@ class StrongOven2(MainFacilityInterface):
     """
 
     def purchaseMoney(self, returnOven):  # 화덕은 purchase()가 아나라 이 함수로 구매 접근
-        # returnOven => t/f t시 화로 반납후 구매(비용 안냄) f시 비용내고 구매(일반적인 purchase)
         # 이 함수에서 purchase() 호출하므로 무조건 구매시 purchaseMoney 사용
-        if (returnOven):
+        if (any(mainCard.main_card_type in (MainFacilityType.OVEN1, MainFacilityType.OVEN2) for mainCard in
+                self.player_data.card.putMainCard)):
             for mainCard in self.player_data.card.putMainCard:
                 if mainCard.main_card_type in (MainFacilityType.OVEN1, MainFacilityType.OVEN2):
                     self.player_data.card.putMainCard.remove(mainCard)
@@ -133,4 +133,4 @@ class StrongOven2(MainFacilityInterface):
     def canPurchase(self):
         chk_oven = any(mainCard.main_card_type in (MainFacilityType.OVEN1, MainFacilityType.OVEN2) for mainCard in
                        self.player_data.card.putMainCard)
-        return chk_oven or self.player_data.resource.dirt >= 5
+        return (chk_oven or self.player_data.resource.dirt >= 5) and self.game_status.main_facility_status[4] == -1
