@@ -87,7 +87,7 @@
         </sizepolicy>
        </property>
        <property name="styleSheet">
-        <string notr="true">background-color: rgb(239, 255, 211);</string>
+        <string notr="true">QWidget#verticalWidget_2{background-color: rgb(239, 255, 211);}</string>
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_13">
         <property name="spacing">
@@ -202,6 +202,9 @@
            </item>
            <item row="0" column="0">
             <widget class="QPushButton" name="btn_sheep">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
              <property name="sizePolicy">
               <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
                <horstretch>0</horstretch>
@@ -209,8 +212,8 @@
               </sizepolicy>
              </property>
              <property name="styleSheet">
-              <string notr="true">border-image: url(:/newPrefix/images/sheep.png);
-background-color: rgb(255, 255, 102);</string>
+              <string notr="true">
+QPushButton:disabled {background-color: yellow;}</string>
              </property>
              <property name="text">
               <string/>
@@ -278,7 +281,7 @@ background-color: rgb(255, 255, 102);</string>
      <item>
       <widget class="QWidget" name="verticalWidget_4" native="true">
        <property name="styleSheet">
-        <string notr="true">background-color: rgb(255, 174, 249);</string>
+        <string notr="true">QWidget#verticalWidget_4{background-color: rgb(255, 174, 249);}</string>
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_15">
         <property name="spacing">
@@ -457,7 +460,7 @@ background-color: rgb(255, 255, 102);</string>
      <item>
       <widget class="QWidget" name="verticalWidget_5" native="true">
        <property name="styleSheet">
-        <string notr="true">background-color: rgb(186, 187, 255);</string>
+        <string notr="true">QWidget#verticalWidget_5{background-color: rgb(186, 187, 255);}</string>
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_16" stretch="1,2">
         <property name="spacing">
