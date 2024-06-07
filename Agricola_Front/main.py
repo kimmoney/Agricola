@@ -4,7 +4,7 @@ sys.path.append(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'Agrico
 sys.path.append(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'data'))
 sys.dont_write_bytecode = True # pyc 생성 방지
 from qcr_converter import run_pyrcc5
-# run_pyrcc5()#QRC 업데이트
+#run_pyrcc5()#QRC 업데이트
 
 from PyQt5 import uic
 from PyQt5.QtWidgets import *
@@ -69,6 +69,9 @@ class MainWindowClass(QMainWindow, main) :
         #플레이어 카드 위젯 설정
         self.personal_card = [PersonalCard_small(i,self) for i in range(4)]
         for i in range(4):getattr(self,f"frm_p{i}_1").addWidget(self.personal_card[i])
+#사이드바 위젯 설정
+        self.sidebar = SideBar(self)
+        self.frm_main_sidebar.addWidget(self.sidebar)
 #메인 카드 위젯 설정
         self.main_card = PersonalCard_big(self)
         self.frm_main_card.addWidget(self.main_card)
@@ -103,7 +106,7 @@ class MainWindowClass(QMainWindow, main) :
         self.update_state_of_all()
         self.set_undo()
         ############################################################################
-        self.stackedWidget.setCurrentIndex(2)
+        self.stackedWidget.setCurrentIndex(2) # 게임시작 화면
         self.GAMESTART_BUTTON.clicked.connect(self.game_start)
 
         #카드 확인하면 다음사람에게 넘기기
@@ -114,7 +117,6 @@ class MainWindowClass(QMainWindow, main) :
             getattr(self, f"p{i}_show").clicked.connect(lambda _, x=i: getattr(myWindow, f"sw_p{x}").setCurrentIndex(1))
             getattr(self, f"p{i}_show").clicked.connect(lambda _, x=i: getattr(myWindow, f"card_check_p{x}").setEnabled(True))
             getattr(self, f"card_check_p{i}").clicked.connect(lambda _, x=i: self.stackedWidget.setCurrentIndex( (x+4)%7 ))
-        self.play_sound()
 
 
 
@@ -149,9 +151,8 @@ class MainWindowClass(QMainWindow, main) :
         self.game_status.now_round = (self.game_status.now_round+1)%15
         pprint(f"현재 라운드는 {self.game_status.now_round}라운드입니다.")
         self.update_state_of_all()
-        
-
         [getattr(self,f"basic_{i+16}").addWidget(self.random_round[i]) for i in range(13)]
+
     def set_undo(self):
         self.undo_player = copy.deepcopy(self.player_status)
         self.undo_gameStatus = copy.deepcopy(self.game_status)
@@ -164,7 +165,6 @@ class MainWindowClass(QMainWindow, main) :
         self.set_undo()
         self.update_state_of_all()
         pprint("턴 초기 화면으로 돌아갔습니다.")
-
 
     def pprint(self,text):
         print(text)
@@ -187,7 +187,7 @@ class MainWindowClass(QMainWindow, main) :
         stacked_Widget = self.stackedWidget
         if not self.timer_close.isActive() and not self.timer_open.isActive():
             # 이걸로 속도 조절 낮을수록 빠름
-            self.speed = 5
+            self.speed = 10
             self.timer_close = QTimer(self)
             self.timer_open = QTimer(self)
             self.total_timer_count = 20
@@ -226,17 +226,28 @@ class MainWindowClass(QMainWindow, main) :
 
     def update_state_of_all(self):
         #resource 업데이트
+        import time
+        t = time.time()
+
         for c in self.personal_field:
             c.update_state()
-            for cc in c.field:cc.update_state()
+            for cc in c.field: cc.update_state()
+        print(time.time()-t)
+        t=time.time()
         # for c in self.personal_card:
         #     c.update_state()
         for c in self.personal_resource:
             c.update_state()
+
+        print(time.time()-t)
+        t=time.time()
         for widget in self.random_round:
             widget.update_state()
+        print(time.time()-t)
+        t=time.time()
         self.update_state()
-
+        print(time.time()-t)
+        t=time.time()
 class WidgetPersonalField(QWidget, personal_field_ui) :
     def __init__(self, player,parent) :
         super().__init__()
@@ -493,10 +504,14 @@ class WidgetBasicRound(QWidget, basic_roundcard_ui) :
         self.btn_round_1.setText('')
         self.setStyleSheet(f"#widget{{border-image: url(:/newPrefix/images/기본행동/기본행동 ({self.num}).png);}}")
         self.btn_round_4.hide()
+        for i in range(5):
+            getattr(self,f"btn_round_{i}").clicked.connect(self.roundClick)
 
     def mousePressEvent(self,event):
         pprint(f"Pressed basic round num : {self.num}")
-        
+    def roundClick(self,event):
+        pprint(f"Pressed basic round num : {self.num}")
+
 class WidgetrandomRound(QWidget, basic_roundcard_ui) :
     def __init__(self, cardnumber,imagenumber,parent) :
         super().__init__()  # 부모 클래스의 __init__ 함수 호출
@@ -515,6 +530,8 @@ class WidgetrandomRound(QWidget, basic_roundcard_ui) :
         round = self.parent.game_status.now_round
         # print(self.imagenum)
         # print(i)
+        import time
+        t = time.time()
         
         if self.cardnum<=round-1:
             self.setStyleSheet(f"#widget{{border-image: url(:/newPrefix/images/랜덤/랜덤 ({self.imagenum}).png);}}")
@@ -530,7 +547,7 @@ class WidgetrandomRound(QWidget, basic_roundcard_ui) :
             self.setStyleSheet(f"#widget{{border-image: url(:/newPrefix/images/라운드카드/number_5.png);}}")
         elif self.cardnum<=13:
             self.setStyleSheet(f"#widget{{border-image: url(:/newPrefix/images/라운드카드/number_6.png);}}")
-
+        print(t-time.time())
         if self.imagenum<5 and "랜덤/랜덤" in self.styleSheet():
             self.btn_round_1.setText(str(1))
         else:
@@ -606,7 +623,6 @@ class WidgetTextLog(QWidget, text_log_ui):
     def mousePressEvent(self,event):
         # 팝업창으로 로그창 크게 보여주기 (중요도 하)
         pass
-
 class WidgetInformation(QWidget, information_ui):
     def __init__(self, parent):
         super().__init__()
@@ -625,7 +641,6 @@ class WidgetInformation(QWidget, information_ui):
     def show_scoreboard(self):
         self.scoreboard = Scoreboard(self.parent)
         self.scoreboard.exec_()
-
 class Scoreboard(QDialog, scoreboard_ui):
     def __init__(self, parent):
         super().__init__()
@@ -640,7 +655,6 @@ class FirstCardDistribution(QWidget, card_distribution_ui):
         self.setupUi(self)
         self.parent = parent
         self.player = player
-
 class AllCard(QDialog, allcard_ui):
     def __init__(self, parent):
         super().__init__()
@@ -649,7 +663,6 @@ class AllCard(QDialog, allcard_ui):
         self.setWindowFlags(Qt.FramelessWindowHint | Qt.WindowStaysOnTopHint)
     def mousePressEvent(self,event):
         self.close()
-
 class Setting(QDialog, setting_ui):
     def __init__(self, parent):
         super().__init__()
@@ -661,6 +674,13 @@ class SideBar(QWidget, sidebar_ui):
         super().__init__()
         self.setupUi(self)
         self.parent = parent
+
+        btns = ["btn_sheep", "btn_pig", "btn_cow", "btn_chg_sheep", "btn_chg_pig", "btn_chg_cow", "btn_chg_vegetable", "btn_trade_grain", "btn_trade_vegetable"]
+        self.focus = [False for _ in range(len(btns))] # 무엇을 선택하는지. 기본: False
+        for btn in btns:
+            getattr(self,f"{btn}").clicked.connect(self.btnClick)
+    def btnClick(self):
+        pass
 
 ###실행 코드### 밑에 건들 필요 굳이 없음###
 if __name__ == "__main__" :

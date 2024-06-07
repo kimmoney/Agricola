@@ -168,7 +168,7 @@
   </layout>
  </widget>
  <resources>
-  <include location="../MyQRC.qrc"/>
+  <include location="../../MyQRC.qrc"/>
  </resources>
  <connections/>
 </ui>

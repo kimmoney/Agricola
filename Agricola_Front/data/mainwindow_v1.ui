@@ -45,7 +45,7 @@
        <enum>QLayout::SetDefaultConstraint</enum>
       </property>
       <item>
-       <layout class="QHBoxLayout" name="horizontalLayout_3" stretch="4,2,2,4,2,2">
+       <layout class="QHBoxLayout" name="horizontalLayout_3" stretch="1,1">
         <property name="spacing">
          <number>0</number>
         </property>
@@ -56,26 +56,83 @@
          <number>0</number>
         </property>
         <item>
-         <layout class="QVBoxLayout" name="frm_p0_0"/>
-        </item>
-        <item>
-         <layout class="QVBoxLayout" name="frm_p0_1"/>
-        </item>
-        <item>
-         <layout class="QVBoxLayout" name="frm_p0_2">
-          <property name="spacing">
-           <number>6</number>
+         <widget class="QWidget" name="player_0_border" native="true">
+          <property name="minimumSize">
+           <size>
+            <width>12</width>
+            <height>0</height>
+           </size>
           </property>
-         </layout>
+          <property name="styleSheet">
+           <string notr="true"/>
+          </property>
+          <layout class="QHBoxLayout" name="horizontalLayout_11" stretch="2,1,1">
+           <property name="spacing">
+            <number>0</number>
+           </property>
+           <property name="leftMargin">
+            <number>1</number>
+           </property>
+           <property name="topMargin">
+            <number>1</number>
+           </property>
+           <property name="rightMargin">
+            <number>1</number>
+           </property>
+           <property name="bottomMargin">
+            <number>1</number>
+           </property>
+           <item>
+            <layout class="QVBoxLayout" name="frm_p0_0"/>
+           </item>
+           <item>
+            <layout class="QVBoxLayout" name="frm_p0_1"/>
+           </item>
+           <item>
+            <layout class="QVBoxLayout" name="frm_p0_2">
+             <property name="spacing">
+              <number>6</number>
+             </property>
+            </layout>
+           </item>
+          </layout>
+         </widget>
         </item>
         <item>
-         <layout class="QVBoxLayout" name="frm_p1_0"/>
-        </item>
-        <item>
-         <layout class="QVBoxLayout" name="frm_p1_1"/>
-        </item>
-        <item>
-         <layout class="QVBoxLayout" name="frm_p1_2"/>
+         <widget class="QWidget" name="player_1_border" native="true">
+          <property name="minimumSize">
+           <size>
+            <width>111</width>
+            <height>0</height>
+           </size>
+          </property>
+          <layout class="QHBoxLayout" name="horizontalLayout_12" stretch="2,1,1">
+           <property name="spacing">
+            <number>0</number>
+           </property>
+           <property name="leftMargin">
+            <number>1</number>
+           </property>
+           <property name="topMargin">
+            <number>1</number>
+           </property>
+           <property name="rightMargin">
+            <number>1</number>
+           </property>
+           <property name="bottomMargin">
+            <number>1</number>
+           </property>
+           <item>
+            <layout class="QVBoxLayout" name="frm_p1_0"/>
+           </item>
+           <item>
+            <layout class="QVBoxLayout" name="frm_p1_1"/>
+           </item>
+           <item>
+            <layout class="QVBoxLayout" name="frm_p1_2"/>
+           </item>
+          </layout>
+         </widget>
         </item>
        </layout>
       </item>
@@ -95,7 +152,7 @@
            </font>
           </property>
           <property name="currentIndex">
-           <number>2</number>
+           <number>1</number>
           </property>
           <widget class="QWidget" name="round_page">
            <layout class="QHBoxLayout" name="horizontalLayout_5" stretch="1,1">
@@ -226,7 +283,7 @@
              <layout class="QVBoxLayout" name="frm_main_field"/>
             </item>
             <item>
-             <layout class="QVBoxLayout" name="frm_main_setUnit"/>
+             <layout class="QVBoxLayout" name="frm_main_sidebar"/>
             </item>
             <item>
              <layout class="QVBoxLayout" name="frm_main_card"/>
@@ -1132,7 +1189,7 @@ p, li { white-space: pre-wrap; }
        </layout>
       </item>
       <item>
-       <layout class="QHBoxLayout" name="horizontalLayout" stretch="2">
+       <layout class="QHBoxLayout" name="horizontalLayout" stretch="1,1">
         <property name="spacing">
          <number>0</number>
         </property>
@@ -1140,33 +1197,28 @@ p, li { white-space: pre-wrap; }
          <enum>QLayout::SetMaximumSize</enum>
         </property>
         <item>
-         <widget class="QFrame" name="frame_11">
-          <property name="font">
-           <font>
-            <family>Pretendard Medium</family>
-           </font>
+         <widget class="QWidget" name="player_2_border" native="true">
+          <property name="minimumSize">
+           <size>
+            <width>12</width>
+            <height>0</height>
+           </size>
           </property>
-          <property name="frameShape">
-           <enum>QFrame::StyledPanel</enum>
-          </property>
-          <property name="frameShadow">
-           <enum>QFrame::Raised</enum>
-          </property>
-          <layout class="QHBoxLayout" name="horizontalLayout_4" stretch="4,2,2,4,2,2">
+          <layout class="QHBoxLayout" name="horizontalLayout_13" stretch="2,1,1">
            <property name="spacing">
             <number>0</number>
            </property>
            <property name="leftMargin">
-            <number>0</number>
+            <number>1</number>
            </property>
            <property name="topMargin">
-            <number>0</number>
+            <number>1</number>
            </property>
            <property name="rightMargin">
-            <number>0</number>
+            <number>1</number>
            </property>
            <property name="bottomMargin">
-            <number>0</number>
+            <number>1</number>
            </property>
            <item>
             <layout class="QVBoxLayout" name="frm_p2_0"/>
@@ -1177,6 +1229,27 @@ p, li { white-space: pre-wrap; }
            <item>
             <layout class="QVBoxLayout" name="frm_p2_2"/>
            </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <widget class="QWidget" name="player_3_border" native="true">
+          <layout class="QHBoxLayout" name="horizontalLayout_14" stretch="2,1,1">
+           <property name="spacing">
+            <number>0</number>
+           </property>
+           <property name="leftMargin">
+            <number>1</number>
+           </property>
+           <property name="topMargin">
+            <number>1</number>
+           </property>
+           <property name="rightMargin">
+            <number>1</number>
+           </property>
+           <property name="bottomMargin">
+            <number>1</number>
+           </property>
            <item>
             <layout class="QVBoxLayout" name="frm_p3_0"/>
            </item>
