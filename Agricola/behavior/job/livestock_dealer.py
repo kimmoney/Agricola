@@ -23,7 +23,7 @@ class LivestockDealer(JobInterface):
     :rtype: bool
     """
     def canUse(self):
-        current_player_cards = player_status_repository.player_status[game_status_repository.game_status.now_turn_player].card.putJobCard
+        current_player_cards = player_status_repository.player_status[game_status_repository.game_status.now_turn_player].card.put_job_card
         livestock_dealer_card_present = any(isinstance(card, LivestockDealer) for card in current_player_cards)
 
         if isinstance(self.input_behavior, CowMarket) or isinstance(self.input_behavior, SheepMarket) or isinstance(self.input_behavior, PigMarket) and livestock_dealer_card_present:

@@ -4,34 +4,23 @@
 :return: 실행 결과.
 :rtype: bool
 """
+from behavior.basebehavior.construct_barn import ConstructBarn
 from behavior.behavior_interface import BehaviorInterface
-from command import Command
-from entity.basic_behavior_type import BasicBehaviorType
-from repository.game_status_repository import game_status_repository
-from repository.player_status_repository import player_status_repository
-from repository.round_status_repository import round_status_repository
 from behavior.basebehavior.house_expansion import HouseExpansion
+from behavior.unitbehavior.use_worker import UseWorker
 
 
 class FarmExpansion(BehaviorInterface):
 
-    def __init__(self, field_status):
+    def __init__(self):
         self.log_text = ""
-        self.field_status = field_status
-        self.is_filled = round_status_repository.round_status.put_basic[BasicBehaviorType.EXPAND.value]
 
     def can_play(self):
         # 농장 확장이 가능한 위치가 있는지 확인
         return True
 
     def execute(self):
-        doExpansion = HouseExpansion(self.field_status)
-        if doExpansion.execute():
-            self.log_text = f"농장 확장에 성공했습니다."
-            return True
-        else:
-            self.log_text = f"농장을 확장하지못했습니다."
-            return False
+        return [HouseExpansion, ConstructBarn, UseWorker]
 
     def log(self):
         return self.log_text

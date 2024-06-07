@@ -7,22 +7,16 @@
 """
 from behavior.behavior_interface import BehaviorInterface
 from behavior.basebehavior.arable_expansion import ArableExpansion
+from behavior.unitbehavior.use_worker import UseWorker
 
 
 class Cultivate(BehaviorInterface):
 
-    def __init__(self, field_status):
+    def __init__(self):
         self.log_text = ""
-        self.field_status = field_status
 
     def execute(self):
-        doArable = ArableExpansion(self.field_status)
-        if doArable.execute():
-            self.log_text = "밭을 일구었습니다."
-            return True
-        else:
-            self.log_text = doArable.log()
-            return False
+        return [ArableExpansion, UseWorker]
 
 
     def log(self):

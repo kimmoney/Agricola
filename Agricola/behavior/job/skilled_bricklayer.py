@@ -22,7 +22,7 @@ class SkilledBrickLayer(JobInterface):
     :rtype: bool
     """
     def canUse(self):
-        current_player_cards = player_status_repository.player_status[game_status_repository.game_status.now_turn_player].card.putJobCard
+        current_player_cards = player_status_repository.player_status[game_status_repository.game_status.now_turn_player].card.put_job_card
         skilled_brick_layer_card_present = any(isinstance(card, SkilledBrickLayer) for card in current_player_cards)
 
         if isinstance(self.input_behavior, UpgradeFacilities) or isinstance(self.input_behavior, Facilities) and skilled_brick_layer_card_present:

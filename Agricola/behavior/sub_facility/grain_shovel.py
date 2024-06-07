@@ -22,7 +22,7 @@ class GrainShovel(SubFacilityInterface):
 
     def canUse(self):
         current_player_cards = player_status_repository.player_status[
-            game_status_repository.game_status.now_turn_player].card.putSubCard
+            game_status_repository.game_status.now_turn_player].card.put_sub_card
         shovel_card_present = any(isinstance(card, GrainShovel) for card in current_player_cards)
 
         if isinstance(self.input_behavior,
@@ -62,8 +62,8 @@ class GrainShovel(SubFacilityInterface):
 
     def putDown(self):
         current_player = player_status_repository.player_status[game_status_repository.game_status.now_turn_player]
-        current_player.card.handSubCard.remove(self)
-        current_player.card.putSubCard.append(self)
+        current_player.card.hand_sub_card.remove(self)
+        current_player.card.put_sub_card.append(self)
         current_player.resource.set_wood(current_player.resource.wood - 1)
         self.log_text = "곡식용 삽 카드를 플레이했습니다"
         return True

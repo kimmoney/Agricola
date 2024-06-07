@@ -8,10 +8,10 @@ from command import Command
 from repository.player_status_repository import player_status_repository
 
 
-class PlayableSubJobListup(Command):
+class PlayableJobCardListup(Command):
     def __init__(self, player):
         self.log_text = ""
-        self.jobList = self.player_ownCard = player_status_repository.player_status[player].own_card.handJobCard
+        self.jobList = self.player_ownCard = player_status_repository.player_status[player].own_card.hand_job_card
 
     def execute(self):
         self.log_text = "구매 가능한 직업을 확인했습니다"

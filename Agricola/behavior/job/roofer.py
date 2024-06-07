@@ -22,7 +22,7 @@ class Roofer(JobInterface):
 
     def canUse(self):
         current_player_cards = player_status_repository.player_status[
-            game_status_repository.game_status.now_turn_player].card.putJobCard
+            game_status_repository.game_status.now_turn_player].card.put_job_card
         roofer_card_present = any(isinstance(card, Roofer) for card in current_player_cards)
 
         if roofer_card_present:
@@ -70,5 +70,5 @@ class Roofer(JobInterface):
 
     def putDown(self):
         current_player = player_status_repository.player_status[game_status_repository.game_status.now_turn_player]
-        current_player.card.handJobCard.remove(self)
-        current_player.card.putJobCard.append(self)
+        current_player.card.hand_job_card.remove(self)
+        current_player.card.put_job_card.append(self)

@@ -4,8 +4,13 @@
 :return: 실행 결과.
 :rtype: bool
 """
+from behavior.basebehavior.buy_main_card import BuyMainCard
+from behavior.basebehavior.buy_sub_card import BuySubCard
 from behavior.basebehavior.house_upgrade import HouseUpgrade
 from behavior.behavior_interface import BehaviorInterface
+from behavior.unitbehavior.playable_sub_facility_listup import PlayableSubCardListup
+from behavior.unitbehavior.purchasable_main_facility_listup import PurchasableMainCardListup
+from behavior.unitbehavior.use_worker import UseWorker
 from command import Command
 from repository.game_status_repository import game_status_repository
 from repository.round_status_repository import round_status_repository
@@ -19,7 +24,8 @@ class UpgradeFacilities(BehaviorInterface):
         return HouseUpgrade().can_play()
 
     def execute(self):
-        round_status_repository.round_status.remain_workers[game_status_repository.game_status.now_turn_player] -= 1
+        ret = [HouseUpgrade, PurchasableMainCardListup, BuyMainCard, PlayableSubCardListup, BuySubCard, UseWorker]
+        return ret
 
     def log(self):
         return self.log_text

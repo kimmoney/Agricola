@@ -24,7 +24,7 @@ class KilnBaker(JobInterface):
     :rtype: bool
     """
     def canUse(self):
-        current_player_cards = player_status_repository.player_status[game_status_repository.game_status.now_turn_player].card.putJobCard
+        current_player_cards = player_status_repository.player_status[game_status_repository.game_status.now_turn_player].card.put_job_card
         kiln_baker_card_present = any(isinstance(card, KilnBaker) for card in current_player_cards)
 
         if (isinstance(self.input_behavior, Wood1) or isinstance(self.input_behavior, Wood2) or isinstance(self.input_behavior, Wood3)) and kiln_baker_card_present:
@@ -60,6 +60,6 @@ class KilnBaker(JobInterface):
     """
     def putDown(self):
         current_player = player_status_repository.player_status[game_status_repository.game_status.now_turn_player]
-        current_player.card.handJobCard.remove(self)
-        current_player.card.putJobCard.append(self)
+        current_player.card.hand_job_card.remove(self)
+        current_player.card.put_job_card.append(self)
         self.log_text = "가마 때는 사람 내려놓음"
