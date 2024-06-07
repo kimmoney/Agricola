@@ -35,7 +35,7 @@ class DoBake(BaseBehaviorInterface):
         elif any(isinstance(card, (Oven1, Oven2)) for card in self.player_MainCard):
             self.player_resource.set_food(self.player_resource.food + leftBake * 2)
             leftBake = 0
-        elif (leftBake != 0):
+        if (leftBake != 0):
             self.log_text = f"주요 설비 부족으로 곡식 {leftBake}개를 굽지 못했습니다"
             return False
         self.log_text = "빵 굽기를 완료했습니다"
