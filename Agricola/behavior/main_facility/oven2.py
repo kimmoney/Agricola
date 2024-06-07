@@ -112,4 +112,4 @@ class Oven2(MainFacilityInterface):
     """
 
     def canPurchase(self):
-        return self.player_data.resource.dirt >= 3
+        return self.player_data.resource.dirt >= 3 and  self.game_status.main_facility_status[2] == -1
