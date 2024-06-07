@@ -1,5 +1,5 @@
 """
-:param: 플레이어 번호, 바꾸고자 하는 동물 배치 상태
+:param: 바꾸고자 하는 동물 배치 상태
 :return: 동물 배치 결과 리턴
 :rtype: bool
 동물 획득 과정
@@ -18,16 +18,15 @@ from repository.player_status_repository import player_status_repository
 
 
 class PlaceAnimal(Command):
-    def __init__(self, gain_animal):
+    def __init__(self, field_status):
         self.log_text = ""
-        self.gain_animal = gain_animal
+        self.field_status = deepcopy(field_status)
 
     def execute(self):
-        field_status = deepcopy(field)
-        if AnimalPositionValidation(field_status).execute():
+        if AnimalPositionValidation(self.field_status).execute():
             self.log_text = "동물 배치에 성공했습니다."
             player_status_repository.player_status[
-                game_status_repository.game_status.now_turn_player].farm.field = field_status
+                game_status_repository.game_status.now_turn_player].farm.field = self.field_status
             return True
         self.log_text = "올바르지 않은 동물 배치 : 동물을 올바르게 배치해주세요."
 
