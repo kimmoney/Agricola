@@ -37,7 +37,17 @@ class SkilledBrickLayer(JobInterface):
     :rtype: bool
     """
     def execute(self):
-        pass
+        farm = player_status_repository.player_status[game_status_repository.game_status.now_turn_player].farm
+        house_count = farm.get_house_count()
+        if house_count >= 3 : # and 흙가마 인 경우:
+            player_status_repository.player_status[
+                game_status_repository.game_status.now_turn_player].resource.set_brick(
+                player_status_repository.player_status[
+                    game_status_repository.game_status.now_turn_player].resource.stone + 1
+            )
+        else:
+            pass
+        self.log_text = "벽돌공 사용"
 
     """
     로그 반환

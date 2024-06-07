@@ -10,6 +10,7 @@ from repository.game_status_repository import game_status_repository
 from repository.player_status_repository import player_status_repository
 
 
+
 class LivestockDealer(JobInterface):
     def __init__(self, input_behavior):
         self.log_text = None

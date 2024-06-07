@@ -5,6 +5,7 @@ from behavior.job.job_interface import JobInterface
 from entity import card_type
 
 
+
 class Priest(JobInterface):
     def __init__(self, input_behavior):
         self.input_behavior = input_behavior

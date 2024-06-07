@@ -13,6 +13,9 @@ from behavior.main_facility.strong_oven2 import StrongOven2
 
 
 class DoBake(BaseBehaviorInterface):
+    def execute(self):
+        pass
+
     def __init__(self):
         self.log_text = ""
         self.game_status = game_status_repository.game_status

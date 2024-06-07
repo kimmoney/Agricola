@@ -7,7 +7,6 @@ from entity import card_type
 from repository.game_status_repository import game_status_repository
 from repository.player_status_repository import player_status_repository
 
-
 class Greengrocer(JobInterface):
 
     def __init__(self, input_behavior):
@@ -66,4 +65,4 @@ class Greengrocer(JobInterface):
         current_player = player_status_repository.player_status[game_status_repository.game_status.now_turn_player]
         current_player.card.handJobCard.remove(self)
         current_player.card.putJobCard.append(self)
-        self.log_text = "채소 장수 내려놓음"
+        self.log_text = "채소 장수 내려 놓음"
