@@ -4,7 +4,7 @@
 :return: 획득한 동물이 담긴 큐
 :rtype: deque
 """
-
+from behavior.behavior_interface import BehaviorInterface
 from command import Command
 from entity.round_behavior_type import RoundBehaviorType
 from repository.game_status_repository import game_status_repository
@@ -13,9 +13,8 @@ from repository.round_status_repository import round_status_repository
 from entity.animal_type import AnimalType
 
 
-# Todo
 
-class SheepMarket(Command):
+class SheepMarket(BehaviorInterface):
 
     def __init__(self, player):
         self.log_text = ""

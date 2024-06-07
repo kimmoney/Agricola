@@ -7,6 +7,7 @@
 from copy import copy
 
 from behavior.basebehavior.seed_plant import SeedPlant
+from behavior.behavior_interface import BehaviorInterface
 from command import Command
 from entity.basic_behavior_type import BasicBehaviorType
 from repository.game_status_repository import game_status_repository
@@ -15,9 +16,8 @@ from behavior.basebehavior.arable_expansion import ArableExpansion
 from repository.round_status_repository import round_status_repository
 
 
-# Todo
 
-class CultivateSeed(Command):
+class CultivateSeed(BehaviorInterface):
 
     def __init__(self, player, plantDict, field_status, ifPlant):
         self.log_text = ""

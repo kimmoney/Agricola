@@ -4,17 +4,21 @@
 :return: 실행 결과.
 :rtype: bool
 """
+from behavior.behavior_interface import BehaviorInterface
 from command import Command
 from repository.game_status_repository import game_status_repository
 from repository.round_status_repository import round_status_repository
 
 
-# Todo
+class UpgradeFacilities(BehaviorInterface):
+    def can_play(self):
+        pass
 
-class UpgradeFacilities(Command):
+    def __init__(self):
+        self.log_text = ""
+
     def execute(self):
         round_status_repository.round_status.remain_workers[game_status_repository.game_status.now_turn_player] -= 1
-        pass
 
     def log(self):
-        pass
+        return self.log_text

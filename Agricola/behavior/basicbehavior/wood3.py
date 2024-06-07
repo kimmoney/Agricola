@@ -5,6 +5,7 @@
 :rtype: bool
 Unit : 지민
 """
+from behavior.behavior_interface import BehaviorInterface
 from command import Command
 from entity.basic_behavior_type import BasicBehaviorType
 from repository.game_status_repository import game_status_repository
@@ -12,7 +13,7 @@ from repository.player_status_repository import player_status_repository
 from repository.round_status_repository import round_status_repository
 
 
-class Wood3(Command):
+class Wood3(BehaviorInterface):
     def __init__(self, player):
         self.log_text = ""
         self.game_status = game_status_repository.game_status
