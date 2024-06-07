@@ -35,6 +35,5 @@ class SeedBake(BehaviorInterface):
             ret.append(DoBake)
         ret.append(UseWorker)
         return ret
-
     def log(self):
         return self.log_text
