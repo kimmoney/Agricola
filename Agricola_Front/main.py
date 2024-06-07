@@ -187,10 +187,10 @@ class MainWindowClass(QMainWindow, main) :
         stacked_Widget = self.stackedWidget
         if not self.timer_close.isActive() and not self.timer_open.isActive():
             # 이걸로 속도 조절 낮을수록 빠름
-            self.speed = 10
+            self.speed = 5
             self.timer_close = QTimer(self)
             self.timer_open = QTimer(self)
-            self.total_timer_count = 20
+            self.total_timer_count = 10
             self.current_timer_count = 0
             self.timer_open.stop()
             self.timer_close.stop()
@@ -201,7 +201,7 @@ class MainWindowClass(QMainWindow, main) :
             self.opacity_effect = QGraphicsOpacityEffect(stacked_Widget.currentWidget())
             self.opacity_effect_after = QGraphicsOpacityEffect(after_page)
             self.opacity_effect_after.setOpacity(0)
-            self.opacity_effect.setOpacity(1-0.05*self.current_timer_count)
+            self.opacity_effect.setOpacity(1-0.1*self.current_timer_count)
             stacked_Widget.currentWidget().setGraphicsEffect(self.opacity_effect)
             self.current_timer_count += 1
             if self.current_timer_count == self.total_timer_count:
@@ -213,7 +213,7 @@ class MainWindowClass(QMainWindow, main) :
                 self.timer_close.stop()
                 self.opacity_effect_after.setOpacity(1)
         def process_timer_open(self,after_page):
-            self.opacity_effect_after.setOpacity(1-0.05*self.current_timer_count)
+            self.opacity_effect_after.setOpacity(1-0.1*self.current_timer_count)
             after_page.setGraphicsEffect(self.opacity_effect_after)
             self.current_timer_count -= 1
             if self.current_timer_count == 0:
@@ -521,6 +521,19 @@ class WidgetrandomRound(QWidget, basic_roundcard_ui) :
         self.setupUi(self)
         self.btn_round_1.setText('')
         self.btn_round_4.hide()
+
+        if self.cardnum<=3:
+            self.setStyleSheet(f"#widget{{border-image: url(:/newPrefix/images/랜덤/랜덤 ({self.imagenum}).png);}}#widget:disabled{{border-image: url(:/newPrefix/images/라운드카드/number_1.png);}}")
+        elif self.cardnum<=6:
+            self.setStyleSheet(f"#widget{{border-image: url(:/newPrefix/images/랜덤/랜덤 ({self.imagenum}).png);}}#widget:disabled{{border-image: url(:/newPrefix/images/라운드카드/number_2.png);}}")
+        elif self.cardnum<=8:
+            self.setStyleSheet(f"#widget{{border-image: url(:/newPrefix/images/랜덤/랜덤 ({self.imagenum}).png);}}#widget:disabled{{border-image: url(:/newPrefix/images/라운드카드/number_3.png);}}")
+        elif self.cardnum<=10:
+            self.setStyleSheet(f"#widget{{border-image: url(:/newPrefix/images/랜덤/랜덤 ({self.imagenum}).png);}}#widget:disabled{{border-image: url(:/newPrefix/images/라운드카드/number_4.png);}}")
+        elif self.cardnum<=12:
+            self.setStyleSheet(f"#widget{{border-image: url(:/newPrefix/images/랜덤/랜덤 ({self.imagenum}).png);}}#widget:disabled{{border-image: url(:/newPrefix/images/라운드카드/number_5.png);}}")
+        elif self.cardnum<=13:
+            self.setStyleSheet(f"#widget{{border-image: url(:/newPrefix/images/랜덤/랜덤 ({self.imagenum}).png);}}#widget:disabled{{border-image: url(:/newPrefix/images/라운드카드/number_6.png);}}")
         self.update_state()
     def mousePressEvent(self,event):
         pprint(f"Pressed basic round ID : {self.imagenum}")
@@ -533,20 +546,8 @@ class WidgetrandomRound(QWidget, basic_roundcard_ui) :
         import time
         t = time.time()
         
-        if self.cardnum<=round-1:
-            self.setStyleSheet(f"#widget{{border-image: url(:/newPrefix/images/랜덤/랜덤 ({self.imagenum}).png);}}")
-        elif self.cardnum<=3:
-            self.setStyleSheet(f"#widget{{border-image: url(:/newPrefix/images/라운드카드/number_1.png);}}")
-        elif self.cardnum<=6:
-            self.setStyleSheet(f"#widget{{border-image: url(:/newPrefix/images/라운드카드/number_2.png);}}")
-        elif self.cardnum<=8:
-            self.setStyleSheet(f"#widget{{border-image: url(:/newPrefix/images/라운드카드/number_3.png);}}")
-        elif self.cardnum<=10:
-            self.setStyleSheet(f"#widget{{border-image: url(:/newPrefix/images/라운드카드/number_4.png);}}")
-        elif self.cardnum<=12:
-            self.setStyleSheet(f"#widget{{border-image: url(:/newPrefix/images/라운드카드/number_5.png);}}")
-        elif self.cardnum<=13:
-            self.setStyleSheet(f"#widget{{border-image: url(:/newPrefix/images/라운드카드/number_6.png);}}")
+        # if self.cardnum<=round-1:/
+        self.setEnabled(self.cardnum<=round-1)
         print(t-time.time())
         if self.imagenum<5 and "랜덤/랜덤" in self.styleSheet():
             self.btn_round_1.setText(str(1))
