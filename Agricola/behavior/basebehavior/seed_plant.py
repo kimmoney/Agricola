@@ -15,8 +15,8 @@ class SeedPlant(Command):
         self.log_text = ""
 
     def execute(self):
-        checkValidation = SeedPlantValidation(self.plantDict, self.field_status)
-        if checkValidation.execute():
+        seed_plant_validation = SeedPlantValidation(self.plantDict, self.field_status)
+        if seed_plant_validation.execute():
             self.log_text = "종자 심기 검증에 성공했습니다"
             vegetable_count = 0
             grain_count = 0
@@ -31,7 +31,7 @@ class SeedPlant(Command):
             player_status_repository.player_status[game_status_repository.game_status.now_turn_player].farm.field = self.field_status
             return True
         else:
-            self.log_text = checkValidation.log()
+            self.log_text = seed_plant_validation.log()
             return False
 
     def log(self):
