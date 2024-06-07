@@ -152,7 +152,7 @@
            </font>
           </property>
           <property name="currentIndex">
-           <number>1</number>
+           <number>3</number>
           </property>
           <widget class="QWidget" name="round_page">
            <layout class="QHBoxLayout" name="horizontalLayout_5" stretch="1,1">
@@ -336,6 +336,12 @@
                <layout class="QHBoxLayout" name="horizontalLayout_4">
                 <item>
                  <widget class="QPushButton" name="p0_show">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
                   <property name="text">
                    <string>카드 확인하기</string>
                   </property>
@@ -436,6 +442,12 @@
                <layout class="QHBoxLayout" name="horizontalLayout_18">
                 <item>
                  <widget class="QPushButton" name="p1_show">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
                   <property name="text">
                    <string>카드 확인하기</string>
                   </property>
@@ -652,7 +664,7 @@
                 <item>
                  <widget class="QPushButton" name="p3_show">
                   <property name="sizePolicy">
-                   <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+                   <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
                     <horstretch>0</horstretch>
                     <verstretch>0</verstretch>
                    </sizepolicy>
