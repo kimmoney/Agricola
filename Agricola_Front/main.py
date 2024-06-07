@@ -226,28 +226,16 @@ class MainWindowClass(QMainWindow, main) :
 
     def update_state_of_all(self):
         #resource 업데이트
-        import time
-        t = time.time()
-
         for c in self.personal_field:
             c.update_state()
             for cc in c.field: cc.update_state()
-        print(time.time()-t)
-        t=time.time()
         # for c in self.personal_card:
         #     c.update_state()
         for c in self.personal_resource:
             c.update_state()
-
-        print(time.time()-t)
-        t=time.time()
         for widget in self.random_round:
             widget.update_state()
-        print(time.time()-t)
-        t=time.time()
         self.update_state()
-        print(time.time()-t)
-        t=time.time()
 class WidgetPersonalField(QWidget, personal_field_ui) :
     def __init__(self, player,parent) :
         super().__init__()
@@ -675,20 +663,28 @@ class SideBar(QWidget, sidebar_ui):
         super().__init__()
         self.setupUi(self)
         self.parent = parent
+        self.clicked = ""
+        self.btns = ["btn_sheep", "btn_pig", "btn_cow"]
+        for name in self.btns:
+            getattr(self,name).setStyleSheet(f"QPushButton:disabled {{background-color: yellow;border-image: url(:/newPrefix/images/{name.split('_')[-1]}.png);}}QPushButton {{border-image: url(:/newPrefix/images/{name.split('_')[-1]}.png);}}")
+            getattr(self,name).clicked.connect(lambda _, name=name :self.btnClick(name))
+        for name in ["btn_chg_sheep", "btn_chg_pig", "btn_chg_cow", "btn_chg_vegetable", "btn_trade_grain", "btn_trade_vegetable"]:
+            pass
+    def btnClick(self, btn_name):
+        for name in self.btns:
+            getattr(self,name).setEnabled(True)
+        getattr(self,btn_name).setEnabled(False)
+        self.clicked = btn_name
 
-        self.btns = ["btn_sheep", "btn_pig", "btn_cow", "btn_chg_sheep", "btn_chg_pig", "btn_chg_cow", "btn_chg_vegetable", "btn_trade_grain", "btn_trade_vegetable"]
-        self.focus = [False for _ in range(len(self.btns))]  # 무엇을 선택하는지. 기본: False
-        for i, btn in enumerate(self.btns):
-            getattr(self, btn).clicked.connect(lambda checked, i=i: self.btnClick(i))
 
-    def btnClick(self, index):
-        # 모든 focus 값을 False로 설정
-        self.focus = [False] * len(self.focus)
-        # 클릭된 버튼의 인덱스에 해당하는 focus만 True로 설정
-        self.focus[index] = True
-        print(f"Button {self.btns[index]} clicked. Focus: {self.focus}")
+        # getattr(self,btn_name).setFocus(False)
+        # # 모든 focus 값을 False로 설정
+        # self.focus = [False] * len(self.focus)
+        # # 클릭된 버튼의 인덱스에 해당하는 focus만 True로 설정
+        # self.focus[index] = True
+        # print(f"Button {self.btns[index]} clicked. Focus: {self.focus}")
 
-        addStyleSheet(getattr(self,f"{self.btns[index]}"), "background-color: yellow;")
+        # addStyleSheet(getattr(self,f"{self.btns[index]}"), "background-color: yellow;")
 
 def addStyleSheet(widget, new_style):
     # 현재 스타일 시트를 가져온다
