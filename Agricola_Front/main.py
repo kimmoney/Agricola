@@ -192,21 +192,12 @@ class MainWindowClass(QMainWindow, main) :
         self.log_popup.logging(text)
 
     def change_main_stacked(self):
-        import time
-        t=time.time_ns()
-        print("change",time.time_ns()-t)
         self.update_state_of_all()
-        print("change",time.time_ns()-t)
-        t=time.time_ns()
         currentWidget = self.stackedWidget.currentWidget().objectName()
-        print("change",time.time_ns()-t)
-        t=time.time_ns()
         # if index == 0:self.stackedWidget.setCurrentIndex(1)
         # else:self.stackedWidget.setCurrentIndex(0)
         if currentWidget == "round_page":self.change_stacked_page("personal_page")
         else:self.change_stacked_page("round_page")
-        print("change",time.time_ns()-t)
-        t=time.time_ns()
 
 
     def change_stacked_page(self, after_page):
@@ -252,52 +243,23 @@ class MainWindowClass(QMainWindow, main) :
         getattr(self,f"player_{i}_border").setStyleSheet(f"#player_{i}_border{{border:3px solid blue;}}")
 
     def update_state_of_all(self):
-        import time
-        t = time.time()
-        print(time.time_ns()-t)
 # resource 업데이트
 # field 업데이트
         for c in self.personal_field:
             c.update_state()
             for cc in c.field: cc.update_state()
-        print(time.time_ns()-t)
-        t = time.time()
         # for c in self.personal_card:
         #     c.update_state()
         for c in self.personal_resource:
             c.update_state()
-        print(time.time_ns()-t)
-        t = time.time()
         for widget in self.random_round:
             widget.update_state()
-        print(time.time_ns()-t)
-        t = time.time()
 #메인 플레이어 보더 업데이트
         for widget in self.personal_card:
             widget.update_state()
-        print(time.time_ns()-t)
-        t = time.time()
         self.main_card.update_state()
-        # print(time.time_ns()-t)
-        # t = time.time()
 
-        # self.update_state()
-        # print(time.time_ns()-t)
-        # t = time.time()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        self.update_state()
 
 
 
@@ -502,38 +464,43 @@ class WidgetFieldBase(QWidget, field_base_ui) :
         self.btn_barn.setStyleSheet(styleSheet)
 
         pass
+        
+# 개인 농장 오른 쪽 아이콘으로 보이는 작은 카드창
 class PersonalCard_small(QWidget, personal_card_small_ui):
     def __init__(self, player, parent):
         super().__init__()
         self.setupUi(self)
         self.player = player
         self.parent = parent
-        list_sub = self.parent.player_status[player].card.start_handSubCard
-        list_job = self.parent.player_status[player].card.start_handJobCard
-
-        for i in range(3):
-                # print(f"border-image: url(:/newPrefix/images/직업 카드/직업카드{index}.png);")  
-            getattr(self,f"widget_sub_{i+1}").setStyleSheet(f"#widget_sub_{i+1}{{border-image: url(:/newPrefix/images/보조 설비/보조설비{list_sub[i]}.png);}}#widget_sub_{i+1}:disabled{{border-image: url(:/newPrefix/images/보조 설비/보조설비back.png);}}")
-            getattr(self,f"widget_job_{i+1}").setStyleSheet(f"#widget_job_{i+1}{{border-image: url(:/newPrefix/images/직업 카드/직업카드{list_job[i]}.png);}}#widget_job_{i+1}:disabled{{border-image: url(:/newPrefix/images/직업 카드/직업카드back.png);}}")
-            # print(f"#widget_sub_{i+1}{{border-image: url(:/newPrefix/images/주요 설비/주요설비{list_sub[i]}.png);}}#widget_job_{i+1}:disabled{{border-image: url(:/newPrefix/images/보조 설비/보조설비back.png);}}")
-            # print(f"#widget_job_{i+1}{{border-image: url(:/newPrefix/images/직업 카드/직업카드{list_job[i]}.png);}}#widget_job_{i+1}:disabled{{border-image: url(:/newPrefix/images/직업 카드/직업카드back.png);}}")
     def mousePressEvent(self, event):
         self.setEnabled(self.player == self.parent.game_status.now_turn_player)
         pprint(f"Pressed personalField Player ID : {self.player}")
         self.parent.change_main_stacked()  
     def update_state(self):
-        # player = self.parent.game_status.now_turn_player
+        player = self.parent.game_status.now_turn_player
 
-        list_sub = self.parent.player_status[self.player].card.start_handSubCard
-        list_put_sub = self.parent.player_status[self.player].card.putSubCard
-        list_job = self.parent.player_status[self.player].card.start_handJobCard
-        list_put_job = self.parent.player_status[self.player].card.putJobCard
-
+        list_sub = self.parent.player_status[player].card.start_handSubCard
+        list_put_sub = self.parent.player_status[player].card.putSubCard
+        list_job = self.parent.player_status[player].card.start_handJobCard
+        list_put_job = self.parent.player_status[player].card.putJobCard
+        list_put_job = self.parent.player_status[player].card.putMainCard
 
         for i in range(3):
-                getattr(self,f"widget_sub_{i+1}").setEnabled(list_sub[i] in list_put_sub)
-                getattr(self,f"widget_job_{i+1}").setEnabled(list_job[i] in list_put_job)
-
+            index=i
+            if list_job[i] not in list_put_job: 
+                index = "back"
+                print(f"border-image: url(:/newPrefix/images/직업 카드/직업카드{index}.png);")  
+            getattr(self,f"widget_job_{i+1}").setStyleSheet(f"border-image: url(:/newPrefix/images/직업 카드/직업카드{index}.png);")
+            index=i
+            if list_sub[i] not in list_put_sub: 
+                index = "back"
+            getattr(self,f"widget_sub_{i+1}").setStyleSheet(f"border-image: url(:/newPrefix/images/보조 설비/보조설비{index}.png);")
+        for i in range(5):
+            if i<len(list_put_job):
+                getattr(self,f"widget_main_{i+1}").setStyleSheet(f"border-image: url(:/newPrefix/images/주요 설비/주요설비{list_put_job[i]}.png);")
+            else:
+                # getattr(self,f"widget_main_{i+1}").setStyleSheet(f"border:none;")
+                getattr(self,f"widget_main_{i+1}").hide()
 # 메인 창에 뜰 개인별 카드 창
 class PersonalCard_big(QWidget, personal_card_big_ui):
     def __init__(self, parent):

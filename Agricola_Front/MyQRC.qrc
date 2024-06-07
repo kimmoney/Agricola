@@ -1,8 +1,5 @@
 <RCC>
   <qresource prefix="newPrefix">
-    <file>images/주요 설비/주요설비back.png</file>
-    <file>images/직업 카드/직업카드back.png</file>
-    <file>images/보조 설비/보조설비back.png</file>
     <file>images/보조 설비/보조설비0.png</file>
     <file>images/보조 설비/보조설비1.png</file>
     <file>images/보조 설비/보조설비2.png</file>
