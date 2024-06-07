@@ -4,7 +4,7 @@ sys.path.append(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'Agrico
 sys.path.append(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'data'))
 sys.dont_write_bytecode = True # pyc 생성 방지
 from qcr_converter import run_pyrcc5
-run_pyrcc5()#QRC 업데이트
+# run_pyrcc5()#QRC 업데이트/
 
 from PyQt5 import uic
 from PyQt5.QtWidgets import *
@@ -243,7 +243,8 @@ class MainWindowClass(QMainWindow, main) :
         getattr(self,f"player_{i}_border").setStyleSheet(f"#player_{i}_border{{border:3px solid blue;}}")
 
     def update_state_of_all(self):
-        #resource 업데이트
+# resource 업데이트
+# field 업데이트
         for c in self.personal_field:
             c.update_state()
             for cc in c.field: cc.update_state()
@@ -253,7 +254,22 @@ class MainWindowClass(QMainWindow, main) :
             c.update_state()
         for widget in self.random_round:
             widget.update_state()
+#메인 플레이어 보더 업데이트
+        for widget in self.personal_card:
+            widget.update_state()
+        self.main_card.update_state()
+
         self.update_state()
+
+
+
+
+
+
+
+
+
+
 class WidgetPersonalField(QWidget, personal_field_ui) :
     def __init__(self, player,parent) :
         super().__init__()
@@ -460,6 +476,31 @@ class PersonalCard_small(QWidget, personal_card_small_ui):
         self.setEnabled(self.player == self.parent.game_status.now_turn_player)
         pprint(f"Pressed personalField Player ID : {self.player}")
         self.parent.change_main_stacked()  
+    def update_state(self):
+        player = self.parent.game_status.now_turn_player
+
+        list_sub = self.parent.player_status[player].card.start_handSubCard
+        list_put_sub = self.parent.player_status[player].card.putSubCard
+        list_job = self.parent.player_status[player].card.start_handJobCard
+        list_put_job = self.parent.player_status[player].card.putJobCard
+        list_put_job = self.parent.player_status[player].card.putMainCard
+
+        for i in range(3):
+            index=i
+            if list_job[i] not in list_put_job: 
+                index = "back"
+                print(f"border-image: url(:/newPrefix/images/직업 카드/직업카드{index}.png);")  
+            getattr(self,f"widget_job_{i+1}").setStyleSheet(f"border-image: url(:/newPrefix/images/직업 카드/직업카드{index}.png);")
+            index=i
+            if list_sub[i] not in list_put_sub: 
+                index = "back"
+            getattr(self,f"widget_sub_{i+1}").setStyleSheet(f"border-image: url(:/newPrefix/images/보조 설비/보조설비{index}.png);")
+        for i in range(5):
+            if i<len(list_put_job):
+                getattr(self,f"widget_main_{i+1}").setStyleSheet(f"border-image: url(:/newPrefix/images/주요 설비/주요설비{list_put_job[i]}.png);")
+            else:
+                # getattr(self,f"widget_main_{i+1}").setStyleSheet(f"border:none;")
+                getattr(self,f"widget_main_{i+1}").hide()
 # 메인 창에 뜰 개인별 카드 창
 class PersonalCard_big(QWidget, personal_card_big_ui):
     def __init__(self, parent):
@@ -469,6 +510,23 @@ class PersonalCard_big(QWidget, personal_card_big_ui):
     def mousePressEvent(self, event):
         player = self.parent.game_status.now_turn_player
         pprint(f"Pressed personalField Player ID : {player}")
+    def update_state(self):
+        player = self.parent.game_status.now_turn_player
+
+        list_sub = self.parent.player_status[player].card.start_handSubCard
+        list_put_sub = self.parent.player_status[player].card.putSubCard
+        list_job = self.parent.player_status[player].card.start_handJobCard
+        list_put_job = self.parent.player_status[player].card.putJobCard
+        for i in range(3):
+            index=i
+            if list_job[i] not in list_put_job: 
+                index = "back"
+                print(f"border-image: url(:/newPrefix/images/직업 카드/직업카드{index}.png);")  
+            getattr(self,f"widget_job_{i+1}").setStyleSheet(f"border-image: url(:/newPrefix/images/직업 카드/직업카드{index}.png);")
+            index=i
+            if list_sub[i] not in list_put_sub: 
+                index = "back"
+            getattr(self,f"widget_sub_{i+1}").setStyleSheet(f"border-image: url(:/newPrefix/images/보조 설비/보조설비{index}.png);")
 
 class WidgetPersonalResource(QWidget, personal_resources_ui) :
     def __init__(self, player,parent) :
