@@ -1,6 +1,7 @@
 """
 통나무배
 """
+import repository.game_status_repository
 from behavior.sub_facility.sub_facility_interface import SubFacilityInterface
 from entity import card_type
 from behavior.basicbehavior.fishing import Fishing
