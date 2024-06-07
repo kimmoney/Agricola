@@ -16,11 +16,14 @@ class DoBake(BaseBehaviorInterface):
     def execute(self):
         pass
 
-    def __init__(self):
+    def __init__(self, limit):
         self.log_text = ""
         self.game_status = game_status_repository.game_status
-        self.player_resource = player_status_repository.player_status[game_status_repository.game_status.now_turn_player].resource
-        self.player_MainCard = player_status_repository.player_status[game_status_repository.game_status.now_turn_player].card.putMainCard
+        self.player_resource = player_status_repository.player_status[
+            game_status_repository.game_status.now_turn_player].resource
+        self.player_MainCard = player_status_repository.player_status[
+            game_status_repository.game_status.now_turn_player].card.putMainCard
+        self.limit = limit #t/f값 true면 1개만 빵굽기가능(흙가마) f시 무제한 빵굽기(화로,화덕)
 
     def log(self):
         return self.log_text
