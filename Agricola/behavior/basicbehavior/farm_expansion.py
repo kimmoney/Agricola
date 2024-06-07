@@ -16,10 +16,9 @@ from behavior.basebehavior.house_expansion import HouseExpansion
 
 class FarmExpansion(Command):
 
-    def __init__(self, player):
+    def __init__(self, field_status):
         self.log_text = ""
-        self.game_status = game_status_repository.game_status
-        self.player_farm = player_status_repository.player_status[player].farm
+        self.field_status = field_status
         self.is_filled = round_status_repository.round_status.put_basic[BasicBehaviorType.EXPAND.value]
 
     def can_play(self):
@@ -27,8 +26,8 @@ class FarmExpansion(Command):
         return True
 
     def execute(self):
-        doExpansion = HouseExpansion(self.player_farm)
-        if (doExpansion.execute()):
+        doExpansion = HouseExpansion(self.field_status)
+        if doExpansion.execute():
             self.log_text = f"농장 확장에 성공했습니다."
             return True
         else:

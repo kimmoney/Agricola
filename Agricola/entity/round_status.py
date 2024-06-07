@@ -6,8 +6,8 @@
 class RoundStatus:
     def __init__(self):
         self.observers = []
-        self.put_basic = [False for i in range(16)]
-        self.put_round = [False for i in range(14)]
+        self.put_basic = [-1 for i in range(16)]
+        self.put_round = [-1 for i in range(14)]
         self.remain_workers = [0, 0, 0, 0]
 
     def attach(self, observer):
