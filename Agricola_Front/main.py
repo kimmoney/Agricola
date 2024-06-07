@@ -675,13 +675,27 @@ class SideBar(QWidget, sidebar_ui):
         self.setupUi(self)
         self.parent = parent
 
-        btns = ["btn_sheep", "btn_pig", "btn_cow", "btn_chg_sheep", "btn_chg_pig", "btn_chg_cow", "btn_chg_vegetable", "btn_trade_grain", "btn_trade_vegetable"]
-        self.focus = [False for _ in range(len(btns))] # 무엇을 선택하는지. 기본: False
-        for btn in btns:
-            getattr(self,f"{btn}").clicked.connect(self.btnClick)
-    def btnClick(self):
-        pass
+        self.btns = ["btn_sheep", "btn_pig", "btn_cow", "btn_chg_sheep", "btn_chg_pig", "btn_chg_cow", "btn_chg_vegetable", "btn_trade_grain", "btn_trade_vegetable"]
+        self.focus = [False for _ in range(len(self.btns))]  # 무엇을 선택하는지. 기본: False
+        for i, btn in enumerate(self.btns):
+            getattr(self, btn).clicked.connect(lambda checked, i=i: self.btnClick(i))
 
+    def btnClick(self, index):
+        # 모든 focus 값을 False로 설정
+        self.focus = [False] * len(self.focus)
+        # 클릭된 버튼의 인덱스에 해당하는 focus만 True로 설정
+        self.focus[index] = True
+        print(f"Button {self.btns[index]} clicked. Focus: {self.focus}")
+
+        addStyleSheet(getattr(self,f"{self.btns[index]}"), "background-color: yellow;")
+
+def addStyleSheet(widget, new_style):
+    # 현재 스타일 시트를 가져온다
+    current_style = widget.styleSheet()
+    # 새로운 스타일 규칙을 추가한다
+    updated_style = current_style + '\n' + new_style
+    # 업데이트된 스타일 시트를 설정한다
+    widget.setStyleSheet(updated_style)
 ###실행 코드### 밑에 건들 필요 굳이 없음###
 if __name__ == "__main__" :
     #QApplication : 프로그램을 실행시켜주는 클래스
