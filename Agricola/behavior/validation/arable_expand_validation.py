@@ -6,11 +6,13 @@
 Unit : 준영
 """
 from collections import deque
-from copy import copy
+from copy import copy, deepcopy
 
 from behavior.basebehavior.base_behavior_interface import BaseBehaviorInterface
 from command import Command
 from entity.field_type import FieldType
+from repository.game_status_repository import game_status_repository
+from repository.player_status_repository import player_status_repository
 
 
 def check_connected_component(field_status, field_type):
@@ -38,12 +40,18 @@ def check_connected_component(field_status, field_type):
 
 class ArableExpandValidation(BaseBehaviorInterface):
     def __init__(self, field_status):
-        self.field_status = copy(field_status)
+        self.field_status = deepcopy(field_status)
         self.log_text = ""
 
     def execute(self):
         val = check_connected_component(field_status=self.field_status, field_type=FieldType.ARABLE)
-        if val <= 1:
+        cnt = 0
+        for i in range(3):
+            for j in range(5):
+                if self.field_status[i][j] == player_status_repository.player_status[
+                    game_status_repository.game_status.now_turn_player].farm.field[i][j]:
+                    cnt += 1
+        if val <= 1 and cnt == 1:
             self.log_text = "올바른 경작지 배치."
             return True
         else:
