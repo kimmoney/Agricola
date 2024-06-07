@@ -12,6 +12,8 @@ class OwnCard:
         self.put_sub_card = []
         self.put_job_card = []
         self.put_main_card = []
+        self.start_job_card = []
+        self.start_sub_card = []
 
     def attach(self, observer):
         self.observers.append(observer)
