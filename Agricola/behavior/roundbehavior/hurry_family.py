@@ -29,7 +29,7 @@ class HurryFamily(BehaviorInterface):
             return True
 
     def execute(self):
-        self.player_status.baby += 1
+        self.player_status.set_baby(1)
         self.log_text = "급한 가족 늘리기를 성공했습니다"
         round_status_repository.round_status.remain_workers[game_status_repository.game_status.now_turn_player] -= 1
         return True

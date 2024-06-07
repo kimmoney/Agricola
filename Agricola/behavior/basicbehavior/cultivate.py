@@ -14,9 +14,8 @@ from repository.round_status_repository import round_status_repository
 from behavior.basebehavior.arable_expansion import ArableExpansion
 
 
-# Todo
-
 class Cultivate(BehaviorInterface):
+
     def __init__(self, field_status):
         self.log_text = ""
         self.field_status = field_status
@@ -29,6 +28,7 @@ class Cultivate(BehaviorInterface):
         else:
             self.log_text = doArable.log()
             return False
+
 
     def log(self):
         return self.log_text

@@ -2,9 +2,13 @@
 나무꾼 직업 카드
 """
 from behavior.job.job_interface import JobInterface
+from entity import card_type
 
 
 class Lumberjack(JobInterface):
+    def __init__(self, input_behavior):
+        self.input_behavior = input_behavior
+        self.card_type = card_type.CardType.job
     """
     사용 가능 여부를 반환하는 메소드
     :param:
