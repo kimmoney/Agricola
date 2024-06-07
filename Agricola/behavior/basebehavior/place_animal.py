@@ -29,6 +29,7 @@ class PlaceAnimal(Command):
                 game_status_repository.game_status.now_turn_player].farm.field = self.field_status
             return True
         self.log_text = "올바르지 않은 동물 배치 : 동물을 올바르게 배치해주세요."
+        return False
 
     def log(self):
         return self.log_text

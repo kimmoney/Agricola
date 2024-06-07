@@ -18,7 +18,7 @@ class DumpAnimal(BaseBehaviorInterface):
         self.log_text = ""
 
     def execute(self):
-        if player_status_repository.player_status[game_status_repository.game_status.now_turn_player].farm.field[self.pos[0]][self.pos[1]].count == 0:
+        if player_status_repository.player_status[game_status_repository.game_status.now_turn_player].farm.field[self.pos[0]][self.pos[1]].count <= 0:
             self.log_text = "동물이 없습니다."
             return False
         else:
