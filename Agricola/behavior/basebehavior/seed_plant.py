@@ -1,3 +1,8 @@
+"""
+:param plantDict: 심은 곡식 및 채소 위치
+    ex)
+:param field_status: 바꾸고자 하는 필드 상태
+"""
 from copy import deepcopy
 
 from command import Command
@@ -15,7 +20,7 @@ class SeedPlant(Command):
         self.log_text = ""
 
     def execute(self):
-        seed_plant_validation = SeedPlantValidation(self.plantDict, self.field_status)
+        seed_plant_validation = SeedPlantValidation(self.plantDict)
         if seed_plant_validation.execute():
             self.log_text = "종자 심기 검증에 성공했습니다"
             vegetable_count = 0
@@ -26,9 +31,12 @@ class SeedPlant(Command):
             if CropType.GRAIN in self.plantDict:
                 for selectArable in self.plantDict[CropType.GRAIN]:
                     grain_count += 1
-            player_status_repository.player_status[game_status_repository.game_status.now_turn_player].resource.grain -= grain_count
-            player_status_repository.player_status[game_status_repository.game_status.now_turn_player].resource.vegetable -= vegetable_count
-            player_status_repository.player_status[game_status_repository.game_status.now_turn_player].farm.field = self.field_status
+            player_status_repository.player_status[
+                game_status_repository.game_status.now_turn_player].resource.grain -= grain_count
+            player_status_repository.player_status[
+                game_status_repository.game_status.now_turn_player].resource.vegetable -= vegetable_count
+            player_status_repository.player_status[
+                game_status_repository.game_status.now_turn_player].farm.field = self.field_status
             return True
         else:
             self.log_text = seed_plant_validation.log()

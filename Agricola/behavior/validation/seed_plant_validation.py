@@ -1,6 +1,7 @@
 """
 :param: 변하고자 하는 필드 상태,
 """
+from copy import deepcopy
 
 from command import Command
 from entity.crop_type import CropType
@@ -11,9 +12,9 @@ from repository.player_status_repository import player_status_repository
 
 class SeedPlantValidation(Command):
 
-    def __init__(self, plantDict, field_status):
+    def __init__(self, plantDict):
         self.plantDict = plantDict
-        self.field_status = field_status
+        self.field_status = deepcopy(player_status_repository.player_status[game_status_repository.game_status.now_turn_player].farm.field)
         self.log_text = ""
 
     def execute(self):

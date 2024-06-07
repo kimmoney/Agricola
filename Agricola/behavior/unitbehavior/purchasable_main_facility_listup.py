@@ -19,15 +19,15 @@ class PurchasableMainCardListup(Command):
         for index, card in enumerate(game_status_repository.game_status.main_facility_status):
             if card == -1:
                 if index == 0:
-                    card_list.append(Oven1())
+                    card_list.append(Oven1)
                 elif index == 1:
-                    card_list.append(Oven2())
+                    card_list.append(Oven2)
                 elif index == 2:
-                    card_list.append(StrongOven1())
+                    card_list.append(StrongOven1)
                 elif index == 3:
-                    card_list.append(StrongOven2())
+                    card_list.append(StrongOven2)
                 elif index == 4:
-                    card_list.append(DirtKiln())
+                    card_list.append(DirtKiln)
         return card_list
 
     def log(self):
