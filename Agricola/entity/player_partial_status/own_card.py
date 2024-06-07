@@ -7,11 +7,11 @@
 class OwnCard:
     def __init__(self):
         self.observers = []
-        self.handSubCard = []
-        self.handJobCard = []
-        self.putSubCard = []
-        self.putJobCard = []
-        self.putMainCard = []
+        self.hand_sub_card = []
+        self.hand_job_card = []
+        self.put_sub_card = []
+        self.put_job_card = []
+        self.put_main_card = []
 
     def attach(self, observer):
         self.observers.append(observer)
@@ -23,22 +23,22 @@ class OwnCard:
         for observer in self.observers:
             observer.update(self)
 
-    def set_hand_sub_card(self, hand_sub_card):
-        self.handSubCard = hand_sub_card
+    def add_hand_sub_card(self, hand_sub_card):
+        self.hand_sub_card.append(hand_sub_card)
         self.notify()
 
-    def set_hand_job_card(self, hand_job_card):
-        self.handJobCard = hand_job_card
+    def add_hand_job_card(self, hand_job_card):
+        self.hand_job_card.append(hand_job_card)
         self.notify()
 
-    def set_put_sub_card(self, put_sub_card):
-        self.putSubCard = put_sub_card
+    def add_put_sub_card(self, put_sub_card):
+        self.put_sub_card.append(put_sub_card)
         self.notify()
 
-    def set_put_job_card(self, put_job_card):
-        self.putJobCard = put_job_card
+    def add_put_job_card(self, put_job_card):
+        self.put_job_card.append(put_job_card)
         self.notify()
 
-    def set_put_main_card(self, put_main_card):
-        self.putMainCard = put_main_card
+    def add_put_main_card(self, put_main_card):
+        self.put_main_card.append(put_main_card)
         self.notify()

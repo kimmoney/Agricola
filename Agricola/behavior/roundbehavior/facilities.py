@@ -4,38 +4,27 @@
 :return: 실행 결과.
 :rtype: bool
 """
+from behavior.basebehavior.buy_main_card import BuyMainCard
+from behavior.basebehavior.buy_sub_card import BuySubCard
 from behavior.behavior_interface import BehaviorInterface
+from behavior.unitbehavior.playable_sub_facility_listup import PlayableSubCardListup
+from behavior.unitbehavior.purchasable_main_facility_listup import PurchasableMainCardListup
+from behavior.unitbehavior.use_worker import UseWorker
 from command import Command
 from repository.game_status_repository import game_status_repository
 from repository.player_status_repository import player_status_repository
-from repository.round_status_repository import round_status_repository
-
 
 
 class Facilities(BehaviorInterface):
-    def __init__(self, player, selectedCard, isMain):
+    def __init__(self):
         self.log_text = ""
-        self.playerResource = player_status_repository.player_status[player].resource
-        self.playerCard = player_status_repository.player_status[player].card
-        self.selectedCard = selectedCard
-        self.isMain = isMain
 
     def can_play(self):
-        if (self.selectedCard.canPurchase(self.player)):
-            self.log_text = "카드 구매가 가능합니다"
-            return True
-        else:
-            self.log_text = "카드 구매에 실패했습니다"
-            return False
+        return True
 
     def execute(self):
-        if (self.selectedCard.purchase(self.player)):
-            self.log_text = "카드 구매에 성공했습니다"
-            round_status_repository.round_status.remain_workers[game_status_repository.game_status.now_turn_player] -= 1
-            return True
-        else:
-            self.log_text = "카드 구매에 실패했습니다"
-            return False
+        ret = [PurchasableMainCardListup,BuyMainCard, PlayableSubCardListup, BuySubCard, UseWorker]
+        return ret
 
     def log(self):
         return self.log_text

@@ -22,7 +22,7 @@ class Hedger(JobInterface):
     :rtype: bool
     """
     def canUse(self):
-        current_player_cards = player_status_repository.player_status[game_status_repository.game_status.now_turn_player].card.putJobCard
+        current_player_cards = player_status_repository.player_status[game_status_repository.game_status.now_turn_player].card.put_job_card
         hedger_card_present = any(isinstance(card, Hedger) for card in current_player_cards)
 
         if (isinstance(self.input_behavior, FenceConstructionRound) or isinstance(self.input_behavior, UpgradeFence)) and hedger_card_present:
@@ -54,6 +54,6 @@ class Hedger(JobInterface):
     """
     def putDown(self):
         current_player = player_status_repository.player_status[game_status_repository.game_status.now_turn_player]
-        current_player.card.handJobCard.remove(self)
-        current_player.card.putJobCard.append(self)
+        current_player.card.hand_job_card.remove(self)
+        current_player.card.put_job_card.append(self)
         self.log_text = "산울타리지기 내려놓음"

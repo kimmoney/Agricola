@@ -4,7 +4,10 @@
 :return: 실행 결과.
 :rtype: bool
 """
+from behavior.basebehavior.buy_sub_card import BuySubCard
 from behavior.behavior_interface import BehaviorInterface
+from behavior.unitbehavior.playable_sub_facility_listup import PlayableSubCardListup
+from behavior.unitbehavior.use_worker import UseWorker
 from command import Command
 from entity.round_behavior_type import RoundBehaviorType
 from repository.game_status_repository import game_status_repository
@@ -15,29 +18,24 @@ from repository.round_status_repository import round_status_repository
 
 class FamilyFacility(BehaviorInterface):
 
-    def __init__(self, player, subFacility, field_status):
+    def __init__(self):
         self.log_text = ""
+        player = game_status_repository.game_status.now_turn_player
         self.player_status = player_status_repository.player_status[player]
-        self.is_filled = round_status_repository.round_status.put_basic[RoundBehaviorType.FAMILY_FACILITY.value]
-        self.subFacility = subFacility
-        self.field_status = field_status
 
     def can_play(self):
-        '''
-        familyHouse=FamilyHouse()
-        if familyHouse.execute() # field_status 순회 집갯수 조건문
-        '''
+        if self.player_status.worker <= self.player_status.farm.get_house_count():
+            self.log_text = "집이 부족합니다."
+            return False
         if self.player_status.baby + self.player_status.worker == 5:
             self.log_text = "더 이상 가족을 늘릴 수 없습니다"
             return False
-        else:
-            return True
+        return True
 
     def execute(self):
-        self.player_status.set_baby(1)
+        self.player_status.set_baby(self.player_status.baby + 1)
         self.log_text = "급하지않은 가족 늘리기를 성공했습니다"
-        round_status_repository.round_status.remain_workers[game_status_repository.game_status.now_turn_player] -= 1
-        return True
+        return [PlayableSubCardListup, BuySubCard, UseWorker]
 
     def log(self):
         return self.log_text

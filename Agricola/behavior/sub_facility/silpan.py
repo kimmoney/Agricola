@@ -27,7 +27,7 @@ class SilPan(SubFacilityInterface):
 
     def canUse(self):
         current_player_cards = player_status_repository.player_status[
-            game_status_repository.game_status.now_turn_player].card.putSubCard
+            game_status_repository.game_status.now_turn_player].card.put_sub_card
         silpan_card_present = any(isinstance(card, SilPan) for card in current_player_cards)
 
         if (isinstance(self.input_behavior, SideJob1) or isinstance(self.input_behavior,
@@ -67,8 +67,8 @@ class SilPan(SubFacilityInterface):
 
     def putDown(self):
         current_player = player_status_repository.player_status[game_status_repository.game_status.now_turn_player]
-        current_player.card.handSubCard.remove(self)
-        current_player.card.putSubCard.append(self)
+        current_player.card.hand_sub_card.remove(self)
+        current_player.card.put_sub_card.append(self)
         current_player.resource.set_wood(current_player.resource.wood - 1)
         current_player.resource.set_food(current_player.resource.food + 1)
         self.log_text = "빵삽 카드를 플레이해 음식 1개를 얻었습니다"

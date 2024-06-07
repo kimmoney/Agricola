@@ -53,8 +53,8 @@ class Manger(SubFacilityInterface):
 
     def putDown(self):
         current_player = player_status_repository.player_status[game_status_repository.game_status.now_turn_player]
-        current_player.card.handSubCard.remove(self)
-        current_player.card.putSubCard.append(self)
+        current_player.card.hand_sub_card.remove(self)
+        current_player.card.put_sub_card.append(self)
         current_player.resource.set_wood(current_player.resource.wood - 2)
         self.log_text = "여물통 카드를 플레이했습니다"
         return True

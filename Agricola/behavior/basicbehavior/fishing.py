@@ -5,13 +5,12 @@
 :rtype: bool
 """
 from behavior.behavior_interface import BehaviorInterface
+from behavior.unitbehavior.use_worker import UseWorker
 from command import Command
 from entity.basic_behavior_type import BasicBehaviorType
 from repository.game_status_repository import game_status_repository
 from repository.player_status_repository import player_status_repository
 from repository.round_status_repository import round_status_repository
-
-
 
 
 class Fishing(BehaviorInterface):
@@ -30,7 +29,7 @@ class Fishing(BehaviorInterface):
             self.player_resource.food + self.game_status.basic_resource[BasicBehaviorType.FISHING.value])
         self.log_text = f"음식 {self.game_status.basic_resource[BasicBehaviorType.FISHING.value]}개를 획득하였습니다."
         self.game_status.set_basic_resource(BasicBehaviorType.FISHING.value, 0)
-        return True
+        return [UseWorker]
 
     def log(self):
         return self.log_text

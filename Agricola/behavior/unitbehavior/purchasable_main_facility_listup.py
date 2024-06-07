@@ -13,7 +13,7 @@ from command import Command
 from repository.game_status_repository import game_status_repository
 
 
-class PurchasableMainFacilityListup(Command):
+class PurchasableMainCardListup(Command):
     def execute(self):
         card_list = []
         for index, card in enumerate(game_status_repository.game_status.main_facility_status):

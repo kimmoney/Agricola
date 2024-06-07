@@ -22,7 +22,7 @@ class Greengrocer(JobInterface):
     """
 
     def canUse(self):
-        current_player_cards = player_status_repository.player_status[game_status_repository.game_status.now_turn_player].card.putJobCard
+        current_player_cards = player_status_repository.player_status[game_status_repository.game_status.now_turn_player].card.put_job_card
         greengrocer_card_present = any(isinstance(card, Greengrocer) for card in current_player_cards)
 
         if isinstance(self.input_behavior, Seed) and greengrocer_card_present:
@@ -63,6 +63,6 @@ class Greengrocer(JobInterface):
 
     def putDown(self):
         current_player = player_status_repository.player_status[game_status_repository.game_status.now_turn_player]
-        current_player.card.handJobCard.remove(self)
-        current_player.card.putJobCard.append(self)
+        current_player.card.hand_job_card.remove(self)
+        current_player.card.put_job_card.append(self)
         self.log_text = "채소 장수 내려 놓음"
