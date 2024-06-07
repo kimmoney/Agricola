@@ -66,7 +66,12 @@ class MainWindowClass(QMainWindow, main) :
         for i in range(4):getattr(self,f"frm_p{i}_0").addWidget(self.personal_field[i])
 #메인 필드 위젯 설정
         self.frm_main_field.addWidget(self.personal_field[4])
-        #플레이어 카드 위젯 설정
+        for j in [1,3,5,7,9]:
+            for lay in ["horizontalLayout_A","horizontalLayout_B","horizontalLayout_A_5",]:
+                getattr(self.personal_field[4],lay).setStretch(j,6)
+                                    # self.personal_field[4].verticalLayout_2.setStretch(j,1)
+                                # self.personal_field[4].horizontalLayout_A.setStretch(10,2)
+#플레이어 카드 위젯 설정
         self.personal_card = [PersonalCard_small(i,self) for i in range(4)]
         for i in range(4):getattr(self,f"frm_p{i}_1").addWidget(self.personal_card[i])
 #사이드바 위젯 설정
@@ -76,7 +81,7 @@ class MainWindowClass(QMainWindow, main) :
         self.main_card = PersonalCard_big(self)
         self.frm_main_card.addWidget(self.main_card)
         
-        #플레이어 리소스 위젯 설정
+#플레이어 리소스 위젯 설정
         self.personal_resource = [WidgetPersonalResource(i,self) for i in range(4)]
         for i in range(4):getattr(self,f"frm_p{i}_2").addWidget(self.personal_resource[i])
 #베이직 라운드 위젯 설정
@@ -373,9 +378,25 @@ class WidgetFieldBase(QWidget, field_base_ui) :
         # print(rand)
         print(animal)
         print(animal, (self.i,self.j))
-        self.vertical_fence=myWindow.player_status[player].farm.vertical_fence
-        self.horizontal_fence=myWindow.player_status[player].farm.horizon_fence
-        myWindow.player_status[player].farm.field[self.i][self.j].kind = rand[0]
+        # self.vertical_fence=myWindow.player_status[player].farm.vertical_fence
+        # self.horizontal_fence=myWindow.player_status[player].farm.horizon_fence
+        # myWindow.player_status[player].farm.field[self.i][self.j].kind = rand[0]
+        if True:
+            if self.parent.parent.sidebar.checked!="":
+                print( myWindow.player_status[player].farm.field[self.i][self.j].kind)
+                print(getattr(AnimalType,self.parent.parent.sidebar.checked.split('_')[-1].upper()))
+                print( myWindow.player_status[player].farm.field[self.i][self.j].kind==getattr(AnimalType,self.parent.parent.sidebar.checked.split('_')[-1].upper()))
+                print( myWindow.player_status[player].farm.field[self.i][self.j].kind.value==('NONE'))
+                if myWindow.player_status[player].farm.field[self.i][self.j].kind == getattr(AnimalType,self.parent.parent.sidebar.checked.split('_')[-1].upper()) or myWindow.player_status[player].farm.field[self.i][self.j].kind.value==0:    
+                    myWindow.player_status[player].farm.field[self.i][self.j].kind = getattr(AnimalType,self.parent.parent.sidebar.checked.split('_')[-1].upper())
+                    myWindow.player_status[myWindow.game_status.now_turn_player].farm.field[self.i][self.j].count+=1
+                else: pprint("다른 종류의 동물이 올라갈 수 없습니다.")
+            else: 
+                if myWindow.player_status[myWindow.game_status.now_turn_player].farm.field[self.i][self.j].count>0:
+                    myWindow.player_status[myWindow.game_status.now_turn_player].farm.field[self.i][self.j].count-=1
+                if myWindow.player_status[myWindow.game_status.now_turn_player].farm.field[self.i][self.j].count==0:
+                    myWindow.player_status[myWindow.game_status.now_turn_player].farm.field[self.i][self.j].kind = AnimalType.NONE
+
 
         myWindow.update_state_of_all()
 
@@ -531,12 +552,9 @@ class WidgetrandomRound(QWidget, basic_roundcard_ui) :
         round = self.parent.game_status.now_round
         # print(self.imagenum)
         # print(i)
-        import time
-        t = time.time()
         
         # if self.cardnum<=round-1:/
         self.setEnabled(self.cardnum<=round-1)
-        print(t-time.time())
         if self.imagenum<5 and "랜덤/랜덤" in self.styleSheet():
             self.btn_round_1.setText(str(1))
         else:
@@ -663,19 +681,26 @@ class SideBar(QWidget, sidebar_ui):
         super().__init__()
         self.setupUi(self)
         self.parent = parent
-        self.clicked = ""
+        self.checked = ""
         self.btns = ["btn_sheep", "btn_pig", "btn_cow"]
         for name in self.btns:
-            getattr(self,name).setStyleSheet(f"QPushButton:disabled {{background-color: yellow;border-image: url(:/newPrefix/images/{name.split('_')[-1]}.png);}}QPushButton {{border-image: url(:/newPrefix/images/{name.split('_')[-1]}.png);}}")
+            getattr(self,name).setStyleSheet(f"QPushButton:checked {{background-color: yellow;border-image: url(:/newPrefix/images/{name.split('_')[-1]}.png);}}QPushButton {{border-image: url(:/newPrefix/images/{name.split('_')[-1]}.png);}}")
             getattr(self,name).clicked.connect(lambda _, name=name :self.btnClick(name))
         for name in ["btn_chg_sheep", "btn_chg_pig", "btn_chg_cow", "btn_chg_vegetable", "btn_trade_grain", "btn_trade_vegetable"]:
             pass
     def btnClick(self, btn_name):
-        for name in self.btns:
-            getattr(self,name).setEnabled(True)
-        getattr(self,btn_name).setEnabled(False)
-        self.clicked = btn_name
+        btns = copy.deepcopy(self.btns)
+        btns.remove(btn_name)
+        for name in btns:
+            getattr(self,name).setChecked(False)
+        # getattr(self,btn_name).setChecked(True)
+        if getattr(self,btn_name).isChecked():
+            self.checked = btn_name
+        else: self.checked = ""
 
+    def update_state(self):
+        # self.btn.
+        pass
 
         # getattr(self,btn_name).setFocus(False)
         # # 모든 focus 값을 False로 설정
