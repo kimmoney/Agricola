@@ -2,6 +2,7 @@
 게임 전체의 진행 상태를 저장하는 클래스
 """
 from entity.main_facility_status import MainFacilityStatus
+from gamestate.game_context import GameContext
 
 
 class GameStatus:
@@ -15,6 +16,7 @@ class GameStatus:
         self.round_resource = [0 for i in range(14)] # 라운드 기준 해당 라운드 칸 내부
         self.basic_resource = [0 for i in range(16)]
         self.main_facility_status = MainFacilityStatus()
+        self.game_context = GameContext()
 
     def attach(self, observer):
         self.observers.append(observer)

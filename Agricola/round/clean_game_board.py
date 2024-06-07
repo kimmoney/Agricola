@@ -9,9 +9,9 @@ class CleanGameBoard(Command):
     def execute(self):
         round_status = round_status_repository.round_status
         for i in range(16):
-            round_status.put_basic[i] = False
+            round_status.put_basic[i] = -1
         for i in range(14):
-            round_status.put_round[i] = False
+            round_status.put_round[i] = -1
 
     def log(self):
         pass
