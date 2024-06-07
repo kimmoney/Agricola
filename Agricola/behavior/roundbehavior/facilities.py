@@ -10,9 +10,6 @@ from behavior.behavior_interface import BehaviorInterface
 from behavior.unitbehavior.playable_sub_facility_listup import PlayableSubCardListup
 from behavior.unitbehavior.purchasable_main_facility_listup import PurchasableMainCardListup
 from behavior.unitbehavior.use_worker import UseWorker
-from command import Command
-from repository.game_status_repository import game_status_repository
-from repository.player_status_repository import player_status_repository
 
 
 class Facilities(BehaviorInterface):
