@@ -300,6 +300,8 @@
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="../../MyQRC.qrc"/>
+ </resources>
  <connections/>
 </ui>

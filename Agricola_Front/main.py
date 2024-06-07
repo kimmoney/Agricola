@@ -4,7 +4,7 @@ sys.path.append(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'Agrico
 sys.path.append(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'data'))
 sys.dont_write_bytecode = True # pyc 생성 방지
 from qcr_converter import run_pyrcc5
-#run_pyrcc5()#QRC 업데이트
+run_pyrcc5()#QRC 업데이트
 
 from PyQt5 import uic
 from PyQt5.QtWidgets import *
@@ -56,7 +56,7 @@ class MainWindowClass(QMainWindow, main) :
         font_path = os.path.join(os.path.join(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'data'),'font'),'Pretendard-Medium.otf')
         font_id = QFontDatabase.addApplicationFont(font_path)
         font_family = QFontDatabase.applicationFontFamilies(font_id)[0]
-        font = QFont(font_family, 9)  # 로드된 폰트를 기본 폰트로 설정
+        font = QFont(font_family, 13)  # 로드된 폰트를 기본 폰트로 설정
         app.setFont(font)
         self.player_status = player_status_repository.PlayerStatusRepository().player_status
         self.game_status = game_status_repository.GameStatusRepository().game_status
@@ -96,6 +96,10 @@ class MainWindowClass(QMainWindow, main) :
         self.worker_board = WorkerBoard(self)
         self.vlo_etc_workerboard.addWidget(self.worker_board)
 #인포메이션 칸(설정, 점수표)
+
+
+
+
         self.information = WidgetInformation(self)
         self.vlo_etc_information.addWidget(self.information)
 
@@ -115,14 +119,17 @@ class MainWindowClass(QMainWindow, main) :
         self.GAMESTART_BUTTON.clicked.connect(self.game_start)
 
         #카드 확인하면 다음사람에게 넘기기
-        card_distribution = [FirstCardDistribution(i,self) for i in range(4)]
+        card_distribution = [FirstCardDistribution(self,i) for i in range(4)]
         for i in range(4):
+            getattr(self,f'player_{i}_border').hide()
             getattr(self,f"sw_p{i}").setCurrentIndex(0) #확인 전 화면으로 설정해두고
             getattr(self,f"hlo_p{i}_card").addWidget(card_distribution[i]) #카드 분배 위젯 설정
             getattr(self, f"p{i}_show").clicked.connect(lambda _, x=i: getattr(myWindow, f"sw_p{x}").setCurrentIndex(1))
             getattr(self, f"p{i}_show").clicked.connect(lambda _, x=i: getattr(myWindow, f"card_check_p{x}").setEnabled(True))
             getattr(self, f"card_check_p{i}").clicked.connect(lambda _, x=i: self.stackedWidget.setCurrentIndex( (x+4)%7 ))
-
+        self.card_check_p3.clicked.connect(self.open)
+        self.verticalLayout.setStretch(0,0)
+        self.verticalLayout.setStretch(2,0)
 
 
     def play_sound(self):
@@ -145,10 +152,16 @@ class MainWindowClass(QMainWindow, main) :
         print("Playing sound...")
 
 
+    def open(self):
 
+        self.verticalLayout.setStretch(0,1)
+        self.verticalLayout.setStretch(2,1)
+        for i in range(4):
+            getattr(self,f'player_{i}_border').show()
 
     def game_start(self):
         pprint("게임이 시작되었습니다.")
+        
         self.stackedWidget.setCurrentIndex(3) #player1의 카드 공개
         self.play_sound()
         
@@ -657,11 +670,15 @@ class Scoreboard(QDialog, scoreboard_ui):
     def mousePressEvent(self,event):
         self.close()
 class FirstCardDistribution(QWidget, card_distribution_ui):
-    def __init__(self, player, parent):
+    def __init__(self,  parent,player):
         super().__init__()
         self.setupUi(self)
         self.parent = parent
         self.player = player
+        list_sub = self.parent.player_status[self.player].card.handSubCard
+        list_job = self.parent.player_status[self.player].card.handJobCard
+        for i in range(3):getattr(self,f"widget_sub_{i+1}").setStyleSheet(f"border-image: url(:/newPrefix/images/보조 설비/보조설비{i}.png);")
+        for i in range(3):getattr(self,f"widget_job_{i+1}").setStyleSheet(f"border-image: url(:/newPrefix/images/직업 카드/직업카드{i}.png);")
 class AllCard(QDialog, allcard_ui):
     def __init__(self, parent):
         super().__init__()

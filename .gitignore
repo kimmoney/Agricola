@@ -8,3 +8,4 @@
 *.pyc
 /Agricola_Front/dist
 /Agricola_Front/build
+Agricola_Front/data/MyQRC_rc.py
