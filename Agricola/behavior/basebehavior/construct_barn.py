@@ -7,8 +7,7 @@
 """
 import copy
 
-from behavior.basebehavior.create_barn import CreateBarn
-from behavior.basebehavior.create_cage import CreateCage
+from behavior.unitbehavior.create_barn import CreateBarn
 from behavior.basebehavior.house_expansion import *
 from entity.field_type import FieldType
 

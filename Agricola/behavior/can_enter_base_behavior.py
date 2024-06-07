@@ -12,10 +12,10 @@ class CanEnterBaseBehavior(Command):
     def execute(self):
         if round_status_repository.round_status.put_basic[self.behavior_index] == -1 and \
                 self.behavior.can_play():
-            self.log_text = "행동이 수행가능합니다."
+            self.log_text = "행동이 진입가능합니다."
             return True
         else:
-            self.log_text = "행동을 수행할 수 없습니다"
+            self.log_text = "행동을 진입할 수 없습니다"
             return False
 
     def log(self):

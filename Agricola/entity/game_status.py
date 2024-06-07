@@ -31,6 +31,7 @@ class GameStatus:
         self.basic_resource = [0 for i in range(16)] # 행동 Enum 기준 해당 행동 칸 내부 자원 수
         self.main_facility_status = MainFacilityStatus()
         self.game_context = GameContext()
+        self.acted = False
 
     def attach(self, observer):
         self.observers.append(observer)

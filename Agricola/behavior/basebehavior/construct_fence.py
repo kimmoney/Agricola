@@ -7,17 +7,11 @@
 농장 상태 업데이트도 수행되어야 함
 """
 import copy
-from collections import deque
-from typing import List
 
 from behavior.basebehavior.base_behavior_interface import BaseBehaviorInterface
-from behavior.basebehavior.create_cage import CreateCage
-from command import Command
-from entity.farm.cage import Cage
-from entity.farm.field import Field
-from entity.farm.none_field import NoneField
+from behavior.unitbehavior.create_cage import CreateCage
 from entity.field_type import FieldType
-from fence_validation import FenceValidation
+from behavior.validation.fence_validation import FenceValidation
 from repository.game_status_repository import game_status_repository
 from repository.player_status_repository import player_status_repository
 

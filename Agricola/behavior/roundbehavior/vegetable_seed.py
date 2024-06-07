@@ -5,7 +5,6 @@
 :rtype: bool
 """
 from behavior.behavior_interface import BehaviorInterface
-from command import Command
 from entity.round_behavior_type import RoundBehaviorType
 from repository.game_status_repository import game_status_repository
 from repository.player_status_repository import player_status_repository

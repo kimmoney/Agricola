@@ -11,7 +11,7 @@
 """
 from copy import deepcopy
 
-from behavior.basebehavior.animal_position_validation import AnimalPositionValidation
+from behavior.validation.animal_position_validation import AnimalPositionValidation
 from command import Command
 from repository.game_status_repository import game_status_repository
 from repository.player_status_repository import player_status_repository

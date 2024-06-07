@@ -12,10 +12,10 @@ class CanEnterRoundBehavior(Command):
     def execute(self):
         if not round_status_repository.round_status.put_round[self.round] and \
                 self.behavior.can_play():
-            self.log_text = "행동을 수행할 수 있습니다."
+            self.log_text = "행동에 진입 가능합니다."
             return True
         else:
-            self.log_text = "행동을 수행할 수 없습니다."
+            self.log_text = "행동에 진입할 수 없습니다."
             return False
 
     def log(self):

@@ -8,9 +8,8 @@
 from copy import deepcopy
 
 from behavior.basebehavior.base_behavior_interface import BaseBehaviorInterface
-from command import Command
 from entity.house_type import HouseType
-from house_expand_validation import HouseExpandValidation
+from behavior.validation.house_expand_validation import HouseExpandValidation
 from repository.game_status_repository import game_status_repository
 from repository.player_status_repository import player_status_repository
 
