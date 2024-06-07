@@ -32,3 +32,4 @@ class Dirt1(BehaviorInterface):
 
     def log(self):
         return self.log_text
+
