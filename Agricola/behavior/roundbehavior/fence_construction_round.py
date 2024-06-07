@@ -4,14 +4,14 @@
 :return: 실행 결과.
 :rtype: bool
 """
+from behavior.behavior_interface import BehaviorInterface
 from command import Command
 from repository.game_status_repository import game_status_repository
 from repository.round_status_repository import round_status_repository
 
 
-# Todo
 
-class FenceConstructionRound(Command):
+class FenceConstructionRound(BehaviorInterface):
 
     def execute(self):
         round_status_repository.round_status.remain_workers[game_status_repository.game_status.now_turn_player] -= 1

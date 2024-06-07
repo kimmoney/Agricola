@@ -4,15 +4,15 @@
 :return: 실행 결과.
 :rtype: bool
 """
+from behavior.behavior_interface import BehaviorInterface
 from command import Command
 from repository.game_status_repository import game_status_repository
 from repository.player_status_repository import player_status_repository
 from repository.round_status_repository import round_status_repository
 
 
-# Todo
 
-class Facilities(Command):
+class Facilities(BehaviorInterface):
     def __init__(self, player, selectedCard, isMain):
         self.log_text = ""
         self.playerResource = player_status_repository.player_status[player].resource

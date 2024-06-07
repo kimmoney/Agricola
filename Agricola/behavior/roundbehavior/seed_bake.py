@@ -7,6 +7,7 @@
 :rtype: bool
 """
 from behavior.basebehavior.do_bake import DoBake
+from behavior.behavior_interface import BehaviorInterface
 from command import Command
 from copy import copy
 from entity.crop_type import CropType
@@ -19,7 +20,7 @@ from behavior.basebehavior.seed_plant import SeedPlant
 
 # Todo
 
-class SeedBake(Command):
+class SeedBake(BehaviorInterface):
 
     def __init__(self, player, ifBread, plantDict, field_status):
         self.log_text = ""

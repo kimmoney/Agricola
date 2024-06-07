@@ -27,6 +27,9 @@ class AnimalPositionValidation(BaseBehaviorInterface):
                     if item.count >= item.maximum:
                         self.log_text = f"({i}, {j})위치에 동물이 너무 많습니다."
                         return False
+                    elif item.count < 0:
+                        self.log_text = f"({i}, {j})위치의 동물의 수가 음수입니다."
+                        return False
         return True
 
     def log(self):

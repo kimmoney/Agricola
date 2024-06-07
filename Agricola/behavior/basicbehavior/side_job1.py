@@ -4,15 +4,15 @@
 :return: 실행 결과.
 :rtype: bool
 """
+from behavior.behavior_interface import BehaviorInterface
 from command import Command
 from entity.basic_behavior_type import BasicBehaviorType
 from repository.player_status_repository import player_status_repository
 from repository.round_status_repository import round_status_repository
 
 
-# Todo
 
-class SideJob1(Command):
+class SideJob1(BehaviorInterface):
 
     def __init__(self, player, playCard):
         self.log_text = ""

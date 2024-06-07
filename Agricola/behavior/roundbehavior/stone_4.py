@@ -4,6 +4,7 @@
 :return: 실행 결과.
 :rtype: bool
 """
+from behavior.behavior_interface import BehaviorInterface
 from command import Command
 from entity.round_behavior_type import RoundBehaviorType
 from repository.game_status_repository import game_status_repository
@@ -11,9 +12,8 @@ from repository.player_status_repository import player_status_repository
 from repository.round_status_repository import round_status_repository
 
 
-# Todo
 
-class Stone4(Command):
+class Stone4(BehaviorInterface):
     def __init__(self, player):
         self.log_text = ""
         self.game_status = game_status_repository.game_status

@@ -9,6 +9,7 @@ class ChangeTurn(Command):
     def execute(self):
         game_status = game_status_repository.game_status
         game_status.set_now_turn_player(game_status.next_turn_player)
+        game_status.acted = False
         return game_status.now_turn_player
 
     def log(self):

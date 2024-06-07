@@ -8,8 +8,7 @@
 import copy
 
 from behavior.basebehavior.base_behavior_interface import BaseBehaviorInterface
-from command import Command
-from arable_expand_validation import ArableExpandValidation
+from behavior.validation.arable_expand_validation import ArableExpandValidation
 from repository.game_status_repository import game_status_repository
 from repository.player_status_repository import player_status_repository
 

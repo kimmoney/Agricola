@@ -7,9 +7,8 @@ import copy
 from collections import deque
 from typing import List
 
-from behavior.basebehavior.animal_position_validation import AnimalPositionValidation
+from behavior.validation.animal_position_validation import AnimalPositionValidation
 from command import Command
-from entity.animal_type import AnimalType
 from entity.farm.cage import Cage
 from entity.farm.field import Field
 from entity.farm.none_field import NoneField
