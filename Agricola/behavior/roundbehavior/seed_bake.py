@@ -48,7 +48,7 @@ class SeedBake(BehaviorInterface):
             round_status_repository.round_status.remain_workers[game_status_repository.game_status.now_turn_player] -= 1
             return True
         else :
-            doBake = DoBake()
+            doBake = DoBake(self.player)
             if (doBake.execute()):
                 self.log_Text = "빵 굽기를 완료했습니다"
             else:
